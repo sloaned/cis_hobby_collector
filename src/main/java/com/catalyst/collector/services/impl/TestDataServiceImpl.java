@@ -16,6 +16,12 @@ public class TestDataServiceImpl implements TestDataService {
 	@Autowired
 	TestDataDao testDataDao;
 	
+	
+	public void setTestDataDao(TestDataDao testDataDao) {
+		this.testDataDao = testDataDao;
+	}
+
+
 	@Override
 	public List<TestData> getTestData() {
 		return testDataDao.getTestData();

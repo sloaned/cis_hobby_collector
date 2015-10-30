@@ -17,6 +17,12 @@ public class TestDataController {
 	@Autowired
 	private TestDataService testDataService;
 	
+	
+	public void setTestDataService(TestDataService testDataService) {
+		this.testDataService = testDataService;
+	}
+
+
 	@RequestMapping(value="testdata", method=RequestMethod.GET)
 	public List<TestData> getTestData() {
 		return testDataService.getTestData();

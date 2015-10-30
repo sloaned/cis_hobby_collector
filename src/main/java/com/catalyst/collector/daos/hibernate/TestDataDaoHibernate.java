@@ -19,6 +19,12 @@ public class TestDataDaoHibernate implements TestDataDao {
 	@PersistenceContext
 	private EntityManager em;
 	
+	
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+
 	@Override
 	public List<TestData> getTestData() {
 		return em.createQuery("SELECT t FROM TestData t", TestData.class).
