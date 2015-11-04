@@ -35,6 +35,7 @@ public interface CollectionsService {
 	
 	public List<Color> getColorList();
 	public void addColor(Color addedColor);
-	public boolean removeColor(String color);
-	public boolean updateColor(int id, String color);	
+	public boolean removeColor(int id);
+	public boolean updateColor(int id, String color);
+	public Color getByColorId(int colorId);
 }

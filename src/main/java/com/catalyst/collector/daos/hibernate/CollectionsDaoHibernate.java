@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
@@ -70,8 +72,16 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.persist(addedColor);
 	}
 	@Override
-	public boolean removeColor(Color c) {
-		em.remove(c);
+	public Color getByColorId(int colorId) {
+		return em
+				.createQuery("SELECT c FROM Color c WHERE c.id = :ID", Color.class)
+				.setParameter("ID",  colorId)
+				.getSingleResult();
+	}
+	@Override
+	public boolean removeColor(int id) {
+		Color color = getByColorId(id);
+		em.remove(color);
 		return true;	
 	}
 	@Override

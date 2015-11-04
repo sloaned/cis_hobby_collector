@@ -10,7 +10,8 @@ import com.catalyst.collector.entities.Category;
 public interface CollectionsDao {
 	
 	public void addColor(Color addedColor); 
-	public boolean removeColor(Color c);
+	public Color getByColorId(int colorId);
+	public boolean removeColor(int id);
 	public List<Color> getColorList();
 	public void updateColor(Color c);
 	/**

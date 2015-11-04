@@ -50,18 +50,21 @@ public class CollectionsController {
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color{colorType}", method=RequestMethod.DELETE)
-	public boolean removeColor(@PathVariable String colorType) {
-		return collectionsService.removeColor(colorType);
+	@RequestMapping(value="/color/{id}", method=RequestMethod.DELETE)
+	public boolean removeColor(@PathVariable Integer id) {
+		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
 	public void addColor(@RequestBody Color c) {
 		collectionsService.addColor(c);
 	}
-	@RequestMapping(value="/color", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable int id, @RequestParam(value="color",required=true)String color) {
+	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
+	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
 		return collectionsService.updateColor(id, color);
 	}
-	
+	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
+	public Color getByColorId(@PathVariable Integer id){
+		return collectionsService.getByColorId(id);
+	}
 	
 }
