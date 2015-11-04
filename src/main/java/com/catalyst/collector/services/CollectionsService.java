@@ -7,10 +7,10 @@ import java.util.List;
 import com.catalyst.collector.entities.Keyword;
 import com.catalyst.collector.entities.TestData;
 
-public interface TestDataService {
+public interface CollectionsService {
 
     public ArrayList<Keyword> getAllKeywords();
     public boolean addKeyword(Keyword keyword);
-    public Keyword getKeyword(Integer id);
+    public boolean updateKeyword(Keyword keyword);
     public void removeKeyword(Integer id);
 }
