@@ -25,11 +25,17 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
+        var collectible = {};
+
         $.ajax({
             url: '/collectibles',
-            method: 'POST'
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(collectible)
         }).then(function(){
-
+            console.log("Post successful")
+        }, function(error){
+            console.log(error);
         });
     });
 });
