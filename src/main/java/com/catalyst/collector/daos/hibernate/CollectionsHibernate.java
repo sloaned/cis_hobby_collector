@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.entities.Collections;
 
 @Repository
 @Transactional
@@ -47,9 +46,5 @@ public class CollectionsHibernate implements CollectionsDao {
 
 
 
-	@Override
-	public List<Collections> getTestData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

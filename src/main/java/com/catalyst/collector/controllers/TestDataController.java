@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.catalyst.collector.entities.Collections;
 import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.services.CollectionsServices;
 
@@ -39,8 +38,8 @@ public class TestDataController {
 	public void addColor(@RequestBody Color c) {
 		collectionService.addColor(c);
 	}
-	@RequestMapping(value="/color", method=RequestMethod.POST)
-	public boolean getTestData(@PathVariable int id, @RequestParam(value="color",required=true)String color) {
+	@RequestMapping(value="/color", method=RequestMethod.PUT)
+	public boolean updateColor(@PathVariable int id, @RequestParam(value="color",required=true)String color) {
 		return collectionService.updateColor(id, color);
 	}
 	

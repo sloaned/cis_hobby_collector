@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catalyst.collector.daos.CollectionsDao;
-import com.catalyst.collector.entities.Collections;
 import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.services.CollectionsServices;
 
@@ -33,7 +32,8 @@ public class CollectionsServiceImpl implements CollectionsServices {
 	}
 	@Override
 	public boolean removeColor(String color) {
-		
+		//to do: try catch implementation
+		//to-do take object color, not string
 		Color removedColor =getColor(color);
 		collectionDao.removeColor(removedColor);
 		return true;	
