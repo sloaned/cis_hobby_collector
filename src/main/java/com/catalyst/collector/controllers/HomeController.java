@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-	
+
+    /**
+     * Controller to navigate to the home page
+     * @return String with location of html page to get
+     */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "/index.html";
