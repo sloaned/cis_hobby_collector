@@ -57,7 +57,7 @@ public class CollectionsController {
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color{colorType}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/color/{colorType}", method=RequestMethod.DELETE)
 	public boolean removeColor(@PathVariable String colorType) {
 		return collectionsService.removeColor(colorType);
 	}

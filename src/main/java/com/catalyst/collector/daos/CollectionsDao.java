@@ -6,6 +6,7 @@ import com.catalyst.collector.entities.Color;
 import java.util.ArrayList;
 
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 

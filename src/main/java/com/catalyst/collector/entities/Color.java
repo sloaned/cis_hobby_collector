@@ -1,15 +1,13 @@
 package com.catalyst.collector.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
+    @Column(nullable = false, unique = true)
 	String color;
 	public Color(){}
 	/**
