@@ -11,7 +11,6 @@ import com.catalyst.collector.entities.Collectible;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionDao;
-import com.catalyst.collector.entities.TestData;
 
 @Repository
 @Transactional
@@ -26,11 +25,8 @@ public class CollectionDaoHibernate implements CollectionDao {
 	}
 
 
-	@Override
-	public List<TestData> getTestData() {
-		return em.createQuery("SELECT t FROM TestData t", TestData.class).
-				getResultList();
-	}
+
+
 
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
