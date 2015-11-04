@@ -1,7 +1,6 @@
 package com.catalyst.collector.daos.hibernate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,11 +9,11 @@ import javax.transaction.Transactional;
 import com.catalyst.collector.entities.Collectible;
 import org.springframework.stereotype.Repository;
 
-import com.catalyst.collector.daos.CollectionDao;
+import com.catalyst.collector.daos.CollectionsDao;
 
 @Repository
 @Transactional
-public class CollectionDaoHibernate implements CollectionDao {
+public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@PersistenceContext
 	private EntityManager em;
