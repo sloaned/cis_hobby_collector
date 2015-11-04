@@ -8,10 +8,12 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import com.catalyst.collector.entities.Age;
+import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Collectible;
+import com.catalyst.collector.entities.Color;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
-import com.catalyst.collector.entities.TestData;
 
 @Repository
 @Transactional
@@ -26,11 +28,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 
-	@Override
-	public List<TestData> getTestData() {
-		return em.createQuery("SELECT t FROM TestData t", TestData.class).
-				getResultList();
-	}
 
 	public void addAge(Age age){
 		em.persist(age);
@@ -50,6 +47,56 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				.setParameter("id", id)
 				.getSingleResult();
 		em.remove(age);
+	}
+
+
+	@Override
+	public void addCategory(Category category) {
+		em.persist(category);
+
+	}
+
+
+	@Override
+	public void updateCategory(Category category) {
+		em.merge(category);
+
+	}
+
+
+	@Override
+	public void deleteCategory(int id) {
+		Category category = getByCategoryId(id);
+		em.remove(category);
+
+	}
+
+
+	@Override
+	public void addColor(Color addedColor) {
+		em.persist(addedColor);
+	}
+	@Override
+	public boolean removeColor(Color c) {
+		em.remove(c);
+		return true;
+	}
+	@Override
+	public List<Color> getColorList() {
+		return em.createQuery("SELECT c FROM Color c", Color.class).getResultList();
+	}
+	@Override
+	public void updateColor(Color c) {
+		em.merge(c);
+	}
+	@Override
+	public ArrayList<Collectible> getCollectibles() {
+		return (ArrayList<Collectible>) em.createQuery("Select * from COLLECTIBLE").getResultList();
+	}
+
+	@Override
+	public Collectible getCollectible(int id) {
+		return em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
 	}
 
 }

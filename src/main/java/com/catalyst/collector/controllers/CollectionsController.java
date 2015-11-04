@@ -38,6 +38,16 @@ public class CollectionsController {
 		this.collectionsService = collectionsService;
 	}
 
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Collectible> getCollectible(@PathVariable Integer id) {
+		return new ResponseEntity<>(collectionsService.getCollectible(id.intValue()), HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/collectibles", method=RequestMethod.GET)
+	public ArrayList<Collectible> getCollectible() {
+		return collectionsService.getCollectibles();
+	}
+
 
 	@RequestMapping(value="testdata", method=RequestMethod.GET)
 	public List<TestData> getTestData() {

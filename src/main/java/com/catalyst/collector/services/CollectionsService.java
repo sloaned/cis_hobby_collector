@@ -34,7 +34,9 @@ public interface CollectionsService {
      */
 	void deleteAge(Integer id);
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsService {
 
