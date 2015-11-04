@@ -27,4 +27,6 @@ public class TestDataController {
 	public List<TestData> getTestData() {
 		return testDataService.getTestData();
 	}
+
+	@RequestMapping(value="")
 }

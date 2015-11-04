@@ -31,4 +31,8 @@ public class TestDataDaoHibernate implements TestDataDao {
 				getResultList();
 	}
 
+	public void addAge(String age){
+		em.persist(age);
+	}
+
 }

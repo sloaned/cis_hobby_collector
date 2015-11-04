@@ -7,4 +7,5 @@ import com.catalyst.collector.entities.TestData;
 public interface TestDataDao {
 
 	public List<TestData> getTestData();
+	public void addAge(String age);
 }

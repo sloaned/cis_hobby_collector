@@ -27,4 +27,9 @@ public class TestDataServiceImpl implements TestDataService {
 		return testDataDao.getTestData();
 	}
 
+	@Override
+	public void addAge(String age) {
+		testDataDao.addAge(age);
+	}
+
 }
