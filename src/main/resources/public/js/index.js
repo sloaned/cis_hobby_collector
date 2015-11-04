@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-		url : '/testdata',
+		url : '/collections', // TODO: change this to what it actually is.
 		method : 'GET'
 	}).then(function(testData) {
 		for (var i = 0; i < testData.length; i++) {
