@@ -33,12 +33,12 @@ public class CollectionsController {
 		collectionsService.addCategory(category);
 	}
 	
-	@RequestMapping(value="/category", method=RequestMethod.PUT)
-	public void updateCategory(@RequestBody Category category){
-		collectionsService.updateCategory(category);
+	@RequestMapping(value="/category/{id}", method=RequestMethod.PUT)
+	public void updateCategory(@PathVariable Integer id, @RequestBody Category category){
+		collectionsService.updateCategory(id, category);
 	}
 	
-	@RequestMapping(value="/category", method=RequestMethod.DELETE)
+	@RequestMapping(value="/category/{id}", method=RequestMethod.DELETE)
 	public void deleteCategory(@PathVariable Integer id){
 		collectionsService.deleteCategory(id);
 	}

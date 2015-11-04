@@ -20,9 +20,9 @@ public interface CollectionsService {
 	
 	/**
 	 * updates the given category (which will be identified by the id number)
-	 * @param category
+	 * @param id, category
 	 */
-	public void updateCategory(Category category);
+	public void updateCategory(int id, Category category);
 	
 	/**
 	 * deletes the category which matches the given id number

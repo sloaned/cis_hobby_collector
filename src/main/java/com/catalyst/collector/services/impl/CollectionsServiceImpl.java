@@ -36,7 +36,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void updateCategory(Category category) {
+	public void updateCategory(int id, Category category) {
+		category.setId(id);
 		testDataDao.updateCategory(category);
 		
 	}
