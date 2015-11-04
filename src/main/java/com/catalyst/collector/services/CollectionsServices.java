@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.catalyst.collector.entities.Color;
 
-public interface Collections {
+public interface CollectionsServices {
 	
-	public List<Collections> getCollection();
+	public List<CollectionsServices> getCollection();
 	
 	public List<Color> getColorList();
 	public void addColor(Color addedColor);
