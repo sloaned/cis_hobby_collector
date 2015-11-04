@@ -47,6 +47,14 @@ public class Collectible {
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
     private Set<Keyword> keywords;
 
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
+
     private boolean sold;
 
     public int getId() {
