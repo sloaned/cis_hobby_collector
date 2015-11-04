@@ -13,24 +13,24 @@ import com.catalyst.collector.services.CollectionsService;
 public class CollectionsServiceImpl implements CollectionsService {
 
 	@Autowired
-	CollectionsDao testDataDao;
+	CollectionsDao collectionsDao;
 	
 	
-	public void setTestDataDao(CollectionsDao testDataDao) {
-		this.testDataDao = testDataDao;
+	public void setcollectionsDao(CollectionsDao collectionsDao) {
+		this.collectionsDao = collectionsDao;
 	}
 
 
 	@Override
 	public ArrayList<Category> getCategory() {
 		
-		return testDataDao.getCategory();
+		return collectionsDao.getCategory();
 	}
 
 
 	@Override
 	public void addCategory(Category category) {
-		testDataDao.addCategory(category);
+		collectionsDao.addCategory(category);
 		
 	}
 
@@ -38,14 +38,14 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public void updateCategory(int id, Category category) {
 		category.setId(id);
-		testDataDao.updateCategory(category);
+		collectionsDao.updateCategory(category);
 		
 	}
 
 
 	@Override
 	public void deleteCategory(int id) {
-		testDataDao.deleteCategory(id);
+		collectionsDao.deleteCategory(id);
 		
 	}
 
