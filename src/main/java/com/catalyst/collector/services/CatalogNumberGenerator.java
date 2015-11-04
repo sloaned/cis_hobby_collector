@@ -17,6 +17,6 @@ public class CatalogNumberGenerator
     {
         Collectible c =(Collectible) obj;
         // generate your custom sequence here
-        return c.getName().substring(0,2)+c.hashCode(); // In this example, return an int
+        return c.getName().substring(0,2)+"-"+c.hashCode(); // In this example, return an int
     }
 }
