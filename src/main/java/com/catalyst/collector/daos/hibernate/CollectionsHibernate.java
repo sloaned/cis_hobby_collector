@@ -15,7 +15,7 @@ import com.catalyst.collector.entities.Collections;
 
 @Repository
 @Transactional
-public class CollectionsDaoHibernate implements CollectionsDao {
+public class CollectionsHibernate implements CollectionsDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -43,5 +43,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	@Override
 	public void updateColor(Color c){
 		em.merge(c);
+	}
+
+
+
+	@Override
+	public List<Collections> getTestData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -9,22 +9,19 @@ import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Collections;
 import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.services.Collections;
+import com.catalyst.collector.services.CollectionsServices;
 
 @Service
-public class CollectionsServiceImpl implements Collections {
+public class CollectionsServiceImpl implements CollectionsServices {
 
 	@Autowired
 	CollectionsDao collectionDao;
 	
 	
 	public void setCollectionDao(CollectionsDao testDataDao) {
-		this.colectionDao = testDataDao;
+		this.collectionDao = testDataDao;
 	}
-	@Override
-	public List<Collections> getCollection(){
-		return collectionDao.getTestData();
-	}
+	
 	
 	@Override
 	public List<Color> getColorList() {
@@ -72,5 +69,12 @@ public class CollectionsServiceImpl implements Collections {
 		}
 		return null;
 
+	}
+
+
+	@Override
+	public List<CollectionsServices> getCollection() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
