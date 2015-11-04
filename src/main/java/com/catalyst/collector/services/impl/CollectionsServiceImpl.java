@@ -6,26 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.catalyst.collector.daos.TestDataDao;
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.TestData;
-import com.catalyst.collector.services.TestDataService;
+import com.catalyst.collector.services.CollectionsService;
 
 @Service
-public class TestDataServiceImpl implements TestDataService {
+public class CollectionsServiceImpl implements CollectionsService {
 
 	@Autowired
-	TestDataDao testDataDao;
+	CollectionsDao testDataDao;
 	
 	
-	public void setTestDataDao(TestDataDao testDataDao) {
+	public void setTestDataDao(CollectionsDao testDataDao) {
 		this.testDataDao = testDataDao;
-	}
-
-
-	@Override
-	public List<TestData> getTestData() {
-		return testDataDao.getTestData();
 	}
 
 

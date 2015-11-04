@@ -9,13 +9,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.catalyst.collector.daos.TestDataDao;
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.TestData;
 
 @Repository
 @Transactional
-public class TestDataDaoHibernate implements TestDataDao {
+public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -27,17 +26,18 @@ public class TestDataDaoHibernate implements TestDataDao {
 
 
 	@Override
-	public List<TestData> getTestData() {
-		return em.createQuery("SELECT t FROM TestData t", TestData.class).
-				getResultList();
-	}
-
-
-	@Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)
 				.getResultList();
+	}
+	
+	@Override
+	public Category getByCategoryId(int categoryId) {
+		return em
+				.createQuery("SELECT c FROM Category c WHERE c.id = :ID", Category.class)
+				.setParameter("ID",  categoryId)
+				.getSingleResult();
 	}
 
 
@@ -62,13 +62,5 @@ public class TestDataDaoHibernate implements TestDataDao {
 		
 	}
 
-
-	@Override
-	public Category getByCategoryId(int categoryId) {
-		return em
-				.createQuery("SELECT c FROM Category c WHERE c.id = :ID", Category.class)
-				.setParameter("ID",  categoryId)
-				.getSingleResult();
-	}
 
 }

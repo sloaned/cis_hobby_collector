@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestDataDaoHibernateTest {
+public class CollectionsDaoHibernateTest {
 
 	@Test
 	public void test() {
