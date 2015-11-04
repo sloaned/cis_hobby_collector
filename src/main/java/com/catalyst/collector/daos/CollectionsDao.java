@@ -2,6 +2,7 @@ package com.catalyst.collector.daos;
 
 import java.util.List;
 
+import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 import java.util.ArrayList;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Keyword;
 

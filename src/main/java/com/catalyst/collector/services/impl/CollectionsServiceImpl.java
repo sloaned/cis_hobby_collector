@@ -3,17 +3,15 @@ package com.catalyst.collector.services.impl;
 import java.util.ArrayList;
 
 import java.util.List;
+
+import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
-import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
