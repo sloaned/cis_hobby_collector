@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestDataServiceImplTest {
+public class CollectionsServiceImplTest {
+
 
 	@Test
 	public void test() {

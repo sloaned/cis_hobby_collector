@@ -25,7 +25,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
     @Override
     public ArrayList<Keyword> getAllKeywords() {
-        return (ArrayList<Keyword>)em.createQuery("SELECT UNIQUE k From Keyword k", Keyword.class).getResultList();
+        return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
     @Override
     public void removeKeyword(Integer id) {
-        Keyword keyword = em.createQuery("SELECT k FROM Task k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
+        Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
         em.remove(keyword);
     }
 
