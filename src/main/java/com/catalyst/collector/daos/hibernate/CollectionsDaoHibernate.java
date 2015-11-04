@@ -49,6 +49,16 @@ public class CollectionsDaoHibernate implements CollectionsDao {
     }
 
 	@Override
+	public void addCollectible(Collectible collectible) {
+		em.persist(collectible);
+	}
+
+	@Override
+	public void updateCollectible(Collectible collectible) {
+		em.merge(collectible);
+	}
+
+	@Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)

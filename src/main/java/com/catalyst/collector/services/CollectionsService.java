@@ -33,18 +33,16 @@ public interface CollectionsService {
 	 * @param id
 	 */
 	public void deleteCategory(int id);
-
 	ArrayList<Collectible> getCollectibles();
-
 	Collectible getCollectible(Integer id);
-
-
-	public List<Color> getColorList();
-	public void addColor(Color addedColor);
-	public boolean removeColor(String color);
-	public boolean updateColor(int id, String color);
-    public ArrayList<Keyword> getAllKeywords();
-    public boolean addKeyword(Keyword keyword);
-    public boolean updateKeyword(Keyword keyword);
-    public void removeKeyword(Integer id);
+	List<Color> getColorList();
+	void addColor(Color addedColor);
+	boolean removeColor(String color);
+	boolean updateColor(int id, String color);
+    ArrayList<Keyword> getAllKeywords();
+    boolean addKeyword(Keyword keyword);
+    boolean updateKeyword(Keyword keyword);
+    void removeKeyword(Integer id);
+	void addCollectible(Collectible collectible);
+	void updateCollectible(Collectible collectible);
 }

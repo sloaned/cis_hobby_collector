@@ -135,6 +135,16 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
 	@Override
+	public void addCollectible(Collectible collectible) {
+		collectionsDao.addCollectible(collectible);
+	}
+
+	@Override
+	public void updateCollectible(Collectible collectible) {
+		collectionsDao.updateCollectible(collectible);
+	}
+
+	@Override
 	public ArrayList<Collectible> getCollectibles() {
 		return collectionsDao.getCollectibles();
 	}

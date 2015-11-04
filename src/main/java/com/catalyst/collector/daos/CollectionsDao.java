@@ -51,4 +51,8 @@ public interface CollectionsDao {
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
+
+	void addCollectible(Collectible collectible);
+
+	void updateCollectible(Collectible collectible);
 }
