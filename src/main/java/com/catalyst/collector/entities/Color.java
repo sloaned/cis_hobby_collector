@@ -18,15 +18,11 @@ public class Color {
 	public Color(String color){
 		this.color=color;
 	}
-	/**
-	 * @return String
-	 */
+	
 	public String getColor() {
 		return color;
 	}
-	/**
-	 * @param color
-	 */
+	
 	public void setColor(String color) {
 		this.color = color;
 	}
