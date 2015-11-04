@@ -50,7 +50,7 @@ public class CollectionsController {
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color{colorType}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/color/{colorType}", method=RequestMethod.DELETE)
 	public boolean removeColor(@PathVariable String colorType) {
 		return collectionsService.removeColor(colorType);
 	}
@@ -58,10 +58,12 @@ public class CollectionsController {
 	public void addColor(@RequestBody Color c) {
 		collectionsService.addColor(c);
 	}
-	@RequestMapping(value="/color", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable int id, @RequestParam(value="color",required=true)String color) {
+	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
+	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
 		return collectionsService.updateColor(id, color);
 	}
 	
+	// (value="color",required=true)
+
 	
 }
