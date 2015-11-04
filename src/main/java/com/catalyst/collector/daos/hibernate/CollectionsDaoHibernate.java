@@ -7,10 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import com.catalyst.collector.entities.Age;
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
@@ -49,6 +46,20 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.remove(age);
 	}
 
+	@Override
+	public ArrayList<Category> getCategory() {
+		return (ArrayList<Category>)em
+				.createQuery("SELECT c FROM Category c", Category.class)
+				.getResultList();
+	}
+
+	@Override
+	public Category getByCategoryId(int categoryId) {
+		return em
+				.createQuery("SELECT c FROM Category c WHERE c.categoryId = :ID", Category.class)
+				.setParameter("ID",  categoryId)
+				.getSingleResult();
+	}
 
 	@Override
 	public void addCategory(Category category) {
@@ -97,6 +108,26 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	@Override
 	public Collectible getCollectible(int id) {
 		return em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
+	}
+
+	@Override
+	public ArrayList<Keyword> getAllKeywords() {
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
+	}
+
+	@Override
+	public void addKeyword(Keyword keyword) {
+		em.persist(keyword);
+	}
+
+	public void updateKeyword(Keyword keyword) {
+		em.merge(keyword);
+	}
+
+	@Override
+	public void removeKeyword(Integer id) {
+		Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
+		em.remove(keyword);
 	}
 
 }
