@@ -10,11 +10,13 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
+
+import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Color;
 
 @Repository
 @Transactional
-public class CollectionsHibernate implements CollectionsDao {
+public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -25,7 +27,44 @@ public class CollectionsHibernate implements CollectionsDao {
 	}
 
 
+	@Override
+	public ArrayList<Category> getCategory() {
+		return (ArrayList<Category>)em
+				.createQuery("SELECT c FROM Category c", Category.class)
+				.getResultList();
+	}
 	
+	@Override
+	public Category getByCategoryId(int categoryId) {
+		return em
+				.createQuery("SELECT c FROM Category c WHERE c.categoryId = :ID", Category.class)
+				.setParameter("ID",  categoryId)
+				.getSingleResult();
+	}
+
+
+	@Override
+	public void addCategory(Category category) {
+		em.persist(category);
+		
+	}
+
+
+	@Override
+	public void updateCategory(Category category) {
+		em.merge(category);
+		
+	}
+
+
+	@Override
+	public void deleteCategory(int id) {
+		Category category = getByCategoryId(id);
+		em.remove(category);
+		
+	}
+
+
 	@Override
 	public void addColor(Color addedColor) {
 		em.persist(addedColor);
@@ -44,7 +83,4 @@ public class CollectionsHibernate implements CollectionsDao {
 		em.merge(c);
 	}
 
-
-
-	
 }
