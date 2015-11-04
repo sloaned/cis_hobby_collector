@@ -26,7 +26,7 @@ public class Collectible {
     @JoinColumn(name = "ageId")
     private Age age;
 
-    @Length()
+    @Column(nullable = true, length = 1000)
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
