@@ -7,8 +7,13 @@ import com.catalyst.collector.entities.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
+import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
@@ -128,4 +133,15 @@ public class CollectionsServiceImpl implements CollectionsService {
     public void removeKeyword(Integer id) {
         collectionsDao.removeKeyword(id);
     }
+
+	@Override
+	public ArrayList<Collectible> getCollectibles() {
+		return collectionsDao.getCollectibles();
+	}
+
+	@Override
+	public Collectible getCollectible(Integer id) {
+		return collectionsDao.getCollectible(id);
+	}
+
 }

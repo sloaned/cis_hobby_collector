@@ -10,6 +10,8 @@ import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 
+	ArrayList<Collectible> getCollectibles();
+	Collectible getCollectible(int id);
 	public void addColor(Color addedColor);
 	public boolean removeColor(Color c);
 	public List<Color> getColorList();

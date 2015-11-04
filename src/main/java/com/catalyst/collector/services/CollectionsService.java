@@ -33,6 +33,10 @@ public interface CollectionsService {
 	 */
 	public void deleteCategory(int id);
 
+	ArrayList<Collectible> getCollectibles();
+
+	Collectible getCollectible(Integer id);
+
 
 	public List<Color> getColorList();
 	public void addColor(Color addedColor);
