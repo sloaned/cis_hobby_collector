@@ -1,7 +1,6 @@
 package com.catalyst.collector.daos.hibernate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +34,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	@Override
 	public Category getByCategoryId(int categoryId) {
 		return em
-				.createQuery("SELECT c FROM Category c WHERE c.id = :ID", Category.class)
+				.createQuery("SELECT c FROM Category c WHERE c.categoryId = :ID", Category.class)
 				.setParameter("ID",  categoryId)
 				.getSingleResult();
 	}

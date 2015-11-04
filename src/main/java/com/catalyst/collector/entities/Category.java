@@ -10,14 +10,14 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int categoryId;
 	private String name;
 	
 	public int getId() {
-		return id;
+		return categoryId;
 	}
 	public void setId(int id) {
-		this.id = id;
+		categoryId = id;
 	}
 	public String getName() {
 		return name;

@@ -1,7 +1,6 @@
 package com.catalyst.collector.daos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.catalyst.collector.entities.Category;
 
