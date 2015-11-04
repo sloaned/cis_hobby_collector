@@ -25,6 +25,11 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
-        //TODO: ajax call here to add new collection.
+        $.ajax({
+            url: '/collectibles',
+            method: 'POST'
+        }).then(function(){
+
+        });
     });
 });
