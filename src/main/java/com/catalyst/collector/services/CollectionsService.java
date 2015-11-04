@@ -30,7 +30,7 @@ public interface CollectionsService {
 
 	/**
 	 * Calls the delete age method in the Dao
-	 * @param age
+	 * @param id
      */
-	void deleteAge(Age age);
+	void deleteAge(Integer id);
 }

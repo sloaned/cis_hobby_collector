@@ -5,10 +5,7 @@ import java.util.List;
 
 import com.catalyst.collector.entities.Age;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.catalyst.collector.entities.TestData;
 import com.catalyst.collector.services.CollectionsService;
@@ -30,18 +27,19 @@ public class CollectionsController {
 		return collectionsService.getTestData();
 	}
 
-	@RequestMapping(value="agetypes", method=RequestMethod.GET)
+	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
 	@RequestMapping(value="/agetypes", method=RequestMethod.POST)
 	public void addAge(@RequestBody Age age){
 		collectionsService.addAge(age);}
 
-	@RequestMapping(value="/agetypes", method=RequestMethod.PUT)
-	public void updateAge(@RequestBody Age age){
+	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.PUT)
+	public void updateAge(@PathVariable Integer id, @RequestBody Age age){
+		age.setAge_id(id);
 		collectionsService.updateAge(age);}
 
-	@RequestMapping(value="/agetypes", method=RequestMethod.DELETE)
-	public void deleteAge(@RequestBody Age age){
-		collectionsService.deleteAge(age);}
+	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
+	public void deleteAge(@PathVariable Integer id){
+		collectionsService.deleteAge(id);}
 }

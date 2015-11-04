@@ -44,8 +44,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public void deleteAge(Age age){
-		collectionsDao.deleteAge(age);
+	public void deleteAge(Integer id){
+		collectionsDao.deleteAge(id);
 	}
 
 }

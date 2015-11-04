@@ -44,7 +44,11 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.merge(age);
 	}
 
-	public void deleteAge(Age age){
+	public void deleteAge(Integer id){
+		Age age = em
+				.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
+				.setParameter("id", id)
+				.getSingleResult();
 		em.remove(age);
 	}
 

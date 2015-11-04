@@ -25,7 +25,7 @@ public interface CollectionsDao {
 
 	/**
 	 * Deletes an age type from the database
-	 * @param age
+	 * @param id
      */
-	void deleteAge(Age age);
+	void deleteAge(Integer id);
 }

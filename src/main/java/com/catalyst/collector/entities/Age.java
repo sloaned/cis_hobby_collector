@@ -7,11 +7,22 @@ import javax.persistence.*;
  */
 @Entity
 public class Age {
+    public Integer getAge_id() {
+        return age_id;
+    }
+
+    public void setAge_id(Integer age_id) {
+        this.age_id = age_id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int age_id;
+    private Integer age_id;
     @Column(nullable = false, unique = true)
     private String age;
+
+
+    public Age(){}
 
     /**
      * This setter creates a new age category
