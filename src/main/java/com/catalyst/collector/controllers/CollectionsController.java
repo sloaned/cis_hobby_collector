@@ -88,9 +88,9 @@ public class CollectionsController {
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color/{colorType}", method=RequestMethod.DELETE)
-	public boolean removeColor(@PathVariable String colorType) {
-		return collectionsService.removeColor(colorType);
+	@RequestMapping(value="/color/{id}", method=RequestMethod.DELETE)
+	public boolean removeColor(@PathVariable Integer id) {
+		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
 	public void addColor(@RequestBody Color c) {

@@ -19,7 +19,7 @@ public interface CollectionsDao {
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 	void addColor(Color addedColor);
-	boolean removeColor(Color c);
+	boolean removeColor(int id);
 	List<Color> getColorList();
 	void updateColor(Color c);
 	/**

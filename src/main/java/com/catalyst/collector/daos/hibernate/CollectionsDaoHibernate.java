@@ -88,9 +88,17 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.persist(addedColor);
 	}
 	@Override
-	public boolean removeColor(Color c) {
-		em.remove(c);
+	public boolean removeColor(int id) {
+		Color color = getByColorId(id);
+		em.remove(color);
 		return true;
+	}
+	
+	public Color getByColorId(int colorId){
+		return em
+				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
+				.setParameter("ID",  colorId)
+				.getSingleResult();
 	}
 	@Override
 	public List<Color> getColorList() {

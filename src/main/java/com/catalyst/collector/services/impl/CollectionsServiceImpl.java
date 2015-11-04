@@ -88,23 +88,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 		collectionsDao.addColor(addedColor);
 	}
 	@Override
-	public boolean removeColor(String color) {
+	public boolean removeColor(int id) {
 		//to do: try catch implementation
 		//to-do take object color, not string
-		Color removedColor =getColor(color);
-		collectionsDao.removeColor(removedColor);
+		//Color removedColor =getColor(id);
+		collectionsDao.removeColor(id);
 		return true;
 	}
-	public Color getColor(String color){
+	/*public Color getColor(int id){
 		List<Color> colors = getColorList();
 		for(Color c: colors){
-			if(c.getColor().equals(color)){
+			if(c.getId() == id){
 				return c;
 			}
 		}
 		return null;
 
-	}
+	}*/
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
