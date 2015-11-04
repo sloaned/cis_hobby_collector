@@ -49,7 +49,7 @@ public class CollectionsController {
 	}
 
 
-	
+
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -109,7 +109,6 @@ public class CollectionsController {
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
     }
-
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {
         if (!collectionsService.addKeyword(keyword))
@@ -129,4 +128,6 @@ public class CollectionsController {
     public void deleteKeyword(@PathVariable Integer id) {
         collectionsService.removeKeyword(id);
     }
+	
+	
 }
