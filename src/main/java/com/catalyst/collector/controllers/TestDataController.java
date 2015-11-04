@@ -6,9 +6,9 @@ import java.util.List;
 import com.catalyst.collector.entities.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.QueryLookupStrategy;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.catalyst.collector.entities.TestData;
 import com.catalyst.collector.services.TestDataService;
@@ -27,5 +27,17 @@ public class TestDataController {
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
         return testDataService.getAllKeywords();
+    }
+
+    @RequestMapping(value="/keywords", method = RequestMethod.POST)
+    public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {
+        if (!testDataService.addKeyword(keyword))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(keyword, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/keyword/{id}", method = RequestMethod.PUT)
+    public Keyword getKeyword(@PathVariable Integer id) {
+        return testDataService.getKeyword(id);
     }
 }

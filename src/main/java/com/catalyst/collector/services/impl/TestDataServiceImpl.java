@@ -16,21 +16,29 @@ public class TestDataServiceImpl implements TestDataService {
 
 	@Autowired
 	TestDataDao testDataDao;
-	
-	
+
+
 	public void setTestDataDao(TestDataDao testDataDao) {
 		this.testDataDao = testDataDao;
 	}
 
-
-	@Override
-	public List<TestData> getTestData() {
-		return testDataDao.getTestData();
-	}
 
     @Override
     public ArrayList<Keyword> getAllKeywords() {
         return testDataDao.getAllKeywords();
     }
 
+    @Override
+    public boolean addKeyword(Keyword keyword) {
+        if (keyword.getWord().length() < 1 || keyword.getWord().length() > 255)
+            return false;
+
+        testDataDao.addKeyword(keyword);
+        return true;
+    }
+
+    @Override
+    public Keyword getKeyword(Integer id) {
+        return testDataDao.getKeyword(id);
+    }
 }

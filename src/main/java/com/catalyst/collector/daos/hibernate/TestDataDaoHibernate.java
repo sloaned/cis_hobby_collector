@@ -25,16 +25,19 @@ public class TestDataDaoHibernate implements TestDataDao {
 		this.em = em;
 	}
 
-
-	@Override
-	public List<TestData> getTestData() {
-		return em.createQuery("SELECT t FROM TestData t", TestData.class).
-				getResultList();
-	}
-
     @Override
     public ArrayList<Keyword> getAllKeywords() {
         return (ArrayList<Keyword>)em.createQuery("SELECT UNIQUE k From Keyword k", Keyword.class).getResultList();
+    }
+
+    @Override
+    public void addKeyword(Keyword keyword) {
+        em.persist(keyword);
+    }
+
+    @Override
+    public Keyword getKeyword(Integer id) {
+        return em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
     }
 
 }
