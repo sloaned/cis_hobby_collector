@@ -101,10 +101,8 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 	@Override
 	public void updateColor(Color c) {
-        em.merge(c);
-    }
-
-
+		em.merge(c);
+	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
 		return (ArrayList<Collectible>) em.createQuery("Select * from COLLECTIBLE").getResultList();
