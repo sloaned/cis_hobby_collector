@@ -11,4 +11,28 @@ public class CollectionsDaoHibernateTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testGetTestData() throws Exception {
+
+	}
+
+	@Test
+	public void testAddAge() throws Exception {
+
+	}
+
+	@Test
+	public void testGetAgeTypes() throws Exception {
+
+	}
+
+	@Test
+	public void testUpdateAge() throws Exception {
+
+	}
+
+	@Test
+	public void testDeleteAge() throws Exception {
+
+	}
 }

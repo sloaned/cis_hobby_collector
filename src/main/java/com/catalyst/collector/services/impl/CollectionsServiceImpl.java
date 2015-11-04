@@ -29,7 +29,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public void addAge(String age) {
+	public void addAge(Age age) {
 		collectionsDao.addAge(age);
 	}
 

@@ -9,7 +9,7 @@ import com.catalyst.collector.entities.TestData;
 public interface CollectionsDao {
 
 	public List<TestData> getTestData();
-	public void addAge(String age);
+	public void addAge(Age age);
 
 	/**
 	 * Gets an ArrayList of age types from the database

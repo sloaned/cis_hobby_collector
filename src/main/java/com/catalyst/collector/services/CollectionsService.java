@@ -13,8 +13,8 @@ public interface CollectionsService {
 	/**
 	 * Calls the add Age method in the Dao
 	 * @param age
-     */
-	public void addAge(String age);
+	 */
+	public void addAge(Age age);
 
 	/**
 	 * Calls the get age types method in the Dao

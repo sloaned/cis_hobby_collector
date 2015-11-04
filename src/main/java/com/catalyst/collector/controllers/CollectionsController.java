@@ -17,22 +17,31 @@ import com.catalyst.collector.services.CollectionsService;
 public class CollectionsController {
 
 	@Autowired
-	private CollectionsService testDataService;
+	private CollectionsService collectionsService;
 	
 	
-	public void setTestDataService(CollectionsService testDataService) {
-		this.testDataService = testDataService;
+	public void setCollectionsService(CollectionsService collectionsService) {
+		this.collectionsService = collectionsService;
 	}
 
 
 	@RequestMapping(value="testdata", method=RequestMethod.GET)
 	public List<TestData> getTestData() {
-		return testDataService.getTestData();
+		return collectionsService.getTestData();
 	}
 
 	@RequestMapping(value="agetypes", method=RequestMethod.GET)
-	public ArrayList<Age> getAgeTypes(){return testDataService.getAgeTypes();}
+	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
 	@RequestMapping(value="/agetypes", method=RequestMethod.POST)
-	public void addAge(@RequestBody String age){testDataService.addAge(age);}
+	public void addAge(@RequestBody Age age){
+		collectionsService.addAge(age);}
+
+	@RequestMapping(value="/agetypes", method=RequestMethod.PUT)
+	public void updateAge(@RequestBody Age age){
+		collectionsService.updateAge(age);}
+
+	@RequestMapping(value="/agetypes", method=RequestMethod.DELETE)
+	public void deleteAge(@RequestBody Age age){
+		collectionsService.deleteAge(age);}
 }

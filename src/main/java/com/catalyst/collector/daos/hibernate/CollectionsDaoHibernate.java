@@ -32,18 +32,10 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				getResultList();
 	}
 
-	/**
-	 * Used to add an age type to the database
-	 * @param age as the age type you want to add
-     */
-	public void addAge(String age){
+	public void addAge(Age age){
 		em.persist(age);
 	}
 
-	/**
-	 * Accesses the Age table in the database
-	 * @return an Array List of all the age types that currently exist
-     */
 	public ArrayList<Age> getAgeTypes(){
 		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
 	}
