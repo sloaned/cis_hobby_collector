@@ -1,8 +1,11 @@
 package com.catalyst.collector.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Collections;
+import com.catalyst.collector.entities.Color;
 
 public interface CollectionsService {
 		
@@ -29,4 +32,11 @@ public interface CollectionsService {
 	 * @param id
 	 */
 	public void deleteCategory(int id);
+	
+	public List<Collections> getCollection();
+	
+	public List<Color> getColorList();
+	public void addColor(Color addedColor);
+	public boolean removeColor(String color);
+	public boolean updateColor(int id, String color);	
 }
