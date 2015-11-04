@@ -1,5 +1,6 @@
 package com.catalyst.collector.entities;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,9 +12,12 @@ import java.util.Set;
 @Entity
 public class Collectible {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_gen")
+    @GenericGenerator(name = "id_gen",
+            strategy = "com.catalyst.collector.services.CatalogNumberGenerator")
     private String catalogueNumber;
 
     @Column(nullable = false, length = 255)
