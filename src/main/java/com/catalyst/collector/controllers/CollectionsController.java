@@ -19,26 +19,26 @@ public class CollectionsController {
 	private CollectionsService collectionsService;
 	
 	
-	public void setcollectionsService(CollectionsService collectionsService) {
+	public void setCollectionsService(CollectionsService collectionsService) {
 		this.collectionsService = collectionsService;
 	}
 
-	@RequestMapping(value="/collections", method=RequestMethod.GET)
+	@RequestMapping(value="/category", method=RequestMethod.GET)
 	public ArrayList<Category> getCategory(){
 		return collectionsService.getCategory();
 	}
 	
-	@RequestMapping(value="/collections", method=RequestMethod.POST)
+	@RequestMapping(value="/category", method=RequestMethod.POST)
 	public void addCategory(@RequestBody Category category){
 		collectionsService.addCategory(category);
 	}
 	
-	@RequestMapping(value="/collections", method=RequestMethod.PUT)
+	@RequestMapping(value="/category", method=RequestMethod.PUT)
 	public void updateCategory(@RequestBody Category category){
 		collectionsService.updateCategory(category);
 	}
 	
-	@RequestMapping(value="/collections", method=RequestMethod.DELETE)
+	@RequestMapping(value="/category", method=RequestMethod.DELETE)
 	public void deleteCategory(@PathVariable Integer id){
 		collectionsService.deleteCategory(id);
 	}
