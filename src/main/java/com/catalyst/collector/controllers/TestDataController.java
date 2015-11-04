@@ -24,7 +24,6 @@ public class TestDataController {
 		this.collectionService = collectionService;
 	}
 
-
 	@RequestMapping(value="/collectible/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Collectible> getCollectible(@PathVariable Integer id) {
 		return new ResponseEntity<>(collectionService.getCollectible(id.intValue()), HttpStatus.OK);
