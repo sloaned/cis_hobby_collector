@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 
 import com.catalyst.collector.entities.Keyword;
@@ -24,7 +25,6 @@ import com.catalyst.collector.entities.Age;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.catalyst.collector.entities.TestData;
 import com.catalyst.collector.services.CollectionsService;
 
 @RestController
@@ -48,11 +48,6 @@ public class CollectionsController {
 		return collectionsService.getCollectibles();
 	}
 
-
-	@RequestMapping(value="testdata", method=RequestMethod.GET)
-	public List<TestData> getTestData() {
-		return collectionsService.getTestData();
-	}
 
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
@@ -103,7 +98,7 @@ public class CollectionsController {
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color{colorType}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/color/{colorType}", method=RequestMethod.DELETE)
 	public boolean removeColor(@PathVariable String colorType) {
 		return collectionsService.removeColor(colorType);
 	}
@@ -111,11 +106,10 @@ public class CollectionsController {
 	public void addColor(@RequestBody Color c) {
 		collectionsService.addColor(c);
 	}
-	@RequestMapping(value="/color", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable int id, @RequestParam(value="color",required=true)String color) {
+	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
+	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
 		return collectionsService.updateColor(id, color);
 	}
-
 
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
@@ -141,4 +135,6 @@ public class CollectionsController {
     public void deleteKeyword(@PathVariable Integer id) {
         collectionsService.removeKeyword(id);
     }
+	
+	
 }
