@@ -3,12 +3,13 @@ package com.catalyst.collector.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.catalyst.collector.entities.*;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Keyword;
-
 public interface CollectionsService {
+
 
 	/**
 	 * gets every category object
@@ -35,14 +36,41 @@ public interface CollectionsService {
 	public void deleteCategory(int id);
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(Integer id);
-	List<Color> getColorList();
-	void addColor(Color addedColor);
-	boolean removeColor(String color);
-	boolean updateColor(int id, String color);
-    ArrayList<Keyword> getAllKeywords();
-    boolean addKeyword(Keyword keyword);
-    boolean updateKeyword(Keyword keyword);
-    void removeKeyword(Integer id);
+
+
+	public List<Color> getColorList();
+	public void addColor(Color addedColor);
+	public boolean removeColor(String color);
+	public boolean updateColor(int id, String color);
+    public ArrayList<Keyword> getAllKeywords();
+    public boolean addKeyword(Keyword keyword);
+    public boolean updateKeyword(Keyword keyword);
+    public void removeKeyword(Integer id);
 	void addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
+
+
+	/**
+	 * Calls the add Age method in the Dao
+	 * @param age
+	 */
+	public void addAge(Age age);
+
+	/**
+	 * Calls the get age types method in the Dao
+	 * @return
+	 */
+	ArrayList<Age> getAgeTypes();
+
+	/**
+	 * Calls the update age method in the Dao
+	 * @param age
+	 */
+	void updateAge(Age age);
+
+	/**
+	 * Calls the delete age method in the Dao
+	 * @param id
+	 */
+	void deleteAge(Integer id);
 }

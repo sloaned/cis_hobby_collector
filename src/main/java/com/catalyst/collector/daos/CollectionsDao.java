@@ -1,15 +1,20 @@
 package com.catalyst.collector.daos;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.catalyst.collector.entities.Age;
 
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
-import java.util.ArrayList;
 
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
+
+
+
 
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
@@ -55,4 +60,23 @@ public interface CollectionsDao {
 	void addCollectible(Collectible collectible);
 
 	void updateCollectible(Collectible collectible);
+	public void addAge(Age age);
+
+	/**
+	 * Gets an ArrayList of age types from the database
+	 * @return
+	 */
+	ArrayList<Age> getAgeTypes();
+
+	/**
+	 * Updates an age type in the database
+	 * @param age
+	 */
+	void updateAge(Age age);
+
+	/**
+	 * Deletes an age type from the database
+	 * @param id
+	 */
+	void deleteAge(Integer id);
 }
