@@ -7,14 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import com.catalyst.collector.entities.Keyword;
-import com.catalyst.collector.entities.Collectible;
+import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
-
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Color;
 
 @Repository
 @Transactional
@@ -28,25 +24,27 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		this.em = em;
 	}
 
-    @Override
-    public ArrayList<Keyword> getAllKeywords() {
-        return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
-    }
 
-    @Override
-    public void addKeyword(Keyword keyword) {
-        em.persist(keyword);
-    }
 
-    public void updateKeyword(Keyword keyword) {
-        em.merge(keyword);
-    }
+	public void addAge(Age age){
+		em.persist(age);
+	}
 
-    @Override
-    public void removeKeyword(Integer id) {
-        Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
-        em.remove(keyword);
-    }
+	public ArrayList<Age> getAgeTypes(){
+		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
+	}
+
+	public void updateAge(Age age){
+		em.merge(age);
+	}
+
+	public void deleteAge(Integer id){
+		Age age = em
+				.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
+				.setParameter("id", id)
+				.getSingleResult();
+		em.remove(age);
+	}
 
 	@Override
 	public ArrayList<Category> getCategory() {
@@ -62,7 +60,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				.setParameter("ID",  categoryId)
 				.getSingleResult();
 	}
-
 
 	@Override
 	public void addCategory(Category category) {
@@ -111,6 +108,26 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	@Override
 	public Collectible getCollectible(int id) {
 		return em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
+	}
+
+	@Override
+	public ArrayList<Keyword> getAllKeywords() {
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
+	}
+
+	@Override
+	public void addKeyword(Keyword keyword) {
+		em.persist(keyword);
+	}
+
+	public void updateKeyword(Keyword keyword) {
+		em.merge(keyword);
+	}
+
+	@Override
+	public void removeKeyword(Integer id) {
+		Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
+		em.remove(keyword);
 	}
 
 }
