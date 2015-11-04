@@ -3,6 +3,7 @@ package com.catalyst.collector.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.catalyst.collector.entities.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,10 @@ public class TestDataServiceImpl implements TestDataService {
 	public List<TestData> getTestData() {
 		return testDataDao.getTestData();
 	}
+
+    @Override
+    public ArrayList<Keyword> getAllKeywords() {
+        return testDataDao.getAllKeywords();
+    }
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import com.catalyst.collector.entities.Keyword;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.TestDataDao;
@@ -30,5 +31,10 @@ public class TestDataDaoHibernate implements TestDataDao {
 		return em.createQuery("SELECT t FROM TestData t", TestData.class).
 				getResultList();
 	}
+
+    @Override
+    public ArrayList<Keyword> getAllKeywords() {
+        return (ArrayList<Keyword>)em.createQuery("SELECT UNIQUE k From Keyword k", Keyword.class).getResultList();
+    }
 
 }

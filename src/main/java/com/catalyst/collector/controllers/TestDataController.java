@@ -3,7 +3,9 @@ package com.catalyst.collector.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.catalyst.collector.entities.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +24,8 @@ public class TestDataController {
 		this.testDataService = testDataService;
 	}
 
-
-	@RequestMapping(value="testdata", method=RequestMethod.GET)
-	public List<TestData> getTestData() {
-		return testDataService.getTestData();
-	}
+    @RequestMapping(value="/keywords", method = RequestMethod.GET)
+    public ArrayList<Keyword> getAllKeywords() {
+        return testDataService.getAllKeywords();
+    }
 }
