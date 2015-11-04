@@ -40,4 +40,9 @@ public class TestDataDaoHibernate implements TestDataDao {
         return em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
     }
 
+    @Override
+    public void removeKeyword(Integer id) {
+        em.remove(getKeyword(id));
+    }
+
 }

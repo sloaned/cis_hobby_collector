@@ -41,4 +41,9 @@ public class TestDataServiceImpl implements TestDataService {
     public Keyword getKeyword(Integer id) {
         return testDataDao.getKeyword(id);
     }
+
+    @Override
+    public void removeKeyword(Integer id) {
+        testDataDao.removeKeyword(id);
+    }
 }

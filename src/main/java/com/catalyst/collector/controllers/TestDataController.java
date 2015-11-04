@@ -40,4 +40,9 @@ public class TestDataController {
     public Keyword getKeyword(@PathVariable Integer id) {
         return testDataService.getKeyword(id);
     }
+
+    @RequestMapping(value="/keyword/{id}", method = RequestMethod.DELETE)
+    public void deleteKeyword(@PathVariable Integer id) {
+        testDataService.removeKeyword(id);
+    }
 }

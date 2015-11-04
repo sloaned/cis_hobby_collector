@@ -12,4 +12,5 @@ public interface TestDataService {
     public ArrayList<Keyword> getAllKeywords();
     public boolean addKeyword(Keyword keyword);
     public Keyword getKeyword(Integer id);
+    public void removeKeyword(Integer id);
 }
