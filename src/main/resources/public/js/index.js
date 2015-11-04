@@ -1,14 +1,21 @@
 $(document).ready(function(){
 	$.ajax({
-		url : '/collections', // TODO: change this to what it actually is.
+		url : '/collectibles', // TODO: change this to what it actually is.
 		method : 'GET'
-	}).then(function(testData) {
-		for (var i = 0; i < testData.length; i++) {
-			var data = testData[i];
-			var row = "<tr><td>" + data.id + "</td><td>"
-					+ data.data1 + "</td></tr>"; 
-			$("#result").append(row);
+	}).then(function(collectibles) {
+		$("tbody").children().remove();
+		for (var i = 0; i < collectibles.length; i++) {
+			addDataToRow(collectibles[i]);
 		}
-		console.log(testData);
 	});
 });
+
+function addDataToRow(collectible){
+	var row = "<tr><td>" + collectible.category + "</td><td>"
+			+ collectible.color + "</td><td>" + collectible.condition + "</td><td>"
+			+ collectible.age + "</td><td>" + collectible.description + "</td><td>"
+			+ collectible.name + "</td><td>" + collectible.keywords + "</td><td>"
+			+ collectible.sold + "</td><td>" + collectible.catalogueNumber + "</td></tr>";
+
+	$("tbody").append(row);
+}
