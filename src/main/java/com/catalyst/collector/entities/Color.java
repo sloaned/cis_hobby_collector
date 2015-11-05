@@ -1,9 +1,6 @@
 package com.catalyst.collector.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -11,6 +8,7 @@ public class Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
+    @Column(nullable = false, unique = true)
 	@Size(max = 255)
 	String color;
 	public Color(){}

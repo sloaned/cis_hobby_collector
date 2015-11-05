@@ -50,7 +50,28 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.remove(age);
 	}
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return (ArrayList<Condition>) em.createQuery("SELECT c FROM Condition c", Condition.class).getResultList();
+    }
+
+    @Override
+    public void addCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
+    public void updateCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        Condition condition = em.createQuery("SELECT c FROM Condition c WHERE c.id = :id", Condition.class).setParameter("id", id).getSingleResult();
+        em.remove(condition);
+    }
+
+    @Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)

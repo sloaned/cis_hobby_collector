@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.catalyst.collector.entities.*;
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.entities.Keyword;
-public interface CollectionsService {
 
+public interface CollectionsService {
 
 	/**
 	 * gets every category object
@@ -45,6 +41,10 @@ public interface CollectionsService {
 	public boolean removeColor(int id);
 	public boolean updateColor(int id, String color);
 	public Color getColor(int colorId);
+    ArrayList<Condition> getAllConditions();
+    boolean addCondition(Condition condition);
+    boolean updateCondition(Condition condition);
+    void deleteCondition(Integer id);
     public ArrayList<Keyword> getAllKeywords();
     public boolean addKeyword(Keyword keyword);
     public boolean updateKeyword(Keyword keyword);
