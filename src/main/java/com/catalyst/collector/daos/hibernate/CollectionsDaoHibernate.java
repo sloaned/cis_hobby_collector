@@ -102,8 +102,14 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 
 	@Override
-	public void addColor(Color addedColor) {
+	public boolean addColor(Color addedColor) {
+		try{
 		em.persist(addedColor);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	@Override
 <<<<<<< HEAD
@@ -117,8 +123,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 =======
 >>>>>>> 0fd35167437ca4fab58292063ccfa585d0794525
 	public boolean removeColor(int id) {
+		try{
 		Color color = getByColorId(id);
 		em.remove(color);
+		}
+		catch(Exception e){
+			return false;
+		}
 		return true;
 	}
 	
@@ -133,8 +144,14 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return em.createQuery("SELECT c FROM Color c", Color.class).getResultList();
 	}
 	@Override
-	public void updateColor(Color c) {
+	public boolean updateColor(Color c) {
+		try{
 		em.merge(c);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {

@@ -13,11 +13,11 @@ import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 	
-	public void addColor(Color addedColor); 
+	public boolean addColor(Color addedColor); 
 	public Color getByColorId(int colorId);
 	public boolean removeColor(int id);
 	public List<Color> getColorList();
-	public void updateColor(Color c);
+	public boolean updateColor(Color c);
 
 
 
