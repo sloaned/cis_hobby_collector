@@ -50,7 +50,28 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.remove(age);
 	}
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return (ArrayList<Condition>) em.createQuery("SELECT c FROM Condition c", Condition.class).getResultList();
+    }
+
+    @Override
+    public void addCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
+    public void updateCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        Condition condition = em.createQuery("SELECT c FROM Condition c WHERE c.id = :id", Condition.class).setParameter("id", id).getSingleResult();
+        em.remove(condition);
+    }
+
+    @Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)
@@ -66,24 +87,38 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
-	public void addCategory(Category category) {
-		em.persist(category);
-
+	public boolean addCategory(Category category) {
+		try{
+			em.persist(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
 	}
 
 
 	@Override
-	public void updateCategory(Category category) {
-		em.merge(category);
-
+	public boolean updateCategory(Category category) {
+		try{
+			em.merge(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+		
 	}
 
 
 	@Override
-	public void deleteCategory(int id) {
-		Category category = getByCategoryId(id);
-		em.remove(category);
-
+	public boolean deleteCategory(int id) {
+		try{
+			Category category = getByCategoryId(id);
+			em.remove(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+		
 	}
 
 
@@ -98,22 +133,31 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return true;
 	}
 	@Override
-	public Color getByColorId(int colorId) {
+
+	public Color getColor(int colorId) {
 		return em
 				.createQuery("SELECT c FROM Color c WHERE c.id = :ID", Color.class)
 				.setParameter("ID",  colorId)
 				.getSingleResult();
 	}
 	@Override
+
 	public boolean removeColor(int id) {
 		try{
-		Color color = getByColorId(id);
+		Color color = getColor(id);
 		em.remove(color);
 		}
 		catch(Exception e){
 			return false;
 		}
 		return true;
+	}
+	
+	public Color getByColorId(int colorId){
+		return em
+				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
+				.setParameter("ID",  colorId)
+				.getSingleResult();
 	}
 	@Override
 	public List<Color> getColorList() {

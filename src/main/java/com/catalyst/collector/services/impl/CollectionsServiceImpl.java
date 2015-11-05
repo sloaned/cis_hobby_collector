@@ -3,7 +3,8 @@ package com.catalyst.collector.services.impl;
 import java.util.ArrayList;
 
 import java.util.List;
-import com.catalyst.collector.entities.Color;
+
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
@@ -28,10 +29,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Autowired
 	CollectionsDao collectionsDao;
-
-
-	public void setcollectionsDao(CollectionsDao collectionsDao) {}
-
 
 	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
@@ -64,20 +61,22 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void addCategory(Category category) {
-		collectionsDao.addCategory(category);
+	public boolean addCategory(Category category) {
+		return collectionsDao.addCategory(category);
 
 	}
 
 
 	@Override
-	public void updateCategory(int id, Category category) {
+	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		collectionsDao.updateCategory(category);
+		return collectionsDao.updateCategory(category);
 	}
 
-
-
+	@Override
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
+	}
 
 	@Override
 	public List<Color> getColorList() {
@@ -101,11 +100,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 		catch(Exception e){
 			return false;
 		}
-		return true;	
+		return true;
 	}
-	
 
-	
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
@@ -129,15 +126,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	}
 
-
-	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
-	}
 	@Override
 	public Color getByColorId(int colorId){
-		return collectionsDao.getByColorId(colorId);
-
+		return collectionsDao.getColor(colorId);
 	}
 
     @Override
@@ -167,7 +158,33 @@ public class CollectionsServiceImpl implements CollectionsService {
         collectionsDao.removeKeyword(id);
     }
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsDao.getAllConditions();
+    }
+
+    @Override
+    public boolean addCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.addCondition(condition);
+        return true;
+    }
+
+    @Override
+    public boolean updateCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.updateCondition(condition);
+        return true;
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        collectionsDao.deleteCondition(id);
+    }
+
+    @Override
 	public ArrayList<Collectible> getCollectibles() {
 		return collectionsDao.getCollectibles();
 	}

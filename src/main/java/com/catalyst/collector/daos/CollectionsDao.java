@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.catalyst.collector.entities.Age;
-
+import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
-
-import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Condition;
 import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 	
 	public boolean addColor(Color addedColor); 
-	public Color getByColorId(int colorId);
+	public Color getColor(int colorId);
 	public boolean removeColor(int id);
 	public List<Color> getColorList();
 	public boolean updateColor(Color c);
@@ -24,10 +23,7 @@ public interface CollectionsDao {
 
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
-	
-	
-	
-	
+
 	/**
 	 * gets every category object
 	 * @return ArrayList of all categories
@@ -45,19 +41,19 @@ public interface CollectionsDao {
 	 * adds a new category to the database
 	 * @param category
 	 */
-	void addCategory(Category category);
+	boolean addCategory(Category category);
 
 	/**
 	 * updates the given category (which will be identified by the id number)
 	 * @param category
 	 */
-	void updateCategory(Category category);
+	boolean updateCategory(Category category);
 
 	/**
 	 * deletes the category which matches the given id number
 	 * @param id
 	 */
-	void deleteCategory(int id);
+	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
@@ -81,4 +77,8 @@ public interface CollectionsDao {
 	 * @param id
 	 */
 	void deleteAge(Integer id);
+    ArrayList<Condition> getAllConditions();
+    void addCondition(Condition condition);
+    void updateCondition(Condition condition);
+    void deleteCondition(Integer id);
 }

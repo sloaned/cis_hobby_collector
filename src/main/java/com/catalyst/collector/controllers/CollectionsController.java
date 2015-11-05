@@ -3,6 +3,7 @@ package com.catalyst.collector.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,18 +72,18 @@ public class CollectionsController {
 	}
 
 	@RequestMapping(value="/category", method=RequestMethod.POST)
-	public void addCategory(@RequestBody Category category){
-		collectionsService.addCategory(category);
+	public boolean addCategory(@RequestBody Category category){
+		return collectionsService.addCategory(category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.PUT)
-	public void updateCategory(@PathVariable Integer id, @RequestBody Category category){
-		collectionsService.updateCategory(id, category);
+	public boolean updateCategory(@PathVariable Integer id, @RequestBody Category category){
+		return collectionsService.updateCategory(id, category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.DELETE)
-	public void deleteCategory(@PathVariable Integer id){
-		collectionsService.deleteCategory(id);
+	public boolean deleteCategory(@PathVariable Integer id){
+		return collectionsService.deleteCategory(id);
 	}
 
 	@RequestMapping(value="/color", method=RequestMethod.GET)
@@ -102,8 +103,8 @@ public class CollectionsController {
 		return collectionsService.updateColor(id, color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
-	public Color getByColorId(@PathVariable Integer id){
-		return collectionsService.getByColorId(id);
+	public Color getColor(@PathVariable Integer id){
+		return collectionsService.getColor(id);
 	}
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
@@ -128,6 +129,30 @@ public class CollectionsController {
     public void deleteKeyword(@PathVariable Integer id) {
         collectionsService.removeKeyword(id);
     }
-	
-	
+
+    @RequestMapping(value="/conditions", method = RequestMethod.GET)
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsService.getAllConditions();
+    }
+
+    @RequestMapping(value = "/conditions", method = RequestMethod.POST)
+    public ResponseEntity<Condition> addCondition(@RequestBody Condition condition) {
+        if (!collectionsService.addCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<Condition>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Condition> updateCondition(@PathVariable Integer id, @RequestBody Condition condition) {
+        condition.setId(id);
+        if (!collectionsService.updateCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.DELETE)
+    public void deleteCondition(@PathVariable Integer id) {
+        collectionsService.deleteCondition(id);
+    }
 }

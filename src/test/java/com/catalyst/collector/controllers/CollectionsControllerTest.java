@@ -18,34 +18,46 @@ public class CollectionsControllerTest {
 	CollectionsServiceImpl mockCollectionsService = mock(CollectionsServiceImpl.class);
 
 	
-	/*@Before
-	public void setup(){
-
-		CollectionsServiceImpl mockCollectionsService = mock(CollectionsServiceImpl.class);
-		collectionsController.setCollectionsService(mockCollectionsService);
-	}*/
-	
 	@Test
 	public void testGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
 		when(mockCollectionsService.getCategory()).thenReturn(sample);
 		
 		collectionsController.setCollectionsService(mockCollectionsService);
-
-		
-		
+	
 		ArrayList<Category> result = collectionsController.getCategory();
 		
-		assertEquals(sample, result);
-			
+		assertEquals(sample, result);			
 	}
 	
 	@Test
 	public void testAddCategory(){
-		Category category = new Category();
-		category.setName("Ornaments");
+		Category sample = new Category();
+		when(mockCollectionsService.addCategory(sample)).thenReturn(true);
 		
-		
+		collectionsController.setCollectionsService(mockCollectionsService);
+		boolean result = collectionsController.addCategory(sample);
+		assertTrue(result);
 	}
+	
+	@Test
+	public void testUpdateCategory(){
+		Category sample = new Category();
+		when(mockCollectionsService.updateCategory(0, sample)).thenReturn(true);
+		
+		collectionsController.setCollectionsService(mockCollectionsService);
+		boolean result = collectionsController.updateCategory(0, sample);
+		assertTrue(result);
+	}
+	
+	@Test
+	public void testDeleteCategory(){
+		when(mockCollectionsService.deleteCategory(0)).thenReturn(true);
+		
+		collectionsController.setCollectionsService(mockCollectionsService);
+		boolean result = collectionsController.deleteCategory(0);
+		assertTrue(result);
+	}
+	
 
 }
