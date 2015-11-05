@@ -54,9 +54,19 @@ public class CollectionsDaoHibernateTest {
 	public void testAddCategoryNoName(){
 		Category sample = new Category();
 		doThrow(new Exception()).when(mockEm).persist(sample);
+		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addCategory(sample);
 		assertFalse(result);
-		//when(mockEm.persist(sample)).thenThrow(new Exception());
+	}
+	
+	@Test(expected=Exception.class)
+	public void testUpdateCategoryTooLong(){
+		Category sample = new Category();
+		sample.setName("I am far too long to be a valid name. Well over 255 characters. I'm just going to keep typing until I reach that amount of characters. Wow this is taking a while. How do typists do this every day without getting blisters? Boy I could go for some pizza right now. Okay this has got to be 256 characters by now, right? I will assume that it is because I'm mocking the results anyway.");
+		doThrow(new Exception()).when(mockEm).merge(sample);
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.updateCategory(sample);
+		assertFalse(result);
 	}
 	
 	@Test
@@ -67,7 +77,6 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
 	}
-	
 	@Test
 	public void TestGetByCategoryId(){
 		Category sample = new Category();
@@ -91,12 +100,27 @@ public class CollectionsDaoHibernateTest {
 			.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
 
-		when(mockTypedQuery.getSingleResult()).thenReturn(sample);
+		//when(mockTypedQuery.getSingleResult()).thenReturn(sample);
 		
 		collectionsDaoHibernate.setEm(mockEm);
 		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testDeleteCategoryInvalidId(){
+		Category sample = new Category();
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		doThrow(new Exception()).when(mockEm).remove(sample);
+
+		collectionsDaoHibernate.setEm(mockEm);
+		Category cat = collectionsDaoHibernate.getByCategoryId(0);
+		boolean result = collectionsDaoHibernate.deleteCategory(0);
+		assertFalse(result);
 	}
 	
 	
