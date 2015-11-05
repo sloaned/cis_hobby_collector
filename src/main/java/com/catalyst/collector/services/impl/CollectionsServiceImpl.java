@@ -2,7 +2,22 @@ package com.catalyst.collector.services.impl;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
+import com.catalyst.collector.entities.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.catalyst.collector.daos.CollectionsDao;
+import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
+import com.catalyst.collector.entities.Collectible;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.catalyst.collector.daos.CollectionsDao;
+import java.util.List;
+
+import com.catalyst.collector.entities.Age;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +28,7 @@ import com.catalyst.collector.services.CollectionsService;
 public class CollectionsServiceImpl implements CollectionsService {
 
 	@Autowired
-    CollectionsDao collectionsDao;
-
+	CollectionsDao collectionsDao;
 
 	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
@@ -143,4 +157,41 @@ public class CollectionsServiceImpl implements CollectionsService {
     public void removeKeyword(Integer id) {
         collectionsDao.removeKeyword(id);
     }
+
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsDao.getAllConditions();
+    }
+
+    @Override
+    public boolean addCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.addCondition(condition);
+        return true;
+    }
+
+    @Override
+    public boolean updateCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.updateCondition(condition);
+        return true;
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        collectionsDao.deleteCondition(id);
+    }
+
+    @Override
+	public ArrayList<Collectible> getCollectibles() {
+		return collectionsDao.getCollectibles();
+	}
+
+	@Override
+	public Collectible getCollectible(Integer id) {
+		return collectionsDao.getCollectible(id);
+	}
+
 }
