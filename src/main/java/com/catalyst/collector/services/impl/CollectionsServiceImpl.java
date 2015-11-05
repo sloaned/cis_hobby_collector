@@ -3,7 +3,8 @@ package com.catalyst.collector.services.impl;
 import java.util.ArrayList;
 
 import java.util.List;
-import com.catalyst.collector.entities.Color;
+
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
@@ -28,10 +29,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Autowired
 	CollectionsDao collectionsDao;
-
-
-	public void setcollectionsDao(CollectionsDao collectionsDao) {}
-
 
 	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
@@ -64,47 +61,48 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void addCategory(Category category) {
-		collectionsDao.addCategory(category);
+	public boolean addCategory(Category category) {
+		return collectionsDao.addCategory(category);
 
 	}
 
 
 	@Override
-	public void updateCategory(int id, Category category) {
+	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		collectionsDao.updateCategory(category);
+		return collectionsDao.updateCategory(category);
 	}
 
-
-
+	@Override
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
+	}
 
 	@Override
 	public List<Color> getColorList() {
 		return collectionsDao.getColorList();
 	}
 	@Override
-	public void addColor(Color addedColor) {
-		collectionsDao.addColor(addedColor);
-	}
+	public boolean addColor(Color addedColor) {
+		try{
+			collectionsDao.addColor(addedColor);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
+		}
 	@Override
-	public boolean removeColor(String color) {
-		//to do: try catch implementation
-		//to-do take object color, not string
-		Color removedColor =getColor(color);
-		collectionsDao.removeColor(removedColor);
+	public boolean removeColor(int id) {
+		try{
+		collectionsDao.removeColor(id);
+		}
+		catch(Exception e){
+			return false;
+		}
 		return true;
 	}
-	public Color getColor(String color){
-		List<Color> colors = getColorList();
-		for(Color c: colors){
-			if(c.getColor().equals(color)){
-				return c;
-			}
-		}
-		return null;
 
-	}
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
@@ -128,11 +126,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	}
 
-
 	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
-
+	public Color getByColorId(int colorId){
+		return collectionsDao.getColor(colorId);
 	}
 
     @Override
@@ -162,7 +158,33 @@ public class CollectionsServiceImpl implements CollectionsService {
         collectionsDao.removeKeyword(id);
     }
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsDao.getAllConditions();
+    }
+
+    @Override
+    public boolean addCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.addCondition(condition);
+        return true;
+    }
+
+    @Override
+    public boolean updateCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.updateCondition(condition);
+        return true;
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        collectionsDao.deleteCondition(id);
+    }
+
+    @Override
 	public ArrayList<Collectible> getCollectibles() {
 		return collectionsDao.getCollectibles();
 	}

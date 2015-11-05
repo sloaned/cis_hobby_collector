@@ -5,14 +5,14 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 
 @Entity
-public class Keyword {
+public class Condition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(nullable = false, unique = true, length = 255)
-
-    private String word;
+    Integer id;
+    @Column(nullable = false, unique = true)
+    @Length(max = 255)
+    String condition;
 
     public Integer getId() {
         return id;
@@ -22,11 +22,11 @@ public class Keyword {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 }

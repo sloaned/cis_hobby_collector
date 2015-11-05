@@ -3,6 +3,7 @@ package com.catalyst.collector.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,7 @@ public class CollectionsController {
 	}
 
 
+
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -70,27 +72,27 @@ public class CollectionsController {
 	}
 
 	@RequestMapping(value="/category", method=RequestMethod.POST)
-	public void addCategory(@RequestBody Category category){
-		collectionsService.addCategory(category);
+	public boolean addCategory(@RequestBody Category category){
+		return collectionsService.addCategory(category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.PUT)
-	public void updateCategory(@PathVariable Integer id, @RequestBody Category category){
-		collectionsService.updateCategory(id, category);
+	public boolean updateCategory(@PathVariable Integer id, @RequestBody Category category){
+		return collectionsService.updateCategory(id, category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.DELETE)
-	public void deleteCategory(@PathVariable Integer id){
-		collectionsService.deleteCategory(id);
+	public boolean deleteCategory(@PathVariable Integer id){
+		return collectionsService.deleteCategory(id);
 	}
 
 	@RequestMapping(value="/color", method=RequestMethod.GET)
 	public List<Color> getColorList() {
 		return collectionsService.getColorList();
 	}
-	@RequestMapping(value="/color/{colorType}", method=RequestMethod.DELETE)
-	public boolean removeColor(@PathVariable String colorType) {
-		return collectionsService.removeColor(colorType);
+	@RequestMapping(value="/color/{id}", method=RequestMethod.DELETE)
+	public boolean removeColor(@PathVariable Integer id) {
+		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
 	public void addColor(@RequestBody Color c) {
@@ -100,12 +102,14 @@ public class CollectionsController {
 	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
 		return collectionsService.updateColor(id, color);
 	}
-
+	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
+	public Color getColor(@PathVariable Integer id){
+		return collectionsService.getColor(id);
+	}
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
     }
-
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {
         if (!collectionsService.addKeyword(keyword))
@@ -125,6 +129,30 @@ public class CollectionsController {
     public void deleteKeyword(@PathVariable Integer id) {
         collectionsService.removeKeyword(id);
     }
-	
-	
+
+    @RequestMapping(value="/conditions", method = RequestMethod.GET)
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsService.getAllConditions();
+    }
+
+    @RequestMapping(value = "/conditions", method = RequestMethod.POST)
+    public ResponseEntity<Condition> addCondition(@RequestBody Condition condition) {
+        if (!collectionsService.addCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<Condition>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Condition> updateCondition(@PathVariable Integer id, @RequestBody Condition condition) {
+        condition.setId(id);
+        if (!collectionsService.updateCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.DELETE)
+    public void deleteCondition(@PathVariable Integer id) {
+        collectionsService.deleteCondition(id);
+    }
 }
