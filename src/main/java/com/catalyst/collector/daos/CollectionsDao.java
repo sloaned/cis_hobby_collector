@@ -3,10 +3,7 @@ package com.catalyst.collector.daos;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.catalyst.collector.entities.Age;
-
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.*;
 
 public interface CollectionsDao {
 	

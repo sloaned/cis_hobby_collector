@@ -8,20 +8,6 @@ import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
-import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Keyword;
-import com.catalyst.collector.entities.Collectible;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.catalyst.collector.daos.CollectionsDao;
-import java.util.List;
-
-import com.catalyst.collector.entities.Age;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service

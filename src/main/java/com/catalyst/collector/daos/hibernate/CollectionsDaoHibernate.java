@@ -62,7 +62,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
     @Override
     public void updateCondition(Condition condition) {
-        em.persist(condition);
+        em.merge(condition);
     }
 
     @Override
