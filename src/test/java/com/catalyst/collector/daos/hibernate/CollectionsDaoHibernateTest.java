@@ -85,7 +85,7 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		
+		sample.setName("Books");
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
