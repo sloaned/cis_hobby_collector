@@ -12,16 +12,19 @@ import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
+	
+	public boolean addColor(Color addedColor); 
+	public Color getColor(int colorId);
+	public boolean removeColor(int id);
+	public List<Color> getColorList();
+	public boolean updateColor(Color c);
 
 
 
 
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
-	void addColor(Color addedColor);
-	boolean removeColor(int id);
-	List<Color> getColorList();
-	void updateColor(Color c);
+
 	/**
 	 * gets every category object
 	 * @return ArrayList of all categories

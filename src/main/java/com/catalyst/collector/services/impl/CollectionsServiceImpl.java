@@ -84,27 +84,26 @@ public class CollectionsServiceImpl implements CollectionsService {
 		return collectionsDao.getColorList();
 	}
 	@Override
-	public void addColor(Color addedColor) {
-		collectionsDao.addColor(addedColor);
-	}
+	public boolean addColor(Color addedColor) {
+		try{
+			collectionsDao.addColor(addedColor);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
+		}
 	@Override
 	public boolean removeColor(int id) {
-		//to do: try catch implementation
-		//to-do take object color, not string
-		//Color removedColor =getColor(id);
+		try{
 		collectionsDao.removeColor(id);
-		return true;
-	}
-	/*public Color getColor(int id){
-		List<Color> colors = getColorList();
-		for(Color c: colors){
-			if(c.getId() == id){
-				return c;
-			}
 		}
-		return null;
-
-	}*/
+		catch(Exception e){
+			return false;
+		}
+		return true;	
+	}
+	
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
@@ -125,6 +124,17 @@ public class CollectionsServiceImpl implements CollectionsService {
 			}
 		}
 		return null;
+
+	}
+
+
+	@Override
+	public void deleteCategory(int id) {
+		collectionsDao.deleteCategory(id);
+	}
+	@Override
+	public Color getByColorId(int colorId){
+		return collectionsDao.getColor(colorId);
 
 	}
 

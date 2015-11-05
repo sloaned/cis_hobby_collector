@@ -41,9 +41,10 @@ public interface CollectionsService {
 
 
 	public List<Color> getColorList();
-	public void addColor(Color addedColor);
+	public boolean addColor(Color addedColor);
 	public boolean removeColor(int id);
 	public boolean updateColor(int id, String color);
+	public Color getColor(int colorId);
     public ArrayList<Keyword> getAllKeywords();
     public boolean addKeyword(Keyword keyword);
     public boolean updateKeyword(Keyword keyword);

@@ -49,6 +49,7 @@ public class CollectionsController {
 	}
 
 
+
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -100,12 +101,14 @@ public class CollectionsController {
 	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
 		return collectionsService.updateColor(id, color);
 	}
-
+	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
+	public Color getColor(@PathVariable Integer id){
+		return collectionsService.getColor(id);
+	}
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
     }
-
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {
         if (!collectionsService.addKeyword(keyword))

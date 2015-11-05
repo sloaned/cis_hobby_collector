@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+
+
+import org.hibernate.Session;
 
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Repository;
@@ -98,13 +102,33 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 
 	@Override
-	public void addColor(Color addedColor) {
+	public boolean addColor(Color addedColor) {
+		try{
 		em.persist(addedColor);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	@Override
+
+	public Color getColor(int colorId) {
+		return em
+				.createQuery("SELECT c FROM Color c WHERE c.id = :ID", Color.class)
+				.setParameter("ID",  colorId)
+				.getSingleResult();
+	}
+	@Override
+
 	public boolean removeColor(int id) {
-		Color color = getByColorId(id);
+		try{
+		Color color = getColor(id);
 		em.remove(color);
+		}
+		catch(Exception e){
+			return false;
+		}
 		return true;
 	}
 	
@@ -119,8 +143,14 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return em.createQuery("SELECT c FROM Color c", Color.class).getResultList();
 	}
 	@Override
-	public void updateColor(Color c) {
+	public boolean updateColor(Color c) {
+		try{
 		em.merge(c);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
