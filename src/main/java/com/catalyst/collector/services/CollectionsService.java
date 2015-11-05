@@ -39,7 +39,7 @@ public interface CollectionsService {
 
 	Collectible getCollectible(Integer id);
 
-
+	public Color getByColorId(int colorId);
 	public List<Color> getColorList();
 	public boolean addColor(Color addedColor);
 	public boolean removeColor(int id);
@@ -74,4 +74,7 @@ public interface CollectionsService {
 	 * @param id
 	 */
 	void deleteAge(Integer id);
+
+	
+
 }

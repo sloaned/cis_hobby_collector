@@ -72,12 +72,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 		return collectionsDao.updateCategory(category);
 	}
 
-	@Override
-	public boolean deleteCategory(int id) {
-		return collectionsDao.deleteCategory(id);
-
-	}
-
 
 	@Override
 	public List<Color> getColorList() {
@@ -129,8 +123,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
 	}
 	@Override
 	public Color getByColorId(int colorId){
