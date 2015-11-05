@@ -39,19 +39,19 @@ public interface CollectionsDao {
 	 * adds a new category to the database
 	 * @param category
 	 */
-	void addCategory(Category category);
+	boolean addCategory(Category category);
 
 	/**
 	 * updates the given category (which will be identified by the id number)
 	 * @param category
 	 */
-	void updateCategory(Category category);
+	boolean updateCategory(Category category);
 
 	/**
 	 * deletes the category which matches the given id number
 	 * @param id
 	 */
-	void deleteCategory(int id);
+	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);

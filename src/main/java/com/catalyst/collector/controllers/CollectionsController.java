@@ -70,18 +70,18 @@ public class CollectionsController {
 	}
 
 	@RequestMapping(value="/category", method=RequestMethod.POST)
-	public void addCategory(@RequestBody Category category){
-		collectionsService.addCategory(category);
+	public boolean addCategory(@RequestBody Category category){
+		return collectionsService.addCategory(category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.PUT)
-	public void updateCategory(@PathVariable Integer id, @RequestBody Category category){
-		collectionsService.updateCategory(id, category);
+	public boolean updateCategory(@PathVariable Integer id, @RequestBody Category category){
+		return collectionsService.updateCategory(id, category);
 	}
 
 	@RequestMapping(value="/category/{id}", method=RequestMethod.DELETE)
-	public void deleteCategory(@PathVariable Integer id){
-		collectionsService.deleteCategory(id);
+	public boolean deleteCategory(@PathVariable Integer id){
+		return collectionsService.deleteCategory(id);
 	}
 
 	@RequestMapping(value="/color", method=RequestMethod.GET)

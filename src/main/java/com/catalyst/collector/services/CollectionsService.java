@@ -21,19 +21,19 @@ public interface CollectionsService {
 	 * adds a new category to the database
 	 * @param category
 	 */
-	public void addCategory(Category category);
+	public boolean addCategory(Category category);
 
 	/**
 	 * updates the given category (which will be identified by the id number)
 	 * @param id, category
 	 */
-	public void updateCategory(int id, Category category);
+	public boolean updateCategory(int id, Category category);
 
 	/**
 	 * deletes the category which matches the given id number
 	 * @param id
 	 */
-	public void deleteCategory(int id);
+	public boolean deleteCategory(int id);
 
 	ArrayList<Collectible> getCollectibles();
 

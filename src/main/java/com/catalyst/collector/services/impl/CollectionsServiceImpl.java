@@ -64,19 +64,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void addCategory(Category category) {
-		collectionsDao.addCategory(category);
+	public boolean addCategory(Category category) {
+		return collectionsDao.addCategory(category);
 
 	}
 
 
 	@Override
-	public void updateCategory(int id, Category category) {
+	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		collectionsDao.updateCategory(category);
+		return collectionsDao.updateCategory(category);
 	}
 
+	@Override
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
 
+	}
 
 
 	@Override
@@ -125,13 +129,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 			}
 		}
 		return null;
-
-	}
-
-
-	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
 
 	}
 
