@@ -1,12 +1,15 @@
 package com.catalyst.collector.daos.hibernate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 
@@ -18,18 +21,19 @@ public class CollectionsDaoHibernateTest {
 	EntityManager mockEm = mock(EntityManager.class);
 	
 
-/*	@Test
+	@Test
 	public void testGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
-		when(mockEm.createQuery("SELECT c FROM Category c", Category.class)
-				.getResultList()).thenReturn(sample);
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		
 		collectionsDaoHibernate.setEm(mockEm);
-	
 		ArrayList<Category> result = collectionsDaoHibernate.getCategory();
 		
 		assertEquals(sample, result);			
-	}*/
+	}
 	
 	@Test
 	public void testAddCategory(){
@@ -51,14 +55,14 @@ public class CollectionsDaoHibernateTest {
 		assertTrue(result);
 	}
 	
-/*	@Test
+	@Test
 	public void testDeleteCategory(){
 		//when(mockEm.deleteCategory(0)).thenReturn(true);
 		
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
-	}*/
+	}
 
 
 }
