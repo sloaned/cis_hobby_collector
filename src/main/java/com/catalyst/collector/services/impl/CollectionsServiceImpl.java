@@ -11,18 +11,7 @@ import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.catalyst.collector.daos.CollectionsDao;
-import java.util.List;
-
 import com.catalyst.collector.entities.Age;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.catalyst.collector.daos.CollectionsDao;
-import com.catalyst.collector.services.CollectionsService;
-
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
@@ -81,7 +70,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean deleteCategory(int id) {
 		return collectionsDao.deleteCategory(id);
-
 	}
 
 
@@ -134,15 +122,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 
-	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
-	}
-	@Override
+	/*@Override
 	public Color getByColorId(int colorId){
 		return collectionsDao.getColor(colorId);
 
-	}
+	}*/
 
     @Override
     public ArrayList<Keyword> getAllKeywords() {
