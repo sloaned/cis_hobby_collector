@@ -5,7 +5,10 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 
 import java.util.ArrayList;
 
@@ -41,8 +44,19 @@ public class CollectionsDaoHibernateTest {
 		Category sample = new Category();
 		
 		collectionsDaoHibernate.setEm(mockEm);
+		//boolean result = 
+		collectionsDaoHibernate.addCategory(sample);
+		//assertTrue(result);
+		verify(mockEm, times(1)).persist(sample);
+	}
+
+	@Test(expected=Exception.class)
+	public void testAddCategoryNoName(){
+		Category sample = new Category();
+		doThrow(new Exception()).when(mockEm).persist(sample);
 		boolean result = collectionsDaoHibernate.addCategory(sample);
-		assertTrue(result);
+		assertFalse(result);
+		//when(mockEm.persist(sample)).thenThrow(new Exception());
 	}
 	
 	@Test
@@ -84,6 +98,8 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
 	}
+	
+	
 
 
 }
