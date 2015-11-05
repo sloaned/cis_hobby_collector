@@ -66,6 +66,16 @@ public class CollectionsController {
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
 	public void deleteAge(@PathVariable Integer id){
 		collectionsService.deleteAge(id);}
+	@RequestMapping(value="/collectible", method=RequestMethod.POST)
+	public void addCollectible(@RequestBody Collectible collectible){
+		collectionsService.addCollectible(collectible);
+	}
+
+	@RequestMapping(value="/collectible", method=RequestMethod.PUT)
+	public void updateCollectible(@RequestBody Collectible collectible){
+		collectionsService.updateCollectible(collectible);
+	}
+
 	@RequestMapping(value="/category", method=RequestMethod.GET)
 	public ArrayList<Category> getCategory(){
 		return collectionsService.getCategory();
