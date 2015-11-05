@@ -12,7 +12,7 @@ $(document).ready(function(){
         url: "/category",
         method: "GET"
     }).then(function(categories){
-        addDropdown($("#typeDropdown").html(), $("#typeSelection"), {categories: categories})
+        addDropdown($("#typeDropdown").html(), $("#typeSelection"), categories)
     });
 
     //Add color to dropdown
@@ -20,7 +20,7 @@ $(document).ready(function(){
         url: "/color",
         method: "GET"
     }).then(function(colors){
-        addDropdown($("#colorDropdown").html(), $("#colorSelection"), {color: colors});
+        addDropdown($("#colorDropdown").html(), $("#colorSelection"), colors);
     });
 
     //Add conditions to dropdown
@@ -28,7 +28,7 @@ $(document).ready(function(){
         url: "/conditions",
         method: "GET"
     }).then(function(conditions){
-        addDropdown($("#conditionDropdown").html(), $("#conditionSelection"), {conditions: conditions});
+        addDropdown($("#conditionDropdown").html(), $("#conditionSelection"), conditions);
     });
 
     //Add age to dropdown
@@ -36,7 +36,7 @@ $(document).ready(function(){
         url: "/agetypes",
         method: "GET"
     }).then(function(age){
-        addDropdown($("#ageDropdown").html(), $("#ageSelection"), {age: age});
+        addDropdown($("#ageDropdown").html(), $("#ageSelection"), age);
     });
 
     // Removes popup from display when users clicks away from container.
@@ -93,9 +93,31 @@ $(document).ready(function(){
         var text = $(this).text();
         $("#inputAge").val(text);
     });
+
+    keywords();
+
 });
 
 function addDropdown (source, destination, object){
     var template = Handlebars.compile(source);
     destination.html(template(object));
+}
+
+function keywords () {
+    $('#keywords input').on('focusout',function(){
+        var txt= this.value.replace(/[^\w ]/g,'');
+        if(txt) {
+            $(this).before('<span class="keywords">'+ txt.toLowerCase() +'</span>');
+        }
+        this.value="";
+    }).on('keyup',function( e ){
+        // if: comma,enter (delimit more keyCodes with | pipe)
+        if(/(188|13)/.test(e.which)) $(this).focusout();
+
+    });
+
+
+    $('#keywords').on('click','.keywords',function(){
+        $(this).remove();
+    });
 }
