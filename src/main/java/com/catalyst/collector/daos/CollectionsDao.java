@@ -14,7 +14,7 @@ import com.catalyst.collector.entities.Keyword;
 public interface CollectionsDao {
 	
 	public boolean addColor(Color addedColor); 
-	public Color getByColorId(int colorId);
+	public Color getColor(int colorId);
 	public boolean removeColor(int id);
 	public List<Color> getColorList();
 	public boolean updateColor(Color c);
@@ -24,17 +24,7 @@ public interface CollectionsDao {
 
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
-<<<<<<< HEAD
-	
-	
-	
-	
-=======
-	void addColor(Color addedColor);
-	boolean removeColor(int id);
-	List<Color> getColorList();
-	void updateColor(Color c);
->>>>>>> 0fd35167437ca4fab58292063ccfa585d0794525
+
 	/**
 	 * gets every category object
 	 * @return ArrayList of all categories

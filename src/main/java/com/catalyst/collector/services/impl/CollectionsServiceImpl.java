@@ -107,16 +107,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 		}
 		return true;	
 	}
-	/*public Color getColor(int id){
-		List<Color> colors = getColorList();
-		for(Color c: colors){
-			if(c.getId() == id){
-				return c;
-			}
-		}
-		return null;
-
-	}*/
+	
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
@@ -147,7 +138,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	@Override
 	public Color getByColorId(int colorId){
-		return collectionsDao.getByColorId(colorId);
+		return collectionsDao.getColor(colorId);
 
 	}
 

@@ -112,19 +112,18 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return true;
 	}
 	@Override
-<<<<<<< HEAD
-	public Color getByColorId(int colorId) {
+
+	public Color getColor(int colorId) {
 		return em
 				.createQuery("SELECT c FROM Color c WHERE c.id = :ID", Color.class)
 				.setParameter("ID",  colorId)
 				.getSingleResult();
 	}
 	@Override
-=======
->>>>>>> 0fd35167437ca4fab58292063ccfa585d0794525
+
 	public boolean removeColor(int id) {
 		try{
-		Color color = getByColorId(id);
+		Color color = getColor(id);
 		em.remove(color);
 		}
 		catch(Exception e){

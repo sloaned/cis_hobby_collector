@@ -102,8 +102,8 @@ public class CollectionsController {
 		return collectionsService.updateColor(id, color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
-	public Color getByColorId(@PathVariable Integer id){
-		return collectionsService.getByColorId(id);
+	public Color getColor(@PathVariable Integer id){
+		return collectionsService.getColor(id);
 	}
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
