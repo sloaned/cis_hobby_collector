@@ -29,10 +29,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Autowired
 	CollectionsDao collectionsDao;
 
-
-	public void setcollectionsDao(CollectionsDao collectionsDao) {}
-
-
 	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
 	}
