@@ -72,6 +72,17 @@ public class CollectionsDaoHibernate implements CollectionsDao {
     }
 
     @Override
+	@Override
+	public void addCollectible(Collectible collectible) {
+		em.persist(collectible);
+	}
+
+	@Override
+	public void updateCollectible(Collectible collectible) {
+		em.merge(collectible);
+	}
+
+	@Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)
@@ -105,7 +116,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}catch(Exception e){
 			return false;
 		}
-		
+
 	}
 
 
@@ -118,7 +129,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}catch(Exception e){
 			return false;
 		}
-		
+
 	}
 
 
@@ -152,7 +163,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}
 		return true;
 	}
-	
+
 	public Color getByColorId(int colorId){
 		return em
 				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)

@@ -11,8 +11,8 @@ import com.catalyst.collector.entities.Condition;
 import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
-	
-	public boolean addColor(Color addedColor); 
+
+	public boolean addColor(Color addedColor);
 	public Color getColor(int colorId);
 	public boolean removeColor(int id);
 	public List<Color> getColorList();
@@ -81,4 +81,8 @@ public interface CollectionsDao {
     void addCondition(Condition condition);
     void updateCondition(Condition condition);
     void deleteCondition(Integer id);
+
+	void addCollectible(Collectible collectible);
+
+	void updateCollectible(Collectible collectible);
 }
