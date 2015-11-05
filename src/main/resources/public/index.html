@@ -4,6 +4,7 @@
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/handlebars-v4.0.4.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/index.js"></script>
 		<script src="js/addCollectible.js"></script>
@@ -70,9 +71,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Type 1</a></li>
-									<li><a>Type 2</a></li>
-									<li><a>Type 3</a></li>
+									<script id="typeDropdown" type="text/x-handlebars-template">
+										{{#categories}}
+											<li><a>{{name}}</a></li>
+										{{/categories}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->

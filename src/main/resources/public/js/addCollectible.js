@@ -7,6 +7,30 @@ $(document).ready(function(){
         $("#fade").css("display", "block");
     });
 
+    //Add categories to dropdown
+    var source = $("#typeDropdown").html();
+    var template = Handlebars.compile(source);
+    var categories = { categories: [
+        {name: "type 1"},
+        {name: "type 2"},
+        {name: "type 3"},
+        {name: "type example"}
+    ]};
+    $("#typeSelection").html(template(categories));
+    //end dropdown
+
+    //Add color to dropdown
+    var source = $("#colorDropdown").html();
+    var template = Handlebars.compile(source);
+    var categories = { categories: [
+        {name: "type 1"},
+        {name: "type 2"},
+        {name: "type 3"},
+        {name: "type example"}
+    ]};
+    $("#colorSelection").html(template(categories));
+    //end dropdown
+
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
         var container = $("#newCollectibleForm");
