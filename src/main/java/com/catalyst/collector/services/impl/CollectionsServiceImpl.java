@@ -168,7 +168,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 		collectionsDao.updateCollectible(collectible);
 	}
 
-	@Override
     @Override
     public ArrayList<Condition> getAllConditions() {
         return collectionsDao.getAllConditions();

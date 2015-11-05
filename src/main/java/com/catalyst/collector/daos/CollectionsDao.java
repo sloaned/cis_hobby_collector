@@ -12,11 +12,11 @@ import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 	
-	public boolean addColor(Color addedColor); 
-	public Color getColor(int colorId);
-	public boolean removeColor(int id);
-	public List<Color> getColorList();
-	public boolean updateColor(Color c);
+	boolean addColor(Color addedColor);
+	Color getColor(int colorId);
+	boolean removeColor(int id);
+	List<Color> getColorList();
+	boolean updateColor(Color c);
 
 
 
@@ -62,7 +62,7 @@ public interface CollectionsDao {
 	void addCollectible(Collectible collectible);
 
 	void updateCollectible(Collectible collectible);
-	public void addAge(Age age);
+	void addAge(Age age);
 
 	/**
 	 * Gets an ArrayList of age types from the database
