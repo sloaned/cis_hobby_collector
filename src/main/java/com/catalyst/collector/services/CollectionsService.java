@@ -3,10 +3,7 @@ package com.catalyst.collector.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.entities.Keyword;
+import com.catalyst.collector.entities.*;
 
 public interface CollectionsService {
 
@@ -43,8 +40,11 @@ public interface CollectionsService {
 	public void addColor(Color addedColor);
 	public boolean removeColor(String color);
 	public boolean updateColor(int id, String color);
-    public ArrayList<Keyword> getAllKeywords();
-    public boolean addKeyword(Keyword keyword);
-    public boolean updateKeyword(Keyword keyword);
-    public void removeKeyword(Integer id);
+    ArrayList<Keyword> getAllKeywords();
+    boolean addKeyword(Keyword keyword);
+    boolean updateKeyword(Keyword keyword);
+    void removeKeyword(Integer id);
+    ArrayList<Condition> getAllConditions();
+    boolean addCondition(Condition condition);
+    boolean updateCondition(Condition condition);
 }

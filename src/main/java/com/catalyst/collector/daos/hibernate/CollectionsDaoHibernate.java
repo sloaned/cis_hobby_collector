@@ -7,14 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import com.catalyst.collector.entities.Keyword;
-import com.catalyst.collector.entities.Collectible;
+import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Repository;
 
 import com.catalyst.collector.daos.CollectionsDao;
-
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Color;
 
 @Repository
 @Transactional
@@ -48,7 +44,22 @@ public class CollectionsDaoHibernate implements CollectionsDao {
         em.remove(keyword);
     }
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return (ArrayList<Condition>) em.createQuery("SELECT c FROM Condition c", Condition.class).getResultList();
+    }
+
+    @Override
+    public void addCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
+    public void updateCondition(Condition condition) {
+        em.persist(condition);
+    }
+
+    @Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)

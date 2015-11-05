@@ -1,8 +1,10 @@
 package com.catalyst.collector.controllers;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import com.catalyst.collector.entities.Collectible;
+
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Color;
-import com.catalyst.collector.entities.Keyword;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.catalyst.collector.services.CollectionsService;
@@ -99,5 +98,31 @@ public class CollectionsController {
     @RequestMapping(value="/keyword/{id}", method = RequestMethod.DELETE)
     public void deleteKeyword(@PathVariable Integer id) {
         collectionsService.removeKeyword(id);
+    }
+
+    @RequestMapping(value="/conditions", method = RequestMethod.GET)
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsService.getAllConditions();
+    }
+
+    @RequestMapping(value = "/conditions", method = RequestMethod.POST)
+    public ResponseEntity<Condition> addCondition(@RequestBody Condition condition) {
+        if (!collectionsService.addCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<Condition>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Condition> updateCondition(@PathVariable Integer id, @RequestBody Condition condition) {
+        condition.setId(id);
+        if (!collectionsService.updateCondition(condition))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(condition, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/condition/{id}", method = RequestMethod.DELETE)
+    public void deleteCondition(@PathVariable Integer id) {
+
     }
 }

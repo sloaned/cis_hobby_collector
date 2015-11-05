@@ -2,12 +2,9 @@ package com.catalyst.collector.daos;
 
 import java.util.List;
 
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
-import java.util.ArrayList;
+import com.catalyst.collector.entities.*;
 
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Keyword;
+import java.util.ArrayList;
 
 public interface CollectionsDao {
 
@@ -51,4 +48,7 @@ public interface CollectionsDao {
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
+    ArrayList<Condition> getAllConditions();
+    void addCondition(Condition condition);
+    void updateCondition(Condition condition);
 }
