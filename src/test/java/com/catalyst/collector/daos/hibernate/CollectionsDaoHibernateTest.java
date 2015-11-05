@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 
-import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.*;
 
 public class CollectionsDaoHibernateTest {
 
@@ -98,8 +98,45 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
 	}
-	
-	
 
 
+    @Test(expected=Exception.class)
+    public void testGetAllKeywordsDoesntMakeADBCall() {
+        ArrayList<Keyword> sample = new ArrayList<Keyword>();
+        TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
+        when(mockEm.createQuery(anyString(), eq(Keyword.class)))
+                .thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getResultList()).thenReturn(sample);
+
+        collectionsDaoHibernate.setEm(mockEm);
+        ArrayList<Keyword> result = collectionsDaoHibernate.getAllKeywords();
+
+        assertEquals(sample, result);
+    }
+
+    @Test(expected=Exception.class)
+    public void testAddKeywordDoesntMakeADBCall() {
+        Keyword sample = new Keyword();
+        doThrow(new Exception()).when(mockEm).persist(sample);
+        boolean result = collectionsDaoHibernate.addKeyword(sample);
+        assertTrue(result);
+    }
+
+    @Test(expected=Exception.class)
+    public void testUpdateKeywordDoesntMakeADBCall() {
+        Keyword sample = new Keyword();
+        doThrow(new Exception()).when(mockEm).merge(sample);
+        collectionsDaoHibernate.setEm(mockEm);
+        boolean result = collectionsDaoHibernate.updateKeyword(sample);
+        assertTrue(result);
+    }
+
+    @Test(expected=Exception.class)
+    public void testRemoveKeywordDoesntMakeDBCall() throws Exception {
+        Keyword sample = new Keyword();
+        doThrow(new Exception()).when(mockEm).remove(sample);
+        collectionsDaoHibernate.setEm(mockEm);
+        boolean result = collectionsDaoHibernate.updateKeyword(sample);
+        assertTrue(result);
+    }
 }

@@ -154,8 +154,8 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
     @Override
-    public void removeKeyword(Integer id) {
-        collectionsDao.removeKeyword(id);
+    public boolean removeKeyword(Integer id) {
+        return collectionsDao.removeKeyword(id);
     }
 
 	@Override
