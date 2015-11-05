@@ -1,6 +1,7 @@
 package com.catalyst.collector.daos.hibernate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -38,7 +39,6 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void testAddCategory(){
 		Category sample = new Category();
-		//when(mockEm.persist(sample)).thenReturn();
 		
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addCategory(sample);
@@ -48,7 +48,6 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		//when(mockEm.merge(sample)).thenReturn(true);
 		
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
@@ -56,10 +55,32 @@ public class CollectionsDaoHibernateTest {
 	}
 	
 	@Test
-	public void testDeleteCategory(){
-		//when(mockEm.deleteCategory(0)).thenReturn(true);
+	public void TestGetByCategoryId(){
+		Category sample = new Category();
+		sample.setId(0);
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(sample);
 		
 		collectionsDaoHibernate.setEm(mockEm);
+		Category result = collectionsDaoHibernate.getByCategoryId(0);
+		assertEquals(sample, result);
+	}
+	
+	@Test
+	public void testDeleteCategory(){
+		Category sample = new Category();
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+
+		when(mockTypedQuery.getSingleResult()).thenReturn(sample);
+		
+		collectionsDaoHibernate.setEm(mockEm);
+		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
 	}
