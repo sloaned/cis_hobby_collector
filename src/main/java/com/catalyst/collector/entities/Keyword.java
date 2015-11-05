@@ -10,8 +10,8 @@ public class Keyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false, unique = true)
-    @Length(max = 255)
+    @Column(nullable = false, unique = true, length = 255)
+
     private String word;
 
     public Integer getId() {
