@@ -87,9 +87,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Color 1</a></li>
-									<li><a>Color 2</a></li>
-									<li><a>Color 3</a></li>
+									<script id="colorDropdown" type="text/x-handlebars-template">
+										{{#color}}
+										<li><a>{{color}}</a></li>
+										{{/color}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
@@ -101,9 +103,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="conditionSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Condition 1</a></li>
-									<li><a>Condition 2</a></li>
-									<li><a>Condition 3</a></li>
+									<script id="conditionDropdown" type="text/x-handlebars-template">
+										{{#conditions}}
+										<li><a>{{condition}}</a></li>
+										{{/conditions}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
@@ -115,9 +119,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="ageSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Age 1</a></li>
-									<li><a>Age 2</a></li>
-									<li><a>Age 3</a></li>
+									<script id="ageDropdown" type="text/x-handlebars-template">
+										{{#age}}
+										<li><a>{{age}}</a></li>
+										{{/age}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
