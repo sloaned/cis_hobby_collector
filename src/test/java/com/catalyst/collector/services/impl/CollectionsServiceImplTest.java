@@ -31,11 +31,22 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testAddCategory(){
 		Category sample = new Category();
+		sample.setName("Books");
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertTrue(result);
+	}
+	
+	@Test
+	public void testAddCategoryNoName(){
+		Category sample = new Category();
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(false);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		boolean result = collectionsServiceImpl.addCategory(sample);
+		assertFalse(result);
 	}
 	
 	@Test

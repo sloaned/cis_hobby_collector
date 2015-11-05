@@ -1,12 +1,19 @@
 package com.catalyst.collector.daos.hibernate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 
@@ -18,47 +25,81 @@ public class CollectionsDaoHibernateTest {
 	EntityManager mockEm = mock(EntityManager.class);
 	
 
-/*	@Test
+	@Test
 	public void testGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
-		when(mockEm.createQuery("SELECT c FROM Category c", Category.class)
-				.getResultList()).thenReturn(sample);
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		
 		collectionsDaoHibernate.setEm(mockEm);
-	
 		ArrayList<Category> result = collectionsDaoHibernate.getCategory();
 		
 		assertEquals(sample, result);			
-	}*/
+	}
 	
 	@Test
 	public void testAddCategory(){
 		Category sample = new Category();
-		//when(mockEm.persist(sample)).thenReturn();
 		
 		collectionsDaoHibernate.setEm(mockEm);
+		//boolean result = 
+		collectionsDaoHibernate.addCategory(sample);
+		//assertTrue(result);
+		verify(mockEm, times(1)).persist(sample);
+	}
+
+	@Test(expected=Exception.class)
+	public void testAddCategoryNoName(){
+		Category sample = new Category();
+		doThrow(new Exception()).when(mockEm).persist(sample);
 		boolean result = collectionsDaoHibernate.addCategory(sample);
-		assertTrue(result);
+		assertFalse(result);
+		//when(mockEm.persist(sample)).thenThrow(new Exception());
 	}
 	
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		//when(mockEm.merge(sample)).thenReturn(true);
 		
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
 	}
 	
-/*	@Test
-	public void testDeleteCategory(){
-		//when(mockEm.deleteCategory(0)).thenReturn(true);
+	@Test
+	public void TestGetByCategoryId(){
+		Category sample = new Category();
+		sample.setId(0);
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(sample);
 		
 		collectionsDaoHibernate.setEm(mockEm);
+		Category result = collectionsDaoHibernate.getByCategoryId(0);
+		assertEquals(sample, result);
+	}
+	
+	@Test
+	public void testDeleteCategory(){
+		Category sample = new Category();
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+
+		when(mockTypedQuery.getSingleResult()).thenReturn(sample);
+		
+		collectionsDaoHibernate.setEm(mockEm);
+		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
-	}*/
+	}
+	
+	
 
 
 }
