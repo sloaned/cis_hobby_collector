@@ -3,7 +3,7 @@
 		<title>Hobby Collector</title>
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/index.js"></script>
 		<script src="js/addCollectible.js"></script>
@@ -64,27 +64,76 @@
 				<h1 class="text-center">Add a New Collectible</h1>
 				<div>
 					<div class="form-group">
-						<label for="inputType">Type</label>
-						<input type="text" class="form-control" id="inputType" placeholder="Type">
+						<label for="inputType">Type</label> <br>
+						<div class="input-group">
+							<input id="inputType" type="text" class="form-control" aria-label="...">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="#">Type 1</a></li>
+									<li><a href="#">Type 2</a></li>
+									<li><a href="#">Type 3</a></li>
+								</ul>
+							</div><!-- /btn-group -->
+						</div><!-- /input-group -->
 					</div>
 					<div class="form-group">
 						<label for="inputColor">Color</label>
-						<input type="text" class="form-control" id="inputColor" placeholder="Color">
+						<div class="form-inline">
+							<div class="btn-group">
+								<input type="text" class="form-control input-group-addon" id="inputColor" placeholder="Color">
+								<button id="colorDropdown" type="button" class="btn btn-default dropdown-toggle pull-right dropdown-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul id="colorSelection" class="dropdown-menu">
+									<li><a>Color 1</a></li>
+									<li><a>Color 2</a></li>
+									<li><a>Color 3</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputCondition">Condition</label>
-						<input type="text" class="form-control" id="inputCondition" placeholder="Condition">
+						<div class="form-inline">
+							<div class="btn-group">
+								<input type="text" class="form-control input-group-addon" id="inputCondition" placeholder="Condition">
+								<button id="conditionDropdown" type="button" class="btn btn-default dropdown-toggle pull-right dropdown-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul id="conditionSelection" class="dropdown-menu">
+									<li><a>Condition 1</a></li>
+									<li><a>Condition 2</a></li>
+									<li><a>Condition 3</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputAge">Age</label>
-						<input type="text" class="form-control" id="inputAge" placeholder="Age">
+						<div class="form-inline">
+							<div class="btn-group">
+								<input type="text" class="form-control input-group-addon" id="inputAge" placeholder="Age">
+								<button id="ageDropdown" type="button" class="btn btn-default dropdown-toggle pull-right dropdown-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul id="ageSelection" class="dropdown-menu">
+									<li><a>Age 1</a></li>
+									<li><a>Age 2</a></li>
+									<li><a>Age 3</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputDescription">Description</label>
-						<input type="text" class="form-control" id="inputDescription" placeholder="Description">
+						<label for="inputDescription">Description</label> <br>
+						<textarea class="form-control" id="inputDescription" placeholder="Description" rows="5"></textarea>
 					</div>
-					<div class="form-group">
-						<label for="inputName">Name</label>
+					<div class="form-inline">
+						<label for="inputName">Name</label> <br>
 						<input type="text" class="form-control" id="inputName" placeholder="Name">
 					</div>
 					<div class="form-group">
@@ -93,11 +142,15 @@
 					</div>
 					<div class="form-group">
 						<label for="inputSoldStatus">Sold Status</label>
-						<input type="text" class="form-control" id="inputSoldStatus" placeholder="Sold Status">
-					</div>
-					<div class="form-group">
-						<label for="inputCatalogNumber">Catalog Number</label>
-						<input type="text" class="form-control" id="inputCatalogNumber" placeholder="Catalog Number">
+						<div class="btn-group">
+							<button id="inputSoldStatus" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Select <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a>True</a></li>
+								<li><a>False</a></li>
+							</ul>
+						</div>
 					</div>
 
 					<div class="button-group">

@@ -7,12 +7,13 @@ $(document).ready(function(){
         $("#fade").css("display", "block");
     });
 
+    // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e)
     {
         var container = $("#newCollectibleForm");
 
-        if (!container.is(e.target) // if the target of the click isn't the container...
-            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        if (!container.is(e.target)
+            && container.has(e.target).length === 0)
         {
             $("#newCollectibleForm").css("display", "none");
             $("#fade").css("display", "none");
@@ -25,17 +26,40 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
+        var isValid = true; // Set to true for testing. TODO: Change to false for production.
         var collectible = {};
 
-        $.ajax({
-            url: '/collectibles',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(collectible)
-        }).then(function(){
-            console.log("Post successful")
-        }, function(error){
-            console.log(error);
-        });
+        if (isValid){
+            $.ajax({
+                url: '/collectibles',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(collectible)
+            }).then(function(){
+                console.log("Post successful")
+            }, function(error){
+                console.log(error);
+            });
+        }
+    });
+
+    $("#typeSelection").find("li").click(function () {
+        var text = $(this).text();
+        $("#inputType").val(text);
+    });
+
+    $("#colorSelection").find("li").click(function () {
+        var text = $(this).text();
+        $("#inputColor").val(text);
+    });
+
+    $("#conditionSelection").find("li").click(function () {
+        var text = $(this).text();
+        $("#inputCondition").val(text);
+    });
+
+    $("#ageSelection").find("li").click(function () {
+        var text = $(this).text();
+        $("#inputAge").val(text);
     });
 });

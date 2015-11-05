@@ -24,6 +24,7 @@
     background-color: white;
     z-index:1002;
     overflow: auto;
+    border-radius: 5px;
 }
 
 .form-container {
@@ -41,4 +42,8 @@
 
 a:hover {
     cursor: hand;
+}
+
+.dropdown-selector {
+    padding: 14px;
 }
