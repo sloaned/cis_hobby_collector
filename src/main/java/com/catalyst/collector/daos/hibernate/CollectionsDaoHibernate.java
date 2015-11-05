@@ -66,24 +66,38 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
-	public void addCategory(Category category) {
-		em.persist(category);
-
+	public boolean addCategory(Category category) {
+		try{
+			em.persist(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
 	}
 
 
 	@Override
-	public void updateCategory(Category category) {
-		em.merge(category);
-
+	public boolean updateCategory(Category category) {
+		try{
+			em.merge(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+		
 	}
 
 
 	@Override
-	public void deleteCategory(int id) {
-		Category category = getByCategoryId(id);
-		em.remove(category);
-
+	public boolean deleteCategory(int id) {
+		try{
+			Category category = getByCategoryId(id);
+			em.remove(category);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+		
 	}
 
 
@@ -92,6 +106,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		em.persist(addedColor);
 	}
 	@Override
+<<<<<<< HEAD
 	public Color getByColorId(int colorId) {
 		return em
 				.createQuery("SELECT c FROM Color c WHERE c.id = :ID", Color.class)
@@ -99,10 +114,19 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				.getSingleResult();
 	}
 	@Override
+=======
+>>>>>>> 0fd35167437ca4fab58292063ccfa585d0794525
 	public boolean removeColor(int id) {
 		Color color = getByColorId(id);
 		em.remove(color);
 		return true;
+	}
+	
+	public Color getByColorId(int colorId){
+		return em
+				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
+				.setParameter("ID",  colorId)
+				.getSingleResult();
 	}
 	@Override
 	public List<Color> getColorList() {

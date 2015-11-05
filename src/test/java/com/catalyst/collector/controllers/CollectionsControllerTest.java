@@ -40,12 +40,5 @@ public class CollectionsControllerTest {
 			
 	}
 	
-	@Test
-	public void testAddCategory(){
-		Category category = new Category();
-		category.setName("Ornaments");
-		
-		
-	}
 
 }

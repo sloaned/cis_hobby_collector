@@ -64,19 +64,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void addCategory(Category category) {
-		collectionsDao.addCategory(category);
+	public boolean addCategory(Category category) {
+		return collectionsDao.addCategory(category);
 
 	}
 
 
 	@Override
-	public void updateCategory(int id, Category category) {
+	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		collectionsDao.updateCategory(category);
+		return collectionsDao.updateCategory(category);
 	}
 
+	@Override
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
 
+	}
 
 
 	@Override
@@ -91,11 +95,17 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean removeColor(int id) {
 		collectionsDao.removeColor(id);
 		return true;	
-		
 	}
-	
+	/*public Color getColor(int id){
+		List<Color> colors = getColorList();
+		for(Color c: colors){
+			if(c.getId() == id){
+				return c;
+			}
+		}
+		return null;
 
-	
+	}*/
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
