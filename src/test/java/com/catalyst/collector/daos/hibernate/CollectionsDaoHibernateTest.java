@@ -31,7 +31,6 @@ public class CollectionsDaoHibernateTest {
 	CollectionsDaoHibernate collectionsDaoHibernate = new CollectionsDaoHibernate();
 	EntityManager mockEm = mock(EntityManager.class);
 	
-
 	@Test
 	public void testGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
@@ -45,18 +44,15 @@ public class CollectionsDaoHibernateTest {
 		
 		assertEquals(sample, result);			
 	}
-	
 	@Test
 	public void testAddCategory(){
 		Category sample = new Category();
-		
 		collectionsDaoHibernate.setEm(mockEm);
 		//boolean result = 
 		collectionsDaoHibernate.addCategory(sample);
 		//assertTrue(result);
 		verify(mockEm, times(1)).persist(sample);
 	}
-
 	@Test(expected=Exception.class)
 	public void testAddCategoryNoName(){
 		Category sample = new Category();
@@ -74,7 +70,6 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
 	}
-	
 	@Test
 	public void TestGetByCategoryId(){
 		Category sample = new Category();
@@ -103,9 +98,6 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
 	}
-	
-	
-
 	@Test
 	public void happyPathAddColorTest(){
 		Color c = new Color("azul");
@@ -113,14 +105,14 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.addColor(c);
 		assertTrue(result);
 	}
-	/*@Test
+	@Test(expected=Exception.class)
 	public void sadPathAddColorTest_noColor(){
 		Color c = new Color();
-		collectionsDaoHibernate.setEm(mockEm);
+		doThrow(new Exception()).when(mockEm).persist(c);
 		boolean result = collectionsDaoHibernate.addColor(c);
 		assertFalse(result);
-	}*/
-	/*@Test
+	}
+	@Test(expected=Exception.class)
 	public void sadPathAddColorTest_over255Char(){
 		Color c = new Color();
 		String s = new String();
@@ -128,10 +120,10 @@ public class CollectionsDaoHibernateTest {
 			s = Integer.toString(i);
 		}
 		c.setColor(s);
-		collectionsDaoHibernate.setEm(mockEm);
+		doThrow(new Exception()).when(mockEm).persist(c);
 		boolean result = collectionsDaoHibernate.addColor(c);
 		assertFalse(result);
-	}*/
+	}
 
 	@Test
 	public void happyPathRemoveColorTest(){
@@ -166,15 +158,14 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.updateColor(c);
 		assertTrue(result);
 	}
-	/*
-	@Test
+	@Test(expected=Exception.class)
 	public void sadPathUpdateColorTest_noColor(){
 		Color c = new Color();
-		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.updateColor(c);
-		assertTrue(result);
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
 	}
-	@Test
+	@Test(expected=Exception.class)
 	public void sadPathUpdateColorTest_over255Char(){
 		Color c = new Color();
 		String s = new String();
@@ -182,25 +173,10 @@ public class CollectionsDaoHibernateTest {
 			s = Integer.toString(i);
 		}
 		c.setColor(s);
-		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.updateColor(c);
-		assertTrue(result);
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
 	}
-	*/
-	@Test
-	public void testGetCategory() {
-		ArrayList<Category> sample = new ArrayList<Category>();
-		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
-		when(mockEm.createQuery(anyString(), eq(Category.class)))
-			.thenReturn(mockTypedQuery);
-		when(mockTypedQuery.getResultList()).thenReturn(sample);
-		
-		collectionsDaoHibernate.setEm(mockEm);
-		ArrayList<Category> result = collectionsDaoHibernate.getCategory();
-		
-		assertEquals(sample, result);			
-	}
-	
 	@Test
 	public void happyPathGetColorListTest(){
 		List<Color> colorList = new ArrayList<Color>();

@@ -4,12 +4,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
 import com.catalyst.collector.daos.hibernate.CollectionsDaoHibernate;
 import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Color;
 
 public class CollectionsServiceImplTest {
 
@@ -27,6 +29,17 @@ public class CollectionsServiceImplTest {
 		
 		assertEquals(sample, result);			
 	}
+	@Test
+	public void testGetColor() {
+		ArrayList<Color> sample = new ArrayList<Color>();
+		when(mockCollectionsDao.getColorList()).thenReturn(sample);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+	
+		ArrayList<Color> result = (ArrayList<Color>) collectionsServiceImpl.getColorList();
+		
+		assertEquals(sample, result);			
+	}
 	
 	@Test
 	public void testAddCategory(){
@@ -40,6 +53,16 @@ public class CollectionsServiceImplTest {
 	}
 	
 	@Test
+	public void testAddColor(){
+		Color sample = new Color();
+		sample.setColor("rojo");
+		when(mockCollectionsDao.addColor(sample)).thenReturn(true);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		boolean result = collectionsServiceImpl.addColor(sample);
+		assertTrue(result);
+	}
+	@Test
 	public void testAddCategoryNoName(){
 		Category sample = new Category();
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(false);
@@ -48,7 +71,15 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
-	
+	@Test
+	public void testAddColor_noName(){
+		Color sample = new Color();
+		when(mockCollectionsDao.addColor(sample)).thenReturn(false);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		boolean result = collectionsServiceImpl.addColor(sample);
+		assertFalse(result);
+	}
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
@@ -58,7 +89,15 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertTrue(result);
 	}
-	
+	@Test
+	public void testUpdateColor(){
+		Color sample = new Color();
+		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		boolean result = collectionsServiceImpl.updateColor(0, "verde");
+		assertTrue(result);
+	}
 	@Test
 	public void testDeleteCategory(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
@@ -67,5 +106,12 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertTrue(result);
 	}
-
+	@Test
+	public void testRemoveColor(){
+		when(mockCollectionsDao.removeColor(0)).thenReturn(true);
+		
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		boolean result = collectionsServiceImpl.removeColor(0);
+		assertTrue(result);
+	}
 }
