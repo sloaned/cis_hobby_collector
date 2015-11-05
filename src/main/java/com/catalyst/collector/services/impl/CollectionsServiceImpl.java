@@ -8,7 +8,20 @@ import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
+import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Keyword;
+import com.catalyst.collector.entities.Collectible;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.catalyst.collector.daos.CollectionsDao;
+import java.util.List;
 
+import com.catalyst.collector.entities.Age;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
@@ -18,12 +31,33 @@ public class CollectionsServiceImpl implements CollectionsService {
 	CollectionsDao collectionsDao;
 
 
-	public void setcollectionsDao(CollectionsDao collectionsDao) {
+	public void setcollectionsDao(CollectionsDao collectionsDao) {}
+
+
+	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
 	}
 
 
 	@Override
+	public void addAge(Age age) {
+		collectionsDao.addAge(age);
+	}
+
+	@Override
+	public ArrayList<Age> getAgeTypes(){
+		return collectionsDao.getAgeTypes();
+	}
+
+	@Override
+	public void updateAge(Age age){
+		collectionsDao.updateAge(age);
+	}
+
+	@Override
+	public void deleteAge(Integer id) {
+		collectionsDao.deleteAge(id);
+	}
 	public ArrayList<Category> getCategory() {
 
 		return collectionsDao.getCategory();
@@ -31,19 +65,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 
 	@Override
-	public void addCategory(Category category) {
-		collectionsDao.addCategory(category);
+	public boolean addCategory(Category category) {
+		return collectionsDao.addCategory(category);
 
 	}
 
 
 	@Override
-	public void updateCategory(int id, Category category) {
+	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		collectionsDao.updateCategory(category);
+		return collectionsDao.updateCategory(category);
 	}
 
+	@Override
+	public boolean deleteCategory(int id) {
+		return collectionsDao.deleteCategory(id);
 
+	}
 
 
 	@Override
@@ -55,23 +93,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 		collectionsDao.addColor(addedColor);
 	}
 	@Override
-	public boolean removeColor(String color) {
+	public boolean removeColor(int id) {
 		//to do: try catch implementation
 		//to-do take object color, not string
-		Color removedColor =getColor(color);
-		collectionsDao.removeColor(removedColor);
+		//Color removedColor =getColor(id);
+		collectionsDao.removeColor(id);
 		return true;
 	}
-	public Color getColor(String color){
+	/*public Color getColor(int id){
 		List<Color> colors = getColorList();
 		for(Color c: colors){
-			if(c.getColor().equals(color)){
+			if(c.getId() == id){
 				return c;
 			}
 		}
 		return null;
 
-	}
+	}*/
 	@Override
 	public boolean updateColor(int id, String color){
 		try{
@@ -92,13 +130,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 			}
 		}
 		return null;
-
-	}
-
-
-	@Override
-	public void deleteCategory(int id) {
-		collectionsDao.deleteCategory(id);
 
 	}
 

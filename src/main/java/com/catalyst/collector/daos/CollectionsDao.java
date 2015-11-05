@@ -1,17 +1,22 @@
 package com.catalyst.collector.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.catalyst.collector.entities.*;
+import com.catalyst.collector.entities.Age;
 
-import java.util.ArrayList;
+import com.catalyst.collector.entities.Collectible;
+import com.catalyst.collector.entities.Color;
 
 public interface CollectionsDao {
+
+
+
 
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 	void addColor(Color addedColor);
-	boolean removeColor(Color c);
+	boolean removeColor(int id);
 	List<Color> getColorList();
 	void updateColor(Color c);
 	/**
@@ -31,23 +36,42 @@ public interface CollectionsDao {
 	 * adds a new category to the database
 	 * @param category
 	 */
-	void addCategory(Category category);
+	boolean addCategory(Category category);
 
 	/**
 	 * updates the given category (which will be identified by the id number)
 	 * @param category
 	 */
-	void updateCategory(Category category);
+	boolean updateCategory(Category category);
 
 	/**
 	 * deletes the category which matches the given id number
 	 * @param id
 	 */
-	void deleteCategory(int id);
+	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
+	public void addAge(Age age);
+
+	/**
+	 * Gets an ArrayList of age types from the database
+	 * @return
+	 */
+	ArrayList<Age> getAgeTypes();
+
+	/**
+	 * Updates an age type in the database
+	 * @param age
+	 */
+	void updateAge(Age age);
+
+	/**
+	 * Deletes an age type from the database
+	 * @param id
+	 */
+	void deleteAge(Integer id);
     ArrayList<Condition> getAllConditions();
     void addCondition(Condition condition);
     void updateCondition(Condition condition);
