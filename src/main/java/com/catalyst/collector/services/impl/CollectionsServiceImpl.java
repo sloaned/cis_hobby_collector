@@ -4,14 +4,24 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import com.catalyst.collector.entities.Collectible;
-import com.catalyst.collector.entities.Color;
+import com.catalyst.collector.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
+import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
+import com.catalyst.collector.entities.Collectible;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.catalyst.collector.daos.CollectionsDao;
+import java.util.List;
+
 import com.catalyst.collector.entities.Age;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
@@ -155,7 +165,33 @@ public class CollectionsServiceImpl implements CollectionsService {
         collectionsDao.removeKeyword(id);
     }
 
-	@Override
+    @Override
+    public ArrayList<Condition> getAllConditions() {
+        return collectionsDao.getAllConditions();
+    }
+
+    @Override
+    public boolean addCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.addCondition(condition);
+        return true;
+    }
+
+    @Override
+    public boolean updateCondition(Condition condition) {
+        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
+            return false;
+        collectionsDao.updateCondition(condition);
+        return true;
+    }
+
+    @Override
+    public void deleteCondition(Integer id) {
+        collectionsDao.deleteCondition(id);
+    }
+
+    @Override
 	public ArrayList<Collectible> getCollectibles() {
 		return collectionsDao.getCollectibles();
 	}

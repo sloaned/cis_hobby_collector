@@ -8,9 +8,6 @@ import com.catalyst.collector.entities.Age;
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
 
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Keyword;
-
 public interface CollectionsDao {
 	
 	public boolean addColor(Color addedColor); 
@@ -78,4 +75,8 @@ public interface CollectionsDao {
 	 * @param id
 	 */
 	void deleteAge(Integer id);
+    ArrayList<Condition> getAllConditions();
+    void addCondition(Condition condition);
+    void updateCondition(Condition condition);
+    void deleteCondition(Integer id);
 }
