@@ -30,24 +30,25 @@ public interface CollectionsService {
 	 * @param id
 	 */
 	boolean deleteCategory(int id);
-
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(Integer id);
 
+	Color getByColorId(int colorId);
 	List<Color> getColorList();
 	boolean addColor(Color addedColor);
+	boolean removeColor(int id);
 	boolean updateColor(int id, String color);
+	Color getColor(int colorId);
+    ArrayList<Condition> getAllConditions();
+    boolean addCondition(Condition condition);
+    boolean updateCondition(Condition condition);
+    void deleteCondition(Integer id);
     ArrayList<Keyword> getAllKeywords();
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
-	ArrayList<Condition> getAllConditions();
-	boolean addCondition(Condition condition);
-	boolean updateCondition(Condition condition);
-	void deleteCondition(Integer id);
-	Color getByColorId(int colorId);
-	boolean removeColor(int id);
-	Color getColor(int colorId);
+	void addCollectible(Collectible collectible);
+	void updateCollectible(Collectible collectible);
 
 	/**
 	 * Calls the add Age method in the Dao

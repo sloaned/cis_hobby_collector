@@ -4,7 +4,10 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
@@ -54,8 +57,29 @@ public class CollectionsDaoHibernateTest {
 	public void testAddCategory(){
 		Category sample = new Category();
 		collectionsDaoHibernate.setEm(mockEm);
+		//boolean result = 
+		collectionsDaoHibernate.addCategory(sample);
+		//assertTrue(result);
+		verify(mockEm, times(1)).persist(sample);
+	}
+
+	@Test(expected=Exception.class)
+	public void testAddCategoryNoName(){
+		Category sample = new Category();
+		doThrow(new Exception()).when(mockEm).persist(sample);
+		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addCategory(sample);
-		assertTrue(result);
+		assertFalse(result);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testUpdateCategoryTooLong(){
+		Category sample = new Category();
+		sample.setName("I am far too long to be a valid name. Well over 255 characters. I'm just going to keep typing until I reach that amount of characters. Wow this is taking a while. How do typists do this every day without getting blisters? Boy I could go for some pizza right now. Okay this has got to be 256 characters by now, right? I will assume that it is because I'm mocking the results anyway.");
+		doThrow(new Exception()).when(mockEm).merge(sample);
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.updateCategory(sample);
+		assertFalse(result);
 	}
 	
 	@Test
@@ -66,7 +90,6 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
 	}
-	
 	@Test
 	public void TestGetByCategoryId(){
 		Category sample = new Category();
@@ -94,6 +117,23 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
 	}
+	
+	@Test(expected=Exception.class)
+	public void testDeleteCategoryInvalidId(){
+		Category sample = new Category();
+		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Category.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		doThrow(new Exception()).when(mockEm).remove(sample);
+
+		collectionsDaoHibernate.setEm(mockEm);
+		Category cat = collectionsDaoHibernate.getByCategoryId(0);
+		boolean result = collectionsDaoHibernate.deleteCategory(0);
+		assertFalse(result);
+	}
+	
+	
 
 	@Test
 	public void happyAddAgeToDatabase(){
@@ -133,7 +173,7 @@ public class CollectionsDaoHibernateTest {
 				.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		collectionsDaoHibernate.setEm(mockEm);
-		ArrayList<Age> result = collectionsDaoHibernate.getCategory();
+		ArrayList<Age> result = collectionsDaoHibernate.getAgeTypes();
 		assertEquals(sample, result);
 	}
 

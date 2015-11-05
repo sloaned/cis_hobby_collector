@@ -12,15 +12,15 @@ import com.catalyst.collector.entities.Keyword;
 
 public interface CollectionsDao {
 	
-	public boolean addColor(Color addedColor); 
-	public Color getColor(int colorId);
-	public boolean removeColor(int id);
-	public List<Color> getColorList();
-	public boolean updateColor(Color c);
+	boolean addColor(Color addedColor);
+	Color getColor(int colorId);
+	boolean removeColor(int id);
+	List<Color> getColorList();
+	boolean updateColor(Color c);
 
 
 
-
+//nneeed to commit
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 
@@ -59,6 +59,8 @@ public interface CollectionsDao {
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
 	boolean addAge(Age age);
+	void addCollectible(Collectible collectible);
+	void updateCollectible(Collectible collectible);
 
 	/**
 	 * Gets an ArrayList of age types from the database
