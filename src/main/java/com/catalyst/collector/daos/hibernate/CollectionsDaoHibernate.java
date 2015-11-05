@@ -71,7 +71,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
         em.remove(condition);
     }
 
-    @Override
 	@Override
 	public void addCollectible(Collectible collectible) {
 		em.persist(collectible);
@@ -186,12 +185,12 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
-		return (ArrayList<Collectible>) em.createQuery("Select * from COLLECTIBLE").getResultList();
+		return (ArrayList<Collectible>) em.createQuery("Select c from Collectible c", Collectible.class).getResultList();
 	}
 
 	@Override
 	public Collectible getCollectible(int id) {
-		return em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
+		return em.createQuery("SELECT c FROM Collectible c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
 	}
 
 	@Override

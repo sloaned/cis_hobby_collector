@@ -12,9 +12,6 @@ import java.util.Set;
 @Entity
 public class Collectible {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_gen")
     @GenericGenerator(name = "id_gen",
             strategy = "com.catalyst.collector.services.CatalogNumberGenerator")
@@ -47,14 +44,15 @@ public class Collectible {
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
     private Set<Keyword> keywords;
 
+    @Column
     private boolean sold;
 
-    public int getId() {
-        return id;
+    public boolean isSold() {
+        return sold;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     public String getCatalogueNumber() {
