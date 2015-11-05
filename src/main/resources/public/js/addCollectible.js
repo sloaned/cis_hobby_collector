@@ -8,8 +8,7 @@ $(document).ready(function(){
     });
 
     // Removes popup from display when users clicks away from container.
-    $(document).mouseup(function (e)
-    {
+    $(document).mouseup(function (e) {
         var container = $("#newCollectibleForm");
 
         if (!container.is(e.target)
