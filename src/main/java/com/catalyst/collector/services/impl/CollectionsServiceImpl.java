@@ -151,6 +151,11 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
     @Override
+    public void deleteCondition(Integer id) {
+        collectionsDao.deleteCondition(id);
+    }
+
+    @Override
 	public ArrayList<Collectible> getCollectibles() {
 		return collectionsDao.getCollectibles();
 	}

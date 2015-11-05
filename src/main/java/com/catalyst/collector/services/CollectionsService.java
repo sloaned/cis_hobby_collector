@@ -47,4 +47,5 @@ public interface CollectionsService {
     ArrayList<Condition> getAllConditions();
     boolean addCondition(Condition condition);
     boolean updateCondition(Condition condition);
+    void deleteCondition(Integer id);
 }

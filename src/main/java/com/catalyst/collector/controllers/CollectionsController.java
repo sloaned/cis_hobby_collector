@@ -123,6 +123,6 @@ public class CollectionsController {
 
     @RequestMapping(value = "/condition/{id}", method = RequestMethod.DELETE)
     public void deleteCondition(@PathVariable Integer id) {
-
+        collectionsService.deleteCondition(id);
     }
 }

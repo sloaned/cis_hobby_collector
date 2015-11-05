@@ -60,6 +60,12 @@ public class CollectionsDaoHibernate implements CollectionsDao {
     }
 
     @Override
+    public void deleteCondition(Integer id) {
+        Condition condition = em.createQuery("SELECT c FROM Condition c WHERE c.id = :id", Condition.class).setParameter("id", id).getSingleResult();
+        em.remove(condition);
+    }
+
+    @Override
 	public ArrayList<Category> getCategory() {
 		return (ArrayList<Category>)em
 				.createQuery("SELECT c FROM Category c", Category.class)

@@ -51,4 +51,5 @@ public interface CollectionsDao {
     ArrayList<Condition> getAllConditions();
     void addCondition(Condition condition);
     void updateCondition(Condition condition);
+    void deleteCondition(Integer id);
 }
