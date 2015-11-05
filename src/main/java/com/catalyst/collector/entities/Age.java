@@ -18,7 +18,7 @@ public class Age {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer age_id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length=255)
     private String age;
 
 

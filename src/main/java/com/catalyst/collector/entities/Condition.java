@@ -10,8 +10,7 @@ public class Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(nullable = false, unique = true)
-    @Length(max = 255)
+    @Column(nullable = false, unique = true, length=255)
     String condition;
 
     public Integer getId() {
