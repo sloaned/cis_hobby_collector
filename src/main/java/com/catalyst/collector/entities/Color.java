@@ -8,6 +8,7 @@ public class Color {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
     @Column(nullable = false, unique = true)
+	@Size(max = 255)
 	String color;
 	public Color(){}
 	/**
