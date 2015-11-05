@@ -84,14 +84,24 @@ public class CollectionsServiceImpl implements CollectionsService {
 		return collectionsDao.getColorList();
 	}
 	@Override
-	public void addColor(Color addedColor) {
-		collectionsDao.addColor(addedColor);
-	}
+	public boolean addColor(Color addedColor) {
+		try{
+			collectionsDao.addColor(addedColor);
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
+		}
 	@Override
 	public boolean removeColor(int id) {
+		try{
 		collectionsDao.removeColor(id);
+		}
+		catch(Exception e){
+			return false;
+		}
 		return true;	
-		
 	}
 	
 
