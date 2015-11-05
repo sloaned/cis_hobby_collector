@@ -81,6 +81,14 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
+		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		{
+			return false;
+		}
+		if((category.getName()).length() > 255)
+		{
+			return false;
+		}
 		return collectionsDao.addCategory(category);
 
 	}
@@ -89,6 +97,14 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
+		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		{
+			return false;
+		}
+		if((category.getName()).length() > 255)
+		{
+			return false;
+		}
 		return collectionsDao.updateCategory(category);
 	}
 
