@@ -16,12 +16,16 @@ public class CollectionsControllerTest {
 
 	private CollectionsController collectionsController;
 	CollectionsServiceImpl mockCollectionsService = mock(CollectionsServiceImpl.class);
+	
 	@Before
 	public void setup(){
 		collectionsController = new CollectionsController();
 		collectionsController.setCollectionsService(mockCollectionsService);
 	}
 	
+	/*
+	 * Category Controller tests
+	 */
 	@Test
 	public void HappyPathGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
@@ -31,7 +35,6 @@ public class CollectionsControllerTest {
 		
 		assertEquals(sample, result);			
 	}
-	
 	@Test
 	public void HappyPathAddCategory(){
 		Category sample = new Category();
@@ -40,7 +43,6 @@ public class CollectionsControllerTest {
 		boolean result = collectionsController.addCategory(sample);
 		assertTrue(result);
 	}
-	
 	@Test
 	public void HappyPathUpdateCategory(){
 		Category sample = new Category();
@@ -49,7 +51,6 @@ public class CollectionsControllerTest {
 		boolean result = collectionsController.updateCategory(0, sample);
 		assertTrue(result);
 	}
-	
 	@Test
 	public void HappyPathDeleteCategory(){
 		when(mockCollectionsService.deleteCategory(0)).thenReturn(true);

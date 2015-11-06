@@ -16,11 +16,16 @@ public class CollectionsServiceImplTest {
 
 	private CollectionsServiceImpl collectionsServiceImpl;
 	CollectionsDaoHibernate mockCollectionsDao = mock(CollectionsDaoHibernate.class);
+	
 	@Before
 	public void setup(){
 		collectionsServiceImpl = new CollectionsServiceImpl();
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 	}
+	
+	/*
+	 * Category Service tests
+	 */
 	@Test
 	public void HappyPathGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
