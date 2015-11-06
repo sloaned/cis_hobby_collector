@@ -58,7 +58,7 @@ public interface CollectionsService {
 	 * Calls the add Age method in the Dao
 	 * @param age
 	 */
-	boolean addAge(Age age);
+	void addAge(Age age);
 
 	/**
 	 * Calls the get age types method in the Dao
@@ -70,7 +70,7 @@ public interface CollectionsService {
 	 * Calls the update age method in the Dao
 	 * @param age
 	 */
-	boolean updateAge(Age age);
+	void updateAge(Age age);
 
 	/**
 	 * Calls the delete age method in the Dao

@@ -20,32 +20,26 @@ public class CollectionsServiceImpl implements CollectionsService {
 		this.collectionsDao = collectionsDao;
 	}
 
-
-
 	@Override
 	public ArrayList<Age> getAgeTypes(){
 		return collectionsDao.getAgeTypes();
 	}
 
 	@Override
-	public boolean addAge(Age age) {
+	public void addAge(Age age) {
 		String ageString = age.getAge();
-		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.addAge(age);
-			return true;
 		}
-		return false;
 	}
 
 
 	@Override
-	public boolean updateAge(Age age){
+	public void updateAge(Age age){
 		String ageString = age.getAge();
-		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.updateAge(age);
-			return true;
 		}
-		return false;
 
 	}
 

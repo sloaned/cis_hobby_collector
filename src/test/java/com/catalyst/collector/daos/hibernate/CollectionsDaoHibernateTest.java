@@ -6,22 +6,15 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
-
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
-
 import java.util.*;
-
 import org.junit.Test;
-
-
 import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Age;
 import com.catalyst.collector.entities.Collectible;
 import org.junit.Before;
 import javax.persistence.TypedQuery;
-import org.junit.Test;
-
 import com.catalyst.collector.entities.*;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Color;
@@ -98,23 +91,23 @@ public class CollectionsDaoHibernateTest {
 		sample.setId(1);
 		target.updateCategory(sample);
 		verify(mockEm, times(1)).merge(sample);
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.updateCategory(sample);
+		assertTrue(result);
 	}
+
 	@Test
 	public void happyPathGetByCategoryId(){
-
 		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);		
 		when(mockEm.createQuery(anyString(), eq(Category.class))).thenReturn(mockTypedQuery);
 		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
-
 		target.getByCategoryId(0);
-
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(0));
 	}
 	@Test
 	public void happyPathDeleteCategory(){
 		Category sample = new Category();
 		sample.setId(5);
-
 		TypedQuery<Category> mockTypedQuery = mock(TypedQuery.class);
 		when(mockEm.createQuery(anyString(), eq(Category.class))).thenReturn(mockTypedQuery);
 		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
@@ -159,48 +152,15 @@ public class CollectionsDaoHibernateTest {
 			.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
 		doThrow(new Exception()).when(mockEm).remove(sample);
-
 		collectionsDaoHibernate.setEm(mockEm);
 		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertFalse(result);
-
 		target.deleteCategory(5);
 		verify(mockEm, times(1)).remove(sample);
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(5));
 	}
 
-
-
-	@Test
-	public void happyAddAgeToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("Antique");
-		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
-		assertTrue(result);
-	}
-
-	@Test
-	public void sadAddAgeWithNumbersToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("2");
-		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
-		assertFalse(result);
-	}
-
-	@Test
-	public void sadAddAgeWithTooManyCharactersToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
-		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
-		assertFalse(result);
-	}
 
     @Test
     public void testGetAllKeywordsHappyPathMakesADBCall() throws Exception {
@@ -230,7 +190,6 @@ public class CollectionsDaoHibernateTest {
     @Test
     public void testAddKeywordHappyPathMakesADBCall() throws Exception {
         target.addKeyword(null);
-
         //We have nothing we can assert. So use verify to check how many times a dependency's method was called.
         verify(mockEm, times(1)).persist(null);
     }
@@ -239,9 +198,7 @@ public class CollectionsDaoHibernateTest {
     public void testUpdateKeywordHappyPathMakesADBCall() throws Exception {
         Keyword expected = new Keyword();
         expected.setId(1);
-
         target.updateKeyword(expected);
-
         verify(mockEm, times(1)).merge(expected);
     }
 
@@ -249,16 +206,11 @@ public class CollectionsDaoHibernateTest {
     public void testRemoveKeywordHappyPathMakesADBCall() throws Exception {
         Keyword keywordToDelete = new Keyword();
         keywordToDelete.setId(5);
-
         TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
-
         when(mockEm.createQuery(anyString(), eq(Keyword.class))).thenReturn(mockTypedQuery);
         when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
         when(mockTypedQuery.getSingleResult()).thenReturn(keywordToDelete);
-
         target.removeKeyword(5);
-
-
         verify(mockEm, times(1)).remove(keywordToDelete);
         verify(mockTypedQuery, times(1)).setParameter(eq("id"), eq(5));
     }
@@ -278,7 +230,6 @@ public class CollectionsDaoHibernateTest {
     @Test
     public void testAddConditionHappyPathMakesADBCall() throws Exception {
         target.addCondition(null);
-
         //We have nothing we can assert. So use verify to check how many times a dependency's method was called.
         verify(mockEm, times(1)).persist(null);
     }
@@ -287,9 +238,7 @@ public class CollectionsDaoHibernateTest {
     public void testUpdateConditionHappyPathMakesADBCall() throws Exception {
         Condition expected = new Condition();
         expected.setId(1);
-
         target.updateCondition(expected);
-
         verify(mockEm, times(1)).merge(expected);
     }
 
@@ -297,31 +246,55 @@ public class CollectionsDaoHibernateTest {
     public void testDeleteConditionHappyPathMakesADBCall() throws Exception {
         Condition condition = new Condition();
         condition.setId(5);
-
         TypedQuery<Condition> mockTypedQuery = mock(TypedQuery.class);
-
         when(mockEm.createQuery(anyString(), eq(Condition.class))).thenReturn(mockTypedQuery);
         when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
         when(mockTypedQuery.getSingleResult()).thenReturn(condition);
-
         target.deleteCondition(5);
-
-
         verify(mockEm, times(1)).remove(condition);
         verify(mockTypedQuery, times(1)).setParameter(eq("id"), eq(5));
     }
 
-/*	@Test
-	public void happyGetAgeTypesFromDatabase(){
+	@Test
+	public void happyGetAgeArrayList() {
 		ArrayList<Age> sample = new ArrayList<Age>();
 		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
-		when(mockEm.createQuery(anyString(), eq(Category.class)))
-			.thenReturn(mockTypedQuery);
+		when(mockEm.createQuery(anyString(), eq(Age.class)))
+				.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		collectionsDaoHibernate.setEm(mockEm);
 		ArrayList<Age> result = collectionsDaoHibernate.getAgeTypes();
 		assertEquals(sample, result);
-	}*/
+	}
+
+	@Test
+	public void happyAddAgeToDatabaseMakesOneCall(){
+		Age sample = new Age();
+		collectionsDaoHibernate.setEm(mockEm);
+		collectionsDaoHibernate.addAge(sample);
+		verify(mockEm, times(1)).persist(sample);
+	}
+
+	@Test
+	public void happyUpdateAgeOneCallOnly(){
+		Age age = new Age();
+		collectionsDaoHibernate.setEm(mockEm);
+		collectionsDaoHibernate.updateAge(age);
+		verify(mockEm, times(1)).merge(age);
+	}
+
+	@Test
+	public void happyDeleteAgeFromDatabaseOnlyOneCall(){
+		Age age = new Age();
+		collectionsDaoHibernate.setEm(mockEm);
+		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
+		when(mockEm.createQuery(anyString(), eq(Age.class)))
+				.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(age);
+		collectionsDaoHibernate.deleteAge(1);
+		verify(mockEm, times(1)).remove(age);
+	}
 
 
 	@Test
@@ -387,5 +360,5 @@ public class CollectionsDaoHibernateTest {
 		List<Color> result = collectionsDaoHibernate.getColorList();
 		assertEquals(colorList,result);
 	}
-	
+
 }
