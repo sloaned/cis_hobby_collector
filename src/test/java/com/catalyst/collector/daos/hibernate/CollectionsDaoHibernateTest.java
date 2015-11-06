@@ -66,7 +66,10 @@ public class CollectionsDaoHibernateTest {
 
 		verify(mockEm, times(1)).persist(sample);
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> classified_mollison_39
 	@Test
 	public void happyPathUpdateCategory(){
 		Category sample = new Category();
@@ -106,6 +109,7 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.addColor(c);
 		assertTrue(result);
 	}
+<<<<<<< HEAD
 	@Test(expected=Exception.class)
 	public void sadPathAddColorTest_noColor(){
 		Color c = new Color();
@@ -145,6 +149,38 @@ public class CollectionsDaoHibernateTest {
 
 
 
+=======
+	@Test
+	public void happyAddAgeToDatabase(){
+		Age test = new Age();
+		test.setAge_id(1);
+		test.setAge("Antique");
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.addAge(test);
+		assertTrue(result);
+	}
+
+	@Test
+	public void sadAddAgeWithNumbersToDatabase(){
+		Age test = new Age();
+		test.setAge_id(1);
+		test.setAge("2");
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.addAge(test);
+		assertFalse(result);
+	}
+
+	@Test
+	public void sadAddAgeWithTooManyCharactersToDatabase(){
+		Age test = new Age();
+		test.setAge_id(1);
+		test.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.addAge(test);
+		assertFalse(result);
+	}
+
+>>>>>>> classified_mollison_39
     @Test
     public void testGetAllKeywordsHappyPathMakesADBCall() throws Exception {
         ArrayList<Keyword> testList = new ArrayList<>();

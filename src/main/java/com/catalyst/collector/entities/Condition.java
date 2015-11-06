@@ -7,9 +7,17 @@ public class Condition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
     @Column(nullable = false, unique = true, length=255)
-    String condition;
+    private String condition;
+
+    @Override
+    public String toString() {
+        return "Condition{" +
+                "id=" + id +
+                ", condition='" + condition + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;

@@ -96,4 +96,5 @@ public class CollectionsControllerTest {
 		boolean result = collectionsController.removeColor(0);
 		assertTrue(result);
 	}
+
 }
