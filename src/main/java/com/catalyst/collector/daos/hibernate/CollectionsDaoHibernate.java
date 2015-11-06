@@ -2,18 +2,11 @@ package com.catalyst.collector.daos.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
-
-
-import org.hibernate.Session;
-
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Repository;
-
 import com.catalyst.collector.daos.CollectionsDao;
 
 @Repository
@@ -54,17 +47,32 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
-	public void addCollectible(Collectible collectible) {
-		em.persist(collectible);
+	public boolean addCollectible(Collectible collectible) {
+		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
+				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
+			em.merge(collectible);
+		else
+			em.persist(collectible);
+		return true;
 	}
 
 	@Override
-	public void updateCollectible(Collectible collectible) {
+	public boolean updateCollectible(Collectible collectible) {
 		em.merge(collectible);
+		return true;
+	}
+
+	@Override
+	public boolean removeCollectible(int id) {
+		Collectible c = em.createQuery("SELECT c from Collectible c where c.id = :id", Collectible.class).setParameter("id",id)
+				.getSingleResult();
+
+		em.remove(c);
+		return true;
 	}
 
 
-    @Override
+	@Override
     public ArrayList<Condition> getAllConditions() {
         return (ArrayList<Condition>) em.createQuery("SELECT c FROM Condition c", Condition.class).getResultList();
     }

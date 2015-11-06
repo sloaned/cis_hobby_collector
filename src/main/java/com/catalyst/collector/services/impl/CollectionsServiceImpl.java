@@ -61,11 +61,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		if(category.getName() == null || ((category.getName()).trim()).equals("") || category.getName().matches(".*\\d.*"))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")|| category.getCategory().matches(".*\\d.*"))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getCategory()).length() > 255)
 		{
 			return false;
 		}
@@ -76,13 +76,13 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
-		
+
 		category.setId(id);
-		if(category.getName() == null || ((category.getName()).trim()).equals("") || category.getName().matches(".*\\d.*"))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || category.getCategory().matches(".*\\d.*"))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255 || category.getId()<1)
+		if((category.getCategory()).length() > 255 || category.getId()<1)
 		{
 			return false;
 		}
@@ -138,7 +138,7 @@ public class CollectionsServiceImpl implements CollectionsService {
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsDao.getAllKeywords();
     }
-    
+
     @Override
     public ArrayList<Keyword> getKeywordsByLetter(char letter){
     	return collectionsDao.getKeywordsByLetter(letter);
@@ -146,7 +146,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addKeyword(Keyword keyword) {
-        if (keyword.getWord().length() < 1 || keyword.getWord().length() > 255)
+        if (keyword.getKeyword().length() < 1 || keyword.getKeyword().length() > 255)
             return false;
 
         collectionsDao.addKeyword(keyword);
@@ -155,7 +155,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-        if (keyword.getWord() == null || keyword.getWord().equals("") || keyword.getWord().length() > 255)
+        if (keyword.getKeyword() == null || keyword.getKeyword().equals("") || keyword.getKeyword().length() > 255)
             return false;
         collectionsDao.updateKeyword(keyword);
         return true;
@@ -168,6 +168,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void addCollectible(Collectible collectible) {
+
+
 		collectionsDao.addCollectible(collectible);
 	}
 
@@ -210,6 +212,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public Collectible getCollectible(Integer id) {
 		return collectionsDao.getCollectible(id);
+	}
+
+	@Override
+	public boolean removeCollectible(int id) {
+		return collectionsDao.removeCollectible(id);
 	}
 
 }

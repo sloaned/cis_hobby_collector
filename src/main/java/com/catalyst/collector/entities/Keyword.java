@@ -1,17 +1,24 @@
 package com.catalyst.collector.entities;
 
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
 @Entity
 public class Keyword {
 
+    @Override
+    public String toString() {
+        return "Keyword{" +
+                "id=" + id +
+                ", keyword='" + keyword + '\'' +
+                '}';
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false, unique = true, length = 255)
-    private String word;
+    private String keyword;
 
     public Integer getId() {
         return id;
@@ -21,11 +28,11 @@ public class Keyword {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setKeyword(String word) {
+        this.keyword = word;
     }
 }
