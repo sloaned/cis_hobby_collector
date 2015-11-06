@@ -172,7 +172,7 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
     
     @Override
-    public ArrayList<Keyword> getKeywordsByLetter(char letter){
+    public ArrayList<Keyword> getKeywordsByLetter(String letter){
     	return collectionsDao.getKeywordsByLetter(letter);
     }
 

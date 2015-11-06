@@ -47,6 +47,8 @@ public class Collectible {
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
     private Set<Keyword> keywords;
 
+    private boolean sold;
+
     public boolean isSold() {
         return sold;
     }
@@ -54,8 +56,6 @@ public class Collectible {
     public void setSold(boolean sold) {
         this.sold = sold;
     }
-
-    private boolean sold;
 
     public int getId() {
         return id;

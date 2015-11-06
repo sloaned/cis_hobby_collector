@@ -44,7 +44,7 @@ public interface CollectionsService {
     boolean updateCondition(Condition condition);
     void deleteCondition(Integer id);
     ArrayList<Keyword> getAllKeywords();
-    ArrayList<Keyword> getKeywordsByLetter(char letter);
+    ArrayList<Keyword> getKeywordsByLetter(String letter);
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
