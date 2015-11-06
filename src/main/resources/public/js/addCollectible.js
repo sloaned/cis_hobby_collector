@@ -13,6 +13,11 @@ $(document).ready(function(){
         method: "GET"
     }).then(function(categories){
         addDropdown($("#typeDropdown").html(), $("#typeSelection"), categories)
+        $("#typeSelection").find("li").click(function () {
+            var text = $(this).text();
+            console.log(text);
+            $("#inputType").val(text);
+        });
     });
 
     //Add color to dropdown
@@ -21,6 +26,10 @@ $(document).ready(function(){
         method: "GET"
     }).then(function(colors){
         addDropdown($("#colorDropdown").html(), $("#colorSelection"), colors);
+        $("#colorSelection").find("li").click(function () {
+            var text = $(this).text();
+            $("#inputColor").val(text);
+        });
     });
 
     //Add conditions to dropdown
@@ -29,6 +38,10 @@ $(document).ready(function(){
         method: "GET"
     }).then(function(conditions){
         addDropdown($("#conditionDropdown").html(), $("#conditionSelection"), conditions);
+        $("#conditionSelection").find("li").click(function () {
+            var text = $(this).text();
+            $("#inputCondition").val(text);
+        });
     });
 
     //Add age to dropdown
@@ -37,6 +50,10 @@ $(document).ready(function(){
         method: "GET"
     }).then(function(age){
         addDropdown($("#ageDropdown").html(), $("#ageSelection"), age);
+        $("#ageSelection").find("li").click(function () {
+            var text = $(this).text();
+            $("#inputAge").val(text);
+        });
     });
 
     // Removes popup from display when users clicks away from container.
@@ -79,27 +96,6 @@ $(document).ready(function(){
                 console.log(error);
             });
         }
-    });
-
-    $("#typeSelection").find("li").click(function () {
-        var text = $(this).text();
-        console.log(text);
-        $("#inputType").val(text);
-    });
-
-    $("#colorSelection").find("li").click(function () {
-        var text = $(this).text();
-        $("#inputColor").val(text);
-    });
-
-    $("#conditionSelection").find("li").click(function () {
-        var text = $(this).text();
-        $("#inputCondition").val(text);
-    });
-
-    $("#ageSelection").find("li").click(function () {
-        var text = $(this).text();
-        $("#inputAge").val(text);
     });
 
     keywords();
