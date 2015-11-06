@@ -61,7 +61,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getName() == null || ((category.getName()).trim()).equals("") || category.getName().matches(".*\\d.*"))
 		{
 			return false;
 		}
@@ -76,8 +76,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
+		
 		category.setId(id);
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getName() == null || ((category.getName()).trim()).equals("") || category.getName().matches(".*\\d.*"))
 		{
 			return false;
 		}
@@ -90,7 +91,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean deleteCategory(int id) {
-		return collectionsDao.deleteCategory(id);
+		if(id > 0)
+		{
+			return collectionsDao.deleteCategory(id);
+		}
+		return false;
 	}
 
 	@Override
