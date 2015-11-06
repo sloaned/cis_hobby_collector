@@ -150,12 +150,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addColor(Color addedColor) {
-		try{
 		em.persist(addedColor);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 	@Override
@@ -167,36 +162,19 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				.getSingleResult();
 	}
 	@Override
-
 	public boolean removeColor(int id) {
-		try{
 		Color color = getColor(id);
 		em.remove(color);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 
-	public Color getByColorId(int colorId){
-		return em
-				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
-				.setParameter("ID",  colorId)
-				.getSingleResult();
-	}
 	@Override
 	public List<Color> getColorList() {
 		return em.createQuery("SELECT c FROM Color c", Color.class).getResultList();
 	}
 	@Override
 	public boolean updateColor(Color c) {
-		try{
 		em.merge(c);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 	@Override
