@@ -16,7 +16,7 @@ public class Keyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false, unique = true, length = 255)
-    private String word;
+    private String keyword;
 
     public Integer getId() {
         return id;
@@ -26,19 +26,19 @@ public class Keyword {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public boolean isValid() {
-        if (word == null)
+        if (keyword == null)
             return false;
-        matcher = pattern.matcher(word);
-        return !word.equals("") && word.length() < 256 && !matcher.find();
+        matcher = pattern.matcher(keyword);
+        return !keyword.equals("") && keyword.length() < 256 && !matcher.find();
 
     }
 }

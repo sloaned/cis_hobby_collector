@@ -126,7 +126,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testAddAValidKeyword() {
         Keyword keyword = new Keyword();
-        keyword.setWord("AValidWord");
+        keyword.setKeyword("AValidWord");
 
         assertTrue(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -134,7 +134,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testAddAInvalidKeywordWithEmptyString() {
         Keyword keyword = new Keyword();
-        keyword.setWord("");
+        keyword.setKeyword("");
 
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -142,7 +142,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testAddAInvalidKeywordWithStringLengthTooLong() {
         Keyword keyword = new Keyword();
-        keyword.setWord("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+        keyword.setKeyword("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
 
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -150,7 +150,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testAddAInvalidKeywordWithInvalidCharacterInString() {
         Keyword keyword = new Keyword();
-        keyword.setWord("asdf#as");
+        keyword.setKeyword("asdf#as");
 
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -174,7 +174,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateAValidKeyword() {
         Keyword keyword = new Keyword();
-        keyword.setWord("AValidWord");
+        keyword.setKeyword("AValidWord");
 
         assertTrue(collectionsServiceImpl.updateKeyword(keyword));
     }
@@ -182,7 +182,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateAInvalidKeywordWithNullString() {
         Keyword keyword = new Keyword();
-        keyword.setWord(null);
+        keyword.setKeyword(null);
 
         assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
@@ -190,7 +190,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateAInvalidKeywordWithStringLengthTooLong() {
         Keyword keyword = new Keyword();
-        keyword.setWord("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+        keyword.setKeyword("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
 
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -198,7 +198,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateAInvalidKeywordWithInvalidCharacterInString() {
         Keyword keyword = new Keyword();
-        keyword.setWord("asdf#as");
+        keyword.setKeyword("asdf#as");
 
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
