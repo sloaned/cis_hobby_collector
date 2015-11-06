@@ -9,13 +9,21 @@ import javax.persistence.*;
 public class Age {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer age_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @Column(nullable = false, unique = true, length = 255)
-    private String age;
+    private String  age;
 
 
     public Age(){}
+
+    @Override
+    public String toString() {
+        return "Age{" +
+                "id=" + id +
+                ", age='" + age + '\'' +
+                '}';
+    }
 
     /**
      * This setter creates a new age category
@@ -23,6 +31,9 @@ public class Age {
      */
     public Age(String age) {
         this.age = age;
+    }
+    public Age(int id) {
+        this.id = new Integer(id);
     }
 
 
@@ -34,11 +45,11 @@ public class Age {
         this.age = age;
     }
 
-    public Integer getAge_id() {
-        return age_id;
+    public Integer getId() {
+        return id.intValue();
     }
 
-    public void setAge_id(Integer age_id) {
-        this.age_id = age_id;
+    public void setId(Integer age_id) {
+        this.id = age_id;
     }
 }

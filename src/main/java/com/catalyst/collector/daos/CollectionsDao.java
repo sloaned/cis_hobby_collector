@@ -13,9 +13,10 @@ public interface CollectionsDao {
 	List<Color> getColorList();
 	boolean updateColor(Color c);
 
-
-
-//nneeed to commit
+	public Collectible getCollectible(String catalogNumber);
+	boolean addCollectible(Collectible collectible);
+	boolean updateCollectible(Collectible collectible);
+	boolean removeCollectible(int id);
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 
@@ -54,8 +55,7 @@ public interface CollectionsDao {
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
-	void addCollectible(Collectible collectible);
-	void updateCollectible(Collectible collectible);
+
 
 	/**
 	 * Gets an ArrayList of age types from the database

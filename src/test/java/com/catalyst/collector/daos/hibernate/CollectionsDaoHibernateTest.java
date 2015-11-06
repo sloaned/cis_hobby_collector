@@ -66,7 +66,7 @@ public class CollectionsDaoHibernateTest {
 
 		verify(mockEm, times(1)).persist(sample);
 	}
-	
+
 	@Test
 	public void happyPathUpdateCategory(){
 		Category sample = new Category();
@@ -86,6 +86,7 @@ public class CollectionsDaoHibernateTest {
 		target.getByCategoryId(0);
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(0));
 	}
+
 	@Test
 	public void happyPathDeleteCategory(){
 		Category sample = new Category();
@@ -106,6 +107,8 @@ public class CollectionsDaoHibernateTest {
 		boolean result = collectionsDaoHibernate.addColor(c);
 		assertTrue(result);
 	}
+
+
 	@Test(expected=Exception.class)
 	public void sadPathAddColorTest_noColor(){
 		Color c = new Color();
@@ -343,5 +346,29 @@ public class CollectionsDaoHibernateTest {
 		List<Color> result = collectionsDaoHibernate.getColorList();
 		assertEquals(colorList,result);
 	}
+	@Test
+	public void happyPathGetCollectiblesTest(){
+		List<Collectible> collectibles = new ArrayList<>();
+		TypedQuery<Collectible> mockTypedQuery = mock(TypedQuery.class);
+		when(mockEm.createQuery(anyString(), eq(Collectible.class)))
+				.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getResultList()).thenReturn(collectibles);
+		collectionsDaoHibernate.setEm(mockEm);
+		List<Collectible> result = collectionsDaoHibernate.getCollectibles();
+		assertEquals(collectibles,result);
+	}
 
+	@Test
+	public void happyPathGetCollectibleTest(){
+		Collectible c = new Collectible();
+		c.setId(0);
+		TypedQuery<Collectible> mockTypedQuery = mock(TypedQuery.class);
+		when(mockEm.createQuery(anyString(), eq(Collectible.class)))
+				.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(c);
+		collectionsDaoHibernate.setEm(mockEm);
+		Collectible result = collectionsDaoHibernate.getCollectible(0);
+		assertEquals(c, result);
+	}
 }

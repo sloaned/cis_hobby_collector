@@ -11,41 +11,52 @@ import java.util.Set;
  */
 @Entity
 public class Collectible {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_gen")
-    @GenericGenerator(name = "id_gen",
-            strategy = "com.catalyst.collector.services.CatalogNumberGenerator")
+    @GeneratedValue
+    @Id
+    private Integer id;
+
+    @Column(nullable = false)
     private String catalogueNumber;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255,unique = true)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ageId")
-    private Age age;
-
-    @Column(nullable = true, length = 1000)
+    @Column(nullable = false, length = 1000)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryId")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn()
+    private Age age;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn
     private Category category;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "conditionId")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn
     private Condition condition;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "colorId")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "color")
     private Color color;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
     private Set<Keyword> keywords;
+
+    @Column
+    private boolean sold;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public boolean isSold() {
         return sold;
@@ -53,16 +64,6 @@ public class Collectible {
 
     public void setSold(boolean sold) {
         this.sold = sold;
-    }
-
-    private boolean sold;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCatalogueNumber() {
@@ -127,5 +128,20 @@ public class Collectible {
 
     public void setKeywords(Set<Keyword> keywords) {
         this.keywords = keywords;
+    }
+
+    @Override
+    public String toString() {
+        return "Collectible{" +
+                "catalogueNumber='" + catalogueNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", condition=" + condition +
+                ", color=" + color +
+                ", keywords=" + keywords +
+                ", sold=" + sold +
+                '}';
     }
 }
