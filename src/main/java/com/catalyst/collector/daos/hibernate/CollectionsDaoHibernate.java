@@ -223,17 +223,17 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public void addKeyword(Keyword keyword) {
-		em.persist(keyword);
+        em.persist(keyword);
 	}
 
 	public void updateKeyword(Keyword keyword) {
-		em.merge(keyword);
+        em.merge(keyword);
 	}
 
 	@Override
 	public void removeKeyword(Integer id) {
 		Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
-		em.remove(keyword);
+        em.remove(keyword);
 	}
 
 }

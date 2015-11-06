@@ -15,7 +15,7 @@ public interface CollectionsDao {
 
 
 
-//need to commit
+//nneeed to commit
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 
