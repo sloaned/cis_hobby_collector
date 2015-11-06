@@ -61,6 +61,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
+		
 		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")|| !category.getCategory().matches("^[a-zA-Z0-9]*$"))
 		{
 			return false;
@@ -69,6 +70,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 		{
 			return false;
 		}
+		String cat = category.getCategory();
+		cat.toLowerCase();
+		category.setCategory(cat);
 		return collectionsDao.addCategory(category);
 
 	}
@@ -78,7 +82,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean updateCategory(int id, Category category) {
 
 		category.setId(id);
-
        
 		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || !category.getCategory().matches("^[a-zA-Z0-9]*$") )
 		{
@@ -88,6 +91,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 		{
 			return false;
 		}
+		String cat = category.getCategory();
+		cat.toLowerCase();
+		category.setCategory(cat);
 		return collectionsDao.updateCategory(category);
 	}
 
