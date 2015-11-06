@@ -82,6 +82,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
+		
 		category.setId(id);
 		if(category.getName() == null || ((category.getName()).trim()).equals("") || category.getName().matches(".*\\d.*"))
 		{
