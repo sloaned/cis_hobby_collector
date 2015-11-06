@@ -72,9 +72,9 @@
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="typeDropdown" type="text/x-handlebars-template">
-										{{#categories}}
+										{{#each this}}
 											<li><a>{{name}}</a></li>
-										{{/categories}}
+										{{/each}}
 									</script>
 								</ul>
 							</div><!-- /btn-group -->
@@ -87,9 +87,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Color 1</a></li>
-									<li><a>Color 2</a></li>
-									<li><a>Color 3</a></li>
+									<script id="colorDropdown" type="text/x-handlebars-template">
+										{{#each this}}
+										<li><a>{{color}}</a></li>
+										{{/each}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
@@ -101,9 +103,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="conditionSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Condition 1</a></li>
-									<li><a>Condition 2</a></li>
-									<li><a>Condition 3</a></li>
+									<script id="conditionDropdown" type="text/x-handlebars-template">
+										{{#each this}}
+										<li><a>{{condition}}</a></li>
+										{{/each}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
@@ -115,9 +119,11 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
 								<ul id="ageSelection" class="dropdown-menu dropdown-menu-right">
-									<li><a>Age 1</a></li>
-									<li><a>Age 2</a></li>
-									<li><a>Age 3</a></li>
+									<script id="ageDropdown" type="text/x-handlebars-template">
+										{{#each this}}
+										<li><a>{{age}}</a></li>
+										{{/each}}
+									</script>
 								</ul>
 							</div><!-- /btn-group -->
 						</div><!-- /input-group -->
@@ -132,7 +138,11 @@
 					</div>
 					<div class="form-group">
 						<label for="inputKeywords">keywords</label>
-						<input type="text" class="form-control" id="inputKeywords" placeholder="Keywords">
+						<div id="keywords">
+
+							<input id="inputKeywords" class="form-control" type="text" placeholder="Add a keyword" />
+						</div>
+
 					</div>
 					<div class="form-group">
 						<label for="inputSoldStatus">Sold Status</label>
