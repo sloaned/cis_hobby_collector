@@ -229,6 +229,54 @@ public class CollectionsDaoHibernateTest {
         verify(mockTypedQuery, times(1)).setParameter(eq("id"), eq(5));
     }
 
+    @Test
+    public void testGetAllConditionsHappyPathMakesADBCall() throws Exception {
+        ArrayList<Condition> testList = new ArrayList<>();
+        TypedQuery<Condition> mockTypedQuery = mock(TypedQuery.class);
+        when(mockEm.createQuery(anyString(), eq(Condition.class)))
+                .thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getResultList()).thenReturn(testList);
+        collectionsDaoHibernate.setEm(mockEm);
+        ArrayList<Condition> result = collectionsDaoHibernate.getAllConditions();
+        assertEquals(testList, result);
+    }
+
+    @Test
+    public void testAddConditionHappyPathMakesADBCall() throws Exception {
+        target.addCondition(null);
+
+        //We have nothing we can assert. So use verify to check how many times a dependency's method was called.
+        verify(mockEm, times(1)).persist(null);
+    }
+
+    @Test
+    public void testUpdateConditionHappyPathMakesADBCall() throws Exception {
+        Condition expected = new Condition();
+        expected.setId(1);
+
+        target.updateCondition(expected);
+
+        verify(mockEm, times(1)).merge(expected);
+    }
+
+    @Test
+    public void testDeleteConditionHappyPathMakesADBCall() throws Exception {
+        Condition condition = new Condition();
+        condition.setId(5);
+
+        TypedQuery<Condition> mockTypedQuery = mock(TypedQuery.class);
+
+        when(mockEm.createQuery(anyString(), eq(Condition.class))).thenReturn(mockTypedQuery);
+        when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getSingleResult()).thenReturn(condition);
+
+        target.deleteCondition(5);
+
+
+        verify(mockEm, times(1)).remove(condition);
+        verify(mockTypedQuery, times(1)).setParameter(eq("id"), eq(5));
+    }
+
 /*	@Test
 	public void happyGetAgeTypesFromDatabase(){
 		ArrayList<Age> sample = new ArrayList<Age>();
