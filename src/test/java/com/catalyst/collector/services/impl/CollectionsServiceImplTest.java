@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.catalyst.collector.daos.hibernate.CollectionsDaoHibernate;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Color;
+
 public class CollectionsServiceImplTest {
 
     CollectionsServiceImpl collectionsServiceImpl = new CollectionsServiceImpl();
@@ -22,15 +23,6 @@ public class CollectionsServiceImplTest {
         mockCollectionsDao = mock(CollectionsDaoHibernate.class);
         collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
     }
-
-	private CollectionsServiceImpl collectionsServiceImpl;
-	CollectionsDaoHibernate mockCollectionsDao = mock(CollectionsDaoHibernate.class);
-
-	@Before
-	public void setup(){
-		collectionsServiceImpl = new CollectionsServiceImpl();
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
-	}
 
 
 	@Test
@@ -166,7 +158,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameIsBlank(){
 		Category sample = new Category();
-		sample.setName("  ");
+		sample.setCategory("  ");
 
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -175,7 +167,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
-		sample.setName("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -215,7 +207,6 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		sample.setId(1);
-		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
@@ -257,11 +248,13 @@ public class CollectionsServiceImplTest {
 	}
 
 	@Test
-	public void happyPathDeleteCategory(){
-		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
-		boolean result = collectionsServiceImpl.deleteCategory(0);
+	public void happyPathDeleteCategory() {
+        when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
+        collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+        boolean result = collectionsServiceImpl.deleteCategory(0);
+    }
 
+    @Test
 	public void SadPathUpdateCategoryIdIsLessThan1(){
 		Category sample = new Category();
 		sample.setId(0);
@@ -442,12 +435,7 @@ public class CollectionsServiceImplTest {
 		verify(mockCollectionsDao, times(0)).deleteAge(0);
 	}
 
-	public void HappyPathDeleteCategory(){
-		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
 
-		boolean result = collectionsServiceImpl.deleteCategory(1);
-		assertTrue(result);
-	}
 
 	@Test
 	public void SadPathDeleteCategoryIdLessThanOne(){
