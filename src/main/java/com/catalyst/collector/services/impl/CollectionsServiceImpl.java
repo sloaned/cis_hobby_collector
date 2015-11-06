@@ -164,7 +164,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addKeyword(Keyword keyword) {
-        if (keyword.getWord().length() < 1 || keyword.getWord().length() > 255)
+        if (!keyword.isValid())
             return false;
 
         collectionsDao.addKeyword(keyword);
@@ -173,7 +173,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-        if (keyword.getWord() == null || keyword.getWord().equals("") || keyword.getWord().length() > 255)
+        if (!keyword.isValid())
             return false;
         collectionsDao.updateKeyword(keyword);
         return true;
@@ -181,6 +181,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public void removeKeyword(Integer id) {
+        if (id < 0)
+            return;
         collectionsDao.removeKeyword(id);
     }
 
