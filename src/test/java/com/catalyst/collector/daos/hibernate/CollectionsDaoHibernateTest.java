@@ -75,7 +75,7 @@ public class CollectionsDaoHibernateTest {
 	@Test(expected=Exception.class)
 	public void testUpdateCategoryTooLong(){
 		Category sample = new Category();
-		sample.setName("I am far too long to be a valid name. Well over 255 characters. I'm just going to keep typing until I reach that amount of characters. Wow this is taking a while. How do typists do this every day without getting blisters? Boy I could go for some pizza right now. Okay this has got to be 256 characters by now, right? I will assume that it is because I'm mocking the results anyway.");
+		sample.setCategory("I am far too long to be a valid name. Well over 255 characters. I'm just going to keep typing until I reach that amount of characters. Wow this is taking a while. How do typists do this every day without getting blisters? Boy I could go for some pizza right now. Okay this has got to be 256 characters by now, right? I will assume that it is because I'm mocking the results anyway.");
 		doThrow(new Exception()).when(mockEm).merge(sample);
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
@@ -85,7 +85,7 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		sample.setName("Books");
+		sample.setCategory("Books");
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
@@ -138,7 +138,7 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void happyAddAgeToDatabase(){
 		Age test = new Age();
-		test.setAge_id(1);
+		test.setId(1);
 		test.setAge("Antique");
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addAge(test);
@@ -148,7 +148,7 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void sadAddAgeWithNumbersToDatabase(){
 		Age test = new Age();
-		test.setAge_id(1);
+		test.setId(1);
 		test.setAge("2");
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addAge(test);
@@ -158,24 +158,14 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void sadAddAgeWithTooManyCharactersToDatabase(){
 		Age test = new Age();
-		test.setAge_id(1);
+		test.setId(1);
 		test.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.addAge(test);
 		assertFalse(result);
 	}
 
-	@Test
-	public void happyGetAgeTypesFromDatabase(){
-		ArrayList<Age> sample = new ArrayList<Age>();
-		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
-		when(mockEm.createQuery(anyString(), eq(Category.class)))
-				.thenReturn(mockTypedQuery);
-		when(mockTypedQuery.getResultList()).thenReturn(sample);
-		collectionsDaoHibernate.setEm(mockEm);
-		ArrayList<Age> result = collectionsDaoHibernate.getAgeTypes();
-		assertEquals(sample, result);
-	}
+
 
 
 

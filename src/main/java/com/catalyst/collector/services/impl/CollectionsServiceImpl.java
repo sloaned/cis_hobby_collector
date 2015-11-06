@@ -12,16 +12,9 @@ import com.catalyst.collector.entities.Color;
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Keyword;
 import com.catalyst.collector.entities.Collectible;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.catalyst.collector.daos.CollectionsDao;
-import java.util.List;
 
 import com.catalyst.collector.entities.Age;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.services.CollectionsService;
 
 @Service
@@ -81,11 +74,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals(""))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getCategory()).length() > 255)
 		{
 			return false;
 		}
@@ -97,11 +90,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals(""))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getCategory()).length() > 255)
 		{
 			return false;
 		}
@@ -173,7 +166,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addKeyword(Keyword keyword) {
-        if (keyword.getWord().length() < 1 || keyword.getWord().length() > 255)
+        if (keyword.getKeyword().length() < 1 || keyword.getKeyword().length() > 255)
             return false;
 
         collectionsDao.addKeyword(keyword);
@@ -182,7 +175,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-        if (keyword.getWord() == null || keyword.getWord().equals("") || keyword.getWord().length() > 255)
+        if (keyword.getKeyword() == null || keyword.getKeyword().equals("") || keyword.getKeyword().length() > 255)
             return false;
         collectionsDao.updateKeyword(keyword);
         return true;
@@ -195,6 +188,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void addCollectible(Collectible collectible) {
+
+
 		collectionsDao.addCollectible(collectible);
 	}
 

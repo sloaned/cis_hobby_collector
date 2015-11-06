@@ -48,7 +48,7 @@ public class CollectionsController {
 
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.PUT)
 	public void updateAge(@PathVariable Integer id, @RequestBody Age age){
-		age.setAge_id(id);
+		age.setId(id);
 		collectionsService.updateAge(age);}
 
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
@@ -57,7 +57,8 @@ public class CollectionsController {
 	
 	@RequestMapping(value="/collectible", method=RequestMethod.POST)
 	public void addCollectible(@RequestBody Collectible collectible){
-		collectionsService.addCollectible(collectible);
+
+		System.out.println(collectible);collectionsService.addCollectible(collectible);
 	}
 
 	@RequestMapping(value="/collectible", method=RequestMethod.PUT)

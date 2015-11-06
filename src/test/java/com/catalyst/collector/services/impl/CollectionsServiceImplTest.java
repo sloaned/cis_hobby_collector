@@ -31,7 +31,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testAddCategory(){
 		Category sample = new Category();
-		sample.setName("Books");
+		sample.setCategory("Books");
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -51,7 +51,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testAddCategoryBlankName(){
 		Category sample = new Category();
-		sample.setName("  ");
+		sample.setCategory("  ");
 		
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
@@ -61,7 +61,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testAddCategoryLongName(){
 		Category sample = new Category();
-		sample.setName("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way— in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other wayï¿½ in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 		
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
@@ -71,7 +71,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		sample.setName("Books");
+		sample.setCategory("Books");
 		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
 		
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -91,7 +91,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void testUpdateCategoryBlankName(){
 		Category sample = new Category();
-		sample.setName("  ");
+		sample.setCategory("  ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
@@ -101,7 +101,7 @@ public class CollectionsServiceImplTest {
 	public void testUpdateCategoryLongName(){
 		Category sample = new Category();
 		
-		sample.setName("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way— in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other wayï¿½ in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
