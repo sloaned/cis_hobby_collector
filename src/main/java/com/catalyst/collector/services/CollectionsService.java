@@ -33,29 +33,31 @@ public interface CollectionsService {
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(Integer id);
 
-	Color getByColorId(int colorId);
+	
 	List<Color> getColorList();
 	boolean addColor(Color addedColor);
 	boolean removeColor(int id);
-	boolean updateColor(int id, String color);
+	boolean updateColor(Color color);
 	Color getColor(int colorId);
+	
     ArrayList<Condition> getAllConditions();
     boolean addCondition(Condition condition);
     boolean updateCondition(Condition condition);
     void deleteCondition(Integer id);
+    
     ArrayList<Keyword> getAllKeywords();
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
+    
 	void addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
-
 
 	/**
 	 * Calls the add Age method in the Dao
 	 * @param age
 	 */
-	void addAge(Age age);
+	boolean addAge(Age age);
 
 	/**
 	 * Calls the get age types method in the Dao
@@ -67,14 +69,12 @@ public interface CollectionsService {
 	 * Calls the update age method in the Dao
 	 * @param age
 	 */
-	void updateAge(Age age);
+	boolean updateAge(Age age);
 
 	/**
 	 * Calls the delete age method in the Dao
 	 * @param id
 	 */
-	void deleteAge(Integer id);
-
-
+	boolean deleteAge(Integer id);
 
 }

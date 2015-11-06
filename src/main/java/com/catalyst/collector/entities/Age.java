@@ -7,18 +7,11 @@ import javax.persistence.*;
  */
 @Entity
 public class Age {
-    public Integer getAge_id() {
-        return age_id;
-    }
-
-    public void setAge_id(Integer age_id) {
-        this.age_id = age_id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer age_id;
-    @Column(nullable = false, unique = true, length=255)
+    @Column(nullable = false, unique = true, length = 255)
     private String age;
 
 
@@ -39,5 +32,13 @@ public class Age {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public Integer getAge_id() {
+        return age_id;
+    }
+
+    public void setAge_id(Integer age_id) {
+        this.age_id = age_id;
     }
 }

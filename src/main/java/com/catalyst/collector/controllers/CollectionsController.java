@@ -9,23 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.catalyst.collector.entities.Category;
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Color;
-
 import com.catalyst.collector.entities.Keyword;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import com.catalyst.collector.entities.Age;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.catalyst.collector.services.CollectionsService;
 
 @RestController
@@ -49,8 +39,6 @@ public class CollectionsController {
 		return collectionsService.getCollectibles();
 	}
 
-
-
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -66,6 +54,7 @@ public class CollectionsController {
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
 	public void deleteAge(@PathVariable Integer id){
 		collectionsService.deleteAge(id);}
+	
 	@RequestMapping(value="/collectible", method=RequestMethod.POST)
 	public void addCollectible(@RequestBody Collectible collectible){
 		collectionsService.addCollectible(collectible);
@@ -105,12 +94,13 @@ public class CollectionsController {
 		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
-	public void addColor(@RequestBody Color c) {
-		collectionsService.addColor(c);
+	public boolean addColor(@RequestBody Color c) {
+		return collectionsService.addColor(c);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
-		return collectionsService.updateColor(id, color);
+	public boolean updateColor(@PathVariable Integer id, @RequestBody Color color) {
+		color.setId(id);
+		return collectionsService.updateColor(color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
 	public Color getColor(@PathVariable Integer id){

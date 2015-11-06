@@ -58,11 +58,9 @@ public interface CollectionsDao {
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
-
+	boolean addAge(Age age);
 	void addCollectible(Collectible collectible);
-
 	void updateCollectible(Collectible collectible);
-	void addAge(Age age);
 
 	/**
 	 * Gets an ArrayList of age types from the database
@@ -74,13 +72,13 @@ public interface CollectionsDao {
 	 * Updates an age type in the database
 	 * @param age
 	 */
-	void updateAge(Age age);
+	boolean updateAge(Age age);
 
 	/**
 	 * Deletes an age type from the database
 	 * @param id
 	 */
-	void deleteAge(Integer id);
+	boolean deleteAge(Integer id);
     ArrayList<Condition> getAllConditions();
     void addCondition(Condition condition);
     void updateCondition(Condition condition);
