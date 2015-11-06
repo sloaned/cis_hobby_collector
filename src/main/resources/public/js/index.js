@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-		url : '/collectibles', // TODO: change this to what it actually is.
+		url : '/collectibles',
 		method : 'GET'
 	}).then(function(collectibles) {
 		$("tbody").children().remove();

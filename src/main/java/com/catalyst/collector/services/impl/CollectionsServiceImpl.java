@@ -21,10 +21,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 
-	@Override
-	public void addAge(Age age) {
-		collectionsDao.addAge(age);
-	}
 
 	@Override
 	public ArrayList<Age> getAgeTypes(){
@@ -32,14 +28,37 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public void updateAge(Age age){
-		collectionsDao.updateAge(age);
+	public boolean addAge(Age age) {
+		String ageString = age.getAge();
+		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+			collectionsDao.addAge(age);
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public boolean updateAge(Age age){
+		String ageString = age.getAge();
+		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+			collectionsDao.updateAge(age);
+			return true;
+		}
+		return false;
+
 	}
 
 	@Override
-	public void deleteAge(Integer id) {
-		collectionsDao.deleteAge(id);
+	public boolean deleteAge(Integer id) {
+		if(id > 0) {
+			collectionsDao.deleteAge(id);
+			return true;
+		}
+		return false;
 	}
+
+
 	public ArrayList<Category> getCategory() {
 
 		return collectionsDao.getCategory();
@@ -48,6 +67,14 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
+		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		{
+			return false;
+		}
+		if((category.getName()).length() > 255)
+		{
+			return false;
+		}
 		return collectionsDao.addCategory(category);
 
 	}
@@ -56,6 +83,14 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
+		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		{
+			return false;
+		}
+		if((category.getName()).length() > 255)
+		{
+			return false;
+		}
 		return collectionsDao.updateCategory(category);
 	}
 
@@ -63,7 +98,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean deleteCategory(int id) {
 		return collectionsDao.deleteCategory(id);
 	}
-
 
 	@Override
 	public List<Color> getColorList() {
@@ -113,16 +147,19 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	}
 
-
-	/*@Override
+	@Override
 	public Color getByColorId(int colorId){
 		return collectionsDao.getColor(colorId);
-
-	}*/
+	}
 
     @Override
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsDao.getAllKeywords();
+    }
+    
+    @Override
+    public ArrayList<Keyword> getKeywordsByLetter(char letter){
+    	return collectionsDao.getKeywordsByLetter(letter);
     }
 
     @Override
@@ -146,6 +183,16 @@ public class CollectionsServiceImpl implements CollectionsService {
     public void removeKeyword(Integer id) {
         collectionsDao.removeKeyword(id);
     }
+
+	@Override
+	public void addCollectible(Collectible collectible) {
+		collectionsDao.addCollectible(collectible);
+	}
+
+	@Override
+	public void updateCollectible(Collectible collectible) {
+		collectionsDao.updateCollectible(collectible);
+	}
 
     @Override
     public ArrayList<Condition> getAllConditions() {

@@ -30,25 +30,51 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 
 
-	public void addAge(Age age){
-		em.persist(age);
+	public boolean addAge(Age age){
+		String ageString = age.getAge();
+		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
+			em.persist(age);
+			return true;
+		}
+		return false;
+
 	}
 
 	public ArrayList<Age> getAgeTypes(){
 		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
 	}
 
-	public void updateAge(Age age){
-		em.merge(age);
+	public boolean updateAge(Age age){
+		String ageString = age.getAge();
+		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
+			em.merge(age);
+			return true;
+		}
+		return false;
 	}
 
-	public void deleteAge(Integer id){
-		Age age = em
-				.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
-				.setParameter("id", id)
-				.getSingleResult();
-		em.remove(age);
+	public boolean deleteAge(Integer id){
+		if(id > 0) {
+			Age age = em
+					.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
+					.setParameter("id", id)
+					.getSingleResult();
+			em.remove(age);
+			return true;
+		}
+		return false;
 	}
+
+	@Override
+	public void addCollectible(Collectible collectible) {
+		em.persist(collectible);
+	}
+
+	@Override
+	public void updateCollectible(Collectible collectible) {
+		em.merge(collectible);
+	}
+
 
     @Override
     public ArrayList<Condition> getAllConditions() {
@@ -105,7 +131,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}catch(Exception e){
 			return false;
 		}
-		
+
 	}
 
 
@@ -118,7 +144,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}catch(Exception e){
 			return false;
 		}
-		
+
 	}
 
 
@@ -152,7 +178,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		}
 		return true;
 	}
-	
+
 	public Color getByColorId(int colorId){
 		return em
 				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
@@ -175,17 +201,24 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
-		return (ArrayList<Collectible>) em.createQuery("Select * from COLLECTIBLE").getResultList();
+		return (ArrayList<Collectible>) em.createQuery("Select c FROM Collectible c", Collectible.class).getResultList();
 	}
 
 	@Override
 	public Collectible getCollectible(int id) {
-		return em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
+		return em.createQuery("SELECT c FROM Collectible c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
 	}
 
 	@Override
 	public ArrayList<Keyword> getAllKeywords() {
 		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
+	}
+	
+	@Override
+	public ArrayList<Keyword> getKeywordsByLetter(char letter){
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
+				.setParameter("character",  letter+"%")
+				.getResultList();
 	}
 
 	@Override

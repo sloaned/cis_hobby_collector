@@ -7,15 +7,15 @@ import com.catalyst.collector.entities.*;
 
 public interface CollectionsDao {
 	
-	public boolean addColor(Color addedColor); 
-	public Color getColor(int colorId);
-	public boolean removeColor(int id);
-	public List<Color> getColorList();
-	public boolean updateColor(Color c);
+	boolean addColor(Color addedColor);
+	Color getColor(int colorId);
+	boolean removeColor(int id);
+	List<Color> getColorList();
+	boolean updateColor(Color c);
 
 
 
-
+//need to commit
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 
@@ -50,10 +50,13 @@ public interface CollectionsDao {
 	 */
 	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
+    ArrayList<Keyword> getKeywordsByLetter(char letter);
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
-	public void addAge(Age age);
+	boolean addAge(Age age);
+	void addCollectible(Collectible collectible);
+	void updateCollectible(Collectible collectible);
 
 	/**
 	 * Gets an ArrayList of age types from the database
@@ -65,13 +68,13 @@ public interface CollectionsDao {
 	 * Updates an age type in the database
 	 * @param age
 	 */
-	void updateAge(Age age);
+	boolean updateAge(Age age);
 
 	/**
 	 * Deletes an age type from the database
 	 * @param id
 	 */
-	void deleteAge(Integer id);
+	boolean deleteAge(Integer id);
     ArrayList<Condition> getAllConditions();
     void addCondition(Condition condition);
     void updateCondition(Condition condition);
