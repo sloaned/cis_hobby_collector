@@ -419,5 +419,5 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertFalse(result);
 	}
-	
+
 }
