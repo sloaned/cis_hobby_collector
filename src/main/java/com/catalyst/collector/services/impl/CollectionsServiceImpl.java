@@ -20,32 +20,26 @@ public class CollectionsServiceImpl implements CollectionsService {
 		this.collectionsDao = collectionsDao;
 	}
 
-
-
 	@Override
 	public ArrayList<Age> getAgeTypes(){
 		return collectionsDao.getAgeTypes();
 	}
 
 	@Override
-	public boolean addAge(Age age) {
+	public void addAge(Age age) {
 		String ageString = age.getAge();
-		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.addAge(age);
-			return true;
 		}
-		return false;
 	}
 
 
 	@Override
-	public boolean updateAge(Age age){
+	public void updateAge(Age age){
 		String ageString = age.getAge();
-		if(ageString.length() <= 255 && !ageString.matches(".*\\d.*")) { //Maximum of 255 characters for an age, no digits allowed
+		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.updateAge(age);
-			return true;
 		}
-		return false;
 
 	}
 
@@ -67,11 +61,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")|| category.getCategory().matches(".*\\d.*"))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getCategory()).length() > 255)
 		{
 			return false;
 		}
@@ -82,12 +76,13 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
+
 		category.setId(id);
-		if(category.getName() == null || ((category.getName()).trim()).equals(""))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || category.getCategory().matches(".*\\d.*"))
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getCategory()).length() > 255 || category.getId()<1)
 		{
 			return false;
 		}
@@ -96,6 +91,10 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean deleteCategory(int id) {
+		if(id<1)
+		{
+			return false;
+		}
 		return collectionsDao.deleteCategory(id);
 	}
 
@@ -105,12 +104,10 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	@Override
 	public boolean addColor(Color addedColor) {
-		try{
-			collectionsDao.addColor(addedColor);
-		}
-		catch(Exception e){
-			return false;
-		}
+		 if (addedColor.getColor() == null || addedColor.getColor().trim().equals("") || addedColor.getColor().length() > 255){
+	            return false;
+		 }
+		collectionsDao.addColor(addedColor);
 		return true;
 		}
 	@Override
@@ -125,38 +122,23 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public boolean updateColor(int id, String color){
-		try{
-		Color c = getColor(id);
-		c.setColor(color);
+	public boolean updateColor(Color c){
+		 if (c.getColor() == null || c.getColor().trim().equals("") || c.getColor().length() > 255){
+	            return false;
+		 }
 		collectionsDao.updateColor(c);
-		}
-		catch(Exception e){
-			return false;
-			}
 		return true;
 	}
 	public Color getColor(int id){
-		List<Color> colors = getColorList();
-		for(Color c: colors){
-			if(c.getId() == id){
-				return c;
-			}
-		}
-		return null;
+		return collectionsDao.getColor(id);
 
-	}
-
-	@Override
-	public Color getByColorId(int colorId){
-		return collectionsDao.getColor(colorId);
 	}
 
     @Override
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsDao.getAllKeywords();
     }
-    
+
     @Override
     public ArrayList<Keyword> getKeywordsByLetter(char letter){
     	return collectionsDao.getKeywordsByLetter(letter);
@@ -188,6 +170,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void addCollectible(Collectible collectible) {
+
+
 		collectionsDao.addCollectible(collectible);
 	}
 
@@ -230,6 +214,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public Collectible getCollectible(Integer id) {
 		return collectionsDao.getCollectible(id);
+	}
+
+	@Override
+	public boolean removeCollectible(int id) {
+		return collectionsDao.removeCollectible(id);
 	}
 
 }

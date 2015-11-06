@@ -33,6 +33,16 @@ public class CollectionsController {
 	public ResponseEntity<Collectible> getCollectible(@PathVariable Integer id) {
 		return new ResponseEntity<>(collectionsService.getCollectible(id.intValue()), HttpStatus.OK);
 	}
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	public void removeCollectible(@PathVariable Integer id) {
+		collectionsService.removeCollectible(id.intValue());
+	}
+
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	public void updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
+		c.setCatalogueNumber(id);
+		collectionsService.updateCollectible(c);
+	}
 
 	@RequestMapping(value="/collectibles", method=RequestMethod.GET)
 	public ArrayList<Collectible> getCollectible() {
@@ -48,7 +58,7 @@ public class CollectionsController {
 
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.PUT)
 	public void updateAge(@PathVariable Integer id, @RequestBody Age age){
-		age.setAge_id(id);
+		age.setId(id);
 		collectionsService.updateAge(age);}
 
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
@@ -57,7 +67,8 @@ public class CollectionsController {
 	
 	@RequestMapping(value="/collectible", method=RequestMethod.POST)
 	public void addCollectible(@RequestBody Collectible collectible){
-		collectionsService.addCollectible(collectible);
+
+		System.out.println(collectible);collectionsService.addCollectible(collectible);
 	}
 
 	@RequestMapping(value="/collectible", method=RequestMethod.PUT)
@@ -94,12 +105,13 @@ public class CollectionsController {
 		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
-	public void addColor(@RequestBody Color c) {
-		collectionsService.addColor(c);
+	public boolean addColor(@RequestBody Color c) {
+		return collectionsService.addColor(c);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
-		return collectionsService.updateColor(id, color);
+	public boolean updateColor(@PathVariable Integer id, @RequestBody Color color) {
+		color.setId(id);
+		return collectionsService.updateColor(color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
 	public Color getColor(@PathVariable Integer id){

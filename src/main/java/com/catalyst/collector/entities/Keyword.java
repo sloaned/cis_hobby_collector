@@ -12,6 +12,8 @@ public class Keyword {
     private static final Pattern pattern = Pattern.compile(regex);
     private Matcher matcher;
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -40,5 +42,13 @@ public class Keyword {
         matcher = pattern.matcher(keyword);
         return !keyword.equals("") && keyword.length() < 256 && !matcher.find();
 
+    }
+
+    @Override
+    public String toString() {
+        return "Keyword{" +
+                "id=" + id +
+                ", keyword='" + keyword + '\'' +
+                '}';
     }
 }
