@@ -30,10 +30,7 @@ public interface CollectionsService {
 	 * @param id
 	 */
 	boolean deleteCategory(int id);
-	ArrayList<Collectible> getCollectibles();
-	Collectible getCollectible(Integer id);
 
-	
 	List<Color> getColorList();
 	boolean addColor(Color addedColor);
 	boolean removeColor(int id);
@@ -50,7 +47,10 @@ public interface CollectionsService {
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
-    
+
+	ArrayList<Collectible> getCollectibles();
+	Collectible getCollectible(Integer id);
+	boolean removeCollectible(int id);
 	void addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
 

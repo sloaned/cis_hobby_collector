@@ -133,7 +133,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void HappyPathAddCategory(){
 		Category sample = new Category();
-		sample.setName("Books");
+		sample.setCategory("Books");
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
@@ -153,7 +153,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameIsBlank(){
 		Category sample = new Category();
-		sample.setName("  ");
+		sample.setCategory("  ");
 		
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -162,7 +162,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
-		sample.setName("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 		
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -171,7 +171,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameContainsDigits(){
 		Category sample = new Category();
-		sample.setName("Comi5s");
+		sample.setCategory("Comi5s");
 		
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -182,7 +182,7 @@ public class CollectionsServiceImplTest {
 	public void HappyPathUpdateCategory(){
 		Category sample = new Category();
 		sample.setId(1);
-		sample.setName("Books");
+		sample.setCategory("Books");
 		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
 		
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
@@ -203,7 +203,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameIsBlank(){
 		Category sample = new Category();
 		sample.setId(1);
-		sample.setName("  ");
+		sample.setCategory("  ");
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -212,7 +212,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameContainsDigits(){
 		Category sample = new Category();
 		sample.setId(1);
-		sample.setName("Comi5s");
+		sample.setCategory("Comi5s");
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -221,7 +221,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryIdLessThanOne(){
 		Category sample = new Category();
 		sample.setId(0);
-		sample.setName("Flavors");
+		sample.setCategory("Flavors");
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
@@ -229,7 +229,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
-		sample.setName("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -254,7 +254,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void happyPathAddAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("Antique");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -264,7 +264,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithOnlyANumber(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -274,7 +274,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithNumbersInWords(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -284,7 +284,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddNullAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -294,7 +294,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddEmptyStringAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -304,7 +304,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -314,7 +314,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithTooManyCharacters(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -324,7 +324,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void happyPathUpdateAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("A good age");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -335,7 +335,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithOnlyANumber(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -345,7 +345,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithNumbersInWords(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -355,7 +355,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateNullAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -365,7 +365,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateEmptyStringAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -375,7 +375,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -385,7 +385,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithTooManyCharacters(){
 		Age age = new Age();
-		age.setAge_id(1);
+		age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);

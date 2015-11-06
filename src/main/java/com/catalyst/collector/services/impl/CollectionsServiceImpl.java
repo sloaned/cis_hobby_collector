@@ -214,4 +214,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 		return collectionsDao.getCollectible(id);
 	}
 
+	@Override
+	public boolean removeCollectible(int id) {
+		return collectionsDao.removeCollectible(id);
+	}
+
 }

@@ -33,6 +33,16 @@ public class CollectionsController {
 	public ResponseEntity<Collectible> getCollectible(@PathVariable Integer id) {
 		return new ResponseEntity<>(collectionsService.getCollectible(id.intValue()), HttpStatus.OK);
 	}
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	public void removeCollectible(@PathVariable Integer id) {
+		collectionsService.removeCollectible(id.intValue());
+	}
+
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	public void updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
+		c.setCatalogueNumber(id);
+		collectionsService.updateCollectible(c);
+	}
 
 	@RequestMapping(value="/collectibles", method=RequestMethod.GET)
 	public ArrayList<Collectible> getCollectible() {
