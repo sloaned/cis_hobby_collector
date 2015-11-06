@@ -13,6 +13,7 @@ public interface CollectionsDao {
 	List<Color> getColorList();
 	boolean updateColor(Color c);
 
+	public Collectible getCollectible(String catalogNumber);
 	boolean addCollectible(Collectible collectible);
 	boolean updateCollectible(Collectible collectible);
 	boolean removeCollectible(int id);

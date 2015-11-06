@@ -11,20 +11,22 @@ import java.util.Set;
  */
 @Entity
 public class Collectible {
+
+    @GeneratedValue
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_gen")
-    @GenericGenerator(name = "id_gen",
-            strategy = "com.catalyst.collector.services.CatalogNumberGenerator")
+    private Integer id;
+
+    @Column(nullable = false)
     private String catalogueNumber;
 
     @Column(nullable = false, length = 255,unique = true)
     private String name;
 
-    @Column(nullable = true, length = 1000)
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id")
+    @JoinColumn()
     private Age age;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -46,6 +48,15 @@ public class Collectible {
 
     @Column
     private boolean sold;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public boolean isSold() {
         return sold;

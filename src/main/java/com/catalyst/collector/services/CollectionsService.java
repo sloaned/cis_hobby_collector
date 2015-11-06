@@ -51,7 +51,7 @@ public interface CollectionsService {
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(Integer id);
 	boolean removeCollectible(int id);
-	void addCollectible(Collectible collectible);
+	boolean addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
 
 	/**

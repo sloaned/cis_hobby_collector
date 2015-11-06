@@ -167,6 +167,10 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
+	public Collectible getCollectible(String catalogNumber) {
+		return em.createQuery("SELECT c FROM Collectible c WHERE c.catalogNumber = :id", Collectible.class).setParameter("id", catalogNumber).getSingleResult();
+	}
+	@Override
 	public Collectible getCollectible(int id) {
 		return em.createQuery("SELECT c FROM Collectible c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
 	}

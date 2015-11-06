@@ -167,10 +167,9 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
 	@Override
-	public void addCollectible(Collectible collectible) {
-
-
+	public boolean addCollectible(Collectible collectible) {
 		collectionsDao.addCollectible(collectible);
+		return true;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import java.util.List;
 import java.util.ArrayList;
+
+import com.catalyst.collector.entities.Collectible;
 import org.junit.Before;
 import com.catalyst.collector.entities.Age;
 import org.junit.Test;
@@ -140,7 +142,7 @@ public class CollectionsServiceImplTest {
 		assertTrue(result);
 	}
 	
-	
+
 
 	@Test
 	public void SadPathAddCategoryNameIsNull(){
@@ -419,5 +421,13 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertFalse(result);
 	}
+
+	@Test
+	public void HappyPathCreateCollectible(){
+		Collectible c = new Collectible();
+		boolean result = collectionsServiceImpl.addCollectible(c);
+		assertFalse(result);
+	}
+
 	
 }
