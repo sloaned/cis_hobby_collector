@@ -94,12 +94,13 @@ public class CollectionsController {
 		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
-	public void addColor(@RequestBody Color c) {
-		collectionsService.addColor(c);
+	public boolean addColor(@RequestBody Color c) {
+		return collectionsService.addColor(c);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
-		return collectionsService.updateColor(id, color);
+	public boolean updateColor(@PathVariable Integer id, @RequestBody Color color) {
+		color.setId(id);
+		return collectionsService.updateColor(color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
 	public Color getColor(@PathVariable Integer id){

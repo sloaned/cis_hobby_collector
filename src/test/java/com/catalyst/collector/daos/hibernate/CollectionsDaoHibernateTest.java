@@ -10,6 +10,12 @@ import static org.mockito.Mockito.doThrow;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
+import java.util.*;
+
+import org.junit.Test;
+
+
+import com.catalyst.collector.daos.CollectionsDao;
 import com.catalyst.collector.entities.Age;
 import com.catalyst.collector.entities.Collectible;
 import org.junit.Before;
@@ -17,8 +23,11 @@ import javax.persistence.TypedQuery;
 import org.junit.Test;
 
 import com.catalyst.collector.entities.*;
+import com.catalyst.collector.entities.Category;
+import com.catalyst.collector.entities.Color;
 
 public class CollectionsDaoHibernateTest {
+	CollectionsDao dao;
 	CollectionsDaoHibernate collectionsDaoHibernate = new CollectionsDaoHibernate();
 	EntityManager mockEm = mock(EntityManager.class);
 	private CollectionsDaoHibernate target;
@@ -64,7 +73,6 @@ public class CollectionsDaoHibernateTest {
 
 		verify(mockEm, times(1)).persist(sample);
 	}
-
 	@Test(expected=Exception.class)
 	public void testAddCategoryNoName(){
 		Category sample = new Category();
@@ -115,6 +123,32 @@ public class CollectionsDaoHibernateTest {
 		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertTrue(result);
+	}
+	@Test
+	public void happyPathAddColorTest(){
+		Color c = new Color("azul");
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertTrue(result);
+	}
+	@Test(expected=Exception.class)
+	public void sadPathAddColorTest_noColor(){
+		Color c = new Color();
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
+	}
+	@Test(expected=Exception.class)
+	public void sadPathAddColorTest_over255Char(){
+		Color c = new Color();
+		String s = new String();
+		for(int i = 0; i<130; i++){
+			s = Integer.toString(i);
+		}
+		c.setColor(s);
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
 	}
 	
 	@Test(expected=Exception.class)
@@ -290,6 +324,68 @@ public class CollectionsDaoHibernateTest {
 	}*/
 
 
-
-
+	@Test
+	public void happyPathRemoveColorTest(){
+		Color c = new Color();
+		TypedQuery<Color> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Color.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(c);
+		collectionsDaoHibernate.setEm(mockEm);
+		Color cat = collectionsDaoHibernate.getColor(0);
+		boolean result = collectionsDaoHibernate.removeColor(0);
+		assertTrue(result);
+	}
+		@Test
+	public void happyPathGetColorTest(){
+		Color c = new Color();
+		c.setId(0);
+		TypedQuery<Color> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Color.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(c);
+		collectionsDaoHibernate.setEm(mockEm);
+		Color result = collectionsDaoHibernate.getColor(0);
+		assertEquals(c, result);	
+		}
+	@Test
+	public void happyPathUpdateColorTest(){
+		Color c = new Color("azul");
+		collectionsDaoHibernate.setEm(mockEm);
+		boolean result = collectionsDaoHibernate.updateColor(c);
+		assertTrue(result);
+	}
+	@Test(expected=Exception.class)
+	public void sadPathUpdateColorTest_noColor(){
+		Color c = new Color();
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
+	}
+	@Test(expected=Exception.class)
+	public void sadPathUpdateColorTest_over255Char(){
+		Color c = new Color();
+		String s = new String();
+		for(int i = 0; i<130; i++){
+			s = Integer.toString(i);
+		}
+		c.setColor(s);
+		doThrow(new Exception()).when(mockEm).persist(c);
+		boolean result = collectionsDaoHibernate.addColor(c);
+		assertFalse(result);
+	}
+	@Test
+	public void happyPathGetColorListTest(){
+		List<Color> colorList = new ArrayList<Color>();
+		TypedQuery<Color> mockTypedQuery = mock(TypedQuery.class);		
+		when(mockEm.createQuery(anyString(), eq(Color.class)))
+			.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getResultList()).thenReturn(colorList);
+		collectionsDaoHibernate.setEm(mockEm);
+		List<Color> result = collectionsDaoHibernate.getColorList();
+		assertEquals(colorList,result);
+	}
+	
 }

@@ -109,12 +109,10 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	@Override
 	public boolean addColor(Color addedColor) {
-		try{
-			collectionsDao.addColor(addedColor);
-		}
-		catch(Exception e){
-			return false;
-		}
+		 if (addedColor.getColor() == null || addedColor.getColor().trim().equals("") || addedColor.getColor().length() > 255){
+	            return false;
+		 }
+		collectionsDao.addColor(addedColor);
 		return true;
 		}
 	@Override
@@ -129,31 +127,16 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public boolean updateColor(int id, String color){
-		try{
-		Color c = getColor(id);
-		c.setColor(color);
+	public boolean updateColor(Color c){
+		 if (c.getColor() == null || c.getColor().trim().equals("") || c.getColor().length() > 255){
+	            return false;
+		 }
 		collectionsDao.updateColor(c);
-		}
-		catch(Exception e){
-			return false;
-			}
 		return true;
 	}
 	public Color getColor(int id){
-		List<Color> colors = getColorList();
-		for(Color c: colors){
-			if(c.getId() == id){
-				return c;
-			}
-		}
-		return null;
+		return collectionsDao.getColor(id);
 
-	}
-
-	@Override
-	public Color getByColorId(int colorId){
-		return collectionsDao.getColor(colorId);
 	}
 
     @Override
