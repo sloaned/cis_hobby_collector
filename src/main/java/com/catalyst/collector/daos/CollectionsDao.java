@@ -55,10 +55,11 @@ public interface CollectionsDao {
 	 */
 	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
-    boolean addKeyword(Keyword keyword);
-    boolean updateKeyword(Keyword keyword);
-    boolean removeKeyword(Integer id);
-
+    ArrayList<Keyword> getKeywordsByLetter(char letter);
+    void addKeyword(Keyword keyword);
+    void updateKeyword(Keyword keyword);
+    void removeKeyword(Integer id);
+	boolean addAge(Age age);
 	void addCollectible(Collectible collectible);
 
 	void updateCollectible(Collectible collectible);

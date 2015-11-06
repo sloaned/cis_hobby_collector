@@ -8,28 +8,36 @@ $(document).ready(function(){
     });
 
     //Add categories to dropdown
-    var source = $("#typeDropdown").html();
-    var template = Handlebars.compile(source);
-    var categories = { categories: [
-        {name: "type 1"},
-        {name: "type 2"},
-        {name: "type 3"},
-        {name: "type example"}
-    ]};
-    $("#typeSelection").html(template(categories));
-    //end dropdown
+    $.ajax({
+        url: "/category",
+        method: "GET"
+    }).then(function(categories){
+        addDropdown($("#typeDropdown").html(), $("#typeSelection"), categories)
+    });
 
     //Add color to dropdown
-    var source = $("#colorDropdown").html();
-    var template = Handlebars.compile(source);
-    var categories = { categories: [
-        {name: "type 1"},
-        {name: "type 2"},
-        {name: "type 3"},
-        {name: "type example"}
-    ]};
-    $("#colorSelection").html(template(categories));
-    //end dropdown
+    $.ajax({
+        url: "/color",
+        method: "GET"
+    }).then(function(colors){
+        addDropdown($("#colorDropdown").html(), $("#colorSelection"), colors);
+    });
+
+    //Add conditions to dropdown
+    $.ajax({
+        url: "/conditions",
+        method: "GET"
+    }).then(function(conditions){
+        addDropdown($("#conditionDropdown").html(), $("#conditionSelection"), conditions);
+    });
+
+    //Add age to dropdown
+    $.ajax({
+        url: "/agetypes",
+        method: "GET"
+    }).then(function(age){
+        addDropdown($("#ageDropdown").html(), $("#ageSelection"), age);
+    });
 
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
@@ -85,4 +93,31 @@ $(document).ready(function(){
         var text = $(this).text();
         $("#inputAge").val(text);
     });
+
+    keywords();
+
 });
+
+function addDropdown (source, destination, object){
+    var template = Handlebars.compile(source);
+    destination.html(template(object));
+}
+
+function keywords () {
+    $('#keywords input').on('focusout',function(){
+        var txt= this.value.replace(/[^\w ]/g,'');
+        if(txt) {
+            $(this).before('<span class="keywords">'+ txt.toLowerCase() +'</span>');
+        }
+        this.value="";
+    }).on('keyup',function( e ){
+        // if: comma,enter (delimit more keyCodes with | pipe)
+        if(/(188|13)/.test(e.which)) $(this).focusout();
+
+    });
+
+
+    $('#keywords').on('click','.keywords',function(){
+        $(this).remove();
+    });
+}

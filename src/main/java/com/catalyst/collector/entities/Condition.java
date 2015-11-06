@@ -1,7 +1,5 @@
 package com.catalyst.collector.entities;
-
 import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 
 @Entity

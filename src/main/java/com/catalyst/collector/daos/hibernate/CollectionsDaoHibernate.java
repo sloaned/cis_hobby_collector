@@ -30,24 +30,39 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 
 
-	public void addAge(Age age){
-		em.persist(age);
+	public boolean addAge(Age age){
+		String ageString = age.getAge();
+		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
+			em.persist(age);
+			return true;
+		}
+		return false;
+
 	}
 
 	public ArrayList<Age> getAgeTypes(){
 		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
 	}
 
-	public void updateAge(Age age){
-		em.merge(age);
+	public boolean updateAge(Age age){
+		String ageString = age.getAge();
+		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
+			em.merge(age);
+			return true;
+		}
+		return false;
 	}
 
-	public void deleteAge(Integer id){
-		Age age = em
-				.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
-				.setParameter("id", id)
-				.getSingleResult();
-		em.remove(age);
+	public boolean deleteAge(Integer id){
+		if(id > 0) {
+			Age age = em
+					.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
+					.setParameter("id", id)
+					.getSingleResult();
+			em.remove(age);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -197,6 +212,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	@Override
 	public ArrayList<Keyword> getAllKeywords() {
 		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
+	}
+	
+	@Override
+	public ArrayList<Keyword> getKeywordsByLetter(char letter){
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
+				.setParameter("character",  letter+"%")
+				.getResultList();
 	}
 
 	@Override

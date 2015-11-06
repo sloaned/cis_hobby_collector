@@ -47,3 +47,40 @@ a:hover {
 .dropdown-selector {
     padding: 14px;
 }
+
+#keywords{
+    border:1px solid #ccc;
+    padding:5px;
+    font-family:Arial;
+    border-radius: 5px;
+}
+#keywords span.keywords{
+    cursor:pointer;
+    display:block;
+    float:left;
+    color:#fff;
+    background:#689;
+    padding:5px;
+    padding-right:25px;
+    margin:4px;
+    border-radius: 5px;
+}
+#keywords span.keywords:hover{
+    opacity:0.7;
+}
+#keywords span.keywords:after{
+    position:absolute;
+    content:"x";
+    border:1px solid;
+    padding:0 4px;
+    margin:3px 0 10px 5px;
+    font-size:10px;
+    border-radius: 2px;
+}
+#keywords input{
+    background:#eee;
+    border:0;
+    margin:4px;
+    padding:7px;
+    width:auto;
+}
