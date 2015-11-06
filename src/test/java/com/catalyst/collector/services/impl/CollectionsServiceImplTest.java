@@ -25,7 +25,6 @@ public class CollectionsServiceImplTest {
 	 */
 	
 	@Test
-<<<<<<< HEAD
 	public void testGetColor() {
 		Color sample = new Color();
 		when(mockCollectionsDao.getColor(1)).thenReturn(sample);
