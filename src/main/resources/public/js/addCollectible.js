@@ -83,6 +83,7 @@ $(document).ready(function(){
 
     $("#typeSelection").find("li").click(function () {
         var text = $(this).text();
+        console.log(text);
         $("#inputType").val(text);
     });
 
