@@ -47,7 +47,7 @@ public interface CollectionsService {
     ArrayList<Keyword> getKeywordsByLetter(char letter);
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
-    boolean removeKeyword(Integer id);
+    void removeKeyword(Integer id);
 	void addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
 

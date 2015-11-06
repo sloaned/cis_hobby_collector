@@ -222,33 +222,18 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
-	public boolean addKeyword(Keyword keyword) {
-        try {
-            em.persist(keyword);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+	public void addKeyword(Keyword keyword) {
+        em.persist(keyword);
 	}
 
-	public boolean updateKeyword(Keyword keyword) {
-        try {
-            em.merge(keyword);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+	public void updateKeyword(Keyword keyword) {
+        em.merge(keyword);
 	}
 
 	@Override
-	public boolean removeKeyword(Integer id) {
+	public void removeKeyword(Integer id) {
 		Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
-        try {
-            em.remove(keyword);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        em.remove(keyword);
 	}
 
 }

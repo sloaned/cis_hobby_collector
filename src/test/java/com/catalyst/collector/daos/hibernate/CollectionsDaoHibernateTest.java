@@ -1,13 +1,12 @@
 package com.catalyst.collector.daos.hibernate;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
+
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
@@ -166,6 +165,67 @@ public class CollectionsDaoHibernateTest {
 		assertFalse(result);
 	}
 
+    @Test
+    public void testGetAllKeywordsHappyPathMakesADBCall() throws Exception {
+        ArrayList<Keyword> testList = new ArrayList<>();
+        TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
+        when(mockEm.createQuery(anyString(), eq(Keyword.class)))
+                .thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getResultList()).thenReturn(testList);
+        collectionsDaoHibernate.setEm(mockEm);
+        ArrayList<Keyword> result = collectionsDaoHibernate.getAllKeywords();
+        assertEquals(testList, result);
+    }
+
+    @Test
+    public void testGetKeywordsByLetterHappyPathMakesADBCall() throws Exception {
+        ArrayList<Keyword> testList = new ArrayList<>();
+        TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
+        when(mockEm.createQuery(anyString(), eq(Keyword.class)))
+                .thenReturn(mockTypedQuery);
+        when(mockTypedQuery.setParameter(anyString(), anyChar())).thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getResultList()).thenReturn(testList);
+        collectionsDaoHibernate.setEm(mockEm);
+        ArrayList<Keyword> result = collectionsDaoHibernate.getKeywordsByLetter('c');
+        assertEquals(testList, result);
+    }
+
+    @Test
+    public void testAddKeywordHappyPathMakesADBCall() throws Exception {
+        target.addKeyword(null);
+
+        //We have nothing we can assert. So use verify to check how many times a dependency's method was called.
+        verify(mockEm, times(1)).persist(null);
+    }
+
+    @Test
+    public void testUpdateKeywordHappyPathMakesADBCall() throws Exception {
+        Keyword expected = new Keyword();
+        expected.setId(1);
+
+        target.updateKeyword(expected);
+
+        verify(mockEm, times(1)).merge(expected);
+    }
+
+    @Test
+    public void testRemoveKeywordHappyPathMakesADBCall() throws Exception {
+        Keyword keywordToDelete = new Keyword();
+        keywordToDelete.setId(5);
+
+        TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
+
+        when(mockEm.createQuery(anyString(), eq(Keyword.class))).thenReturn(mockTypedQuery);
+        when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+        when(mockTypedQuery.getSingleResult()).thenReturn(keywordToDelete);
+
+        target.removeKeyword(5);
+
+
+        verify(mockEm, times(1)).remove(keywordToDelete);
+        verify(mockTypedQuery, times(1)).setParameter(eq("id"), eq(5));
+    }
+
 /*	@Test
 	public void happyGetAgeTypesFromDatabase(){
 		ArrayList<Age> sample = new ArrayList<Age>();
@@ -181,44 +241,4 @@ public class CollectionsDaoHibernateTest {
 
 
 
-
-    @Test(expected=Exception.class)
-    public void testGetAllKeywordsDoesntMakeADBCall() {
-        ArrayList<Keyword> sample = new ArrayList<Keyword>();
-        TypedQuery<Keyword> mockTypedQuery = mock(TypedQuery.class);
-        when(mockEm.createQuery(anyString(), eq(Keyword.class)))
-                .thenReturn(mockTypedQuery);
-        when(mockTypedQuery.getResultList()).thenReturn(sample);
-
-        collectionsDaoHibernate.setEm(mockEm);
-        ArrayList<Keyword> result = collectionsDaoHibernate.getAllKeywords();
-
-        assertEquals(sample, result);
-    }
-
-    @Test(expected=Exception.class)
-    public void testAddKeywordDoesntMakeADBCall() {
-        Keyword sample = new Keyword();
-        doThrow(new Exception()).when(mockEm).persist(sample);
-        boolean result = collectionsDaoHibernate.addKeyword(sample);
-        assertTrue(result);
-    }
-
-    @Test(expected=Exception.class)
-    public void testUpdateKeywordDoesntMakeADBCall() {
-        Keyword sample = new Keyword();
-        doThrow(new Exception()).when(mockEm).merge(sample);
-        collectionsDaoHibernate.setEm(mockEm);
-        boolean result = collectionsDaoHibernate.updateKeyword(sample);
-        assertTrue(result);
-    }
-
-    @Test(expected=Exception.class)
-    public void testRemoveKeywordDoesntMakeDBCall() throws Exception {
-        Keyword sample = new Keyword();
-        doThrow(new Exception()).when(mockEm).remove(sample);
-        collectionsDaoHibernate.setEm(mockEm);
-        boolean result = collectionsDaoHibernate.updateKeyword(sample);
-        assertTrue(result);
-    }
 }
