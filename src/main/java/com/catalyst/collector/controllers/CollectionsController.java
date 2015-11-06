@@ -95,12 +95,13 @@ public class CollectionsController {
 		return collectionsService.removeColor(id);
 	}
 	@RequestMapping(value="/color", method=RequestMethod.POST)
-	public void addColor(@RequestBody Color c) {
-		collectionsService.addColor(c);
+	public boolean addColor(@RequestBody Color c) {
+		return collectionsService.addColor(c);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.PUT)
-	public boolean updateColor(@PathVariable Integer id, @RequestBody String color) {
-		return collectionsService.updateColor(id, color);
+	public boolean updateColor(@PathVariable Integer id, @RequestBody Color color) {
+		color.setId(id);
+		return collectionsService.updateColor(color);
 	}
 	@RequestMapping(value="/color/{id}", method=RequestMethod.GET)
 	public Color getColor(@PathVariable Integer id){
@@ -109,6 +110,11 @@ public class CollectionsController {
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
+    }
+    
+    @RequestMapping(value="/keywords/{character}", method=RequestMethod.GET)
+    public ArrayList<Keyword> getKeywordsByLetter(@PathVariable char character){
+    	return collectionsService.getKeywordsByLetter(character);
     }
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {

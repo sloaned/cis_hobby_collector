@@ -22,40 +22,28 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 
-
-	public boolean addAge(Age age){
-		String ageString = age.getAge();
-		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
-			em.persist(age);
-			return true;
-		}
-		return false;
-
-	}
-
 	public ArrayList<Age> getAgeTypes(){
 		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
 	}
 
-	public boolean updateAge(Age age){
-		String ageString = age.getAge();
-		if(ageString.length() < 256 && !ageString.matches(".*\\d.*")) {
-			em.merge(age);
-			return true;
-		}
-		return false;
+	public void addAge(Age age){
+		em.persist(age);
 	}
 
-	public boolean deleteAge(Integer id){
-		if(id > 0) {
+	public Age getAgeById(int id) {
+		return em.createQuery("SELECT c FROM Age c WHERE c.id = :id", Age.class).setParameter("id", id).getSingleResult();
+	}
+
+	public void updateAge(Age age){
+		em.merge(age);
+	}
+
+	public void deleteAge(Integer id){
 			Age age = em
 					.createQuery("SELECT e FROM Age e WHERE e.id = :id", Age.class)
 					.setParameter("id", id)
 					.getSingleResult();
 			em.remove(age);
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -85,7 +73,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
     @Override
     public void updateCondition(Condition condition) {
-        em.persist(condition);
+        em.merge(condition);
     }
 
     @Override
@@ -111,48 +99,31 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCategory(Category category) {
-		try{
-			em.persist(category);
-			return true;
-		}catch(Exception e){
-			return false;
-		}
+		
+		em.persist(category);
+		return true;	
 	}
 
 
 	@Override
 	public boolean updateCategory(Category category) {
-		try{
-			em.merge(category);
-			return true;
-		}catch(Exception e){
-			return false;
-		}
-
+		em.merge(category);
+		return true;
+		
 	}
-
 
 	@Override
 	public boolean deleteCategory(int id) {
-		try{
-			Category category = getByCategoryId(id);
-			em.remove(category);
-			return true;
-		}catch(Exception e){
-			return false;
-		}
-
+	
+		Category category = getByCategoryId(id);
+		em.remove(category);
+		return true;
 	}
 
 
 	@Override
 	public boolean addColor(Color addedColor) {
-		try{
 		em.persist(addedColor);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 	@Override
@@ -164,36 +135,19 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 				.getSingleResult();
 	}
 	@Override
-
 	public boolean removeColor(int id) {
-		try{
 		Color color = getColor(id);
 		em.remove(color);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 
-	public Color getByColorId(int colorId){
-		return em
-				.createQuery("SELECT c FROM Color c WHERE c.idd = :ID", Color.class)
-				.setParameter("ID",  colorId)
-				.getSingleResult();
-	}
 	@Override
 	public List<Color> getColorList() {
 		return em.createQuery("SELECT c FROM Color c", Color.class).getResultList();
 	}
 	@Override
 	public boolean updateColor(Color c) {
-		try{
 		em.merge(c);
-		}
-		catch(Exception e){
-			return false;
-		}
 		return true;
 	}
 	@Override
@@ -210,20 +164,27 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	public ArrayList<Keyword> getAllKeywords() {
 		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
 	}
+	
+	@Override
+	public ArrayList<Keyword> getKeywordsByLetter(char letter){
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
+				.setParameter("character",  letter+"%")
+				.getResultList();
+	}
 
 	@Override
 	public void addKeyword(Keyword keyword) {
-		em.persist(keyword);
+        em.persist(keyword);
 	}
 
 	public void updateKeyword(Keyword keyword) {
-		em.merge(keyword);
+        em.merge(keyword);
 	}
 
 	@Override
 	public void removeKeyword(Integer id) {
 		Keyword keyword = em.createQuery("SELECT k FROM Keyword k WHERE k.id = :id", Keyword.class).setParameter("id", id).getSingleResult();
-		em.remove(keyword);
+        em.remove(keyword);
 	}
 
 }
