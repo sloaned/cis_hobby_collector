@@ -126,7 +126,6 @@ public class CollectionsServiceImplTest {
 	public void HappyPathGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
 		when(mockCollectionsDao.getCategory()).thenReturn(sample);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		ArrayList<Category> result = collectionsServiceImpl.getCategory();
 		assertEquals(sample, result);			
 	}
@@ -135,7 +134,6 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setName("Books");
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertTrue(result);
 	}
@@ -169,9 +167,9 @@ public class CollectionsServiceImplTest {
 	}
 	
 	@Test
-	public void SadPathAddCategoryNameContainsDigits(){
+	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
-		sample.setName("Comi5s");
+		sample.setName("Comi&s");
 		
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
@@ -193,7 +191,6 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameIsNull(){
 
 		Category sample = new Category();
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		sample.setId(1);
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
@@ -209,10 +206,10 @@ public class CollectionsServiceImplTest {
 	}
 	
 	@Test
-	public void SadPathUpdateCategoryNameContainsDigits(){
+	public void SadPathUpdateCategoryNameContainsPunctuation(){
 		Category sample = new Category();
 		sample.setId(1);
-		sample.setName("Comi5s");
+		sample.setName("Comi&s");
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -236,10 +233,15 @@ public class CollectionsServiceImplTest {
 	
 	@Test
 	public void happyPathDeleteCategory(){
-		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
-		boolean result = collectionsServiceImpl.deleteCategory(0);
+		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
+		boolean result = collectionsServiceImpl.deleteCategory(1);
 		assertTrue(result);
+	}
+	
+	@Test
+	public void sadPathDeleteCategoryIdBelowOne(){
+		boolean result = collectionsServiceImpl.deleteCategory(0);
+		assertFalse(result);
 	}
 
 	@Test
@@ -250,6 +252,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Age> result = collectionsServiceImpl.getAgeTypes();
 		assertEquals(sample, result);
 	}
+	
 
 	@Test
 	public void happyPathAddAge(){
