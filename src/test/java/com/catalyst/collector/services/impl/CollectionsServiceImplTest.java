@@ -177,6 +177,13 @@ public class CollectionsServiceImplTest {
 		assertFalse(result);
 	}
 	
+	@Test
+	public void SadPathAddCategoryIdIsLessThan1(){
+		Category sample = new Category();
+		sample.setId(0);
+		boolean result = collectionsServiceImpl.addCategory(sample);
+		assertFalse(result);
+	}
 	
 	@Test
 	public void HappyPathUpdateCategory(){
@@ -235,10 +242,25 @@ public class CollectionsServiceImplTest {
 	}
 	
 	@Test
+<<<<<<< HEAD
 	public void happyPathDeleteCategory(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.deleteCategory(0);
+=======
+	public void SadPathUpdateCategoryIdIsLessThan1(){
+		Category sample = new Category();
+		sample.setId(0);
+		boolean result = collectionsServiceImpl.updateCategory(0, sample);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void HappyPathDeleteCategory(){
+		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
+		
+		boolean result = collectionsServiceImpl.deleteCategory(1);
+>>>>>>> classified_mollison_39
 		assertTrue(result);
 	}
 
@@ -420,4 +442,10 @@ public class CollectionsServiceImplTest {
 		assertFalse(result);
 	}
 	
+	@Test
+	public void SadPathDeleteCategoryIdIsLessThan1(){
+		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
+		boolean result = collectionsServiceImpl.deleteCategory(0);
+		assertFalse(result);
+	}
 }
