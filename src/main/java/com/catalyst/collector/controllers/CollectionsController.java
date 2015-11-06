@@ -109,6 +109,11 @@ public class CollectionsController {
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
     }
+    
+    @RequestMapping(value="/keywords/{character}", method=RequestMethod.GET)
+    public ArrayList<Keyword> getKeywordsByLetter(@PathVariable char character){
+    	return collectionsService.getKeywordsByLetter(character);
+    }
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {
         if (!collectionsService.addKeyword(keyword))

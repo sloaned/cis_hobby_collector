@@ -165,17 +165,17 @@ public class CollectionsDaoHibernateTest {
 		assertFalse(result);
 	}
 
-	@Test
+/*	@Test
 	public void happyGetAgeTypesFromDatabase(){
 		ArrayList<Age> sample = new ArrayList<Age>();
 		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
 		when(mockEm.createQuery(anyString(), eq(Category.class)))
-				.thenReturn(mockTypedQuery);
+			.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		collectionsDaoHibernate.setEm(mockEm);
 		ArrayList<Age> result = collectionsDaoHibernate.getAgeTypes();
 		assertEquals(sample, result);
-	}
+	}*/
 
 
 

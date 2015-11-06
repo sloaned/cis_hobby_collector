@@ -20,7 +20,7 @@ public interface CollectionsDao {
 
 
 
-//nneeed to commit
+//need to commit
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(int id);
 
@@ -55,6 +55,7 @@ public interface CollectionsDao {
 	 */
 	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
+    ArrayList<Keyword> getKeywordsByLetter(char letter);
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);

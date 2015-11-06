@@ -170,6 +170,11 @@ public class CollectionsServiceImpl implements CollectionsService {
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsDao.getAllKeywords();
     }
+    
+    @Override
+    public ArrayList<Keyword> getKeywordsByLetter(char letter){
+    	return collectionsDao.getKeywordsByLetter(letter);
+    }
 
     @Override
     public boolean addKeyword(Keyword keyword) {

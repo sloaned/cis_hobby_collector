@@ -213,6 +213,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	public ArrayList<Keyword> getAllKeywords() {
 		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k From Keyword k", Keyword.class).getResultList();
 	}
+	
+	@Override
+	public ArrayList<Keyword> getKeywordsByLetter(char letter){
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
+				.setParameter("character",  letter+"%")
+				.getResultList();
+	}
 
 	@Override
 	public void addKeyword(Keyword keyword) {
