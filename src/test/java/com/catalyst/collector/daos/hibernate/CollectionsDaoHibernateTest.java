@@ -85,11 +85,11 @@ public class CollectionsDaoHibernateTest {
 	@Test
 	public void testUpdateCategory(){
 		Category sample = new Category();
-		
 		collectionsDaoHibernate.setEm(mockEm);
 		boolean result = collectionsDaoHibernate.updateCategory(sample);
 		assertTrue(result);
 	}
+
 	@Test
 	public void TestGetByCategoryId(){
 		Category sample = new Category();
@@ -126,50 +126,44 @@ public class CollectionsDaoHibernateTest {
 			.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
 		doThrow(new Exception()).when(mockEm).remove(sample);
-
 		collectionsDaoHibernate.setEm(mockEm);
 		Category cat = collectionsDaoHibernate.getByCategoryId(0);
 		boolean result = collectionsDaoHibernate.deleteCategory(0);
 		assertFalse(result);
 	}
-	
-	
 
 	@Test
-	public void happyAddAgeToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("Antique");
+	public void happyAddAgeToDatabaseMakesOneCall(){
+		Age sample = new Age();
 		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
-		assertTrue(result);
+		collectionsDaoHibernate.addAge(sample);
+		verify(mockEm, times(1)).persist(sample);
 	}
 
-	@Test
-	public void sadAddAgeWithNumbersToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("2");
+/*
+	@Test(expected=Exception.class)
+	public void sadDatabaseThrowsExceptionAndReturnsFalse(){
+		Age age = new Age();
+		doThrow(new Exception()).when(mockEm).persist(age);
 		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
+		boolean result = collectionsDaoHibernate.addAge(age);
 		assertFalse(result);
 	}
+*/
 
 	@Test
-	public void sadAddAgeWithTooManyCharactersToDatabase(){
-		Age test = new Age();
-		test.setAge_id(1);
-		test.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
+	public void happyUpdateAgeOneCallOnly(){
+		Age age = new Age();
 		collectionsDaoHibernate.setEm(mockEm);
-		boolean result = collectionsDaoHibernate.addAge(test);
-		assertFalse(result);
+		collectionsDaoHibernate.updateAge(age);
+		verify(mockEm, times(1)).merge(age);
 	}
 
 	@Test
-	public void happyGetAgeTypesFromDatabase(){
+	public void happyGetAgeArrayList(){
 		ArrayList<Age> sample = new ArrayList<Age>();
 		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
-		when(mockEm.createQuery(anyString(), eq(Category.class)))
+		when(mockEm.createQuery(anyString(), eq(Age.class)))
 				.thenReturn(mockTypedQuery);
 		when(mockTypedQuery.getResultList()).thenReturn(sample);
 		collectionsDaoHibernate.setEm(mockEm);
@@ -177,6 +171,16 @@ public class CollectionsDaoHibernateTest {
 		assertEquals(sample, result);
 	}
 
-
-
+	@Test
+	public void happyDeleteAgeFromDatabaseOnlyOneCall(){
+		Age age = new Age();
+		collectionsDaoHibernate.setEm(mockEm);
+		TypedQuery<Age> mockTypedQuery = mock(TypedQuery.class);
+		when(mockEm.createQuery(anyString(), eq(Age.class)))
+				.thenReturn(mockTypedQuery);
+		when(mockTypedQuery.setParameter(anyString(), anyInt())).thenReturn(mockTypedQuery);
+		when(mockTypedQuery.getSingleResult()).thenReturn(age);
+		collectionsDaoHibernate.deleteAge(1);
+		verify(mockEm, times(1)).remove(age);
+	}
 }
