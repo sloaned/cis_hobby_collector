@@ -171,13 +171,9 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
-<<<<<<< HEAD
+
 		sample.setCategory("Comi&s");
 		
-=======
-		sample.setCategory("Comi5s");
-
->>>>>>> 2b854b50c2178b8b4bd54d6142d8377bed3a0142
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -246,19 +242,9 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-<<<<<<< HEAD
-	
-=======
 
-	@Test
-	public void happyPathDeleteCategory() {
-        when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
-        collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
-        boolean result = collectionsServiceImpl.deleteCategory(0);
-    }
 
     @Test
->>>>>>> 2b854b50c2178b8b4bd54d6142d8377bed3a0142
 	public void SadPathUpdateCategoryIdIsLessThan1(){
 		Category sample = new Category();
 		sample.setId(0);
@@ -270,13 +256,9 @@ public class CollectionsServiceImplTest {
 	public void happyPathDeleteCategory(){
 
 		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
-<<<<<<< HEAD
-		boolean result = collectionsServiceImpl.deleteCategory(1);
-=======
 
 		boolean result = collectionsServiceImpl.deleteCategory(1);
 
->>>>>>> 2b854b50c2178b8b4bd54d6142d8377bed3a0142
 		assertTrue(result);
 	}
 	
@@ -453,19 +435,8 @@ public class CollectionsServiceImplTest {
 		collectionsServiceImpl.deleteAge(0);
 		verify(mockCollectionsDao, times(0)).deleteAge(0);
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
 
-
-	@Test
-	public void SadPathDeleteCategoryIdLessThanOne(){
-
-		boolean result = collectionsServiceImpl.deleteCategory(0);
-		assertFalse(result);
-	}
 
 	@Test
 	public void HappyPathCreateCollectible(){
@@ -573,5 +544,4 @@ public class CollectionsServiceImplTest {
         collectionsServiceImpl.removeKeyword(-1);
         verify(mockCollectionsDao, times(0)).removeKeyword(-1);
     }
->>>>>>> 2b854b50c2178b8b4bd54d6142d8377bed3a0142
 }
