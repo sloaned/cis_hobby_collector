@@ -116,7 +116,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testAddAValidKeyword() {
         Keyword keyword = new Keyword();
-        keyword.setKeyword("AValidWord");
+        keyword.setKeyword("AValidWord1");
 
         assertTrue(collectionsServiceImpl.addKeyword(keyword));
     }
@@ -164,7 +164,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateAValidKeyword() {
         Keyword keyword = new Keyword();
-        keyword.setKeyword("AValidWord");
+        keyword.setKeyword("AValidWord1");
 
         assertTrue(collectionsServiceImpl.updateKeyword(keyword));
     }

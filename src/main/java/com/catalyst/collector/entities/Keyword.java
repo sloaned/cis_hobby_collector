@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @Entity
 public class Keyword {
 
-    private static final String regex = "[^a-zA-Z+_]";
+    private static final String regex = "[^a-zA-Z\\d]";
     private static final Pattern pattern = Pattern.compile(regex);
     private Matcher matcher;
 
