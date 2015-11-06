@@ -1,11 +1,16 @@
 package com.catalyst.collector.entities;
 
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 public class Keyword {
+
+    private static final String regex = "[^a-zA-Z+_]";
+    private static final Pattern pattern = Pattern.compile(regex);
+    private Matcher matcher;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +32,13 @@ public class Keyword {
 
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public boolean isValid() {
+        if (word == null)
+            return false;
+        matcher = pattern.matcher(word);
+        return !word.equals("") && word.length() < 256 && !matcher.find();
+
     }
 }
