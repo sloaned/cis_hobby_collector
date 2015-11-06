@@ -178,6 +178,13 @@ public class CollectionsServiceImplTest {
 		assertFalse(result);
 	}
 	
+	@Test
+	public void SadPathAddCategoryIdIsLessThan1(){
+		Category sample = new Category();
+		sample.setId(0);
+		boolean result = collectionsServiceImpl.addCategory(sample);
+		assertFalse(result);
+	}
 	
 	@Test
 	public void HappyPathUpdateCategory(){
@@ -185,7 +192,7 @@ public class CollectionsServiceImplTest {
 		sample.setName("Books");
 		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
 		
-		boolean result = collectionsServiceImpl.updateCategory(0, sample);
+		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertTrue(result);
 	}
 	
@@ -215,11 +222,25 @@ public class CollectionsServiceImplTest {
 	}
 	
 	@Test
+	public void SadPathUpdateCategoryIdIsLessThan1(){
+		Category sample = new Category();
+		sample.setId(0);
+		boolean result = collectionsServiceImpl.updateCategory(0, sample);
+		assertFalse(result);
+	}
+	
+	@Test
 	public void HappyPathDeleteCategory(){
-		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
+		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
 		
-		boolean result = collectionsServiceImpl.deleteCategory(0);
+		boolean result = collectionsServiceImpl.deleteCategory(1);
 		assertTrue(result);
 	}
 	
+	@Test
+	public void SadPathDeleteCategoryIdIsLessThan1(){
+		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
+		boolean result = collectionsServiceImpl.deleteCategory(0);
+		assertFalse(result);
+	}
 }

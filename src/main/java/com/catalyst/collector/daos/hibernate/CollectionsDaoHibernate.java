@@ -114,37 +114,23 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCategory(Category category) {
-		try{
 			em.persist(category);
 			return true;
-		}catch(Exception e){
-			return false;
-		}
 	}
 
 
 	@Override
 	public boolean updateCategory(Category category) {
-		try{
 			em.merge(category);
 			return true;
-		}catch(Exception e){
-			return false;
-		}
-
 	}
 
 
 	@Override
 	public boolean deleteCategory(int id) {
-		try{
 			Category category = getByCategoryId(id);
 			em.remove(category);
 			return true;
-		}catch(Exception e){
-			return false;
-		}
-
 	}
 
 

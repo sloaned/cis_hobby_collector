@@ -87,7 +87,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 		{
 			return false;
 		}
-		if((category.getName()).length() > 255)
+		if((category.getName()).length() > 255 || category.getId()<1)
 		{
 			return false;
 		}
@@ -96,6 +96,10 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean deleteCategory(int id) {
+		if(id<1)
+		{
+			return false;
+		}
 		return collectionsDao.deleteCategory(id);
 	}
 
