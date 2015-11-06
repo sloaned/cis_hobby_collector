@@ -80,11 +80,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 		category.setId(id);
 
        
-		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || !category.getCategory().matches("^[a-zA-Z0-9]*$"))
+		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || !category.getCategory().matches("^[a-zA-Z0-9]*$") )
 		{
 			return false;
 		}
-		if((category.getCategory()).length() > 255 || category.getId()<1)
+		if(category.getCategory().matches("\\s") || (category.getCategory()).length() > 255 || category.getId()<1)
 		{
 			return false;
 		}
