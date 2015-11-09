@@ -1,82 +1,86 @@
-$(document).ready(function() {
+$(document).ready(function(){
 
-	var form = $("#submitAdd");
+    $("#inputType").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == ""){
+            $(this).parent().parent().find(".errorText").remove();
+            $(this).parent().parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().parent().find(".errorText").remove();
+        }
+    });
 
-		var bool = false;
-		if (!numeric(form)) {
-			bool = true;
-		}
-		if (!requiredSize(form) || bool) {
-			bool = true;
-		}
-		if(!required(form) || bool) {
+    $("#inputColor").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == ""){
+            $(this).parent().parent().find(".errorText").remove();
+            $(this).parent().parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().parent().find(".errorText").remove();
+        }
+    });
 
-		}
+    $("#inputCondition").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == ""){
+            $(this).parent().parent().find(".errorText").remove();
+            $(this).parent().parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().parent().find(".errorText").remove();
+        }
+    });
+
+    $("#inputAge").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == ""){
+            $(this).parent().parent().find(".errorText").remove();
+            $(this).parent().parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().parent().find(".errorText").remove();
+
+        }
+    });
+
+    $("#inputDescription").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == "") {
+            $(this).parent().find(".errorText").remove();
+            $(this).parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+
+        }else if(text.length >= 1000){
+            $(this).parent().find(".errorText").remove();
+            $(this).parent().append("<p class='errorText'>Must be less than 1000 characters</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().find(".errorText").remove();
+        }
+    });
+
+    $("#inputName").focusout(function(){
+        var text = $(this).val();
+        if (text == null || text == "") {
+            $(this).parent().find(".errorText").remove();
+            $(this).parent().append("<p class='errorText'>Required field</p>");
+            $(this).addClass("error");
+
+        }else if(text.length >= 255){
+            $(this).parent().find(".errorText").remove();
+            $(this).parent().append("<p class='errorText'>Must be less than 255 characters</p>");
+            $(this).addClass("error");
+        }else {
+            $(this).removeClass("error");
+            $(this).parent().find(".errorText").remove();
+        }
+    });
 
 });
-
-function required (form) {
-	var bool = true;
-	form.find(".required").each(function (){
-		var inputText = $(this).val();
-		if (!inputText || inputText.replace(/\s/g, "").length === 0) {
-			$(this).css("border-color", "red");
-			if (!$(this).next().is(".requiredMessage")) {
-				$(this).after("<span class=\"requiredMessage\" style=\"color: red; font-size: 8px\">This field is required.</span>");
-			}
-			bool = false;
-		} else {
-			$(this).css("border-color", "");
-			if ($(this).next().is(".requiredMessage")) {
-				$(this).next().remove();
-			}
-		}
-		
-	});
-	return bool;
-}
-
-function numeric (form) {
-	var bool = true;
-	form.find(".numeric").each(function (){
-		var inputNumber = $(this).val();
-		if (inputNumber && (isNaN(inputNumber) || inputNumber[0] === " ")) {
-			$(this).css("border-color", "red");
-			if (!$(this).next().is(".numericMessage")) {
-				$(this).after("<span class=\"numericMessage\" style=\"color: red; font-size: 8px\">Enter numbers only.</span>");
-			}
-			bool = false;
-		} else {
-			$(this).css("border-color", "");
-			if ($(this).next().is(".numericMessage")) {
-				$(this).next().remove();
-			}
-		}
-	});
-	return bool;
-}
-
-function requiredSize (form) {
-	var bool = true;
-	form.find(".requiredSize").each(function (){
-		var input = $(this);
-		var inputLength = input.val().length;
-		var inputMaxLength = Number(input.attr("maxlength"));	//Convert to number because .attr returns a string
-		if (inputLength !== inputMaxLength && input.val()) {
-			$(this).css("border-color", "red");
-			if (!$(this).next().is(".requiredSizeMessage")) {
-				$(this).after("<span class=\"requiredSizeMessage\" style=\"color: red; font-size: 8px\">You need to enter " + inputMaxLength + " characters.</span>");
-			}
-			bool = false;
-		} else {
-			$(this).css("border-color", "");
-			if ($(this).next().is(".requiredSizeMessage")) {
-				$(this).next().remove();
-			}
-		}
-	});
-	return bool;
-}
-	
-	
-

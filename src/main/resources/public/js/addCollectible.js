@@ -162,7 +162,7 @@ function keywords () {
         if(/(188|13)/.test(e.which)) $(this).focusout();
     });
 
-    $('#keywords').on('click','.keywords',function(){
+    $('#keywords').on('click','.keyword',function(){
         $(this).remove();
     });
 }
