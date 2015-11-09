@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+
+import com.catalyst.collector.services.CollectionValidation;
 import org.junit.Before;
 import com.catalyst.collector.entities.*;
 import com.catalyst.collector.services.CollectionValidation;
@@ -17,12 +19,14 @@ public class CollectionsServiceImplTest {
     CollectionsDaoHibernate mockCollectionsDao;
     CollectionValidation collectionValidation;
   
+
     @Before
     public void setup() {
         collectionsServiceImpl = new CollectionsServiceImpl();
         mockCollectionsDao = mock(CollectionsDaoHibernate.class);
         collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
         collectionValidation = new CollectionValidation();  
+
         collectionsServiceImpl.setCollectionValidation(collectionValidation);
     }
 
@@ -116,7 +120,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.removeColor(0);
 		assertTrue(result);
 	}
-	
+
 	/*
 	 * CATEGORY TESTS
 	 */
@@ -125,7 +129,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Category> sample = new ArrayList<Category>();
 		when(mockCollectionsDao.getCategory()).thenReturn(sample);
 		ArrayList<Category> result = collectionsServiceImpl.getCategory();
-		assertEquals(sample, result);			
+		assertEquals(sample, result);
 	}
 	@Test
 	public void HappyPathAddCategory(){
@@ -135,14 +139,14 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameIsNull(){
 		Category sample = new Category();
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}	
+	}
 
 	@Test
 	public void SadPathAddCategoryNameIsBlank(){
@@ -151,7 +155,7 @@ public class CollectionsServiceImplTest {
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}	
+	}
 	@Test
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
@@ -160,7 +164,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
@@ -169,7 +173,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
@@ -197,7 +201,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameIsNull(){
 		Category sample = new Category();
@@ -207,7 +211,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameIsBlank(){
 		Category sample = new Category();
@@ -229,7 +233,18 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-	
+
+	@Test
+	public void SadPathUpdateCategoryIdLessThanOne(){
+		Category sample = new Category();
+		sample.setId(0);
+		sample.setCategory("Flavors");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
+		boolean result = collectionsServiceImpl.updateCategory(0, sample);
+		assertFalse(result);
+	}
+
 	@Test
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
@@ -239,7 +254,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
@@ -249,16 +264,16 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void happyPathDeleteCategory(){
 		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
 		boolean result = collectionsServiceImpl.deleteCategory(1);
 		assertTrue(result);
 	}
-	
+
 	@Test
-	public void SadPathDeleteCategoryIdLessThanOne(){	
+	public void SadPathDeleteCategoryIdLessThanOne(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertFalse(result);
@@ -276,7 +291,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Age> result = collectionsServiceImpl.getAgeTypes();
 		assertEquals(sample, result);
 	}
-	
+
 
 	@Test
 	public void happyPathAddAge(){
@@ -418,7 +433,7 @@ public class CollectionsServiceImplTest {
 		collectionsServiceImpl.updateAge(age);
 		verify(mockCollectionsDao, times(0)).updateAge(age);
 	}
-	
+
 	@Test
 	public void happyPathDeleteAge(){
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -440,8 +455,10 @@ public class CollectionsServiceImplTest {
 		Collectible c = new Collectible();
 		boolean result = collectionsServiceImpl.addCollectible(c);
 		assertTrue(result);
+<<<<<<< HEAD
 	}*/
 	
+
 	@Test
 	public void SadPathDeleteCategoryIdIsLessThan1(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
@@ -538,6 +555,171 @@ public class CollectionsServiceImplTest {
 
     @Test
     public void testRemoveKeywordSadPath() throws Exception {
+        collectionsServiceImpl.removeKeyword(-1);
+        verify(mockCollectionsDao, times(0)).removeKeyword(-1);
+    }
+
+    @Test
+    public void testGetAllConditions() throws Exception {
+        ArrayList<Condition> expected = new ArrayList<>();
+        when(mockCollectionsDao.getAllConditions()).thenReturn(expected);
+        ArrayList<Condition> actual = collectionsServiceImpl.getAllConditions();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddConditionValidConditionWithValidConditionString() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AValidCondition1");
+
+        assertTrue(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionValidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition(null);
+        condition.setId(4);
+
+        assertTrue(collectionsServiceImpl.addCondition(condition));
+    }
+    @Test
+    public void testAddConditionInvalidConditionLengthTooLong() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionIsNull() throws Exception {
+        Condition condition = null;
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionStringIsNullAndIdIsNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setId(null);
+        condition.setCondition(null);
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionStringIsEmpty() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingSymbols() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AInvalid+condition");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingASpace() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalid condition");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingANonAsciiCharacter() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalidconditionwith\u2202");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+
+    //updates
+    @Test
+    public void testUpdateConditionValidConditionWithValidConditionString() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AValidCondition1");
+
+        assertTrue(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionValidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition(null);
+        condition.setId(4);
+
+        assertTrue(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionLengthTooLong() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionIsNull() throws Exception {
+        Condition condition = null;
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionStringIsNullAndIdIsNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setId(null);
+        condition.setCondition(null);
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionStringIsEmpty() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingSymbols() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AInvalid+condition");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingASpace() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalid condition");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingANonAsciiCharacter() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalidconditionwith\u2202");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testDeleteConditionHappyPath() throws Exception {
+        collectionsServiceImpl.removeKeyword(3);
+        verify(mockCollectionsDao, times(1)).removeKeyword(3);
+    }
+
+    @Test
+    public void testDeleteConditionSadPath() {
         collectionsServiceImpl.removeKeyword(-1);
         verify(mockCollectionsDao, times(0)).removeKeyword(-1);
     }

@@ -206,6 +206,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public void deleteCondition(Integer id) {
+        if (id < 0)
+            return;
         collectionsDao.deleteCondition(id);
     }
 
