@@ -648,13 +648,14 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateConditionValidConditionWithValidConditionString() throws Exception {
         Condition condition = new Condition();
+        condition.setId(1);
         condition.setCondition("AValidCondition1");
 
         assertTrue(collectionsServiceImpl.updateCondition(condition));
     }
 
     @Test
-    public void testUpdateConditionValidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
+    public void testUpdateConditionInvalidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
         Condition condition = new Condition();
         condition.setCondition(null);
         condition.setId(4);

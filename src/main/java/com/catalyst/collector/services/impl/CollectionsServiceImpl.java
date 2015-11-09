@@ -143,6 +143,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
+        if (keyword.getKeyword() == null)
+            return false;
 		if (collectionValidation.isKeywordValid(keyword)){
 			collectionsDao.addKeyword(keyword);
 			return true;
@@ -191,6 +193,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateCondition(Condition condition) {
+        if (condition.getCondition() == null)
+            return false;
 		if (collectionValidation.isConditionValid(condition)) {
 			collectionsDao.addCondition(condition);
 			return true;
