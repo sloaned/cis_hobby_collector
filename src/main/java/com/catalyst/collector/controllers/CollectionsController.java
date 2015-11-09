@@ -38,7 +38,7 @@ public class CollectionsController {
 		collectionsService.removeCollectible(id.intValue());
 	}
 
-	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.PUT)
 	public void updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
 		c.setCatalogueNumber(id);
 		collectionsService.updateCollectible(c);

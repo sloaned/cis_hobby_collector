@@ -108,7 +108,6 @@ public class CollectionsDaoHibernateTest {
 		assertTrue(result);
 	}
 
-
 	@Test(expected=Exception.class)
 	public void sadPathAddColorTest_noColor(){
 		Color c = new Color();
