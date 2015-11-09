@@ -6,10 +6,31 @@ import java.util.List;
 import com.catalyst.collector.entities.*;
 
 public interface CollectionsDao {
-	
+	/**
+	 * Adds a color to the dataBase
+	 * @param addedColor The color being added to the db MUST NOT HAVE ID SET
+	 * @return true if success false otherwise
+     */
 	boolean addColor(Color addedColor);
+
+	/**
+	 * get a color associated with the given id
+	 * @param colorId an id to a color in the database
+	 * @return The Color Object
+     */
 	Color getColor(int colorId);
+
+	/**
+	 * Removes a color from the database
+	 * @param id the id of the color to remove
+	 * @return false if the color could not be removed true otherwise
+     */
 	boolean removeColor(int id);
+
+	/**
+	 * get
+	 * @return
+     */
 	List<Color> getColorList();
 	boolean updateColor(Color c);
 
