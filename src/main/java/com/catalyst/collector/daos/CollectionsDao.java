@@ -51,7 +51,7 @@ public interface CollectionsDao {
 	 */
 	boolean deleteCategory(int id);
     ArrayList<Keyword> getAllKeywords();
-    ArrayList<Keyword> getKeywordsByLetter(char letter);
+    ArrayList<Keyword> getKeywordsByLetter(String letter);
     void addKeyword(Keyword keyword);
     void updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);

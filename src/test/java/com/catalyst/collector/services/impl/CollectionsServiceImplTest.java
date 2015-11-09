@@ -146,7 +146,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathAddCategoryNameIsNull(){
 		Category sample = new Category();
-
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}	
@@ -155,7 +155,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryNameIsBlank(){
 		Category sample = new Category();
 		sample.setCategory("  ");
-
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}	
@@ -163,6 +163,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
 		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -171,6 +172,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
 		sample.setCategory("Comi&s");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -179,6 +181,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
 		sample.setCategory("two words");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -187,6 +190,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryIdIsLessThan1(){
 		Category sample = new Category();
 		sample.setId(0);
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -205,6 +209,8 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameIsNull(){
 		Category sample = new Category();
 		sample.setId(1);
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
@@ -214,6 +220,8 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setId(1);
 		sample.setCategory("  ");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -223,6 +231,8 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setId(1);
 		sample.setCategory("Comi&s");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -232,6 +242,8 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setId(0);
 		sample.setCategory("Flavors");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
@@ -240,6 +252,8 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
 		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -248,6 +262,8 @@ public class CollectionsServiceImplTest {
 	public void SadPathUpdateCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
 		sample.setCategory("two words");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -261,6 +277,7 @@ public class CollectionsServiceImplTest {
 	
 	@Test
 	public void SadPathDeleteCategoryIdLessThanOne(){	
+		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertFalse(result);
 	}
@@ -493,8 +510,8 @@ public class CollectionsServiceImplTest {
     @Test
     public void testGetKeywordsByLetter() throws Exception {
         ArrayList<Keyword> expected = new ArrayList<>();
-        when(mockCollectionsDao.getKeywordsByLetter('c')).thenReturn(expected);
-        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter('c');
+        when(mockCollectionsDao.getKeywordsByLetter("c")).thenReturn(expected);
+        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter("c");
         assertEquals(expected, actual);
     }
 

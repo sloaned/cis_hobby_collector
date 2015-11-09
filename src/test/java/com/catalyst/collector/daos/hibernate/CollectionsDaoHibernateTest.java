@@ -168,7 +168,7 @@ public class CollectionsDaoHibernateTest {
         when(mockTypedQuery.setParameter(anyString(), anyChar())).thenReturn(mockTypedQuery);
         when(mockTypedQuery.getResultList()).thenReturn(testList);
         collectionsDaoHibernate.setEm(mockEm);
-        ArrayList<Keyword> result = collectionsDaoHibernate.getKeywordsByLetter('c');
+        ArrayList<Keyword> result = collectionsDaoHibernate.getKeywordsByLetter("c");
         assertEquals(testList, result);
     }
 

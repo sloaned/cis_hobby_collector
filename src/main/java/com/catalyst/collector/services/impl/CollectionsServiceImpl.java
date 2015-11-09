@@ -87,7 +87,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 		{
 			return false;
 		}
-		if(category.getCategory().matches("\\s") || (category.getCategory()).length() > 255 || category.getId()<1)
+		if(category.getCategory().matches("\\s") 
+				|| (category.getCategory()).length() > 255 
+					|| category.getId()<1)
 		{
 			return false;
 		}
@@ -148,7 +150,7 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
     @Override
-    public ArrayList<Keyword> getKeywordsByLetter(char letter){
+    public ArrayList<Keyword> getKeywordsByLetter(String letter){
     	return collectionsDao.getKeywordsByLetter(letter);
     }
 

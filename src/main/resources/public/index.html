@@ -6,6 +6,7 @@
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/handlebars-v4.0.4.js"></script>
 		<script src="js/bootstrap.js"></script>
+		<script src="js/typeahead.bundle.js"></script>
 		<script src="js/index.js"></script>
 		<script src="js/addCollectible.js"></script>
 		<script src="js/FormValidation.js"></script>
@@ -69,7 +70,7 @@
 						<div class="input-group">
 							<input id="inputType" type="text" class="form-control" aria-label="...">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="typeDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -85,7 +86,7 @@
 						<div class="input-group">
 							<input id="inputColor" type="text" class="form-control" aria-label="...">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="colorDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -101,7 +102,7 @@
 						<div class="input-group">
 							<input id="inputCondition" type="text" class="form-control" aria-label="...">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="conditionSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="conditionDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -117,7 +118,7 @@
 						<div class="input-group">
 							<input id="inputAge" type="text" class="form-control" aria-label="...">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="ageSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="ageDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -139,15 +140,16 @@
 					<div class="form-group">
 						<label for="inputKeywords">keywords</label>
 						<div id="keywords">
-
-							<input id="inputKeywords" class="form-control" type="text" placeholder="Add a keyword" />
+							<div id="remote">
+								<input id="inputKeywords" class="form-control typeahead" type="text" placeholder="Add a keyword" autocomplete="off">
+							</div>
 						</div>
 
 					</div>
 					<div class="form-group">
 						<label for="inputSoldStatus">Sold Status</label>
-						<div class="btn-group">
-							<button id="inputSoldStatus" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<div id="inputSoldStatus" class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Select <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
