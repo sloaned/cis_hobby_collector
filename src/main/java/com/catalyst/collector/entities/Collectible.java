@@ -22,28 +22,23 @@ public class Collectible {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn()
-    @Column(nullable = false)
     private Age age;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
-    @Column(nullable = false)
     private Category category;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
-    @Column(nullable = false)
     private Condition condition;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "color")
-    @Column(nullable = false)
     private Color color;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
-    @Column(nullable = false)
     private Set<Keyword> keywords;
 
     @Column(nullable = false)
