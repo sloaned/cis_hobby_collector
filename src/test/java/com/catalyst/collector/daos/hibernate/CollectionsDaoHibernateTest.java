@@ -145,8 +145,6 @@ public class CollectionsDaoHibernateTest {
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(5));
 	}
 
-
-
     @Test
     public void testGetAllKeywordsHappyPathMakesADBCall() throws Exception {
         ArrayList<Keyword> testList = new ArrayList<>();

@@ -1,19 +1,14 @@
 package com.catalyst.collector.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Entity
 public class Keyword {
-
-    private static final String regex = "[^a-zA-Z\\d]";
-    private static final Pattern pattern = Pattern.compile(regex);
-    @Transient
-    private Matcher matcher;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,14 +30,6 @@ public class Keyword {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
-    }
-
-    public boolean isValid() {
-        if (keyword == null)
-            return false;
-        matcher = pattern.matcher(keyword);
-        return !keyword.equals("") && keyword.length() < 256 && !matcher.find();
-
     }
 
     @Override
