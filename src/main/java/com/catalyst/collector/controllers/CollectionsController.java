@@ -68,7 +68,8 @@ public class CollectionsController {
 	@RequestMapping(value="/collectible", method=RequestMethod.POST)
 	public void addCollectible(@RequestBody Collectible collectible){
 
-		System.out.println(collectible);collectionsService.addCollectible(collectible);
+		System.out.println(collectible);
+		collectionsService.addCollectible(collectible);
 	}
 
 	@RequestMapping(value="/collectible", method=RequestMethod.PUT)

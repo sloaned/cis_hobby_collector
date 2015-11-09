@@ -152,7 +152,7 @@ public interface CollectionsService {
 	boolean addCollectible(Collectible collectible);
 
 	/**
-	 * update an exsisting {@link Collectible} in the {@link com.catalyst.collector.daos.CollectionsDao}
+	 * update an existing {@link Collectible} in the {@link com.catalyst.collector.daos.CollectionsDao}
 	 * @param collectible the {@link Collectible} to be added
      */
 	void updateCollectible(Collectible collectible);
