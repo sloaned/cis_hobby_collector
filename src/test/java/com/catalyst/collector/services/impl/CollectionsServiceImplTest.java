@@ -3,22 +3,31 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+
+import com.catalyst.collector.services.CollectionValidation;
 import org.junit.Before;
 import com.catalyst.collector.entities.*;
+import com.catalyst.collector.services.CollectionValidation;
+
 import org.junit.Test;
 import com.catalyst.collector.daos.hibernate.CollectionsDaoHibernate;
 
 
 public class CollectionsServiceImplTest {
 
-    CollectionsServiceImpl collectionsServiceImpl = new CollectionsServiceImpl();
-    CollectionsDaoHibernate mockCollectionsDao = mock(CollectionsDaoHibernate.class);
+    CollectionsServiceImpl collectionsServiceImpl;
+    CollectionsDaoHibernate mockCollectionsDao;
+    CollectionValidation collectionValidation;
+  
 
     @Before
     public void setup() {
         collectionsServiceImpl = new CollectionsServiceImpl();
         mockCollectionsDao = mock(CollectionsDaoHibernate.class);
         collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+        collectionValidation = new CollectionValidation();  
+
+        collectionsServiceImpl.setCollectionValidation(collectionValidation);
     }
 
 
@@ -26,7 +35,6 @@ public class CollectionsServiceImplTest {
 	public void testGetColor() {
 		Color sample = new Color();
 		when(mockCollectionsDao.getColor(1)).thenReturn(sample);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		Color result = mockCollectionsDao.getColor(1);
 		assertEquals(sample, result);
 	}
@@ -35,8 +43,6 @@ public class CollectionsServiceImplTest {
 		Color sample = new Color();
 		sample.setColor("rojo");
 		when(mockCollectionsDao.addColor(sample)).thenReturn(true);
-
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addColor(sample);
 		assertTrue(result);
 	}
@@ -45,7 +51,6 @@ public class CollectionsServiceImplTest {
 
 		Color sample = new Color();
 
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addColor(sample);
 		assertFalse(result);
 	}
@@ -54,7 +59,6 @@ public class CollectionsServiceImplTest {
 		Color sample = new Color();
 		sample.setColor("  ");
 
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addColor(sample);
 		assertFalse(result);
 	}
@@ -63,7 +67,6 @@ public class CollectionsServiceImplTest {
 		Color sample = new Color();
 		sample.setColor("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addColor(sample);
 		assertFalse(result);
 	}
@@ -72,7 +75,6 @@ public class CollectionsServiceImplTest {
 		Color sample = new Color();
 		when(mockCollectionsDao.addColor(sample)).thenReturn(false);
 
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addColor(sample);
 		assertFalse(result);
 	}
@@ -82,7 +84,6 @@ public class CollectionsServiceImplTest {
 		sample.setId(1);
 		sample.setColor("verde");
 		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateColor(sample);
 		assertTrue(result);
 	}
@@ -91,7 +92,6 @@ public class CollectionsServiceImplTest {
 		Color sample = new Color();
 		sample.setId(1);
 		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateColor(sample);
 		assertFalse(result);
 	}
@@ -101,7 +101,6 @@ public class CollectionsServiceImplTest {
 		sample.setId(1);
 		sample.setColor("    ");
 		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateColor(sample);
 		assertFalse(result);
 	}
@@ -111,7 +110,6 @@ public class CollectionsServiceImplTest {
 		sample.setId(1);
 		sample.setColor("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
 		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.updateColor(sample);
 		assertFalse(result);
 	}
@@ -119,11 +117,10 @@ public class CollectionsServiceImplTest {
 	public void testRemoveColor(){
 		when(mockCollectionsDao.removeColor(0)).thenReturn(true);
 
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.removeColor(0);
 		assertTrue(result);
 	}
-	
+
 	/*
 	 * CATEGORY TESTS
 	 */
@@ -132,7 +129,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Category> sample = new ArrayList<Category>();
 		when(mockCollectionsDao.getCategory()).thenReturn(sample);
 		ArrayList<Category> result = collectionsServiceImpl.getCategory();
-		assertEquals(sample, result);			
+		assertEquals(sample, result);
 	}
 	@Test
 	public void HappyPathAddCategory(){
@@ -142,14 +139,14 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameIsNull(){
 		Category sample = new Category();
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}	
+	}
 
 	@Test
 	public void SadPathAddCategoryNameIsBlank(){
@@ -158,7 +155,7 @@ public class CollectionsServiceImplTest {
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}	
+	}
 	@Test
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
@@ -167,7 +164,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
@@ -176,7 +173,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathAddCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
@@ -204,7 +201,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameIsNull(){
 		Category sample = new Category();
@@ -214,7 +211,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameIsBlank(){
 		Category sample = new Category();
@@ -238,17 +235,6 @@ public class CollectionsServiceImplTest {
 	}
 
 	@Test
-	public void SadPathUpdateCategoryIdLessThanOne(){
-		Category sample = new Category();
-		sample.setId(0);
-		sample.setCategory("Flavors");
-		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
-
-		boolean result = collectionsServiceImpl.updateCategory(0, sample);
-		assertFalse(result);
-	}
-	
-	@Test
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
 		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
@@ -257,7 +243,7 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void SadPathUpdateCategoryNameContainsMultipleWords(){
 		Category sample = new Category();
@@ -267,16 +253,16 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
-	
+
 	@Test
 	public void happyPathDeleteCategory(){
 		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
 		boolean result = collectionsServiceImpl.deleteCategory(1);
 		assertTrue(result);
 	}
-	
+
 	@Test
-	public void SadPathDeleteCategoryIdLessThanOne(){	
+	public void SadPathDeleteCategoryIdLessThanOne(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
 		boolean result = collectionsServiceImpl.deleteCategory(0);
 		assertFalse(result);
@@ -294,7 +280,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Age> result = collectionsServiceImpl.getAgeTypes();
 		assertEquals(sample, result);
 	}
-	
+
 
 	@Test
 	public void happyPathAddAge(){
@@ -304,6 +290,16 @@ public class CollectionsServiceImplTest {
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
 		verify(mockCollectionsDao, times(1)).addAge(age);
+	}
+
+	@Test
+	public void sadPathAddAgeWithNonLetter(){
+		Age age = new Age();
+		age.setId(1);
+		age.setAge("Antique_");
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		collectionsServiceImpl.addAge(age);
+		verify(mockCollectionsDao, times(0)).addAge(age);
 	}
 
 	@Test
@@ -329,7 +325,6 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddNullAge(){
 		Age age = new Age();
-		age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -370,7 +365,7 @@ public class CollectionsServiceImplTest {
 	public void happyPathUpdateAge(){
 		Age age = new Age();
 		age.setId(1);
-		age.setAge("A good age");
+		age.setAge("Agoodage");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
 		verify(mockCollectionsDao, times(1)).updateAge(age);
@@ -436,7 +431,7 @@ public class CollectionsServiceImplTest {
 		collectionsServiceImpl.updateAge(age);
 		verify(mockCollectionsDao, times(0)).updateAge(age);
 	}
-	
+
 	@Test
 	public void happyPathDeleteAge(){
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -451,15 +446,6 @@ public class CollectionsServiceImplTest {
 		verify(mockCollectionsDao, times(0)).deleteAge(0);
 	}
 
-
-
-	@Test
-	public void HappyPathCreateCollectible(){
-		Collectible c = new Collectible();
-		boolean result = collectionsServiceImpl.addCollectible(c);
-		assertTrue(result);
-	}
-	
 	@Test
 	public void SadPathDeleteCategoryIdIsLessThan1(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
@@ -556,6 +542,171 @@ public class CollectionsServiceImplTest {
 
     @Test
     public void testRemoveKeywordSadPath() throws Exception {
+        collectionsServiceImpl.removeKeyword(-1);
+        verify(mockCollectionsDao, times(0)).removeKeyword(-1);
+    }
+
+    @Test
+    public void testGetAllConditions() throws Exception {
+        ArrayList<Condition> expected = new ArrayList<>();
+        when(mockCollectionsDao.getAllConditions()).thenReturn(expected);
+        ArrayList<Condition> actual = collectionsServiceImpl.getAllConditions();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddConditionValidConditionWithValidConditionString() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AValidCondition1");
+
+        assertTrue(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionValidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition(null);
+        condition.setId(4);
+
+        assertTrue(collectionsServiceImpl.addCondition(condition));
+    }
+    @Test
+    public void testAddConditionInvalidConditionLengthTooLong() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionIsNull() throws Exception {
+        Condition condition = null;
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionStringIsNullAndIdIsNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setId(null);
+        condition.setCondition(null);
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionTheConditionStringIsEmpty() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingSymbols() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AInvalid+condition");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingASpace() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalid condition");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+    @Test
+    public void testAddConditionInvalidConditionWithConditionStringContainingANonAsciiCharacter() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalidconditionwith\u2202");
+
+        assertFalse(collectionsServiceImpl.addCondition(condition));
+    }
+
+
+    //updates
+    @Test
+    public void testUpdateConditionValidConditionWithValidConditionString() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AValidCondition1");
+
+        assertTrue(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionValidConditionTheConditionStringIsNullButIdIsNotNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition(null);
+        condition.setId(4);
+
+        assertTrue(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionLengthTooLong() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionIsNull() throws Exception {
+        Condition condition = null;
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionStringIsNullAndIdIsNull() throws Exception {
+        Condition condition = new Condition();
+        condition.setId(null);
+        condition.setCondition(null);
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionTheConditionStringIsEmpty() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingSymbols() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("AInvalid+condition");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingASpace() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalid condition");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testUpdateConditionInvalidConditionWithConditionStringContainingANonAsciiCharacter() throws Exception {
+        Condition condition = new Condition();
+        condition.setCondition("Ainvalidconditionwith\u2202");
+
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
+    }
+
+    @Test
+    public void testDeleteConditionHappyPath() throws Exception {
+        collectionsServiceImpl.removeKeyword(3);
+        verify(mockCollectionsDao, times(1)).removeKeyword(3);
+    }
+
+    @Test
+    public void testDeleteConditionSadPath() {
         collectionsServiceImpl.removeKeyword(-1);
         verify(mockCollectionsDao, times(0)).removeKeyword(-1);
     }

@@ -81,7 +81,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 			String cat = category.getCategory();
 			cat.toLowerCase();
 			category.setCategory(cat);
-			return collectionsDao.addCategory(category);
+			return collectionsDao.updateCategory(category);
 		}
 		return false;
 	}
@@ -120,7 +120,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateColor(Color c){
 		if (collectionValidation.isColorValid(c))
-			return collectionsDao.addColor(c);
+			return collectionsDao.updateColor(c);
 		return false;
 	}
 	public Color getColor(int id){
@@ -206,6 +206,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public void deleteCondition(Integer id) {
+        if (id < 0)
+            return;
         collectionsDao.deleteCondition(id);
     }
 

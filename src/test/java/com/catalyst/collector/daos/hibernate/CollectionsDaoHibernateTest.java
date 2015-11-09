@@ -86,6 +86,7 @@ public class CollectionsDaoHibernateTest {
 		target.getByCategoryId(0);
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(0));
 	}
+
 	@Test
 	public void happyPathDeleteCategory(){
 		Category sample = new Category();
