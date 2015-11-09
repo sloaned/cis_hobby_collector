@@ -511,8 +511,8 @@ public class CollectionsServiceImplTest {
     @Test
     public void testGetKeywordsByLetter() throws Exception {
         ArrayList<Keyword> expected = new ArrayList<>();
-        when(mockCollectionsDao.getKeywordsByLetter('c')).thenReturn(expected);
-        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter('c');
+        when(mockCollectionsDao.getKeywordsByLetter("c")).thenReturn(expected);
+        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter("c");
         assertEquals(expected, actual);
     }
 
