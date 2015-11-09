@@ -34,7 +34,7 @@ public class Color {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {
