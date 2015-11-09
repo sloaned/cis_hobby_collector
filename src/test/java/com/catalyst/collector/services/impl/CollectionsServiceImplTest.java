@@ -470,6 +470,13 @@ public class CollectionsServiceImplTest {
         assertFalse(collectionsServiceImpl.addKeyword(keyword));
     }
 
+	@Test
+	public void sadAddANullKeyword(){
+		Keyword keyword = new Keyword();
+		keyword.setKeyword("");
+		assertFalse(collectionsServiceImpl.addKeyword(keyword));
+	}
+
     @Test
     public void testAddAInvalidKeywordWithStringLengthTooLong() {
         Keyword keyword = new Keyword();
