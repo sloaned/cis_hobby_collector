@@ -293,6 +293,16 @@ public class CollectionsServiceImplTest {
 	}
 
 	@Test
+	public void sadPathAddAgeWithNonLetter(){
+		Age age = new Age();
+		age.setId(1);
+		age.setAge("Antique_");
+		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
+		collectionsServiceImpl.addAge(age);
+		verify(mockCollectionsDao, times(0)).addAge(age);
+	}
+
+	@Test
 	public void sadPathAddAgeWithOnlyANumber(){
 		Age age = new Age();
 		age.setId(1);
@@ -315,7 +325,6 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddNullAge(){
 		Age age = new Age();
-		age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);

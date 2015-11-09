@@ -53,8 +53,11 @@ public class CollectionValidation {
         return isAgeValid(collectible.getAge());
     }
 
-    static public boolean isAgeValid(Age age){
-        return (age != null && age.getAge() != null && age.getAge().length() <= 255 && age.getAge().matches("^[a-zA-Z]*$") && !age.getAge().matches(".*\\d.*") && !age.getAge().trim().equals(""));
+
+    public boolean isAgeValid(Age age){
+        if(age == null){return false;}
+        if(age.getAge() == null){return age.getId()!= null;}
+        return (age.getAge().length() <= 255 && !age.getAge().matches(".*[\\d\\W_].*") && !age.getAge().trim().equals(""));
          //Maximum of 255 characters for an age, no digits allowed
 
         }

@@ -46,7 +46,7 @@ public class Age {
     }
 
     public Integer getId() {
-        return id.intValue();
+        return id;
     }
 
     public void setId(Integer age_id) {
