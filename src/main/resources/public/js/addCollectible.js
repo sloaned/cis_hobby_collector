@@ -75,23 +75,36 @@ $(document).ready(function(){
 
     $("#submitAdd").click(function(){
         var isValid = true; // Set to true for testing. TODO: Change to false for production.
+        var color = {};
+        color.color = $("#inputColor").val().toLowerCase();
+        var age = {};
+        age.age = $("#inputAge").val().toLowerCase();
+        var category = {};
+        category.category = $("#inputType").val().toLowerCase();
+        var condition = {};
+        condition.condition = $("#inputCondition").val().toLowerCase();
+
         var collectible = {};
-        collectible.name = $("inputName").val().toLowerCase();
-        collectible.age = $("inputAge").val().toLowerCase();
-        collectible.description = $("inputDescription").val().toLowerCase();
-        collectible.category = $("inputCategory").val().toLowerCase();
-        collectible.condition = $("inputCondition").val().toLowerCase();
-        collectible.color = $("inputColor").val().toLowerCase();
+        collectible.name = $("#inputName").val().toLowerCase();
+        collectible.age = age;
+        collectible.description = $("#inputDescription").val().toLowerCase();
+        collectible.category = category;
+        collectible.condition = condition;
+        collectible.color = color;
         collectible.keywords = iCanHazKeywords();
-        collectible.sold = $("inputSoldstatus").find("button").text().toLowerCase().trim();
+        collectible.sold = $("#inputSoldstatus").find("button").text().toLowerCase().trim();
+        collectible.catalogueNumber = $("#inputCatalogNumber").val();
+
+        console.log(collectible);
         if (isValid){
             $.ajax({
-                url: '/collectibles',
+                url: '/collectible',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(collectible)
             }).then(function(){
                 console.log("Post successful")
+                location.reload(true);
             }, function(error){
                 console.log(error);
             });
@@ -139,7 +152,7 @@ function keywords () {
     $('#keywords input').on('focusout',function(){
         var txt= this.value.replace(/[^\w]/g,'');
         if(txt) {
-            $(this).before('<span class="keywords">'+ txt +'</span>');
+            $(this).parent().before('<span class="keyword">'+ txt +'</span>');
         }
         this.value="";
     }).on('keyup',function(e){
@@ -154,8 +167,8 @@ function keywords () {
 
 function iCanHazKeywords(){
     var keywords = [];
-    $("#keywords").find("span").each(function(){
-        keywords.add({"keyword": $(this).text().toLowerCase()});
+    $(".keyword").each(function(){
+        keywords.push({"keyword": $(this).text().toLowerCase()});
     });
     return keywords;
 }

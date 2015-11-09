@@ -9,7 +9,7 @@
 		<script src="js/typeahead.bundle.js"></script>
 		<script src="js/index.js"></script>
 		<script src="js/addCollectible.js"></script>
-		<script src="js/FormValidation.js"></script>
+		<script src="js/formValidation.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
@@ -30,7 +30,6 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li id="addCollectibleButton"><a>Add Collectible</a></li>
-						<li id="editCollectibleButton"><a>Edit Collectible</a></li>
 					</ul>
 					<div class="navbar-form navbar-right" role="search">
 						<div class="form-group">
@@ -54,6 +53,7 @@
 						<th>Keywords</th>
 						<th>Sold Status</th>
 						<th>Catalog Number</th>
+						<th></th>
 					</thead>
 					<tbody>
 					</tbody>
@@ -74,7 +74,7 @@
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="typeDropdown" type="text/x-handlebars-template">
 										{{#each this}}
-											<li><a>{{name}}</a></li>
+											<li><a>{{category}}</a></li>
 										{{/each}}
 									</script>
 								</ul>
@@ -130,12 +130,16 @@
 						</div><!-- /input-group -->
 					</div>
 					<div class="form-group">
-						<label for="inputDescription">Description</label> <br>
+						<label for="inputDescription">Description</label>
 						<textarea class="form-control" id="inputDescription" placeholder="Description" rows="5"></textarea>
 					</div>
 					<div class="form-group">
-						<label for="inputName">Name</label> <br>
+						<label for="inputName">Name</label>
 						<input type="text" class="form-control" id="inputName" placeholder="Name">
+					</div>
+					<div class="form-group">
+						<label for="inputCatalogNumber">Catalog Number</label>
+						<input type="text" class="form-control" id="inputCatalogNumber" placeholder="XXX-123456789012">
 					</div>
 					<div class="form-group">
 						<label for="inputKeywords">keywords</label>

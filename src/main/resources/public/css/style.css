@@ -54,7 +54,7 @@ a:hover {
     font-family:Arial;
     border-radius: 5px;
 }
-#keywords span.keywords{
+#keywords span.keyword{
     cursor:pointer;
     display:block;
     float:left;
@@ -65,10 +65,10 @@ a:hover {
     margin: 4px;
     border-radius: 5px;
 }
-#keywords span.keywords:hover{
+#keywords span.keyword:hover{
     opacity: 0.7;
 }
-#keywords span.keywords:after{
+#keywords span.keyword:after{
     position:absolute;
     content:"x";
     border:1px solid;
@@ -127,4 +127,8 @@ a:hover {
 
 .tt-suggestion p {
     margin: 0;
+}
+
+.error {
+    border-color: red;
 }
