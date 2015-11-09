@@ -31,17 +31,19 @@ public class CollectionsController {
 
 	@RequestMapping(value="/collectible/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Collectible> getCollectible(@PathVariable Integer id) {
-		return new ResponseEntity<>(collectionsService.getCollectible(id.intValue()), HttpStatus.OK);
+		return new ResponseEntity<>(collectionsService.getCollectible(id), HttpStatus.OK);
 	}
 	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
 	public void removeCollectible(@PathVariable Integer id) {
-		collectionsService.removeCollectible(id.intValue());
+		collectionsService.removeCollectible(id);
 	}
 
 	@RequestMapping(value="/collectible/{id}", method=RequestMethod.PUT)
-	public void updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
+	public ResponseEntity<Collectible> updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
 		c.setCatalogueNumber(id);
-		collectionsService.updateCollectible(c);
+		if (collectionsService.updateCollectible(c))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(c, HttpStatus.OK);
 	}
 
 	@RequestMapping(value="/collectibles", method=RequestMethod.GET)
@@ -49,6 +51,13 @@ public class CollectionsController {
 		return collectionsService.getCollectibles();
 	}
 
+    @RequestMapping(value="/collectible", method=RequestMethod.POST)
+    public ResponseEntity<Collectible> addCollectible(@RequestBody Collectible collectible){
+        System.out.println(collectible);
+        if (collectionsService.addCollectible(collectible))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(collectible, HttpStatus.OK);
+    }
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -63,18 +72,9 @@ public class CollectionsController {
 
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
 	public void deleteAge(@PathVariable Integer id){
-		collectionsService.deleteAge(id);}
-	
-	@RequestMapping(value="/collectible", method=RequestMethod.POST)
-	public void addCollectible(@RequestBody Collectible collectible){
+		collectionsService.deleteAge(id);
+    }
 
-		System.out.println(collectible);collectionsService.addCollectible(collectible);
-	}
-
-	@RequestMapping(value="/collectible", method=RequestMethod.PUT)
-	public void updateCollectible(@RequestBody Collectible collectible){
-		collectionsService.updateCollectible(collectible);
-	}
 
 	@RequestMapping(value="/category", method=RequestMethod.GET)
 	public ArrayList<Category> getCategory(){

@@ -178,11 +178,13 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 
 	@Override
-	public void updateCollectible(Collectible collectible) {
+	public boolean updateCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
-		if(collectionValidation.isCollectibleValid())
-			collectionsDao.addCollectible(collectible);
-
+		if(collectionValidation.isCollectibleValid()) {
+            collectionsDao.addCollectible(collectible);
+            return true;
+        }
+        return false;
 	}
 
     @Override
