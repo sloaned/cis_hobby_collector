@@ -2,11 +2,11 @@ package com.catalyst.collector.services;
 
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Service;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
-/**
- * Created by gstringfellow on 11/6/2015.
- */
+
 @Service
 public class CollectionValidation {
 
@@ -19,10 +19,14 @@ public class CollectionValidation {
     }
 
     private Collectible collectible;
+    private static final String keywordRegex = "[^a-zA-Z\\d]";
+    private static final Pattern keywordPattern = Pattern.compile(keywordRegex);
+    private Matcher matcher;
+
     public CollectionValidation() {}
 
     public boolean isCollectibleValid(){
-        return isAgeValid() && isColorValid() && isKeywordValid() && isConditionValid() && isCategoryValid();
+        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid();
     }
 
     private boolean isCategoryValid() {
@@ -33,7 +37,7 @@ public class CollectionValidation {
         return isConditionValid(collectible.getCondition());
     }
 
-    private boolean isKeywordValid() {
+    private boolean isKeywordsValid() {
         for (Keyword k: collectible.getKeywords()) {
             if(!isKeywordValid(k))
                 return false;
@@ -68,12 +72,22 @@ public class CollectionValidation {
     }
 
     public boolean isKeywordValid(Keyword keyword){
-        return !(keyword == null || keyword.getKeyword() == null || keyword.getKeyword().equals("") || keyword.getKeyword().length() > 255
-                    && keyword.getId() == null);
+        if (keyword == null)
+            return false;
+        if (keyword.getKeyword() == null)
+            return keyword.getId() != null;
+
+        matcher = keywordPattern.matcher(keyword.getKeyword());
+        return !keyword.getKeyword().equals("") && keyword.getKeyword().length() < 256 && !matcher.find();
     }
 
     public boolean isConditionValid(Condition condition){
-        return !(condition == null || condition.getCondition() != null || condition.getCondition().equals("") || condition.getCondition().length() > 255
-                    && condition.getId() == null);
+        if (condition == null)
+            return false;
+        if (condition.getCondition() == null)
+            return condition.getId() != null;
+
+        matcher = keywordPattern.matcher(condition.getCondition());
+        return !condition.getCondition().equals("") && condition.getCondition().length() < 256 && !matcher.find();
     }
 }
