@@ -659,7 +659,7 @@ public class CollectionsServiceImplTest {
         condition.setCondition(null);
         condition.setId(4);
 
-        assertFalse(collectionsServiceImpl.updateCondition(condition));
+        assertTrue(collectionsServiceImpl.updateCondition(condition));
     }
 
     @Test
@@ -673,7 +673,7 @@ public class CollectionsServiceImplTest {
     @Test
     public void testUpdateConditionInvalidConditionTheConditionIsNull() throws Exception {
         Condition condition = null;
-        assertTrue(collectionsServiceImpl.updateCondition(condition));
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
     }
 
     @Test
