@@ -11,12 +11,20 @@ $(document).ready(function(){
 });
 
 function addDataToRow(collectible){
-	var row = "<tr><td>" + collectible.category + "</td><td>"
-			+ collectible.color + "</td><td>" + collectible.condition + "</td><td>"
-			+ collectible.age + "</td><td>" + collectible.description + "</td><td>"
-			+ collectible.name + "</td><td>" + collectible.keywords + "</td><td>"
-			+ collectible.sold + "</td><td>" + collectible.catalogueNumber + "</td><td>"
-			+ "<button class='editButtin btn btn-default'>Edit</button>" + "</td></tr>";
+	var row = "<tr><td>" + capitalizeWord(collectible.category.category) + "</td><td>"
+			+ capitalizeWord(collectible.color.color) + "</td><td>" + capitalizeWord(collectible.condition.condition) + "</td><td>"
+			+ capitalizeWord(collectible.age.age) + "</td><td>" + capitalizeWord(collectible.description) + "</td><td>"
+			+ capitalizeWord(collectible.name) + "</td><td>";
+	for (var i = 0; i < collectible.keywords.length; i++) {
+		if (i === collectible.keywords.length - 1)
+			row += capitalizeWord(collectible.keywords[i].keyword);
+		else
+			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
+	}
+
+	row += "</td><td>"
+			+ capitalizeWord(collectible.sold.toString()) + "</td><td>" + collectible.catalogueNumber + "</td><td>"
+			+ "<!--<button class='editButton btn btn-default'>Edit</button>-->" + "</td></tr>";
 
 	$("tbody").append(row);
 }
