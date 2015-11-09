@@ -10,6 +10,7 @@ public class Keyword {
 
     private static final String regex = "[^a-zA-Z\\d]";
     private static final Pattern pattern = Pattern.compile(regex);
+    @Transient
     private Matcher matcher;
 
 
