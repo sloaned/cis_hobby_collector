@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 public class Collectible {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
 
