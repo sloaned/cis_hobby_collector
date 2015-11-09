@@ -6,7 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
+/**
+ * Validation class for all entities
+ */
 @Service
 public class CollectionValidation {
 
