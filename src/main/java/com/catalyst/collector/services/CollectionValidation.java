@@ -3,17 +3,22 @@ package com.catalyst.collector.services;
 import com.catalyst.collector.entities.Collectible;
 import com.catalyst.collector.entities.Keyword;
 
-/**
- * Created by gstringfellow on 11/6/2015.
- */
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
 public class CollectionValidation {
 
     private Collectible collectible;
+    private static final String keywordRegex = "[^a-zA-Z\\d]";
+    private static final Pattern keywordPattern = Pattern.compile(keywordRegex);
+    private Matcher matcher;
+
     public CollectionValidation(Collectible c) {
         collectible = c;
     }
     public boolean isCollectibleValid(){
-        return isAgeValid() && isColorValid() && isKeywordValid() && isConditionValid() && isCategoryValid();
+        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid();
     }
 
     private boolean isCategoryValid() {
@@ -24,7 +29,7 @@ public class CollectionValidation {
         return isConditionValid(collectible.getCondition().getCondition());
     }
 
-    private boolean isKeywordValid() {
+    private boolean isKeywordsValid() {
         for (Keyword k: collectible.getKeywords()) {
             if(!isKeywordValid(k.getKeyword()))
                 return false;
@@ -55,8 +60,12 @@ public class CollectionValidation {
         return !(color == null || color.trim().equals("") || color.length() > 255);
     }
 
-    static public boolean isKeywordValid(String keyword){
-        return !(keyword == null || keyword.equals("") || keyword.length() > 255);
+    public boolean isKeywordValid(String keyword){
+        if (keyword == null)
+            return false;
+
+        matcher = keywordPattern.matcher(keywordRegex);
+        return !keyword.equals("") && keyword.length() < 256 && !matcher.find();
     }
 
     static public boolean isConditionValid(String condition){
