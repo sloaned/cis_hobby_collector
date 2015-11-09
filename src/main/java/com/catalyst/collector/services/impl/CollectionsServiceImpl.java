@@ -33,14 +33,12 @@ public class CollectionsServiceImpl implements CollectionsService {
 		}
 	}
 
-
 	@Override
 	public void updateAge(Age age){
 		String ageString = age.getAge();
 		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.updateAge(age);
 		}
-
 	}
 
 	@Override
@@ -52,12 +50,10 @@ public class CollectionsServiceImpl implements CollectionsService {
 		return false;
 	}
 
-
 	public ArrayList<Category> getCategory() {
 
 		return collectionsDao.getCategory();
 	}
-
 
 	@Override
 	public boolean addCategory(Category category) {
@@ -77,19 +73,15 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	}
 
-
 	@Override
 	public boolean updateCategory(int id, Category category) {
-
 		category.setId(id);
        
 		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || !category.getCategory().matches("^[a-zA-Z0-9]*$") )
 		{
 			return false;
 		}
-		if(category.getCategory().matches("\\s") 
-				|| (category.getCategory()).length() > 255 
-					|| category.getId()<1)
+		if(category.getCategory().matches("\\s") || (category.getCategory()).length() > 255 || category.getId()<1)
 		{
 			return false;
 		}
@@ -119,11 +111,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 		 }
 		collectionsDao.addColor(addedColor);
 		return true;
-		}
+	}
 	@Override
 	public boolean removeColor(int id) {
 		try{
-		collectionsDao.removeColor(id);
+			collectionsDao.removeColor(id);
 		}
 		catch(Exception e){
 			return false;
@@ -141,7 +133,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	public Color getColor(int id){
 		return collectionsDao.getColor(id);
-
 	}
 
     @Override
