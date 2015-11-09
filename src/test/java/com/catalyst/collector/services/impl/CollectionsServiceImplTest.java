@@ -235,17 +235,6 @@ public class CollectionsServiceImplTest {
 	}
 
 	@Test
-	public void SadPathUpdateCategoryIdLessThanOne(){
-		Category sample = new Category();
-		sample.setId(0);
-		sample.setCategory("Flavors");
-		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
-
-		boolean result = collectionsServiceImpl.updateCategory(0, sample);
-		assertFalse(result);
-	}
-
-	@Test
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
 		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
