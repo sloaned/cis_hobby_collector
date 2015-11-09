@@ -155,7 +155,7 @@ public interface CollectionsService {
 	 * update an exsisting {@link Collectible} in the {@link com.catalyst.collector.daos.CollectionsDao}
 	 * @param collectible the {@link Collectible} to be added
      */
-	void updateCollectible(Collectible collectible);
+	boolean updateCollectible(Collectible collectible);
 
 	/**
 	 * Calls the add Age method in the {@link com.catalyst.collector.daos.CollectionsDao}
