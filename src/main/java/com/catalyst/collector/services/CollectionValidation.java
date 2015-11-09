@@ -50,26 +50,25 @@ public class CollectionValidation {
     }
 
     static public boolean isAgeValid(Age age){
-        return (age != null && age.getAge() != null && age.getAge().length() <= 255 && !age.getAge().matches(".*\\d.*") && !age.getAge().trim().equals("")
-                    || age.getId() != null);
+        return (age != null && age.getAge() != null && age.getAge().length() <= 255 && age.getAge().matches("^[a-zA-Z]*$") && !age.getAge().matches(".*\\d.*") && !age.getAge().trim().equals(""));
          //Maximum of 255 characters for an age, no digits allowed
 
         }
 
     public boolean isCategoryValid(Category category){
-        return !(category == null || category.getCategory() == null ||category.getCategory().length() > 255 ||(category.getCategory().trim()).equals("")|| category.getCategory().matches(".*\\d.*")
-                    && category.getId() == null);
+        return !(category == null || category.getCategory() == null || category.getCategory().length() > 255 || (category.getCategory().trim()).equals("")
+        			|| !category.getCategory().matches("^[a-zA-Z0-9]*$") || category.getCategory().matches("\\s"));
     }
 
 
     public boolean isColorValid(Color color){
-        return !(color == null || color.getColor() == null|| color.getColor().trim().equals("") || color.getColor().length() > 255
-                    && color.getId() == null);
+        return !(color == null || color.getColor() == null || color.getColor().trim().equals("") || color.getColor().length() > 255
+                    || !color.getColor().matches("^[a-zA-Z0-9]*$") || color.getColor().matches("\\s"));
     }
 
     public boolean isKeywordValid(Keyword keyword){
         return !(keyword == null || keyword.getKeyword() == null || keyword.getKeyword().equals("") || keyword.getKeyword().length() > 255
-                    && keyword.getId() == null);
+                    || !keyword.getKeyword().matches("^[a-zA-Z0-9]*$") || keyword.getKeyword().matches("\\s"));
     }
 
     public boolean isConditionValid(Condition condition){
