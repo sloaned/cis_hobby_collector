@@ -71,16 +71,23 @@ public class CollectionValidation {
                     && color.getId() == null);
     }
 
-    public boolean isKeywordValid(String keyword){
+    public boolean isKeywordValid(Keyword keyword){
         if (keyword == null)
             return false;
+        if (keyword.getKeyword() == null)
+            return keyword.getId() != null;
 
-        matcher = keywordPattern.matcher(keywordRegex);
-        return !keyword.equals("") && keyword.length() < 256 && !matcher.find();
+        matcher = keywordPattern.matcher(keyword.getKeyword());
+        return !keyword.getKeyword().equals("") && keyword.getKeyword().length() < 256 && !matcher.find();
     }
 
     public boolean isConditionValid(Condition condition){
-        return !(condition == null || condition.getCondition() != null || condition.getCondition().equals("") || condition.getCondition().length() > 255
-                    && condition.getId() == null);
+        if (condition == null)
+            return false;
+        if (condition.getCondition() == null)
+            return condition.getId() != null;
+
+        matcher = keywordPattern.matcher(condition.getCondition());
+        return !condition.getCondition().equals("") && condition.getCondition().length() < 256 && !matcher.find();
     }
 }
