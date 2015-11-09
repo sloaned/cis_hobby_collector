@@ -1,4 +1,4 @@
-package catalyst.PageObjectFramework.Framework;
+package com.catalyst.collector.PageObjectFramework.Framework;
 
 import java.util.HashMap;
 import java.util.Map;

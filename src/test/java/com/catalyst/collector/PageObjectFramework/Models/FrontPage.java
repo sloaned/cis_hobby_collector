@@ -1,6 +1,6 @@
-package catalyst.PageObjectFramework.Models;
+package com.catalyst.collector.PageObjectFramework.Models;
 
-import catalyst.PageObjectFramework.Framework.PageObject;
+import com.catalyst.collector.PageObjectFramework.Framework.PageObject;
 import org.openqa.selenium.WebDriver;
 
 /**

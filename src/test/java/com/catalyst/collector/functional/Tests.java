@@ -1,7 +1,7 @@
 package com.catalyst.collector.functional;
 
-import catalyst.PageObjectFramework.Framework.PageObjectTest;
-import catalyst.PageObjectFramework.Models.FrontPage;
+import com.catalyst.collector.PageObjectFramework.Framework.PageObjectTest;
+import com.catalyst.collector.PageObjectFramework.Models.FrontPage;
 import org.junit.Assert;
 import org.junit.Test;
 

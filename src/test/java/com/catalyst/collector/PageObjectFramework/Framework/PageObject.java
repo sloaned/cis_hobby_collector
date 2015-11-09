@@ -1,11 +1,11 @@
-package catalyst.PageObjectFramework.Framework;
+package com.catalyst.collector.PageObjectFramework.Framework;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 
-import catalyst.PageObjectFramework.Framework.Exceptions.InvalidSelectOptionException;
+import com.catalyst.collector.PageObjectFramework.Framework.Exceptions.InvalidSelectOptionException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

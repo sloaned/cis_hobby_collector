@@ -1,4 +1,4 @@
-package catalyst.PageObjectFramework.Framework;
+package com.catalyst.collector.PageObjectFramework.Framework;
 
 public class SeleniumSettings {
 	
@@ -13,9 +13,9 @@ public class SeleniumSettings {
 	private static String _seleniumLog = "SeleniumLog";
 	private static String _actionLog = "Actions";
 	private static boolean _logAllActions = true;
-	
-	private static String _chromeDriver = "src/test/org/catalyst/PageObjectFramework/Drivers/chromedriver.exe";
-	private static String _ieDriver = "src/test/org/catalyst/PageObjectFramework/Drivers/IEDriverServer.exe";
+
+	private static String _chromeDriver = "src/test/java/com/catalyst/collector/PageObjectFramework/Drivers/chromedriver.exe";
+	private static String _ieDriver = "src/test/java/com/catalyst/collector/PageObjectFramework/Drivers/IEDriverServer.exe";
 
     public static String getActionLogName()
     {

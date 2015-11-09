@@ -1,4 +1,4 @@
-package catalyst.PageObjectFramework.Framework.Exceptions;
+package com.catalyst.collector.PageObjectFramework.Framework.Exceptions;
 
 public class WrongPageException extends Exception {
 	
