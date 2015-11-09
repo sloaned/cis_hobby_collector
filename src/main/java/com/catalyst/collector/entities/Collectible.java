@@ -1,14 +1,9 @@
 package com.catalyst.collector.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-/**
- * Created by gstringfellow on 11/4/2015.
- */
+
 @Entity
 public class Collectible {
 
@@ -27,26 +22,31 @@ public class Collectible {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn()
+    @Column(nullable = false)
     private Age age;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
+    @Column(nullable = false)
     private Category category;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
+    @Column(nullable = false)
     private Condition condition;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "color")
+    @Column(nullable = false)
     private Color color;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
             inverseJoinColumns = {@JoinColumn(name = "keywordID")})
+    @Column(nullable = false)
     private Set<Keyword> keywords;
 
-    @Column
+    @Column(nullable = false)
     private boolean sold;
 
 
