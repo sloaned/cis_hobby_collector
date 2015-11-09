@@ -20,6 +20,8 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	
 	public void setEm(EntityManager em) {
 		this.em = em;
+
+		System.out.println("----------------------------------------------------------------------------------------------");
 		loadDummyCollectibles();
 	}
 
@@ -49,7 +51,9 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		for (Keyword k: c.getKeywords()) {
 			k.setKeyword(words.get(i++));
 		}
-		addCollectible(c);
+		em.flush();
+		em.persist(c);
+		em.flush();
 	}
 
 
