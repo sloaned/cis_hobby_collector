@@ -3,14 +3,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
-
-import com.catalyst.collector.entities.Keyword;
 import org.junit.Before;
-import com.catalyst.collector.entities.Age;
+import com.catalyst.collector.entities.*;
 import org.junit.Test;
 import com.catalyst.collector.daos.hibernate.CollectionsDaoHibernate;
-import com.catalyst.collector.entities.Category;
-import com.catalyst.collector.entities.Color;
+
 
 public class CollectionsServiceImplTest {
 
@@ -126,11 +123,14 @@ public class CollectionsServiceImplTest {
 		boolean result = collectionsServiceImpl.removeColor(0);
 		assertTrue(result);
 	}
+	
+	/*
+	 * CATEGORY TESTS
+	 */
 	@Test
 	public void HappyPathGetCategory() {
 		ArrayList<Category> sample = new ArrayList<Category>();
 		when(mockCollectionsDao.getCategory()).thenReturn(sample);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		ArrayList<Category> result = collectionsServiceImpl.getCategory();
 		assertEquals(sample, result);			
 	}
@@ -139,45 +139,49 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setCategory("Books");
 		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertTrue(result);
 	}
 	
-
-
 	@Test
 	public void SadPathAddCategoryNameIsNull(){
 		Category sample = new Category();
-		
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}
-	
+	}	
 
 	@Test
 	public void SadPathAddCategoryNameIsBlank(){
 		Category sample = new Category();
 		sample.setCategory("  ");
-
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
-	}
-	
+	}	
 	@Test
 	public void SadPathAddCategoryNameIsTooLong(){
 		Category sample = new Category();
-		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
-
+		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
 	
 	@Test
-	public void SadPathAddCategoryNameContainsDigits(){
+	public void SadPathAddCategoryNameContainsPunctuation(){
 		Category sample = new Category();
-		sample.setCategory("Comi5s");
-
+		sample.setCategory("Comi&s");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
+		boolean result = collectionsServiceImpl.addCategory(sample);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void SadPathAddCategoryNameContainsMultipleWords(){
+		Category sample = new Category();
+		sample.setCategory("two words");
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -186,6 +190,7 @@ public class CollectionsServiceImplTest {
 	public void SadPathAddCategoryIdIsLessThan1(){
 		Category sample = new Category();
 		sample.setId(0);
+		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.addCategory(sample);
 		assertFalse(result);
 	}
@@ -196,17 +201,15 @@ public class CollectionsServiceImplTest {
 		sample.setId(1);
 		sample.setCategory("Books");
 		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
-		
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertTrue(result);
 	}
 	
 	@Test
 	public void SadPathUpdateCategoryNameIsNull(){
-
 		Category sample = new Category();
-		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		sample.setId(1);
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
 
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
@@ -217,15 +220,19 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setId(1);
 		sample.setCategory("  ");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
 
 	@Test
-	public void SadPathUpdateCategoryNameContainsDigits(){
+	public void SadPathUpdateCategoryNameContainsPunctuation(){
 		Category sample = new Category();
 		sample.setId(1);
-		sample.setCategory("Comi5s");
+		sample.setCategory("Comi&s");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
@@ -235,6 +242,8 @@ public class CollectionsServiceImplTest {
 		Category sample = new Category();
 		sample.setId(0);
 		sample.setCategory("Flavors");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
@@ -242,34 +251,40 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void SadPathUpdateCategoryNameIsTooLong(){
 		Category sample = new Category();
-		sample.setCategory("we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way� in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only. There were a king with a large jaw and a queen with a plain face, on the throne of England; there were a king with a large jaw and a queen with a fair face, on the throne of France. In both countries it was clearer than crystal to the lords of the State preserves of loaves and fishes, that things in general were settled for ever.");
+		sample.setCategory("supercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocioussupercalifragilisticexpialidocious");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
 		boolean result = collectionsServiceImpl.updateCategory(1, sample);
-		assertFalse(result);
-	}
-
-	@Test
-	public void happyPathDeleteCategory() {
-        when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
-        collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
-        boolean result = collectionsServiceImpl.deleteCategory(0);
-    }
-
-    @Test
-	public void SadPathUpdateCategoryIdIsLessThan1(){
-		Category sample = new Category();
-		sample.setId(0);
-		boolean result = collectionsServiceImpl.updateCategory(0, sample);
 		assertFalse(result);
 	}
 	
 	@Test
-	public void HappyPathDeleteCategory(){
+	public void SadPathUpdateCategoryNameContainsMultipleWords(){
+		Category sample = new Category();
+		sample.setCategory("two words");
+		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
+
+		boolean result = collectionsServiceImpl.updateCategory(1, sample);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void happyPathDeleteCategory(){
 		when(mockCollectionsDao.deleteCategory(1)).thenReturn(true);
-
 		boolean result = collectionsServiceImpl.deleteCategory(1);
-
 		assertTrue(result);
 	}
+	
+	@Test
+	public void SadPathDeleteCategoryIdLessThanOne(){	
+		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
+		boolean result = collectionsServiceImpl.deleteCategory(0);
+		assertFalse(result);
+	}
+
+	/*
+	 * AGE TESTS
+	 */
 
 	@Test
 	public void happyPathGetAgeTypes(){
@@ -279,6 +294,7 @@ public class CollectionsServiceImplTest {
 		ArrayList<Age> result = collectionsServiceImpl.getAgeTypes();
 		assertEquals(sample, result);
 	}
+	
 
 	@Test
 	public void happyPathAddAge(){
@@ -420,7 +436,7 @@ public class CollectionsServiceImplTest {
 		collectionsServiceImpl.updateAge(age);
 		verify(mockCollectionsDao, times(0)).updateAge(age);
 	}
-
+	
 	@Test
 	public void happyPathDeleteAge(){
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -438,12 +454,12 @@ public class CollectionsServiceImplTest {
 
 
 	@Test
-	public void SadPathDeleteCategoryIdLessThanOne(){
-
-		boolean result = collectionsServiceImpl.deleteCategory(0);
-		assertFalse(result);
+	public void HappyPathCreateCollectible(){
+		Collectible c = new Collectible();
+		boolean result = collectionsServiceImpl.addCollectible(c);
+		assertTrue(result);
 	}
-
+	
 	@Test
 	public void SadPathDeleteCategoryIdIsLessThan1(){
 		when(mockCollectionsDao.deleteCategory(0)).thenReturn(true);
@@ -495,8 +511,8 @@ public class CollectionsServiceImplTest {
     @Test
     public void testGetKeywordsByLetter() throws Exception {
         ArrayList<Keyword> expected = new ArrayList<>();
-        when(mockCollectionsDao.getKeywordsByLetter('c')).thenReturn(expected);
-        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter('c');
+        when(mockCollectionsDao.getKeywordsByLetter("c")).thenReturn(expected);
+        ArrayList<Keyword> actual = collectionsServiceImpl.getKeywordsByLetter("c");
         assertEquals(expected, actual);
     }
 

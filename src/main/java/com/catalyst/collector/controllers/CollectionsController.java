@@ -38,7 +38,7 @@ public class CollectionsController {
 		collectionsService.removeCollectible(id.intValue());
 	}
 
-	@RequestMapping(value="/collectible/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/collectible/{id}", method=RequestMethod.PUT)
 	public void updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
 		c.setCatalogueNumber(id);
 		collectionsService.updateCollectible(c);
@@ -117,14 +117,15 @@ public class CollectionsController {
 	public Color getColor(@PathVariable Integer id){
 		return collectionsService.getColor(id);
 	}
+
     @RequestMapping(value="/keywords", method = RequestMethod.GET)
     public ArrayList<Keyword> getAllKeywords() {
         return collectionsService.getAllKeywords();
     }
     
-    @RequestMapping(value="/keywords/{character}", method=RequestMethod.GET)
-    public ArrayList<Keyword> getKeywordsByLetter(@PathVariable char character){
-    	return collectionsService.getKeywordsByLetter(character);
+    @RequestMapping(value="/keywords/{characters}", method=RequestMethod.GET)
+    public ArrayList<Keyword> getKeywordsByLetter(@PathVariable String characters){
+    	return collectionsService.getKeywordsByLetter(characters);
     }
     @RequestMapping(value="/keywords", method = RequestMethod.POST)
     public ResponseEntity<Keyword> addKeyword(@RequestBody Keyword keyword) {

@@ -43,7 +43,7 @@ public interface CollectionsService {
     void deleteCondition(Integer id);
     
     ArrayList<Keyword> getAllKeywords();
-    ArrayList<Keyword> getKeywordsByLetter(char letter);
+    ArrayList<Keyword> getKeywordsByLetter(String letter);
     boolean addKeyword(Keyword keyword);
     boolean updateKeyword(Keyword keyword);
     void removeKeyword(Integer id);
@@ -51,7 +51,7 @@ public interface CollectionsService {
 	ArrayList<Collectible> getCollectibles();
 	Collectible getCollectible(Integer id);
 	boolean removeCollectible(int id);
-	void addCollectible(Collectible collectible);
+	boolean addCollectible(Collectible collectible);
 	void updateCollectible(Collectible collectible);
 
 	/**

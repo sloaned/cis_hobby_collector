@@ -164,6 +164,10 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 
 	@Override
+	public Collectible getCollectible(String catalogNumber) {
+		return em.createQuery("SELECT c FROM Collectible c WHERE c.catalogNumber = :id", Collectible.class).setParameter("id", catalogNumber).getSingleResult();
+	}
+	@Override
 	public Collectible getCollectible(int id) {
 		return em.createQuery("SELECT c FROM Collectible c WHERE c.id = :id", Collectible.class).setParameter("id", id).getSingleResult();
 	}
@@ -174,7 +178,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 	
 	@Override
-	public ArrayList<Keyword> getKeywordsByLetter(char letter){
+	public ArrayList<Keyword> getKeywordsByLetter(String letter){
 		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
 				.setParameter("character",  letter+"%")
 				.getResultList();
