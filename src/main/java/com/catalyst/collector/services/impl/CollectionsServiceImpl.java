@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.catalyst.collector.entities.*;
+import com.catalyst.collector.services.CollectionValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.collector.daos.CollectionsDao;
@@ -28,7 +29,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public void addAge(Age age) {
 		String ageString = age.getAge();
-		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
+		if(CollectionValidation.isAgeValid(ageString)) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.addAge(age);
 		}
 	}
@@ -37,7 +38,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public void updateAge(Age age){
 		String ageString = age.getAge();
-		if(ageString != null && ageString.length() <= 255 && !ageString.matches(".*\\d.*") && !ageString.trim().equals("")) { //Maximum of 255 characters for an age, no digits allowed
+		if(CollectionValidation.isAgeValid(ageString)) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.updateAge(age);
 		}
 
@@ -61,42 +62,18 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		
-		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")|| !category.getCategory().matches("^[a-zA-Z0-9]*$"))
-		{
-			return false;
-		}
-		if((category.getCategory()).length() > 255)
-		{
-			return false;
-		}
-		String cat = category.getCategory();
-		cat.toLowerCase();
-		category.setCategory(cat);
-		return collectionsDao.addCategory(category);
-
+		if(CollectionValidation.isCategoryValid(category.getCategory()))
+			return collectionsDao.addCategory(category);
+		return false;
 	}
 
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
-
 		category.setId(id);
-       
-		if(category.getCategory() == null || ((category.getCategory()).trim()).equals("")  || !category.getCategory().matches("^[a-zA-Z0-9]*$") )
-		{
-			return false;
-		}
-		if(category.getCategory().matches("\\s") 
-				|| (category.getCategory()).length() > 255 
-					|| category.getId()<1)
-		{
-			return false;
-		}
-		String cat = category.getCategory();
-		cat.toLowerCase();
-		category.setCategory(cat);
-		return collectionsDao.updateCategory(category);
+		if(CollectionValidation.isCategoryValid(category.getCategory()))
+			return collectionsDao.addCategory(category);
+		return false;
 	}
 
 	@Override
@@ -114,11 +91,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	@Override
 	public boolean addColor(Color addedColor) {
-		 if (addedColor.getColor() == null || addedColor.getColor().trim().equals("") || addedColor.getColor().length() > 255){
-	            return false;
-		 }
-		collectionsDao.addColor(addedColor);
-		return true;
+		 if (CollectionValidation.isColorValid(addedColor.getColor()))
+			 return collectionsDao.addColor(addedColor);
+		return false;
 		}
 	@Override
 	public boolean removeColor(int id) {
@@ -133,11 +108,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateColor(Color c){
-		 if (c.getColor() == null || c.getColor().trim().equals("") || c.getColor().length() > 255){
-	            return false;
-		 }
-		collectionsDao.updateColor(c);
-		return true;
+		if (CollectionValidation.isColorValid(c.getColor()))
+			return collectionsDao.addColor(c);
+		return false;
 	}
 	public Color getColor(int id){
 		return collectionsDao.getColor(id);
@@ -156,19 +129,21 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addKeyword(Keyword keyword) {
-        if (!keyword.isValid())
+        if (CollectionValidation.isKeywordValid(keyword.getKeyword())){
+			collectionsDao.addKeyword(keyword);
+			return true;
+		}
             return false;
 
-        collectionsDao.addKeyword(keyword);
-        return true;
     }
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-        if (!keyword.isValid())
-            return false;
-        collectionsDao.updateKeyword(keyword);
-        return true;
+		if (CollectionValidation.isKeywordValid(keyword.getKeyword())){
+			collectionsDao.addKeyword(keyword);
+			return true;
+		}
+		return false;
     }
 
     @Override
@@ -180,13 +155,20 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-		collectionsDao.addCollectible(collectible);
-		return true;
+		CollectionValidation cv = new CollectionValidation(collectible);
+		if(cv.isCollectibleValid()) {
+			collectionsDao.addCollectible(collectible);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void updateCollectible(Collectible collectible) {
-		collectionsDao.updateCollectible(collectible);
+		CollectionValidation cv = new CollectionValidation(collectible);
+		if(cv.isCollectibleValid())
+			collectionsDao.addCollectible(collectible);
+
 	}
 
     @Override
@@ -196,18 +178,20 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addCondition(Condition condition) {
-        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
-            return false;
-        collectionsDao.addCondition(condition);
-        return true;
+        if (CollectionValidation.isConditionValid(condition.getCondition())) {
+			collectionsDao.addCondition(condition);
+			return true;
+		}
+        return false;
     }
 
     @Override
     public boolean updateCondition(Condition condition) {
-        if (condition.getCondition() == null || condition.getCondition().equals("") || condition.getCondition().length() > 255)
-            return false;
-        collectionsDao.updateCondition(condition);
-        return true;
+		if (CollectionValidation.isConditionValid(condition.getCondition())) {
+			collectionsDao.addCondition(condition);
+			return true;
+		}
+		return false;
     }
 
     @Override
