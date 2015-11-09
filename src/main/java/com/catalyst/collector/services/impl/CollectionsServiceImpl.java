@@ -20,6 +20,12 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public void setCollectionsDao(CollectionsDao collectionsDao) {
 		this.collectionsDao = collectionsDao;
 	}
+	@Autowired
+	private CollectionValidation collectionValidation;
+
+	public void setCollectionValidation(CollectionValidation collectionValidation) {
+		this.collectionValidation = collectionValidation;
+	}
 
 	@Override
 	public ArrayList<Age> getAgeTypes(){
@@ -28,8 +34,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void addAge(Age age) {
-		String ageString = age.getAge();
-		if(CollectionValidation.isAgeValid(ageString)) { //Maximum of 255 characters for an age, no digits allowed
+		if(collectionValidation.isAgeValid(age)) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.addAge(age);
 		}
 	}
@@ -37,8 +42,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void updateAge(Age age){
-		String ageString = age.getAge();
-		if(CollectionValidation.isAgeValid(ageString)) { //Maximum of 255 characters for an age, no digits allowed
+		if(collectionValidation.isAgeValid(age)) { //Maximum of 255 characters for an age, no digits allowed
 			collectionsDao.updateAge(age);
 		}
 
@@ -62,7 +66,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCategory(Category category) {
-		if(CollectionValidation.isCategoryValid(category.getCategory()))
+		if(collectionValidation.isCategoryValid(category))
 			return collectionsDao.addCategory(category);
 		return false;
 	}
@@ -71,7 +75,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateCategory(int id, Category category) {
 		category.setId(id);
-		if(CollectionValidation.isCategoryValid(category.getCategory()))
+		if(collectionValidation.isCategoryValid(category))
 			return collectionsDao.addCategory(category);
 		return false;
 	}
@@ -91,7 +95,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	}
 	@Override
 	public boolean addColor(Color addedColor) {
-		 if (CollectionValidation.isColorValid(addedColor.getColor()))
+		 if (collectionValidation.isColorValid(addedColor))
 			 return collectionsDao.addColor(addedColor);
 		return false;
 		}
@@ -108,7 +112,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateColor(Color c){
-		if (CollectionValidation.isColorValid(c.getColor()))
+		if (collectionValidation.isColorValid(c))
 			return collectionsDao.addColor(c);
 		return false;
 	}
@@ -129,7 +133,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addKeyword(Keyword keyword) {
-        if (CollectionValidation.isKeywordValid(keyword.getKeyword())){
+        if (collectionValidation.isKeywordValid(keyword)){
 			collectionsDao.addKeyword(keyword);
 			return true;
 		}
@@ -139,7 +143,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-		if (CollectionValidation.isKeywordValid(keyword.getKeyword())){
+		if (collectionValidation.isKeywordValid(keyword)){
 			collectionsDao.addKeyword(keyword);
 			return true;
 		}
@@ -155,8 +159,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-		CollectionValidation cv = new CollectionValidation(collectible);
-		if(cv.isCollectibleValid()) {
+		collectionValidation.setCollectible(collectible);
+		if(collectionValidation.isCollectibleValid()) {
 			collectionsDao.addCollectible(collectible);
 			return true;
 		}
@@ -165,8 +169,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public void updateCollectible(Collectible collectible) {
-		CollectionValidation cv = new CollectionValidation(collectible);
-		if(cv.isCollectibleValid())
+		collectionValidation.setCollectible(collectible);
+		if(collectionValidation.isCollectibleValid())
 			collectionsDao.addCollectible(collectible);
 
 	}
@@ -178,7 +182,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean addCondition(Condition condition) {
-        if (CollectionValidation.isConditionValid(condition.getCondition())) {
+        if (collectionValidation.isConditionValid(condition)) {
 			collectionsDao.addCondition(condition);
 			return true;
 		}
@@ -187,7 +191,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateCondition(Condition condition) {
-		if (CollectionValidation.isConditionValid(condition.getCondition())) {
+		if (collectionValidation.isConditionValid(condition)) {
 			collectionsDao.addCondition(condition);
 			return true;
 		}
