@@ -26,7 +26,7 @@ public class Category {
 	@Column(nullable = false, unique = true, length=255)
 	private String category;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {

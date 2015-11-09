@@ -144,8 +144,6 @@ public class CollectionsDaoHibernateTest {
 		verify(mockTypedQuery, times(1)).setParameter(eq("ID"), eq(5));
 	}
 
-
-
     @Test
     public void testGetAllKeywordsHappyPathMakesADBCall() throws Exception {
         ArrayList<Keyword> testList = new ArrayList<>();
@@ -167,7 +165,7 @@ public class CollectionsDaoHibernateTest {
         when(mockTypedQuery.setParameter(anyString(), anyChar())).thenReturn(mockTypedQuery);
         when(mockTypedQuery.getResultList()).thenReturn(testList);
         collectionsDaoHibernate.setEm(mockEm);
-        ArrayList<Keyword> result = collectionsDaoHibernate.getKeywordsByLetter('c');
+        ArrayList<Keyword> result = collectionsDaoHibernate.getKeywordsByLetter("c");
         assertEquals(testList, result);
     }
 
