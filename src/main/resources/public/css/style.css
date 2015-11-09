@@ -131,4 +131,9 @@ a:hover {
 
 .error {
     border-color: red;
+    font:inherit;
+}
+
+.errorText {
+    color: red;
 }

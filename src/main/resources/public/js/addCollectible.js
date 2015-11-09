@@ -74,7 +74,10 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
-        var isValid = true; // Set to true for testing. TODO: Change to false for production.
+        var isValid = false
+        if ($(".error").length < 1){
+            isValid = true;
+        }
         var color = {};
         color.color = $("#inputColor").val().toLowerCase();
         var age = {};
@@ -95,7 +98,6 @@ $(document).ready(function(){
         collectible.sold = $("#inputSoldstatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
 
-        console.log(collectible);
         if (isValid){
             $.ajax({
                 url: '/collectible',

@@ -3,7 +3,6 @@ $(document).ready(function(){
 		url : '/collectibles',
 		method : 'GET'
 	}).then(function(collectibles) {
-		console.log(collectibles[0]);
 		$("tbody").children().remove();
 		for (var i = 0; i < collectibles.length; i++) {
 			addDataToRow(collectibles[i]);
@@ -25,7 +24,7 @@ function addDataToRow(collectible){
 
 	row += "</td><td>"
 			+ capitalizeWord(collectible.sold.toString()) + "</td><td>" + collectible.catalogueNumber + "</td><td>"
-			+ "<button class='editButton btn btn-default'>Edit</button>" + "</td></tr>";
+			+ "<!--<button class='editButton btn btn-default'>Edit</button>-->" + "</td></tr>";
 
 	$("tbody").append(row);
 }
