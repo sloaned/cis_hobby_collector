@@ -642,7 +642,7 @@ public class CollectionsServiceImplTest {
         condition.setCondition(null);
         condition.setId(4);
 
-        assertTrue(collectionsServiceImpl.updateCondition(condition));
+        assertFalse(collectionsServiceImpl.updateCondition(condition));
     }
 
     @Test

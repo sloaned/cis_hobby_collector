@@ -42,6 +42,8 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public void updateAge(Age age){
 		if(collectionValidation.isAgeValid(age)) { //Maximum of 255 characters for an age, no digits allowed
+            if (age.getAge() == null)
+                return;
 			collectionsDao.updateAge(age);
 		}
 	}
@@ -149,9 +151,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateKeyword(Keyword keyword) {
-        if (keyword.getKeyword() == null)
-            return false;
 		if (collectionValidation.isKeywordValid(keyword)){
+            if (keyword.getKeyword() == null)
+                return false;
 			collectionsDao.addKeyword(keyword);
 			return true;
 		}
@@ -199,9 +201,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public boolean updateCondition(Condition condition) {
-        if (condition.getCondition() == null)
-            return false;
 		if (collectionValidation.isConditionValid(condition)) {
+            if (condition.getCondition() == null)
+                return false;
 			collectionsDao.addCondition(condition);
 			return true;
 		}
