@@ -1,6 +1,8 @@
 package com.catalyst.collector.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,8 +10,11 @@ import java.util.regex.Pattern;
 @Entity
 public class Keyword {
 
+    @Transient
     private static final String regex = "[^a-zA-Z\\d]";
+    @Transient
     private static final Pattern pattern = Pattern.compile(regex);
+    @Transient
     private Matcher matcher;
 
 
@@ -36,6 +41,7 @@ public class Keyword {
         this.keyword = keyword;
     }
 
+    @JsonIgnore
     public boolean isValid() {
         if (keyword == null)
             return false;
