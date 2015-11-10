@@ -2,6 +2,7 @@
  * Created by ddelaney on 11/4/2015.
  */
 $(document).ready(function(){
+
     $("#addCollectibleButton").click(function(){
         $("#newCollectibleForm").css("display", "block");
         $("#fade").css("display", "block");
@@ -122,11 +123,12 @@ $(document).ready(function(){
         $("#inputSoldStatus").find("button").html(text + " <span class=\"caret\"></span>");
     });
 
+    $("#inputCatalogNumber").mask("SSS-000000000000");
 });
 
 function typeahead(){
     var keywords = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('word'),
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         prefetch: '/keywords',
         remote: {
@@ -136,12 +138,14 @@ function typeahead(){
     });
 
     $('#remote .typeahead').typeahead({
-        hint: false,
-        dynamic: false
+        hint: true,
+        dynamic: true
     }, {
-        name: 'best-pictures',
-        display: 'word',
+        name: 'keywords',
+        display: 'keyword',
         source: keywords
+    }).on('typeahead:close', function (obj, datum, name) {
+        $(this).val("");
     });
 }
 
@@ -151,15 +155,17 @@ function addDropdown (source, destination, object){
 }
 
 function keywords () {
-    $('#keywords input').on('focusout',function(){
+    $("#keywords input").focusout(function(){
         var txt= this.value.replace(/[^\w]/g,'');
         if(txt) {
             $(this).parent().before('<span class="keyword">'+ txt +'</span>');
         }
-        this.value="";
-    }).on('keyup',function(e){
+        $(this).val("");
+    }).keyup(function(e){
         // if: comma,enter
-        if(/(188|13)/.test(e.which)) $(this).focusout();
+        if(/(188|13)/.test(e.which)){
+            $(this).focusout();
+        }
     });
 
     $('#keywords').on('click','.keyword',function(){

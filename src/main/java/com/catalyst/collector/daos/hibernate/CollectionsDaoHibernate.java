@@ -179,7 +179,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	
 	@Override
 	public ArrayList<Keyword> getKeywordsByLetter(String letter){
-		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.word LIKE :character", Keyword.class)
+		return (ArrayList<Keyword>)em.createQuery("SELECT DISTINCT k FROM Keyword k WHERE k.keyword LIKE :character", Keyword.class)
 				.setParameter("character",  letter+"%")
 				.getResultList();
 	}
