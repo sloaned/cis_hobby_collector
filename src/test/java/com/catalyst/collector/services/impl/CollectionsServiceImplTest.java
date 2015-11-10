@@ -285,7 +285,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void happyPathAddAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("Antique");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -295,7 +295,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithNonLetter(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("Antique_");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -305,7 +305,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithOnlyANumber(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -315,7 +315,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithNumbersInWords(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -334,7 +334,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddEmptyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -344,7 +344,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -354,12 +354,19 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithTooManyCharacters(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
 		verify(mockCollectionsDao, times(0)).addAge(age);
 	}
+
+    @Test
+    public void sadPathAddAgeWhereAgeObjectIsNull() {
+        Age age = null;
+        collectionsServiceImpl.addAge(age);
+        verify(mockCollectionsDao, times(0)).addAge(age);
+    }
 
 	@Test
 	public void happyPathUpdateAge(){
@@ -432,6 +439,13 @@ public class CollectionsServiceImplTest {
 		verify(mockCollectionsDao, times(0)).updateAge(age);
 	}
 
+    @Test
+    public void sadPathUpdateAgeWhereAgeObjectIsNull() {
+        Age age = null;
+        collectionsServiceImpl.updateAge(age);
+        verify(mockCollectionsDao, times(0)).updateAge(age);
+    }
+
 	@Test
 	public void happyPathDeleteAge(){
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
@@ -471,9 +485,15 @@ public class CollectionsServiceImplTest {
     }
 
 	@Test
+	public void sadAddNullKeywordObject() {
+		Keyword keyword = null;
+		assertFalse(collectionsServiceImpl.addKeyword(keyword));
+	}
+
+	@Test
 	public void sadAddANullKeyword(){
 		Keyword keyword = new Keyword();
-		keyword.setKeyword("");
+		keyword.setKeyword(null);
 		assertFalse(collectionsServiceImpl.addKeyword(keyword));
 	}
 
@@ -513,7 +533,7 @@ public class CollectionsServiceImplTest {
     public void testUpdateAValidKeyword() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("AValidWord1");
-
+		keyword.setId(1);
         assertTrue(collectionsServiceImpl.updateKeyword(keyword));
     }
 
@@ -521,7 +541,7 @@ public class CollectionsServiceImplTest {
     public void testUpdateAInvalidKeywordWithNullString() {
         Keyword keyword = new Keyword();
         keyword.setKeyword(null);
-
+		keyword.setId(1);
         assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
 
@@ -529,17 +549,24 @@ public class CollectionsServiceImplTest {
     public void testUpdateAInvalidKeywordWithStringLengthTooLong() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
-
-        assertFalse(collectionsServiceImpl.addKeyword(keyword));
+		keyword.setId(1);
+        assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
 
     @Test
     public void testUpdateAInvalidKeywordWithInvalidCharacterInString() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("asdf#as");
-
-        assertFalse(collectionsServiceImpl.addKeyword(keyword));
+		keyword.setId(1);
+        assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
+
+	@Test
+	public void testUpdateAKeywordWithNoId(){
+		Keyword keyword = new Keyword();
+		keyword.setKeyword("age");
+		assertFalse(collectionsServiceImpl.updateKeyword(keyword));
+	}
 
     @Test
     public void testRemoveKeywordHappyPath() throws Exception {
