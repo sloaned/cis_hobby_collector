@@ -182,14 +182,6 @@ public class CollectionsServiceImplTest {
 		assertFalse(result);
 	}
 
-	@Test
-	public void SadPathAddCategoryIdIsLessThan1(){
-		Category sample = new Category();
-		sample.setId(0);
-		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
-		boolean result = collectionsServiceImpl.addCategory(sample);
-		assertFalse(result);
-	}
 
 	@Test
 	public void HappyPathUpdateCategory(){

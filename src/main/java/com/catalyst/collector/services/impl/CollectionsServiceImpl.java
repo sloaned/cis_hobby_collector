@@ -73,11 +73,16 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
-
-		if(collectionValidation.isCategoryValid(category))
-		{
+		if(category.getCategory() == null){return false;}
+		if(category.getId() != null && category.getId() >0) {
+		if (collectionValidation.isCategoryValid(category)) {
+			category.setId(id);
+			String cat = category.getCategory();
+			cat.toLowerCase();
+			category.setCategory(cat);
 			return collectionsDao.updateCategory(category);
 		}
+	}
 		return false;
 	}
 
