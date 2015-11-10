@@ -30,7 +30,10 @@ public class CollectionValidation {
     public CollectionValidation() {}
 
     public boolean isCollectibleValid(){
-        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid();
+        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() &&
+                collectible.getName() != null && !collectible.getName().isEmpty() &&
+                collectible.getDescription() != null && !collectible.getDescription().isEmpty() &&
+                collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty();
     }
 
     private boolean isCategoryValid() {
@@ -60,7 +63,6 @@ public class CollectionValidation {
         return true;
     }
 
-
     private boolean isColorValid() {
         return isColorValid(collectible.getColor());
     }
@@ -68,7 +70,6 @@ public class CollectionValidation {
     private boolean isAgeValid() {
         return isAgeValid(collectible.getAge());
     }
-
 
     public boolean isAgeValid(Age age){
         if(age == null){return false;}

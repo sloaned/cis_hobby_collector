@@ -161,9 +161,32 @@ public class CollectionsServiceImpl implements CollectionsService {
         collectionsDao.removeKeyword(id);
     }
 
+	//We probably need to add validation for catalogue number at a later date.
+
 	@Override
 	public boolean addCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
+		String firstThree = collectible.getCatalogueNumber().substring(0,3).toUpperCase();
+		String everythingElse = collectible.getCatalogueNumber().substring(3);
+		collectible.setCatalogueNumber(""+firstThree+everythingElse);
+
+		for (Keyword k: collectible.getKeywords()) {
+			if(k.getKeyword() != null) {
+				addKeyword(k);
+			}
+		}
+		if(collectible.getAge().getAge() !=null){
+			addAge(collectible.getAge());
+		}
+		if(collectible.getCategory().getCategory() !=null){
+			addCategory(collectible.getCategory());
+		}
+		if(collectible.getColor().getColor() !=null){
+			addColor(collectible.getColor());
+		}
+		if(collectible.getCondition().getCondition() !=null){
+			addCondition(collectible.getCondition());
+		}
 		if(collectionValidation.isCollectibleValid()) {
 			collectionsDao.addCollectible(collectible);
 			return true;
