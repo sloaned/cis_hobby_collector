@@ -42,7 +42,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public void updateAge(Age age){
 		if(collectionValidation.isAgeValid(age)) { //Maximum of 255 characters for an age, no digits allowed
-            if (age.getAge() == null)
+            if (age.getAge() == null || (age.getId() == null || age.getId() < 1))
                 return;
 			collectionsDao.updateAge(age);
 		}
@@ -205,9 +205,9 @@ public class CollectionsServiceImpl implements CollectionsService {
     @Override
     public boolean updateCondition(Condition condition) {
 		if (collectionValidation.isConditionValid(condition)) {
-            if (condition.getCondition() == null)
+            if (condition.getCondition() == null || (condition.getId() == null || condition.getId() < 1))
                 return false;
-			collectionsDao.addCondition(condition);
+			collectionsDao.updateCondition(condition);
 			return true;
 		}
 		return false;

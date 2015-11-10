@@ -113,7 +113,7 @@ $(document).ready(function(){
             color.color = colorId;
         }
         var age = {};
-        if (colorId == null){
+        if (ageId == null){
             age.age = $("#inputAge").val().toLowerCase();
         }else{
             age.age = ageid;
