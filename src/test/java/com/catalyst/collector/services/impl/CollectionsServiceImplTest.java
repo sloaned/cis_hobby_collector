@@ -371,7 +371,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void happyPathUpdateAge(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("Agoodage");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -382,7 +382,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithOnlyANumber(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -392,7 +392,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithNumbersInWords(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -402,7 +402,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateNullAge(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -412,7 +412,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateEmptyStringAge(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -422,7 +422,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -432,7 +432,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithTooManyCharacters(){
 		Age age = new Age();
-		//age.setId(1);
+		age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
