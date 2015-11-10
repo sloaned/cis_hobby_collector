@@ -285,7 +285,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void happyPathAddAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("Antique");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -295,7 +295,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithNonLetter(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("Antique_");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -305,7 +305,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithOnlyANumber(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -315,7 +315,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithNumbersInWords(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -334,7 +334,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddEmptyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -344,7 +344,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
@@ -354,17 +354,24 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathAddAgeWithTooManyCharacters(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.addAge(age);
 		verify(mockCollectionsDao, times(0)).addAge(age);
 	}
 
+    @Test
+    public void sadPathAddAgeWhereAgeObjectIsNull() {
+        Age age = null;
+        collectionsServiceImpl.addAge(age);
+        verify(mockCollectionsDao, times(0)).addAge(age);
+    }
+
 	@Test
 	public void happyPathUpdateAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("Agoodage");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -375,7 +382,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithOnlyANumber(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("2");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -385,7 +392,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithNumbersInWords(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("These are 3 Words");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -395,7 +402,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateNullAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge(null);
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -405,7 +412,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateEmptyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -415,7 +422,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateWhiteSpaceOnlyStringAge(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("     ");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
@@ -425,12 +432,19 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadPathUpdateAgeWithTooManyCharacters(){
 		Age age = new Age();
-		age.setId(1);
+		//age.setId(1);
 		age.setAge("this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters");
 		collectionsServiceImpl.setCollectionsDao(mockCollectionsDao);
 		collectionsServiceImpl.updateAge(age);
 		verify(mockCollectionsDao, times(0)).updateAge(age);
 	}
+
+    @Test
+    public void sadPathUpdateAgeWhereAgeObjectIsNull() {
+        Age age = null;
+        collectionsServiceImpl.updateAge(age);
+        verify(mockCollectionsDao, times(0)).updateAge(age);
+    }
 
 	@Test
 	public void happyPathDeleteAge(){
@@ -473,7 +487,7 @@ public class CollectionsServiceImplTest {
 	@Test
 	public void sadAddANullKeyword(){
 		Keyword keyword = new Keyword();
-		keyword.setKeyword("");
+		keyword.setKeyword(null);
 		assertFalse(collectionsServiceImpl.addKeyword(keyword));
 	}
 
