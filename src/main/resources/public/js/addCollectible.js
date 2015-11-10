@@ -9,6 +9,7 @@ $(document).ready(function(){
     });
 
     //Add categories to dropdown
+    var typeId = null;
     $.ajax({
         url: "/category",
         method: "GET"
@@ -16,12 +17,18 @@ $(document).ready(function(){
         addDropdown($("#typeDropdown").html(), $("#typeSelection"), categories)
         $("#typeSelection").find("li").click(function () {
             var text = $(this).text();
-            console.log(text);
             $("#inputType").val(text);
+            validateType();
+            for (var i = 0; i < categories.length; i++){
+                if (text == categories[i].category){
+                    typeId = categories[i].id;
+                }
+            }
         });
     });
 
     //Add color to dropdown
+    var colorId = null;
     $.ajax({
         url: "/color",
         method: "GET"
@@ -30,10 +37,17 @@ $(document).ready(function(){
         $("#colorSelection").find("li").click(function () {
             var text = $(this).text();
             $("#inputColor").val(text);
+            validateColor();
+            for (var i = 0; i < colors.length; i++){
+                if (text == colors[i].color){
+                    colorId = colors[i].id;
+                }
+            }
         });
     });
 
     //Add conditions to dropdown
+    var conditionId = null;
     $.ajax({
         url: "/conditions",
         method: "GET"
@@ -42,10 +56,17 @@ $(document).ready(function(){
         $("#conditionSelection").find("li").click(function () {
             var text = $(this).text();
             $("#inputCondition").val(text);
+            validateCondition();
+            for (var i = 0; i < conditions.length; i++){
+                if (text == conditions[i].conditions){
+                    colorId = conditions[i].id;
+                }
+            }
         });
     });
 
     //Add age to dropdown
+    var ageid = null;
     $.ajax({
         url: "/agetypes",
         method: "GET"
@@ -54,6 +75,12 @@ $(document).ready(function(){
         $("#ageSelection").find("li").click(function () {
             var text = $(this).text();
             $("#inputAge").val(text);
+            validateAge();
+            for (var i = 0; i < age.length; i++){
+                if (text == age[i].age){
+                    colorId = age[i].id;
+                }
+            }
         });
     });
 
@@ -75,18 +102,34 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
-        var isValid = false
+        var isValid = false;
         if ($(".error").length < 1){
             isValid = true;
         }
         var color = {};
-        color.color = $("#inputColor").val().toLowerCase();
+        if (colorId == null){
+            color.color = $("#inputColor").val().toLowerCase();
+        }else{
+            color.color = colorId;
+        }
         var age = {};
-        age.age = $("#inputAge").val().toLowerCase();
+        if (colorId == null){
+            age.age = $("#inputAge").val().toLowerCase();
+        }else{
+            age.age = ageid;
+        }
         var category = {};
-        category.category = $("#inputType").val().toLowerCase();
+        if (typeId == null){
+            category.category = $("#inputType").val().toLowerCase();
+        }else {
+            category.category = typeId;
+        }
         var condition = {};
-        condition.condition = $("#inputCondition").val().toLowerCase();
+        if (conditionId == null){
+            condition.condition = $("#inputCondition").val().toLowerCase();
+        }else{
+            condition.condition = conditionId;
+        }
 
         var collectible = {};
         collectible.name = $("#inputName").val().toLowerCase();
@@ -139,7 +182,7 @@ function typeahead(){
 
     $('#remote .typeahead').typeahead({
         hint: true,
-        dynamic: true
+        dynamic: false
     }, {
         name: 'keywords',
         display: 'keyword',
