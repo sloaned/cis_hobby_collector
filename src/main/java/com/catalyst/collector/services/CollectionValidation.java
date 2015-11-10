@@ -2,6 +2,8 @@ package com.catalyst.collector.services;
 
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,12 +42,24 @@ public class CollectionValidation {
     }
 
     private boolean isKeywordsValid() {
+        if(collectible.getKeywords().size() < 3)
+            return false;
         for (Keyword k: collectible.getKeywords()) {
             if(!isKeywordValid(k))
                 return false;
         }
         return true;
     }
+    public boolean isKeywordsValid(Set<Keyword> keywords) {
+        if(keywords.size() < 3)
+            return false;
+        for (Keyword k: keywords) {
+            if(!isKeywordValid(k))
+                return false;
+        }
+        return true;
+    }
+
 
     private boolean isColorValid() {
         return isColorValid(collectible.getColor());

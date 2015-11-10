@@ -11,6 +11,14 @@ public class Condition {
     @Column(nullable = false, unique = true, length=255)
     private String condition;
 
+    public Condition(String Cond) {
+        condition = Cond;
+    }
+
+    public Condition() {
+
+    }
+
     @Override
     public String toString() {
         return "Condition{" +
