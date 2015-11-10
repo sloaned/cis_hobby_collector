@@ -15,6 +15,18 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	public Category(String cat) {
+		category = cat;
+	}
+
+	public Category() {
+
+	}
+
+	public Category(int i) {
+		id =i;
+	}
+
 	@Override
 	public String toString() {
 		return "Category{" +

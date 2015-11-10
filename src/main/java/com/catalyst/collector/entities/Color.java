@@ -12,6 +12,10 @@ public class Color {
 	private String color;
 	public Color(){}
 
+	public Color(int i) {
+		id=i;
+	}
+
 	@Override
 	public String toString() {
 		return "Color{" +
