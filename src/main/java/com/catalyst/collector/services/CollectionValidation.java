@@ -83,7 +83,7 @@ public class CollectionValidation {
             return false;
         String name = category.getCategory();
         if (name == null)
-            return category.getId() != null;
+            return category.getId() != null && category.getId() > 0;
 
         return !(name.length() > 255 || (name.trim()).equals("")
         			|| !name.matches("^[a-zA-Z0-9]*$") || name.matches("\\s"));
