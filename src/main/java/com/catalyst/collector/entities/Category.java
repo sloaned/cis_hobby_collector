@@ -23,6 +23,10 @@ public class Category {
 
 	}
 
+	public Category(int i) {
+		id =i;
+	}
+
 	@Override
 	public String toString() {
 		return "Category{" +

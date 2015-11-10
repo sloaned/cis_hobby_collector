@@ -19,6 +19,10 @@ public class Condition {
 
     }
 
+    public Condition(int i) {
+        id=i;
+    }
+
     @Override
     public String toString() {
         return "Condition{" +

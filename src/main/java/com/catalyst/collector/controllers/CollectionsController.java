@@ -54,7 +54,7 @@ public class CollectionsController {
     @RequestMapping(value="/collectible", method=RequestMethod.POST)
     public ResponseEntity<Collectible> addCollectible(@RequestBody Collectible collectible){
         System.out.println(collectible);
-        if (collectionsService.addCollectible(collectible))
+        if (!collectionsService.addCollectible(collectible))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(collectible, HttpStatus.OK);
     }

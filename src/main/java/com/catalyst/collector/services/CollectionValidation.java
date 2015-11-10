@@ -79,14 +79,26 @@ public class CollectionValidation {
         }
 
     public boolean isCategoryValid(Category category){
-        return !(category == null || category.getCategory() == null || category.getCategory().length() > 255 || (category.getCategory().trim()).equals("")
-        			|| !category.getCategory().matches("^[a-zA-Z0-9]*$") || category.getCategory().matches("\\s"));
+        if(category == null)
+            return false;
+        String name = category.getCategory();
+        if (name == null)
+            return category.getId() != null;
+
+        return !(name.length() > 255 || (name.trim()).equals("")
+        			|| !name.matches("^[a-zA-Z0-9]*$") || name.matches("\\s"));
     }
 
 
     public boolean isColorValid(Color color){
-        return !(color == null || color.getColor() == null || color.getColor().trim().equals("") || color.getColor().length() > 255
-                    || !color.getColor().matches("^[a-zA-Z0-9]*$") || color.getColor().matches("\\s"));
+        if(color == null)
+            return false;
+        String name = color.getColor();
+        if (name == null)
+            return color.getId() != null;
+
+        return !(name.trim().equals("") || name.length() > 255
+                    || !name.matches("^[a-zA-Z0-9]*$") || name.matches("\\s"));
     }
 
     public boolean isKeywordValid(Keyword keyword){

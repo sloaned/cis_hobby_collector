@@ -35,6 +35,12 @@ public class CollectionValidationTests {
     public void HappyIsAgeValid(){
         assertTrue(cv.isAgeValid(new Age(VALID_AGE)));
     }
+
+    @Test
+    public void HappyIsAgeIDValid(){
+        assertTrue(cv.isAgeValid(new Age(1)));
+    }
+
     @Test
     public void SadIsAgeValidLong(){
         assertFalse(cv.isAgeValid(new Age(INVALID_1004_STRING)));
@@ -55,6 +61,11 @@ public class CollectionValidationTests {
     @Test
     public void HappyCategoryAgeValid(){
         assertTrue(cv.isCategoryValid(new Category(VALID_CATEGORY)));
+    }
+
+    @Test
+    public void HappyCategoryAgeIDValid(){
+        assertTrue(cv.isCategoryValid(new Category(1)));
     }
     @Test
     public void SadIsCategoryValidLong(){
@@ -78,6 +89,10 @@ public class CollectionValidationTests {
         assertTrue(cv.isColorValid(new Color(VALID_AGE)));
     }
     @Test
+    public void HappyColorAgeIDValid(){
+        assertTrue(cv.isColorValid(new Color(1)));
+    }
+    @Test
     public void SadIsColorValidLong(){
         assertFalse(cv.isColorValid(new Color(INVALID_1004_STRING)));
     }
@@ -95,9 +110,14 @@ public class CollectionValidationTests {
     }
 
     @Test
+    public void HappyConditionIDValid(){
+        assertTrue(cv.isConditionValid(new Condition(1)));
+    }
+    @Test
     public void HappyConditionAgeValid(){
         assertTrue(cv.isConditionValid(new Condition(VALID_AGE)));
     }
+
     @Test
     public void SadIsConditionValidLong(){
         assertFalse(cv.isConditionValid(new Condition(INVALID_1004_STRING)));
@@ -193,6 +213,40 @@ public class CollectionValidationTests {
         valid1.setKeyword(VALID_KEYWORD);
         valid2.setKeyword(VALID_KEYWORD);
         valid3.setKeyword(VALID_KEYWORD);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColor(l);
+        c.setCondition(d);
+
+        cv.setCollectible(c);
+
+        assertTrue(cv.isCollectibleValid());
+    }
+
+    @Test
+    public void HappyIsCollectibleIDValid(){
+        Collectible c = new Collectible();
+        Age a = new Age();
+        Color l = new Color();
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks =  new HashSet<>();
+
+        a.setId(1);
+        l.setId(1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
         ks.add(valid1);
         ks.add(valid2);
         ks.add(valid3);
