@@ -139,7 +139,7 @@ $(document).ready(function(){
         collectible.condition = condition;
         collectible.color = color;
         collectible.keywords = iCanHazKeywords();
-        collectible.sold = $("#inputSoldstatus").find("button").text().toLowerCase().trim();
+        collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
         console.log(collectible);
         if (isValid){
