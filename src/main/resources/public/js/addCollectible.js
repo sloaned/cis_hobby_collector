@@ -58,15 +58,15 @@ $(document).ready(function(){
             $("#inputCondition").val(text);
             validateCondition();
             for (var i = 0; i < conditions.length; i++){
-                if (text == conditions[i].conditions){
-                    colorId = conditions[i].id;
+                if (text == conditions[i].condition){
+                    conditionId = conditions[i].id;
                 }
             }
         });
     });
 
     //Add age to dropdown
-    var ageid = null;
+    var ageId = null;
     $.ajax({
         url: "/agetypes",
         method: "GET"
@@ -78,7 +78,7 @@ $(document).ready(function(){
             validateAge();
             for (var i = 0; i < age.length; i++){
                 if (text == age[i].age){
-                    colorId = age[i].id;
+                    ageId = age[i].id;
                 }
             }
         });
@@ -110,25 +110,25 @@ $(document).ready(function(){
         if (colorId == null){
             color.color = $("#inputColor").val().toLowerCase();
         }else{
-            color.color = colorId;
+            color.id = colorId;
         }
         var age = {};
         if (ageId == null){
             age.age = $("#inputAge").val().toLowerCase();
         }else{
-            age.age = ageid;
+            age.id = ageId;
         }
         var category = {};
         if (typeId == null){
             category.category = $("#inputType").val().toLowerCase();
         }else {
-            category.category = typeId;
+            category.id = typeId;
         }
         var condition = {};
         if (conditionId == null){
             condition.condition = $("#inputCondition").val().toLowerCase();
         }else{
-            condition.condition = conditionId;
+            condition.id = conditionId;
         }
 
         var collectible = {};
@@ -140,8 +140,9 @@ $(document).ready(function(){
         collectible.color = color;
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldstatus").find("button").text().toLowerCase().trim();
+        alert(collectible.sold);
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
-
+        console.log(collectible);
         if (isValid){
             $.ajax({
                 url: '/collectible',
