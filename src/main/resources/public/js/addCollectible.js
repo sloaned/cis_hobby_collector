@@ -140,6 +140,7 @@ $(document).ready(function(){
         collectible.color = color;
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldstatus").find("button").text().toLowerCase().trim();
+        alert(collectible.sold);
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
         console.log(collectible);
         if (isValid){
