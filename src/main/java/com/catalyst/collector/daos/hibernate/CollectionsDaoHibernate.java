@@ -85,9 +85,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	public boolean addCollectible(Collectible collectible) {
 		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
 				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
+		{
 			em.merge(collectible);
+		}
 		else
+		{
 			em.persist(collectible);
+		}
 		return true;
 	}
 

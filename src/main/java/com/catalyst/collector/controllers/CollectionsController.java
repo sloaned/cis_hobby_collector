@@ -51,13 +51,6 @@ public class CollectionsController {
 		return collectionsService.getCollectibles();
 	}
 
-    @RequestMapping(value="/collectible", method=RequestMethod.POST)
-    public ResponseEntity<Collectible> addCollectible(@RequestBody Collectible collectible){
-        System.out.println(collectible);
-        if (!collectionsService.addCollectible(collectible))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(collectible, HttpStatus.OK);
-    }
 	@RequestMapping(value="/agetypes", method=RequestMethod.GET)
 	public ArrayList<Age> getAgeTypes(){return collectionsService.getAgeTypes();}
 
@@ -73,7 +66,13 @@ public class CollectionsController {
 	@RequestMapping(value="/agetypes/{id}", method=RequestMethod.DELETE)
 	public void deleteAge(@PathVariable Integer id){
 		collectionsService.deleteAge(id);
-    }
+	}
+	
+	@RequestMapping(value="/collectible", method=RequestMethod.POST)
+	public void addCollectible(@RequestBody Collectible collectible){
+		System.out.println(collectible);
+		collectionsService.addCollectible(collectible);
+	}
 
 
 	@RequestMapping(value="/category", method=RequestMethod.GET)

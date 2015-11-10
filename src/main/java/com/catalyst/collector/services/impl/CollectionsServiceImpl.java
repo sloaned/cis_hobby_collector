@@ -66,9 +66,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean addCategory(Category category) {
 		if(collectionValidation.isCategoryValid(category))
 		{
-			String cat = category.getCategory();
-			cat.toLowerCase();
-			category.setCategory(cat);
 			return collectionsDao.addCategory(category);
 		}
 		return false;
@@ -79,10 +76,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 		if(collectionValidation.isCategoryValid(category))
 		{
-			category.setId(id);
-			String cat = category.getCategory();
-			cat.toLowerCase();
-			category.setCategory(cat);
 			return collectionsDao.updateCategory(category);
 		}
 		return false;
