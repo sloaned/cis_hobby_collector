@@ -25,6 +25,14 @@ public class Keyword {
     @Column(nullable = false, unique = true, length = 255)
     private String keyword;
 
+    public Keyword(String key) {
+        keyword = key;
+    }
+
+    public Keyword() {
+
+    }
+
     public Integer getId() {
         return id;
     }
