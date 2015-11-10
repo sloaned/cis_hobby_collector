@@ -139,6 +139,26 @@ $(document).ready(function(){
         collectible.condition = condition;
         collectible.color = color;
         collectible.keywords = iCanHazKeywords();
+     /*   for(var i = 0; i < keywords.length; i++)
+        {
+        	var keywordEntered = keywords[i];
+        	$.ajax({
+                url: '/keywords',
+                method: 'GET',
+            }).then(function(keywordsList){
+            	var obj = JSON.parse(JSON.stringify(keywordsList));
+    			var item;
+    			for(var j = 0; j < obj.length; j++){
+    				item = obj[i];
+    				if(item.keyword === keywordEntered)
+    				{
+    					keywords[i]
+    					break;
+    				}
+    			}
+            	
+            };
+        }*/
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
         console.log(collectible);
