@@ -72,7 +72,6 @@ $(document).ready(function(){
             $(this).parent().find(".errorText").remove();
             $(this).parent().append("<p class='errorText'>Required field</p>");
             $(this).addClass("error");
-
         }else if(text.length >= 255){
             $(this).parent().find(".errorText").remove();
             $(this).parent().append("<p class='errorText'>Must be less than 255 characters</p>");
@@ -82,5 +81,33 @@ $(document).ready(function(){
             $(this).parent().find(".errorText").remove();
         }
     });
+
+	$("#inputCatalogNumber").focusout(function(){
+		var text = $(this).val();
+		if (text == null || text == "") {
+			$(this).parent().find(".errorText").remove();
+			$(this).parent().append("<p class='errorText'>Required field</p>");
+			$(this).addClass("error");
+		}else if(text.length != 16){
+			$(this).parent().find(".errorText").remove();
+			$(this).parent().append("<p class='errorText'>Must type in all characters</p>");
+			$(this).addClass("error");
+		}else {
+			$(this).removeClass("error");
+			$(this).parent().find(".errorText").remove();
+		}
+	});
+
+	$("#inputKeywords").focusout(function(){
+		var keyLength = $("#keywords").text().trim();
+		if (keyLength.length >= 1000){
+			$(this).parent().find(".errorText").remove();
+			$(this).parent().append("<p class='errorText'>Exceeds 1000 character limit</p>");
+			$(this).addClass("error");
+		}else {
+			$(this).removeClass("error");
+			$(this).parent().find(".errorText").remove();
+		}
+	});
 
 });
