@@ -471,6 +471,12 @@ public class CollectionsServiceImplTest {
     }
 
 	@Test
+	public void sadAddNullKeywordObject() {
+		Keyword keyword = null;
+		assertFalse(collectionsServiceImpl.addKeyword(keyword));
+	}
+
+	@Test
 	public void sadAddANullKeyword(){
 		Keyword keyword = new Keyword();
 		keyword.setKeyword("");
@@ -513,7 +519,7 @@ public class CollectionsServiceImplTest {
     public void testUpdateAValidKeyword() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("AValidWord1");
-
+		keyword.setId(1);
         assertTrue(collectionsServiceImpl.updateKeyword(keyword));
     }
 
@@ -521,7 +527,7 @@ public class CollectionsServiceImplTest {
     public void testUpdateAInvalidKeywordWithNullString() {
         Keyword keyword = new Keyword();
         keyword.setKeyword(null);
-
+		keyword.setId(1);
         assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
 
@@ -529,17 +535,24 @@ public class CollectionsServiceImplTest {
     public void testUpdateAInvalidKeywordWithStringLengthTooLong() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("asdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfasasdfasdfas");
-
-        assertFalse(collectionsServiceImpl.addKeyword(keyword));
+		keyword.setId(1);
+        assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
 
     @Test
     public void testUpdateAInvalidKeywordWithInvalidCharacterInString() {
         Keyword keyword = new Keyword();
         keyword.setKeyword("asdf#as");
-
-        assertFalse(collectionsServiceImpl.addKeyword(keyword));
+		keyword.setId(1);
+        assertFalse(collectionsServiceImpl.updateKeyword(keyword));
     }
+
+	@Test
+	public void testUpdateAKeywordWithNoId(){
+		Keyword keyword = new Keyword();
+		keyword.setKeyword("age");
+		assertFalse(collectionsServiceImpl.updateKeyword(keyword));
+	}
 
     @Test
     public void testRemoveKeywordHappyPath() throws Exception {

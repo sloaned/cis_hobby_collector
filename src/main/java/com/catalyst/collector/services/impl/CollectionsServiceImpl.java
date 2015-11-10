@@ -152,9 +152,10 @@ public class CollectionsServiceImpl implements CollectionsService {
     @Override
     public boolean updateKeyword(Keyword keyword) {
 		if (collectionValidation.isKeywordValid(keyword)){
-            if (keyword.getKeyword() == null)
+            if (keyword.getKeyword() == null || keyword.getId() == null || keyword.getId() < 1){
                 return false;
-			collectionsDao.addKeyword(keyword);
+			}
+			collectionsDao.updateKeyword(keyword);
 			return true;
 		}
 		return false;
