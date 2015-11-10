@@ -48,24 +48,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-			for (Keyword k: collectible.getKeywords()) {
-				if(k.getKeyword() != null) {
-					em.persist(k);
-				}
-			}
 
-		if(collectible.getAge().getAge() !=null){
-			em.persist(collectible.getAge());
-		}
-		if(collectible.getCategory().getCategory() !=null){
-			em.persist(collectible.getCategory());
-		}
-		if(collectible.getColor().getColor() !=null){
-			em.persist(collectible.getColor());
-		}
-		if(collectible.getCondition().getCondition() !=null){
-			em.persist(collectible.getCondition());
-		}
 		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
 				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
 			em.merge(collectible);
