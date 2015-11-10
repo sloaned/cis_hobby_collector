@@ -2,6 +2,8 @@ package com.catalyst.collector.services;
 
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,12 +42,24 @@ public class CollectionValidation {
     }
 
     private boolean isKeywordsValid() {
+        if(collectible.getKeywords().size() < 3)
+            return false;
         for (Keyword k: collectible.getKeywords()) {
             if(!isKeywordValid(k))
                 return false;
         }
         return true;
     }
+    public boolean isKeywordsValid(Set<Keyword> keywords) {
+        if(keywords.size() < 3)
+            return false;
+        for (Keyword k: keywords) {
+            if(!isKeywordValid(k))
+                return false;
+        }
+        return true;
+    }
+
 
     private boolean isColorValid() {
         return isColorValid(collectible.getColor());
@@ -65,14 +79,26 @@ public class CollectionValidation {
         }
 
     public boolean isCategoryValid(Category category){
-        return !(category == null || category.getCategory() == null || category.getCategory().length() > 255 || (category.getCategory().trim()).equals("")
-        			|| !category.getCategory().matches("^[a-zA-Z0-9]*$") || category.getCategory().matches("\\s"));
+        if(category == null)
+            return false;
+        String name = category.getCategory();
+        if (name == null)
+            return category.getId() != null;
+
+        return !(name.length() > 255 || (name.trim()).equals("")
+        			|| !name.matches("^[a-zA-Z0-9]*$") || name.matches("\\s"));
     }
 
 
     public boolean isColorValid(Color color){
-        return !(color == null || color.getColor() == null || color.getColor().trim().equals("") || color.getColor().length() > 255
-                    || !color.getColor().matches("^[a-zA-Z0-9]*$") || color.getColor().matches("\\s"));
+        if(color == null)
+            return false;
+        String name = color.getColor();
+        if (name == null)
+            return color.getId() != null;
+
+        return !(name.trim().equals("") || name.length() > 255
+                    || !name.matches("^[a-zA-Z0-9]*$") || name.matches("\\s"));
     }
 
     public boolean isKeywordValid(Keyword keyword){
