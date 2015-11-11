@@ -29,8 +29,8 @@ INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, categ
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('BBB-123456789101', 'so comfortable', 'chair', FALSE, 2, 2, 2, 2);
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('CCC-123456789101', 'extremely plastic', 'cup', FALSE, 3, 3, 3, 3);
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('DDD-123456789101', 'lava', 'lamp', TRUE, 4, 4, 4, 4);
-INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('DDD-123456789101', 'the first magazine i ever read', 'magazine', TRUE, 5, 5, 5, 5);
-INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('DDD-123456789101', 'a diamond encrusted pen', 'pen', TRUE, 1, 6, 6, 2);
+INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('EEE-123456789101', 'the first magazine i ever read', 'magazine', TRUE, 5, 5, 5, 5);
+INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, color, condition_id) VALUES ('FFF-123456789101', 'a diamond encrusted pen', 'pen', TRUE, 1, 6, 6, 2);
 INSERT INTO collectible_keyword (collectibleid, keywordid) VALUES (1,1);
 INSERT INTO collectible_keyword (collectibleid, keywordid) VALUES (1,2);
 INSERT INTO collectible_keyword (collectibleid, keywordid) VALUES (1,3);
