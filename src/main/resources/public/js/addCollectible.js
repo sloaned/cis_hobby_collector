@@ -102,6 +102,15 @@ $(document).ready(function(){
     });
 
     $("#submitAdd").click(function(){
+        validateType();
+        validateColor();
+        validateCondition();
+        validateAge();
+        validateDescription();
+        validateName();
+        validateCatalogNumber();
+        validateKeywords()
+
         var isValid = false;
         if ($(".error").length < 1){
             isValid = true;
@@ -213,6 +222,7 @@ function keywords () {
 
     $('#keywords').on('click','.keyword',function(){
         $(this).remove();
+        validateKeywords();
     });
 }
 

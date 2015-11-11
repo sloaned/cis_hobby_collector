@@ -131,6 +131,10 @@ function validateKeywords(){
 		$("#inputKeywords").parent().find(".errorText").remove();
 		$("#inputKeywords").parent().append("<p class='errorText'>Exceeds 1000 character limit</p>");
 		$("#inputKeywords").addClass("error");
+	}else if ($(".keyword").length < 3){
+		$("#inputKeywords").parent().find(".errorText").remove();
+		$("#inputKeywords").parent().append("<p class='errorText'>Must have at least 3 keywords</p>");
+		$("#inputKeywords").addClass("error");
 	}else {
 		$("#inputKeywords").removeClass("error");
 		$("#inputKeywords").parent().find(".errorText").remove();
