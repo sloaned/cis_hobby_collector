@@ -32,7 +32,7 @@ function addDataToRow(collectible){
 function capitalizeWord(word){
 	if (word !== null){
 		if (word.length > 1){
-			return word.substring(0,1).toUpperCase() + word.substring(1,word.length);
+			return word.substring(0,1).toUpperCase() + word.substring(1, word.length);
 		}
 		else{
 			return word.toUpperCase();
