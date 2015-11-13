@@ -23,8 +23,8 @@ function addDataToRow(collectible){
 	}
 
 	row += "</td><td>"
-			+ capitalizeWord(collectible.sold.toString()) + "</td><td>" + collectible.catalogueNumber + "</td><td>"
-			+ "<!--<button class='editButton btn btn-default'>Edit</button>-->" + "</td></tr>";
+			+ capitalizeWord(collectible.sold.toString()) + "</td><td>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td><td>"
+			+ "<button class='editButton btn btn-default'>Edit</button>" + "</td></tr>";
 
 	$("tbody").append(row);
 }

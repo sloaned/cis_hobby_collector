@@ -88,9 +88,8 @@ public class CollectionsServiceImplTest {
 		assertTrue(result);
 	}
 	@Test
-	public void testUpdateColor_nullColor(){
+	public void testUpdateColor_nullColorAndNullIdNumber(){
 		Color sample = new Color();
-		sample.setId(1);
 		when(mockCollectionsDao.updateColor(sample)).thenReturn(true);
 		boolean result = collectionsServiceImpl.updateColor(sample);
 		assertFalse(result);
@@ -183,14 +182,6 @@ public class CollectionsServiceImplTest {
 		assertFalse(result);
 	}
 
-	@Test
-	public void SadPathAddCategoryIdIsLessThan1(){
-		Category sample = new Category();
-		sample.setId(0);
-		when(mockCollectionsDao.addCategory(sample)).thenReturn(true);
-		boolean result = collectionsServiceImpl.addCategory(sample);
-		assertFalse(result);
-	}
 
 	@Test
 	public void HappyPathUpdateCategory(){
@@ -203,12 +194,11 @@ public class CollectionsServiceImplTest {
 	}
 
 	@Test
-	public void SadPathUpdateCategoryNameIsNull(){
+	public void SadPathUpdateCategoryNameAndIdNumberIsNull(){
 		Category sample = new Category();
-		sample.setId(1);
 		when(mockCollectionsDao.updateCategory(sample)).thenReturn(true);
 
-		boolean result = collectionsServiceImpl.updateCategory(0, sample);
+		boolean result = collectionsServiceImpl.updateCategory(1, sample);
 		assertFalse(result);
 	}
 

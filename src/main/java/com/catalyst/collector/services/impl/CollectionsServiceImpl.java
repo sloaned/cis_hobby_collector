@@ -66,9 +66,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean addCategory(Category category) {
 		if(collectionValidation.isCategoryValid(category))
 		{
-			String cat = category.getCategory();
-			cat.toLowerCase();
-			category.setCategory(cat);
 			return collectionsDao.addCategory(category);
 		}
 		return false;
@@ -76,15 +73,16 @@ public class CollectionsServiceImpl implements CollectionsService {
 
 	@Override
 	public boolean updateCategory(int id, Category category) {
-
-		if(collectionValidation.isCategoryValid(category))
-		{
+		if(category.getCategory() == null){return false;}
+		if(category.getId() != null && category.getId() >0) {
+		if (collectionValidation.isCategoryValid(category)) {
 			category.setId(id);
 			String cat = category.getCategory();
 			cat.toLowerCase();
 			category.setCategory(cat);
 			return collectionsDao.updateCategory(category);
 		}
+	}
 		return false;
 	}
 
@@ -168,9 +166,32 @@ public class CollectionsServiceImpl implements CollectionsService {
         collectionsDao.removeKeyword(id);
     }
 
+	//We probably need to add validation for catalogue number at a later date.
+
 	@Override
 	public boolean addCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
+		String firstThree = collectible.getCatalogueNumber().substring(0,3).toUpperCase();
+		String everythingElse = collectible.getCatalogueNumber().substring(3);
+		collectible.setCatalogueNumber(""+firstThree+everythingElse);
+
+		for (Keyword k: collectible.getKeywords()) {
+			if(k.getKeyword() != null) {
+				addKeyword(k);
+			}
+		}
+		if(collectible.getAge().getAge() !=null){
+			addAge(collectible.getAge());
+		}
+		if(collectible.getCategory().getCategory() !=null){
+			addCategory(collectible.getCategory());
+		}
+		if(collectible.getColor().getColor() !=null){
+			addColor(collectible.getColor());
+		}
+		if(collectible.getCondition().getCondition() !=null){
+			addCondition(collectible.getCondition());
+		}
 		if(collectionValidation.isCollectibleValid()) {
 			collectionsDao.addCollectible(collectible);
 			return true;

@@ -20,42 +20,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	
 	public void setEm(EntityManager em) {
 		this.em = em;
-
-		System.out.println("----------------------------------------------------------------------------------------------");
-		loadDummyCollectibles();
 	}
-
-	private void loadDummyCollectibles() {
-		Collectible c = new Collectible();
-		c.setAge(new Age());
-		c.setCategory(new Category());
-		c.setColor(new Color());
-		c.setCondition(new Condition());
-		c.setKeywords(new HashSet<>());
-		c.getKeywords().add(new Keyword());
-		c.getKeywords().add(new Keyword());
-		c.getKeywords().add(new Keyword());
-		ArrayList<String> words = new ArrayList<>();
-		words.add("bird");
-		words.add("is");
-		words.add("word");
-
-		c.setDescription("This is a thing");
-		c.setName("someThing");
-		c.setCatalogueNumber("aaa-1111111111111");
-		c.getAge().setAge("Ancient");
-		c.getCategory().setCategory("Penny");
-		c.getCondition().setCondition("Mint");
-		c.getColor().setColor("Red");
-		int i = 0;
-		for (Keyword k: c.getKeywords()) {
-			k.setKeyword(words.get(i++));
-		}
-		em.flush();
-		em.persist(c);
-		em.flush();
-	}
-
 
 	public ArrayList<Age> getAgeTypes(){
 		return (ArrayList<Age>) em.createQuery("SELECT t FROM Age t", Age.class).getResultList();
@@ -83,11 +48,16 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
+
 		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
 				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
+		{
 			em.merge(collectible);
+		}
 		else
+		{
 			em.persist(collectible);
+		}
 		return true;
 	}
 
