@@ -9,6 +9,9 @@
 </head>
 <body>
 	<div class="container">
+		<div class="page-header">
+			<h1>Collectibles</h1>
+		</div>
 		<div class="row">
 			<form role="form">
 				<div class="col-lg-5">
@@ -35,10 +38,12 @@
 							<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
 						</div>
 					</div>
-					<input type="submit" name="submit" id="loginSubmit" value="Register" class="btn btn-info pull-right">
+					<button name="submit" id="registerSubmit" class="btn btn-info pull-right">Register Account</button>
 					</div>
+					<div class="error" id="registerError"></div>
 				</div>
 			</form>
+	
 			<div class="col-lg-2"></div>
 			<form role="form">
 				<div class="col-lg-5">
@@ -58,8 +63,9 @@
 							<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
 						</div>
 					</div>
-					<input type="submit" name="submit" id="loginSubmit" value="Log In" class="btn btn-info pull-right">
+					<button name="submit" id="loginSubmit" class="btn btn-info pull-right">Log In</button>
 					</div>
+					<div class="error" id="loginError"></div>
 				</div>
 			</form>
 		</div>

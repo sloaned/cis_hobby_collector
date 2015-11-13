@@ -1,23 +1,33 @@
 package com.catalyst.collector.entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /*
  * Created by D. Sloane 11/13/2015
  */
-public class User {
+@Entity
+public class Username {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false, unique = true, length = 255)
+  
+	@Column(nullable = false, unique = true, length = 255)
     private String  username;
-    @Column(nullable = false, length = 255)
+ 
+	@Column(nullable = false, length = 255)
     private String password;
     
-    public User(){}
+    public Username(){}
+    
+    @Override
+	public String toString() {
+		return "Username{" +
+				"id=" + id +
+				", username='" + username + 
+				", password='" + password + '\'' +
+				'}';
+	}
 
 	public Integer getId() {
 		return id;
