@@ -25,8 +25,8 @@ function addDataToRow(collectible){
 	}
 
 	row += "</td><td>"
-			+ capitalizeWord(collectible.sold.toString()) + "</td><td class=\"catalogNumber\">" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td>"
-			+ "</tr>";
+			+ capitalizeWord(collectible.sold.toString()) + "</td><td class=\"catalogNumber\">" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td><td>"
+			+ "<button class='editSubmitButton btn btn-default hidden'>Submit</button>" + "</td></tr>";
 
 	$("tbody").append(row);
 }
