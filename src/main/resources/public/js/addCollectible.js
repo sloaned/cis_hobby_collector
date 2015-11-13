@@ -65,7 +65,7 @@ $(document).ready(function(){
         });
     });
 
-    //Add age to dropdown
+    //Add era to dropdown
     var ageId = null;
     $.ajax({
         url: "/agetypes",
@@ -91,14 +91,14 @@ $(document).ready(function(){
         if (!container.is(e.target)
             && container.has(e.target).length === 0)
         {
-            $("#newCollectibleForm").css("display", "none");
-            $("#fade").css("display", "none");
+            clearForm();
+            closeForm();
         }
     });
 
     $("#cancelAdd").click(function(){
-        $("#newCollectibleForm").css("display", "none");
-        $("#fade").css("display", "none");
+        clearForm();
+        closeForm();
     });
 
     $("#submitAdd").click(function(){
@@ -232,4 +232,21 @@ function iCanHazKeywords(){
         keywords.push({"keyword": $(this).text().toLowerCase()});
     });
     return keywords;
+}
+
+function clearForm(){
+        $("#inputType").val("");
+        $("#inputColor").val("");
+        $("#inputCondition").val("");
+        $("#inputAge").val("");
+        $("#inputDescription").val("");
+        $("#inputName").val("");
+        $("#inputCatalogNumber").val("");
+        $("#inputKeywords").val("");
+        $(".keyword").remove();
+}
+
+function closeForm(){
+        $("#newCollectibleForm").css("display", "none");
+        $("#fade").css("display", "none");
 }
