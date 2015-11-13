@@ -7,7 +7,9 @@ $(document).ready(function(){
 		for (var i = 0; i < collectibles.length; i++) {
 			addDataToRow(collectibles[i]);
 		}
+		$(".catalogNumber").click(update)
 	});
+
 });
 
 function addDataToRow(collectible){
@@ -23,7 +25,7 @@ function addDataToRow(collectible){
 	}
 
 	row += "</td><td>"
-			+ capitalizeWord(collectible.sold.toString()) + "</td><td>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td><td>"
+			+ capitalizeWord(collectible.sold.toString()) + "</td><td class=\"catalogNumber\">" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td><td>"
 			+ "<button class='editButton btn btn-default'>Edit</button>" + "</td></tr>";
 
 	$("tbody").append(row);
