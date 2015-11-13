@@ -136,6 +136,7 @@ a:hover {
 
 .errorText {
     color: red;
+    visibility: hidden;
 }
 
 ::-webkit-input-placeholder {

@@ -244,6 +244,8 @@ function clearForm(){
         $("#inputCatalogNumber").val("");
         $("#inputKeywords").val("");
         $(".keyword").remove();
+        $(".error").removeClass("error")
+        $(".errorText").css("visibility", "hidden");
 }
 
 function closeForm(){
