@@ -48,7 +48,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-
 		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
 				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
 		{

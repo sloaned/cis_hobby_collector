@@ -21,7 +21,7 @@ $(document).ready(function(){
 		validateCatalogNumber();
 	});
 	$("#inputKeywords").focusout(function(){
-		validateKeywords()
+		validateKeywords();
 	});
 });
 
