@@ -65,7 +65,7 @@ $(document).ready(function(){
         });
     });
 
-    //Add age to dropdown
+    //Add era to dropdown
     var ageId = null;
     $.ajax({
         url: "/agetypes",
