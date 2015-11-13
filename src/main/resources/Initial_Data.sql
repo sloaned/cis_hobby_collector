@@ -20,6 +20,7 @@ INSERT INTO condition (condition) VALUES ('mint');
 INSERT INTO condition (condition) VALUES ('used');
 INSERT INTO condition (condition) VALUES ('fair');
 INSERT INTO condition (condition) VALUES ('poor');
+INSERT INTO condition (condition) VALUES ('tea-stained');
 INSERT INTO keyword (keyword) VALUES ('shiny');
 INSERT INTO keyword (keyword) VALUES ('large');
 INSERT INTO keyword (keyword) VALUES ('fancy');
