@@ -37,6 +37,11 @@ public class UserController {
 		return userService.getUserById(id);
 	}
 	
+	@RequestMapping(value="/users/{username}", method=RequestMethod.GET)
+	public ArrayList<Username> getUserByName(@PathVariable String username){
+		return userService.getUserByName(username);
+	}
+	
 	@RequestMapping(value="/user/{id}", method=RequestMethod.PUT)
 	public void updateUser(@PathVariable Integer id, @RequestBody Username user){
 		user.setId(id);

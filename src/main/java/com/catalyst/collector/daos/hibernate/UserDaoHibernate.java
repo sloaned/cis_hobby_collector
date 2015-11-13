@@ -32,6 +32,11 @@ public class UserDaoHibernate implements UserDao{
 	public Username getUserById(int id) {
 		return em.createQuery("SELECT u FROM Username u WHERE u.id = :id", Username.class).setParameter("id",  id).getSingleResult();
 	}
+	
+	@Override
+	public ArrayList<Username> getUserByName(String name){
+		return (ArrayList<Username>) em.createQuery("SELECT u FROM Username u WHERE u.username = :name", Username.class).setParameter("username", name).getResultList();
+	}
 
 	@Override
 	public boolean addUser(Username user) {
