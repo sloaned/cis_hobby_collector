@@ -1,3 +1,9 @@
+/* keep the editFields from being bigger than its parent container */
+.editField{
+    width:100%;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
 .black_overlay{
     display: none;
     position: absolute;
