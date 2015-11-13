@@ -28,24 +28,22 @@ $(document).ready(function(){
 function validateType(){
 	var text = $("#inputType").val();
 	if (text == null || text == ""){
-		$("#inputType").parent().parent().find(".errorText").remove();
-		$("#inputType").parent().parent().append("<p class='errorText'>Required field</p>");
+		$("#inputType").parent().parent().find(".errorText").css("visibility", "visible");
 		$("#inputType").addClass("error");
 	}else {
 		$("#inputType").removeClass("error");
-		$("#inputType").parent().parent().find(".errorText").remove();
+		$("#inputType").parent().parent().find(".errorText").css("visibility", "hidden");
 	}
 }
 
 function validateColor(){
 	var text = $("#inputColor").val();
 	if (text == null || text == ""){
-		$("#inputColor").parent().parent().find(".errorText").remove();
-		$("#inputColor").parent().parent().append("<p class='errorText'>Required field</p>");
+		$("#inputColor").parent().parent().find(".errorText").css("visibility", "visible");
 		$("#inputColor").addClass("error");
 	}else {
 		$("#inputColor").removeClass("error");
-		$("#inputColor").parent().parent().find(".errorText").remove();
+		$("#inputColor").parent().parent().find(".errorText").css("visibility", "hidden");
 	}
 }
 
@@ -53,12 +51,11 @@ function validateCondition(){
 
 		var text = $("#inputCondition").val();
 		if (text == null || text == ""){
-			$("#inputCondition").parent().parent().find(".errorText").remove();
-			$("#inputCondition").parent().parent().append("<p class='errorText'>Required field</p>");
+			$("#inputCondition").parent().parent().find(".errorText").css("visibility", "visible");
 			$("#inputCondition").addClass("error");
 		}else {
 			$("#inputCondition").removeClass("error");
-			$("#inputCondition").parent().parent().find(".errorText").remove();
+			$("#inputCondition").parent().parent().find(".errorText").css("visibility", "hidden");
 		}
 
 }
@@ -66,12 +63,11 @@ function validateCondition(){
 function validateAge(){
 	var text = $("#inputAge").val();
 	if (text == null || text == ""){
-		$("#inputAge").parent().parent().find(".errorText").remove();
-		$("#inputAge").parent().parent().append("<p class='errorText'>Required field</p>");
+		$("#inputAge").parent().parent().find(".errorText").css("visibility", "visible");
 		$("#inputAge").addClass("error");
 	}else {
 		$("#inputAge").removeClass("error");
-		$("#inputAge").parent().parent().find(".errorText").remove();
+		$("#inputAge").parent().parent().find(".errorText").css("visibility", "hidden");
 
 	}
 }
@@ -79,64 +75,56 @@ function validateAge(){
 function validateDescription(){
 	var text = $("#inputDescription").val();
 	if (text == null || text == "") {
-		$("#inputDescription").parent().find(".errorText").remove();
-		$("#inputDescription").parent().append("<p class='errorText'>Required field</p>");
+		$("#inputDescription").parent().find(".errorText").css("visibility", "visible");
 		$("#inputDescription").addClass("error");
 
 	}else if(text.length >= 1000){
-		$("#inputDescription").parent().find(".errorText").remove();
-		$("#inputDescription").parent().append("<p class='errorText'>Must be less than 1000 characters</p>");
+		$("#inputDescription").parent().find(".errorText").css("visibility", "visible");
 		$("#inputDescription").addClass("error");
 	}else {
 		$("#inputDescription").removeClass("error");
-		$("#inputDescription").parent().find(".errorText").remove();
+		$("#inputDescription").parent().find(".errorText").css("visibility", "hidden");
 	}
 }
 
 function validateName(){
 	var text = $("#inputName").val();
 	if (text == null || text == "") {
-		$("#inputName").parent().find(".errorText").remove();
-		$("#inputName").parent().append("<p class='errorText'>Required field</p>");
+		$("#inputName").parent().find(".errorText").css("visibility", "visible");
 		$("#inputName").addClass("error");
 	}else if(text.length >= 255){
-		$("#inputName").parent().find(".errorText").remove();
-		$("#inputName").parent().append("<p class='errorText'>Must be less than 255 characters</p>");
+		$("#inputName").parent().find(".errorText").css("visibility", "visible");
 		$("#inputName").addClass("error");
 	}else {
 		$("#inputName").removeClass("error");
-		$("#inputName").parent().find(".errorText").remove();
+		$("#inputName").parent().find(".errorText").css("visibility","hidden");
 	}
 }
 
 function validateCatalogNumber(){
 	var text = $("#inputCatalogNumber").val();
 	if (text == null || text == "") {
-		$("#inputCatalogNumber").parent().find(".errorText").remove();
-		$("#inputCatalogNumber").parent().append("<p class='errorText'>Required field</p>");
+		$("#inputCatalogNumber").parent().find(".errorText").css("visibility", "visible");
 		$("#inputCatalogNumber").addClass("error");
 	}else if(text.length != 16){
-		$("#inputCatalogNumber").parent().find(".errorText").remove();
-		$("#inputCatalogNumber").parent().append("<p class='errorText'>Must type in all characters</p>");
+		$("#inputCatalogNumber").parent().find(".errorText").css("visibility", "visible");
 		$("#inputCatalogNumber").addClass("error");
 	}else {
 		$("#inputCatalogNumber").removeClass("error");
-		$("#inputCatalogNumber").parent().find(".errorText").remove();
+		$("#inputCatalogNumber").parent().find(".errorText").css("visibility","hidden");
 	}
 }
 
 function validateKeywords(){
 	var keyLength = $("#keywords").text().trim();
 	if (keyLength.length >= 1000){
-		$("#inputKeywords").parent().find(".errorText").remove();
-		$("#inputKeywords").parent().append("<p class='errorText'>Exceeds 1000 character limit</p>");
+		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").addClass("error");
 	}else if ($(".keyword").length < 3){
-		$("#inputKeywords").parent().find(".errorText").remove();
-		$("#inputKeywords").parent().append("<p class='errorText'>Must have at least 3 keywords</p>");
+		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").addClass("error");
 	}else {
 		$("#inputKeywords").removeClass("error");
-		$("#inputKeywords").parent().find(".errorText").remove();
+		$("#inputKeywords").parent().find(".errorText").css('visibility','hidden');
 	}
 }
