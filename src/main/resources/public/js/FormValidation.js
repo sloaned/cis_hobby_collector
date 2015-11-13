@@ -28,11 +28,11 @@ $(document).ready(function(){
 function validateType(){
 	var text = $("#inputType").val();
 	if (text == null || text == ""){
-		$("#inputType").parent().parent().find(".errorText").css("visibility", "visible");
+		$("#inputType").parent().parent().find(".errorText").css("visibility", "visible"); //Makes the error message visible
 		$("#inputType").addClass("error");
 	}else {
 		$("#inputType").removeClass("error");
-		$("#inputType").parent().parent().find(".errorText").css("visibility", "hidden");
+		$("#inputType").parent().parent().find(".errorText").css("visibility", "hidden"); //Makes the error message invisible
 	}
 }
 
@@ -121,10 +121,10 @@ function validateKeywords(){
 		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").addClass("error");
 	}else if ($(".keyword").length < 3){
-		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
+		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").addClass("error");
 	}else {
 		$("#inputKeywords").removeClass("error");
-		$("#inputKeywords").parent().find(".errorText").css('visibility','hidden');
+		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','hidden');
 	}
 }
