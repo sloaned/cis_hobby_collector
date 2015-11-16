@@ -78,7 +78,7 @@ function validateDescription(){
 		$("#inputDescription").parent().find(".errorText").css("visibility", "visible");
 		$("#inputDescription").addClass("error");
 
-	}else if(text.length >= 1000){
+	}else if(text.length > 1000){
 		$("#inputDescription").parent().find(".errorText").css("visibility", "visible");
 		$("#inputDescription").addClass("error");
 	}else {
@@ -92,7 +92,7 @@ function validateName(){
 	if (text == null || text == "") {
 		$("#inputName").parent().find(".errorText").css("visibility", "visible");
 		$("#inputName").addClass("error");
-	}else if(text.length >= 255){
+	}else if(text.length > 255){
 		$("#inputName").parent().find(".errorText").css("visibility", "visible");
 		$("#inputName").addClass("error");
 	}else {
@@ -117,7 +117,7 @@ function validateCatalogNumber(){
 
 function validateKeywords(){
 	var keyLength = $("#keywords").text().trim();
-	if (keyLength.length >= 1000){
+	if (keyLength.length > 1000){
 		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").addClass("error");
 	}else if ($(".keyword").length < 3){

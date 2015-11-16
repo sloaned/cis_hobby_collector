@@ -13,7 +13,7 @@ $(document).ready(function(){
 });
 
 function addDataToRow(collectible){
-	var row = "<tr><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
+	var row = "<tr id='"+collectible.id+"'><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
 			+ capitalizeWord(collectible.color.color) + "</div></td><td><div class='condition'>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div class='age'>"
 			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class='description'>" + capitalizeWord(collectible.description).truncString(10) + "</div></td><td><div class='name'>"
 			+ capitalizeWord(collectible.name) + "</div></td><td><div class='keywords'>";
