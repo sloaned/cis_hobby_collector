@@ -156,10 +156,15 @@ $(document).ready(function(){
                 data: JSON.stringify(collectible)
             }).then(function(){
                 console.log("Post successful")
-                location.reload(true);
+                toast("Collectible added", true);
+                loadTable();
+                closeForm();
             }, function(error){
                 console.log(error);
+                toast("Catalog number already exists");
             });
+        } else {
+            toast(getErrors());
         }
     });
 
@@ -248,4 +253,31 @@ function clearForm(){
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
         $("#fade").css("display", "none");
+}
+
+function getErrors() {
+    var errText = "The following fields are required: <br />";
+    var hasError = false;
+    $(".inputBox").each(function() {
+        if ($(this).hasClass("error")) {
+            hasError = true;
+            errText += $(this).attr("Placeholder") + "<br />";
+            console.log(errText);
+        }
+    });
+
+    if ($("#inputCatalogNumber").hasClass("error")) {
+        errText += "Catalog number <br />";
+        hasError = true;
+    }
+    if ($("#inputKeywords").hasClass("error")) {
+        var keywordErr = "Must have at least 3 keywords"
+        if (hasError) {
+            errText += "<br />" + keywordErr;
+        } else {
+            errText = keywordErr;
+        }
+    }
+
+    return errText;
 }

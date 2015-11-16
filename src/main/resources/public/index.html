@@ -3,11 +3,13 @@
 		<title>Hobby Collector</title>
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/toastr.css" rel="stylesheet"/>
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/handlebars-v4.0.4.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/typeahead.bundle.js"></script>
 		<script src="js/jQuery-Mask.js"></script>
+        <script src="js/toastr.min.js"></script>
 
 		<script src="js/index.js"></script>
 		<script src="js/addCollectible.js"></script>
@@ -70,7 +72,7 @@
 					<div class="form-group">
 						<label for="inputType">Type</label>
 						<div class="input-group">
-							<input id="inputType" type="text" class="form-control" aria-label="..." placeholder="Type" maxlength="255">
+							<input id="inputType" type="text" class="form-control inputBox" aria-label="..." placeholder="Type" maxlength="255">
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
@@ -87,7 +89,7 @@
 					<div class="form-group">
 						<label for="inputColor">Color</label>
 						<div class="input-group">
-							<input id="inputColor" type="text" class="form-control" aria-label="..." placeholder="Color" maxlength="255">
+							<input id="inputColor" type="text" class="form-control inputBox" aria-label="..." placeholder="Color" maxlength="255">
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
@@ -104,7 +106,7 @@
 					<div class="form-group">
 						<label for="inputCondition">Condition</label>
 						<div class="input-group">
-							<input id="inputCondition" type="text" class="form-control" aria-label="..." placeholder="Condition" maxlength="255">
+							<input id="inputCondition" type="text" class="form-control inputBox" aria-label="..." placeholder="Condition" maxlength="255">
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="conditionSelection" class="dropdown-menu dropdown-menu-right">
@@ -121,7 +123,7 @@
 					<div class="form-group">
 						<label for="inputAge">Era</label>
 						<div class="input-group">
-							<input id="inputAge" type="text" class="form-control" aria-label="..." placeholder="Era" maxlength="255">
+							<input id="inputAge" type="text" class="form-control inputBox" aria-label="..." placeholder="Era" maxlength="255">
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="ageSelection" class="dropdown-menu dropdown-menu-right">
@@ -137,12 +139,12 @@
 					</div>
 					<div class="form-group">
 						<label for="inputDescription">Description</label>
-						<textarea class="form-control" id="inputDescription" placeholder="Description" rows="5" maxlength="1000"></textarea>
+						<textarea class="form-control inputBox" id="inputDescription" placeholder="Description" rows="5" maxlength="1000"></textarea>
 						<p class="errorText">Required Field</p>
 					</div>
 					<div class="form-group">
 						<label for="inputName">Name</label>
-						<input type="text" class="form-control" id="inputName" placeholder="Name" maxlength="255">
+						<input type="text" class="form-control inputBox" id="inputName" placeholder="Name" maxlength="255">
 						<p class="errorText">Required Field</p>
 					</div>
 					<div class="form-group">
