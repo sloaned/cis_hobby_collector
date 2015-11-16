@@ -26,6 +26,21 @@ public class SearchDaoHibernate implements SearchDao{
 
     @Override
     public ArrayList<Collectible> search(Search searchBody) {
-        return em.createQuery("SELECT c FROM Collectible c WHERE c.name");
+        String query = "SELECT c FROM Collectible c WHERE";
+        String type = searchBody.getCategory();
+        String color = searchBody.getColor();
+        String condition = searchBody.getCondition();
+        String age = searchBody.getAge();
+        String description = searchBody.getDescription();
+        String name = searchBody.getName();
+        String keyword = searchBody.getKeyword();
+        boolean soldStatus = searchBody.isSold();
+        String catalogNumber = searchBody.getCatalogueNumber();
+
+        if(type != null){
+
+        }
+
+        return (ArrayList<Collectible>)em.createQuery(query);
     }
 }
