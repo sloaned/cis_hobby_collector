@@ -1,6 +1,3 @@
-/**
- * Created by ddelaney on 11/4/2015.
- */
 $(document).ready(function(){
 
     $("#addCollectibleButton").click(function(){
@@ -210,7 +207,7 @@ function keywords () {
     $("#keywords input").focusout(function(){
         var txt= this.value.replace(/[^\w]/g,'');
         if(txt) {
-            $(this).parent().before('<span class="keyword">'+ txt +'</span>');
+            $(this).parent().before('<span class="keyword">'+ txt + '<span class="delete">X</span></span>');
         }
         $(this).val("");
     }).keyup(function(e){
@@ -220,8 +217,8 @@ function keywords () {
         }
     });
 
-    $('#keywords').on('click','.keyword',function(){
-        $(this).remove();
+    $('#keywords').on('click','.delete',function(){
+        $(this).parent().remove();
         validateKeywords();
     });
 }
@@ -229,7 +226,7 @@ function keywords () {
 function iCanHazKeywords(){
     var keywords = [];
     $(".keyword").each(function(){
-        keywords.push({"keyword": $(this).text().toLowerCase()});
+        keywords.push({"keyword": $(this).contents().first().text().toLowerCase()});
     });
     return keywords;
 }
@@ -244,6 +241,8 @@ function clearForm(){
         $("#inputCatalogNumber").val("");
         $("#inputKeywords").val("");
         $(".keyword").remove();
+        $(".error").removeClass("error")
+        $(".errorText").css("visibility", "hidden");
 }
 
 function closeForm(){
