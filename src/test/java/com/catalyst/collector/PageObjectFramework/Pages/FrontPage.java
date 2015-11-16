@@ -3,6 +3,7 @@ package com.catalyst.collector.PageObjectFramework.Pages;
 
 import com.catalyst.collector.SeleniumFramework.Pages.IndexPage;
 import com.catalyst.collector.SeleniumFramework.SeleniumSettings;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -42,5 +43,11 @@ public class FrontPage {
 
         assertEquals("Hobby Collector", actualtitle);
     }
+
+    @After
+            public void tearDown() throws Exception {
+                driver.quit();
+    }
+
 
 }
