@@ -156,3 +156,7 @@ td div{
 	overflow: hidden;
 }
 
+.displayCatalogNumber{
+	white-space: nowrap;
+}
+
