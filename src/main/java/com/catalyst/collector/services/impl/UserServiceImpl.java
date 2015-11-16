@@ -26,27 +26,48 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Username getUserById(int id) {
+		if(id < 1)
+		{
+			return null;
+		}
 		return userDao.getUserById(id);
 	}
 	
 	@Override
-	public ArrayList<Username> getUserByName(String name){
+	public Username getUserByName(String name){
 		return userDao.getUserByName(name);
 	}
 
 	@Override
 	public boolean addUser(Username user) {
+		if(user.getUsername() == null || user.getUsername() == "" || user.getPassword() == null || user.getPassword() == "")
+		{
+			return false;
+		}
 		return userDao.addUser(user);
 	}
 
 	@Override
 	public boolean updateUser(Username user) {
+		if(user.getUsername() == null || user.getUsername() == "" || user.getPassword() == null || user.getPassword() == "" || user.getId() == null || user.getId() < 1)
+		{
+			return false;
+		}
 		return userDao.updateUser(user);
 	}
 
 	@Override
 	public boolean deleteUser(int id) {
+		if(id < 1)
+		{
+			return false;
+		}
 		return userDao.deleteUser(id);
+	}
+	
+	@Override
+	public boolean nameInUse(String Name){
+		return userDao.nameInUse(Name);
 	}
 
 }

@@ -38,7 +38,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/users/{username}", method=RequestMethod.GET)
-	public ArrayList<Username> getUserByName(@PathVariable String username){
+	public boolean nameInUse(@PathVariable String username){
+		return userService.nameInUse(username);
+	}
+	
+	@RequestMapping(value="/user/name/{username}", method=RequestMethod.GET)
+	public Username getUserByName(@PathVariable String username){
 		return userService.getUserByName(username);
 	}
 	

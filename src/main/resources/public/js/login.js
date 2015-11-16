@@ -5,49 +5,7 @@ $(document).ready(function(){
 	
 	$("#registerSubmit").click(function(event){
 		event.preventDefault();
-		$("#registerError").empty();
-
-		var username = $("#registerUsername").val();
-		var password1 = $("#registerPassword1").val();
-		var password2 = $("#registerPassword2").val();
-		if(username === "" || password1 === "" || password2 === "")
-		{
-			$("#registerError").val(errorStart + "All fields are required" + messageEnd);
-			return;
-		}
-		else if(password1 != password2)
-		{
-			$("#registerError").val(errorStart + "Passwords do not match" + messageEnd);
-			return;
-		}
-		var user = {};
-		user.username = username;
-		user.password = password1;
-		$.ajax({
-	        url: '/users/'+username,
-	        method: 'GET',
-	    }).then(function(User){
-	    	if(User === null)
-	    	{
-	    		$.ajax({
-	    	        url: '/users',
-	    	        method: 'POST',
-	    	        contentType: 'application/json',
-	    	        data: JSON.stringify(user)
-	    	    }).then(function(){
-	    	        console.log("Post successful")
-	    	        $("#registerError").val(successStart + "Success! You may now log in" + messageEnd);
-	    	    }, function(error){
-	    	        console.log(error);
-	    	    });
-	    	}
-	    	else
-	    	{
-	    		$("#registerError").val(errorStart + "That username is already in use" + messageEnd);
-	    	}
-	    }, function(error){
-	        console.log(error);
-	    });
+		registerSubmit();
 	});
 	
 	$("#loginSubmit").click(function(event){
@@ -62,18 +20,20 @@ var messageEnd = "</strong></div>";
 
 function registerSubmit(){
 	$("#registerError").empty();
-
+	$("#loginError").empty();
+	$("#loginUsername").val("");
+	$("#loginPassword").val("");
 	var username = $("#registerUsername").val();
 	var password1 = $("#registerPassword1").val();
 	var password2 = $("#registerPassword2").val();
 	if(username === "" || password1 === "" || password2 === "")
 	{
-		$("#registerError").val(errorStart + "All fields are required" + messageEnd);
+		$("#registerError").append(errorStart + "All fields are required" + messageEnd);
 		return;
 	}
 	else if(password1 != password2)
 	{
-		$("#registerError").val(errorStart + "Passwords do not match" + messageEnd);
+		$("#registerError").append(errorStart + "Passwords do not match" + messageEnd);
 		return;
 	}
 	var user = {};
@@ -82,8 +42,8 @@ function registerSubmit(){
 	$.ajax({
         url: '/users/'+username,
         method: 'GET',
-    }).then(function(User){
-    	if(User === null)
+    }).then(function(InUse){
+    	if(InUse === false)
     	{
     		$.ajax({
     	        url: '/users',
@@ -92,14 +52,17 @@ function registerSubmit(){
     	        data: JSON.stringify(user)
     	    }).then(function(){
     	        console.log("Post successful")
-    	        $("#registerError").val(successStart + "Success! You may now log in" + messageEnd);
+    	        $("#registerUsername").val("");
+    	        $("#registerPassword1").val("");
+    	        $("#registerPassword2").val("");
+    	        $("#registerError").append(successStart + "Success! You may now log in" + messageEnd);
     	    }, function(error){
     	        console.log(error);
     	    });
     	}
     	else
     	{
-    		$("#registerError").val(errorStart + "That username is already in use" + messageEnd);
+    		$("#registerError").append(errorStart + "That username is already in use" + messageEnd);
     	}
     }, function(error){
         console.log(error);
@@ -107,34 +70,45 @@ function registerSubmit(){
 };
 
 function loginSubmit(){
+	$("#registerError").empty();
 	$("#loginError").empty();
-	var username = $("#loginUsername");
-	var password = $("#loginPassword");
-	if(username === null || password === null)
+	$("#registerUsername").val("");
+	$("#registerPassword1").val("");
+	$("#registerPassword2").val("");
+	var username = $("#loginUsername").val();
+	var password = $("#loginPassword").val();
+	if(username === "" || password === "")
 	{
-		$("#loginError").val(errorStart + "All fields are required" + messageEnd);
+		$("#loginError").append(errorStart + "All fields are required" + messageEnd);
 		return;
 	}
 	$.ajax({
         url: '/users/'+username,
         method: 'GET',
-    }).then(function(User){
-    	if(User === null)
+    }).then(function(InUse){
+    	if(InUse === false)
     	{
-    		$("#loginError").val(errorStart + "Username does not exist" + messageEnd);
+    		$("#loginError").append(errorStart + "Username does not exist" + messageEnd);
     		return;
     	}
     	else
     	{
-    		if(User.password != password)
-    		{
-    			$("#loginError").val(errorStart + "Username/password do not match" + messageEnd);
-        		return;
-    		}
-    		else
-    		{
-    			location.href("/home");
-    		}
+    		$.ajax({
+    	        url: '/user/name/'+username,
+    	        method: 'GET',
+    		}).then(function(User){
+    			if(User.password != password)
+    			{
+    				$("#loginError").append(errorStart + "Username/password do not match" + messageEnd);
+    				return;
+    			}
+    			else
+    			{
+    				window.location.replace("/home");
+    			}
+    		}, function(error){
+    	        console.log(error);
+    	    });
     	}
     }, function(error){
         console.log(error);

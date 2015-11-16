@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -34,8 +36,14 @@ public class UserDaoHibernate implements UserDao{
 	}
 	
 	@Override
-	public ArrayList<Username> getUserByName(String name){
-		return (ArrayList<Username>) em.createQuery("SELECT u FROM Username u WHERE u.username = :name", Username.class).setParameter("username", name).getResultList();
+	public Username getUserByName(String Name){
+		return em.createQuery("SELECT u FROM Username u WHERE u.username = :name", Username.class).setParameter("name", Name).getSingleResult();
+	}
+	
+	@Override
+	public boolean nameInUse(String Name){
+		ArrayList<Username> results = (ArrayList<Username>) em.createQuery("SELECT u FROM Username u WHERE u.username = :name", Username.class).setParameter("name", Name).getResultList();
+		return(results != null && results.size() != 0);
 	}
 
 	@Override
