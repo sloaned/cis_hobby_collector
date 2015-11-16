@@ -255,7 +255,7 @@ function closeForm(){
         $("#fade").css("display", "none");
 }
 
-function toast(message, successful = false) {
+function toast(message, successful) {
     toastr.options = {
         "positionClass": "toast-top-center",
         "preventDuplicates": true
