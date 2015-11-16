@@ -166,3 +166,13 @@ td div{
     overflow: hidden;
     white-space: nowrap;
 }
+
+.table-striped > tbody > tr:nth-child(2n-1) > td, .table-striped > tbody > tr:nth-child(2n-1) > th {
+    background-color: #f0ad4e;
+    color: #ffffff;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: #d9534f;
+    color: #ffffff;
+}

@@ -14,7 +14,7 @@
 		<script src="js/formValidation.js"></script>
 	</head>
 	<body>
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -44,7 +44,7 @@
 		</nav>
 		<div class="body">
 			<div class="container">
-				<table class="table table-striped">
+				<table class="table table-striped table-responsive">
 					<thead>
 						<th>Type</th>
 						<th>Color</th>
@@ -72,7 +72,7 @@
 						<div class="input-group">
 							<input id="inputType" type="text" class="form-control" aria-label="..." placeholder="Type" maxlength="255">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
+								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="typeSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="typeDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -89,7 +89,7 @@
 						<div class="input-group">
 							<input id="inputColor" type="text" class="form-control" aria-label="..." placeholder="Color" maxlength="255">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
+								<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="colorDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -106,7 +106,7 @@
 						<div class="input-group">
 							<input id="inputCondition" type="text" class="form-control" aria-label="..." placeholder="Condition" maxlength="255">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
+								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="conditionSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="conditionDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -123,7 +123,7 @@
 						<div class="input-group">
 							<input id="inputAge" type="text" class="form-control" aria-label="..." placeholder="Era" maxlength="255">
 							<div class="input-group-btn">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
+								<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
 								<ul id="ageSelection" class="dropdown-menu dropdown-menu-right">
 									<script id="ageDropdown" type="text/x-handlebars-template">
 										{{#each this}}
@@ -167,15 +167,15 @@
 								False <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a>True</a></li>
-								<li><a>False</a></li>
+								<li class="btn-warning"><a>True</a></li>
+								<li class="btn-danger"><a>False</a></li>
 							</ul>
 						</div>
 					</div>
 
 					<div class="button-group">
-						<button id="submitAdd" type="submit" class="btn btn-default">Submit</button>
-						<button id="cancelAdd" type="submit" class="btn btn-default">Cancel</button>
+						<button id="submitAdd" type="submit" class="btn btn-warning">Submit</button>
+						<button id="cancelAdd" type="submit" class="btn btn-danger">Cancel</button>
 					</div>
 				</div>
 			</div>
