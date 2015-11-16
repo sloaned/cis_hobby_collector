@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    loadTable();
+});
+
+function loadTable() {
     $.ajax({
         url : '/collectibles',
         method : 'GET'
@@ -8,9 +12,9 @@ $(document).ready(function(){
             addDataToRow(collectibles[i]);
         }
     });
-    });
+}
 
-    function addDataToRow(collectible){
+function addDataToRow(collectible){
     var row = "<tr><td>" + capitalizeWord(collectible.category.category) + "</td><td>"
             + capitalizeWord(collectible.color.color) + "</td><td>" + capitalizeWord(collectible.condition.condition) + "</td><td>"
             + capitalizeWord(collectible.age.age) + "</td><td>" + capitalizeWord(collectible.description) + "</td><td>"

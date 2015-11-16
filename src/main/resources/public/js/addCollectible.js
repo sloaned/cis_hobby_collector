@@ -160,7 +160,8 @@ $(document).ready(function(){
             }).then(function(){
                 console.log("Post successful")
                 toast("Collectible added", true);
-                location.reload(true);
+                loadTable();
+                closeForm();
             }, function(error){
                 console.log(error);
                 toast("Can't POST")
@@ -266,6 +267,6 @@ function toast(message, successful = false) {
     var status;
     status = successful ? "Success" : "Error";
 
-    toastr[status.toLowerCase()](errorMessage, status);
+    toastr[status.toLowerCase()](message, status);
 
 }
