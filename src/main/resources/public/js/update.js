@@ -2,28 +2,30 @@ function update(){
     //if already changed td to input then don't do it again again
     if($(this).children().hasClass("editField"))return;
     //set row to the row of the CatalogNumber clicked
-    row = $(this.parentNode);
+    row = $(this.parentNode.parentNode);
+   // console.log(row);
     //console.log(self)
 
     //change all td to input boxes
     row.children().each(function(){
-        //set this to what this is (the td)
-        td=$(this);
+        //set this to what this is (the div)
+        div=$(this.children);
 
         //if this is the submit button we don't want to change it to a input field however we do want to show it
-        if($(td).children().hasClass("editSubmitButton")){
-            $(td).children().toggleClass("hidden");
+        if($(div).children().hasClass("editSubmitButton")){
+            $(div).children().toggleClass("hidden");
             return;
         }
 
-        if($(td).children().hasClass("sold")){
-            var isSold = $(td).
-            $(td).html("<select class=\"editField\" value=\""+ text +"\">  <option>true</option> <option>false</option></select>");
+        if($(div).hasClass("sold")){
+            var isSold = $(div).text().toLowerCase() == "true"? "<option selected='selected'>true</option> <option>false</option>":"<option >true</option> <option selected='selected'>false</option>";
+            console.log(isSold);
+            $(div).html("<select class=\"editField\" value=\""+ isSold +"\"> "+ isSold+ "</select>");
             return;
         }
 
-        text = $(td).text();
-        $(td).html("<input class=\"editField\"type=\"text\" value=\""+ text +"\">");
+        text = $(div).text();
+        $(div).html("<input class=\"editField\"type=\"text\" value=\""+ text +"\">");
     });
     $(".editSubmitButton").click(updated)
 }

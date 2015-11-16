@@ -13,10 +13,10 @@ $(document).ready(function(){
 });
 
 function addDataToRow(collectible){
-	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.color.color) + "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div>" + capitalizeWord(collectible.description).truncString(10) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
+	var row = "<tr><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
+			+ capitalizeWord(collectible.color.color) + "</div></td><td><div class='condition'>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div class='age'>"
+			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class='description'>" + capitalizeWord(collectible.description).truncString(10) + "</div></td><td><div class='name'>"
+			+ capitalizeWord(collectible.name) + "</div></td><td><div class='keywords'>";
 	for (var i = 0; i < collectible.keywords.length; i++) {
 		if (i === collectible.keywords.length - 1)
 			row += capitalizeWord(collectible.keywords[i].keyword);
@@ -24,9 +24,9 @@ function addDataToRow(collectible){
 			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
 	}
 
-	row += "</div></td><td><div>"
-			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
-			+ "<button class='editButton btn btn-default'>Edit</button>" + "</div></td></tr>";
+	row += "</div></td><td><div class='sold'>"
+			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='CatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
+			+ "<button class='editSubmitButton btn btn-default hidden' >Edit</button>" + "</div></td></tr>";
 
     $("tbody").append(row);
     }
