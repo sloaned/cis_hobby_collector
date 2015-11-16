@@ -47,3 +47,29 @@ function capitalizeWord(word){
 String.prototype.makeEllipsis = function(length) {
     return this.length > length ? this.substring(0, length-1) + "&hellip;" : this;
 }
+
+function toast(message, successful) {
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      'body-output-type': 'trustedHtml'
+    }
+
+    var status;
+    status = successful ? "Success" : "Error";
+
+    toastr[status.toLowerCase()](message, status);
+}
