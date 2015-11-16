@@ -13,10 +13,10 @@ $(document).ready(function(){
 });
 
 function addDataToRow(collectible){
-	var row = "<tr><td>" + capitalizeWord(collectible.category.category) + "</td><td>"
-			+ capitalizeWord(collectible.color.color) + "</td><td>" + capitalizeWord(collectible.condition.condition) + "</td><td>"
-			+ capitalizeWord(collectible.age.age) + "</td><td>" + capitalizeWord(collectible.description) + "</td><td>"
-			+ capitalizeWord(collectible.name) + "</td><td>";
+	var row = "<tr><td class='category'>" + capitalizeWord(collectible.category.category) + "</td><td class='color'>"
+			+ capitalizeWord(collectible.color.color) + "</td><td class='condition'>" + capitalizeWord(collectible.condition.condition) + "</td><td class='age'>"
+			+ capitalizeWord(collectible.age.age) + "</td><td class='description'>" + capitalizeWord(collectible.description) + "</td><td class='category'>"
+			+ capitalizeWord(collectible.name) + "</td><td class='keywords'>";
 	for (var i = 0; i < collectible.keywords.length; i++) {
 		if (i === collectible.keywords.length - 1)
 			row += capitalizeWord(collectible.keywords[i].keyword);
@@ -24,7 +24,7 @@ function addDataToRow(collectible){
 			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
 	}
 
-	row += "</td><td>"
+	row += "</td><td class='sold'>"
 			+ capitalizeWord(collectible.sold.toString()) + "</td><td class=\"catalogNumber\">" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</td><td>"
 			+ "<button class='editSubmitButton btn btn-default hidden'>Submit</button>" + "</td></tr>";
 
