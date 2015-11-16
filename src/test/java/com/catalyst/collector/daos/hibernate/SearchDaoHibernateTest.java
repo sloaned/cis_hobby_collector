@@ -6,6 +6,7 @@ import com.catalyst.collector.entities.Search;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
@@ -16,17 +17,23 @@ import static org.mockito.Mockito.mock;
  */
 public class SearchDaoHibernateTest {
     Search searchBody = new Search();
-    SearchDaoHibernate searchDaoHibernate;
-    EntityManager em;
+    SearchDao dao;
+    SearchDaoHibernate searchDaoHibernate = new SearchDaoHibernate();
+    EntityManager mockEm;
+    private SearchDaoHibernate target;
+
     @Before
-    public void setUp(){
-        searchDaoHibernate = new SearchDaoHibernate();
-        searchBody.setCategory("arrowhead");
+    public void setup() {
+        target = new SearchDaoHibernate();
+        mockEm = mock(EntityManager.class);
+        target.setEm(mockEm);
     }
 
 
     @Test
     public void testSearch() throws Exception {
+        searchBody.setAge("antique");
+        searchDaoHibernate.setEm(mockEm);
         searchDaoHibernate.search(searchBody);
     }
 }
