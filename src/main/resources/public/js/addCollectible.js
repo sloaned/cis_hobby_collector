@@ -86,7 +86,7 @@ $(document).ready(function(){
         var container = $("#newCollectibleForm");
 
         if (!container.is(e.target)
-            && container.has(e.target).length === 0)
+            && container.has(e.target).length === 0 && !$("#toast-container").has(e.target))
         {
             clearForm();
             closeForm();
