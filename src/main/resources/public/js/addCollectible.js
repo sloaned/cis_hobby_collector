@@ -156,10 +156,15 @@ $(document).ready(function(){
                 data: JSON.stringify(collectible)
             }).then(function(){
                 console.log("Post successful")
-                location.reload(true);
+                toast("Collectible added", true);
+                loadTable();
+                closeForm();
             }, function(error){
                 console.log(error);
+                toast("Can't POST")
             });
+        } else {
+            toast("Invalid input");
         }
     });
 
@@ -248,4 +253,17 @@ function clearForm(){
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
         $("#fade").css("display", "none");
+}
+
+function toast(message, successful = false) {
+    toastr.options = {
+        "positionClass": "toast-top-center",
+        "preventDuplicates": true
+    }
+
+    var status;
+    status = successful ? "Success" : "Error";
+
+    toastr[status.toLowerCase()](message, status);
+
 }

@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    loadTable();
+});
+
+function loadTable() {
     $.ajax({
         url : '/collectibles',
         method : 'GET'
@@ -8,7 +12,7 @@ $(document).ready(function(){
             addDataToRow(collectibles[i]);
         }
     });
-    });
+}
 
 function addDataToRow(collectible){
 	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
