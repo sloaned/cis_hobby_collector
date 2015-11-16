@@ -160,4 +160,10 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
-
+#searchButton{
+	margin: 0 auto;
+display:block;
+}
+.popover{
+	max-width:98%;
+}
