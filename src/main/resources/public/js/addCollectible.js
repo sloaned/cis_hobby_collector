@@ -106,7 +106,10 @@ $(document).ready(function(){
         validateDescription();
         validateName();
         validateCatalogNumber();
-        validateKeywords()
+        validateKeywords();
+        var purchaseDate = $("#inputPurchaseDate").val();
+        var sellDate = $("#inputSellDate").val();
+        
 
         var isValid = false;
         if ($(".error").length < 1){
@@ -173,6 +176,7 @@ $(document).ready(function(){
     });
 
     $("#inputCatalogNumber").mask("SSS-000000000000");
+    $("#inputPurchaseDate").mask("00/00/0000");
 });
 
 function typeahead(){

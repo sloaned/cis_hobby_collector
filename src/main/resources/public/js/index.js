@@ -23,7 +23,13 @@ function addDataToRow(collectible){
 	}
 
 	row += "</div></td><td><div>"
-			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
+			+ collectible.purchaseDate.toString() + "</div></td><td><div>"
+			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div>";
+			if(collectible.sellDate != null)
+			{
+				row += collectible.sellDate.toString();
+			}
+			row += "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
 			+ "<button class='editButton btn btn-default'>Edit</button>" + "</div></td></tr>";
 
     $("tbody").append(row);
