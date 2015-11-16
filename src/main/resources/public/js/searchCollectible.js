@@ -28,7 +28,12 @@ var content = '<form class="form-inline" role="form">\
       <label>Catalog Number:</label>\
       <input type="text" class="form-control" id="catalogNumberSearch" placeholder="catalog number">\
     </div>\
-    <button type="submit" class="btn btn-default">Submit</button>\
+   <select>\
+  		<option value="select">Select</option>\
+  		<option value="sold">Sold</option>\
+  		<option value="notsold">Not Sold</option>\
+	</select>\
+    <button type="submit" id="submitSearch" class="btn btn-default">Submit</button>\
   </form>';
     $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3>", 
     content: content, html: true, placement: "top"}); 
