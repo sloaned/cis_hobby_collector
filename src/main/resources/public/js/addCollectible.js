@@ -84,9 +84,10 @@ $(document).ready(function(){
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
         var container = $("#newCollectibleForm");
-
+        console.log("clicked: " + e.target.nodeName)
+        $target = $(e.target);
         if (!container.is(e.target)
-            && container.has(e.target).length === 0 && !$("#toast-container").has(e.target))
+            && container.has(e.target).length === 0 && $target.attr("class").indexOf("toast") === -1)
         {
             clearForm();
             closeForm();
@@ -256,7 +257,7 @@ function closeForm(){
 }
 
 function getErrors() {
-    var errText = "The following fields are required: <br />";
+    var errText = "The following fields have errors: <br />";
     var hasError = false;
     $(".inputBox").each(function() {
         if ($(this).hasClass("error")) {
@@ -271,12 +272,7 @@ function getErrors() {
         hasError = true;
     }
     if ($("#inputKeywords").hasClass("error")) {
-        var keywordErr = "Must have at least 3 keywords"
-        if (hasError) {
-            errText += "<br />" + keywordErr;
-        } else {
-            errText = keywordErr;
-        }
+        errText += "Keywords"
     }
 
     return errText;
