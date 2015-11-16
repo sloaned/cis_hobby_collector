@@ -14,7 +14,7 @@ public class AddCollectiblePage extends PageObject {
     }
 
     public void clickAddCollectible(){
-        click(By.linkText("Add Collectible"));
+        click(By.id("addCollectibleButton"));
     }
 
 }
