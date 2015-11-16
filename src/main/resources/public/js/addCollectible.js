@@ -91,14 +91,14 @@ $(document).ready(function(){
         if (!container.is(e.target)
             && container.has(e.target).length === 0)
         {
-            $("#newCollectibleForm").css("display", "none");
-            $("#fade").css("display", "none");
+            clearForm();
+            closeForm();
         }
     });
 
     $("#cancelAdd").click(function(){
-        $("#newCollectibleForm").css("display", "none");
-        $("#fade").css("display", "none");
+        clearForm();
+        closeForm();
     });
 
     $("#submitAdd").click(function(){
@@ -210,7 +210,7 @@ function keywords () {
     $("#keywords input").focusout(function(){
         var txt= this.value.replace(/[^\w]/g,'');
         if(txt) {
-            $(this).parent().before('<span class="keyword">'+ txt +'</span>');
+            $(this).parent().before('<span class="keyword">'+ txt + '<span class="delete">X</span></span>');
         }
         $(this).val("");
     }).keyup(function(e){
@@ -220,8 +220,8 @@ function keywords () {
         }
     });
 
-    $('#keywords').on('click','.keyword',function(){
-        $(this).remove();
+    $('#keywords').on('click','.delete',function(){
+        $(this).parent().remove();
         validateKeywords();
     });
 }
@@ -229,7 +229,26 @@ function keywords () {
 function iCanHazKeywords(){
     var keywords = [];
     $(".keyword").each(function(){
-        keywords.push({"keyword": $(this).text().toLowerCase()});
+        keywords.push({"keyword": $(this).contents().first().text().toLowerCase()});
     });
     return keywords;
+}
+
+function clearForm(){
+        $("#inputType").val("");
+        $("#inputColor").val("");
+        $("#inputCondition").val("");
+        $("#inputAge").val("");
+        $("#inputDescription").val("");
+        $("#inputName").val("");
+        $("#inputCatalogNumber").val("");
+        $("#inputKeywords").val("");
+        $(".keyword").remove();
+        $(".error").removeClass("error")
+        $(".errorText").css("visibility", "hidden");
+}
+
+function closeForm(){
+        $("#newCollectibleForm").css("display", "none");
+        $("#fade").css("display", "none");
 }
