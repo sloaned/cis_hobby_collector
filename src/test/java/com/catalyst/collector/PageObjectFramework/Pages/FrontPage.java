@@ -3,6 +3,7 @@ package com.catalyst.collector.PageObjectFramework.Pages;
 
 import com.catalyst.collector.SeleniumFramework.Pages.IndexPage;
 import com.catalyst.collector.SeleniumFramework.SeleniumSettings;
+import com.catalyst.collector.SeleniumFramework.TestPageObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,15 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by ddelaney on 11/13/2015.
  */
-public class FrontPage {
-    private WebDriver driver;
-    SeleniumSettings seleniumSettings;
-
-    @Before
-    public void setup(){
-        seleniumSettings = new SeleniumSettings();
-        driver = seleniumSettings.getDriver();
-    }
+public class FrontPage extends TestPageObject {
 
     @Test
     public void checkThatItGoesToTheRightPage(){
@@ -44,10 +37,6 @@ public class FrontPage {
         assertEquals("Hobby Collector", actualtitle);
     }
 
-    @After
-            public void tearDown() throws Exception {
-                driver.quit();
-    }
 
 
 }
