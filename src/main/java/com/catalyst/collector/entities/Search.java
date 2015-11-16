@@ -6,22 +6,13 @@ import java.util.Set;
  * Created by gfisher on 11/16/2015.
  */
 public class Search {
-
-    private Category category;
-
-    private String catalogueNumber;
-
-    private String name;
-
+    private String category;
+    private String color;
+    private String condition;
+    private String age;
     private String description;
-
-    private Age age;
-
-    private Condition condition;
-
-    private Color color;
-
-    private Set<Keyword> keywords;
-
+    private String name;
+    private Set<String> keywords;
     private boolean sold;
+    private String catalogueNumber;
 }
