@@ -5,7 +5,49 @@ $(document).ready(function(){
 	
 	$("#registerSubmit").click(function(event){
 		event.preventDefault();
-		registerSubmit();
+		$("#registerError").empty();
+
+		var username = $("#registerUsername").val();
+		var password1 = $("#registerPassword1").val();
+		var password2 = $("#registerPassword2").val();
+		if(username === "" || password1 === "" || password2 === "")
+		{
+			$("#registerError").val(errorStart + "All fields are required" + messageEnd);
+			return;
+		}
+		else if(password1 != password2)
+		{
+			$("#registerError").val(errorStart + "Passwords do not match" + messageEnd);
+			return;
+		}
+		var user = {};
+		user.username = username;
+		user.password = password1;
+		$.ajax({
+	        url: '/users/'+username,
+	        method: 'GET',
+	    }).then(function(User){
+	    	if(User === null)
+	    	{
+	    		$.ajax({
+	    	        url: '/users',
+	    	        method: 'POST',
+	    	        contentType: 'application/json',
+	    	        data: JSON.stringify(user)
+	    	    }).then(function(){
+	    	        console.log("Post successful")
+	    	        $("#registerError").val(successStart + "Success! You may now log in" + messageEnd);
+	    	    }, function(error){
+	    	        console.log(error);
+	    	    });
+	    	}
+	    	else
+	    	{
+	    		$("#registerError").val(errorStart + "That username is already in use" + messageEnd);
+	    	}
+	    }, function(error){
+	        console.log(error);
+	    });
 	});
 	
 	$("#loginSubmit").click(function(event){
