@@ -1,8 +1,14 @@
 function update(){
+    //if there is already a row beeing edited then dont make another row editable
+    if($(".editField").length !== 0) return;
     //if already changed td to input then don't do it again again
     if($(this).children().hasClass("editField"))return;
     //set row to the row of the CatalogNumber clicked
     row = $(this.parentNode.parentNode);
+
+    row.focusout(function(){
+       console.log("hi");
+    });
    // console.log(row);
 
     //change all td to input boxes
