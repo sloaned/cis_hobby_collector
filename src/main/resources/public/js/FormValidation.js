@@ -24,15 +24,10 @@ $(document).ready(function(){
 		validateKeywords();
 	});
 	$("#inputPurchaseDate").focusout(function(){
-		var pDate = $("#inputPurchaseDate").val();
-		validateDate(pDate);
+		validatePurchaseDate();
 	});
 	$("#inputSoldDate").focusout(function(){
-		if($("#inputSoldStatus").val() === "True")
-		{
-			var sDate = $("#inputSoldDate").val();
-			validateDate(sDate);
-		}
+		validateSellDate();
 	});
 });
 
@@ -68,7 +63,6 @@ function validateCondition(){
 			$("#inputCondition").removeClass("error");
 			$("#inputCondition").parent().parent().find(".errorText").css("visibility", "hidden");
 		}
-
 }
 
 function validateAge(){
@@ -114,7 +108,7 @@ function validateName(){
 
 function validateCatalogNumber(){
 	var text = $("#inputCatalogNumber").val();
-	if (text == null || text == "") {
+	if (text === null || text === "") {
 		$("#inputCatalogNumber").parent().find(".errorText").css("visibility", "visible");
 		$("#inputCatalogNumber").addClass("error");
 	}else if(text.length != 16){
@@ -126,7 +120,101 @@ function validateCatalogNumber(){
 	}
 }
 
+function validatePurchaseDate(){
+	var pDate = $("#inputPurchaseDate").val();
+	if(!validateDate(pDate))
+	{
+		$("#inputPurchaseDate").parent().find(".errorText").css("visibility", "visible");
+		$("#inputPurchaseDate").addClass("error");
+	}
+	else if(!comparePurchaseDateToSellDate())
+	{
+		$("#inputPurchaseDate").parent().find(".errorText").css("visibility", "visible");
+		$("#inputPurchaseDate").addClass("error");
+	}
+	else
+	{
+		$("#inputPurchaseDate").removeClass("error");
+		$("#inputPurchaseDate").parent().find(".errorText").css("visibility","hidden");
+	}
+}
+
+function validateSellDate(){
+	var sDate = $("#inputSoldDate").val();
+	
+	if(!validateDate(sDate))
+	{
+		$("#inputSellDate").parent().find(".errorText").css("visibility", "visible");
+		$("#inputSellDate").addClass("error");
+		return;
+	}
+	else
+	{
+		$("#inputSellDate").removeClass("error");
+		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
+		$("#inputSoldStatus").val("True");
+	}
+	
+	if(!comparePurchaseDateToSellDate())
+	{
+		$("#inputSellDate").parent().find(".errorText").css("visibility", "visible");
+		$("#inputSellDate").addClass("error");
+	}
+	else
+	{
+		$("#inputSellDate").removeClass("error");
+		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
+		$("#inputSoldStatus").val("True");
+	}
+}
+
+function comparePurchaseDateToSellDate(){
+	var pDate = $("#inputPurchaseDate").val();
+	var sDate = $("#inputSoldDate").val();
+	if(!validateDate(pDate) || !validateDate(sDate))
+	{
+		return true;
+	}
+	
+	var pParts = pDate.split("/");
+    var pDay = parseInt(pParts[1], 10);
+    var pMonth = parseInt(pParts[0], 10);
+    var pYear = parseInt(pParts[2], 10);
+	var sParts = sDate.split("/");
+    var sDay = parseInt(sParts[1], 10);
+    var sMonth = parseInt(sParts[0], 10);
+    var sYear = parseInt(sParts[2], 10);
+	
+    if(pYear > sYear)
+    {
+    	return false;
+    }
+    else if(pYear < sYear)
+    {
+    	return true;
+    }
+    
+    if(pMonth > sMonth)
+    {
+    	return false;
+    }
+    else if(pMonth < sMonth)
+    {
+    	return true;
+    }
+    
+    if(pDay > sDay)
+    {
+    	return false;
+    }
+    return true;
+}
+
 function validateDate(dateString){
+	if(dateString === null || dateString === "")
+	{
+		return false;
+	}
 	// First check for the pattern
     if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
     {
@@ -144,7 +232,6 @@ function validateDate(dateString){
     	return false;
     }
         
-
     var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
     // Adjust for leap years
