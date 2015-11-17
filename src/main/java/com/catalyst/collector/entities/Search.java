@@ -102,3 +102,6 @@ public class Search {
         this.catalogNumber = catalogueNumber;
     }
 }
+
+
+//{"search":["category":"coins","color":"blue","condition":null,"age":null,"description":null,"name":null,"keyword":null,"sold":null,"catalogNumber":null]}

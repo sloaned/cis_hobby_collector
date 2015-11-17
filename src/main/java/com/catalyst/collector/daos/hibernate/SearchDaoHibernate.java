@@ -33,7 +33,7 @@ public class SearchDaoHibernate implements SearchDao{
 
         CriteriaBuilder cb = em.getCriteriaBuilder(); //Greg needs to look this up.
         CriteriaQuery<Collectible> cq = cb.createQuery(Collectible.class);//Greg needs to look this up.
-        Root<Collectible> collectible = cq.from(Collectible.class);//Greg needs to look this up.
+        Root<Search> searchRoot = cq.from(Search.class);//Greg needs to look this up.
 
         String type = searchBody.getCategory();
         String color = searchBody.getColor();
