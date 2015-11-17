@@ -160,9 +160,15 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
-#searchButton, #submitSearch{
+#searchButton{
+	margin-left:48%;
+	display:block;
+	position:fixed;
+	bottom:4px;
+}
+#submitSearch{
 	margin: 0 auto;
-display:block;
+	display:block;
 }
 .popover{
 	max-width:98%;
@@ -196,4 +202,11 @@ thead {
 
 textarea:focus, input:focus{
     background-color: #996633;
+}
+popover select:focus, input:focus {
+    color: #ffffff;
+}
+.popover-title, .popover-content{
+	background-color:#d9534f;
+	border: 1px solid #ccc;
 }

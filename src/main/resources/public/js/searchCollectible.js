@@ -1,6 +1,8 @@
 var collectibles;
+function hide(){
+    $("[data-toggle='popover']").popover('hide');
+}
 function callSearch(){
-    	alert("callSearch");
     	var search ={};
     	search.category = $("#collectibleSearch").val().toLowerCase();
         search.color = $("#colorSearch").val().toLowerCase(); 
@@ -9,19 +11,17 @@ function callSearch(){
         search.description = $("#descriptionSearch").val().toLowerCase();
         search.name = $("#nameSearch").val().toLowerCase();
         search.keyword = $("#keywordsSearch").val().toLowerCase();
-        var sold = $("#soldSearch").val().toLowerCase();
-        if(sold=="true"){
+        var sold = $("#soldSearch").val();
+        if(sold=="sold"){
         	search.sold=true;
         }
-        else if(sold=="false"){
+        else if(sold=="notsold"){
         	search.sold=false;
         }
         else{
         	search.sold=null;
         }
         search.catalogNumber = $("#catalogNumberSearch").val().toLowerCase();
-        alert("checking");
-        alert("mick"+search.color);
     	$.ajax({
         url: '/collectibles/search',
         method: 'POST',
@@ -29,18 +29,15 @@ function callSearch(){
         data: JSON.stringify(search)
     }).then(function(searchResult){
     	collectibles = searchResult;
-    	alert("s");
     	replaceTable();
         console.log("Post successful")
     }, function(error){
     	replaceTable();
-    	alert("f");
         console.log(error);
     });
     	$("[data-toggle='popover']").popover('toggle');
     }
 function replaceTable(){
-	alert("remove");
 	 $("tbody").children().remove();
      for (var i = 0; i < collectibles.length; i++) {
          addRow(collectibles[i]);
@@ -90,11 +87,11 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
     </div>\
     <div class="form-group col-sm-4">\
       <label>Name:</label>\
-      <input type="password" class="form-control" id="nameSearch" placeholder="name">\
+      <input type="text" class="form-control" id="nameSearch" placeholder="name">\
     </div>\
     <div class="form-group col-sm-4">\
       <label>Keywords:</label>\
-      <input type="password" class="form-control" id="keywordsSearch" placeholder="keyword">\
+      <input type="text" class="form-control" id="keywordsSearch" placeholder="keyword">\
     </div>\
   </div>\
   <div class="row">\
@@ -117,6 +114,6 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
  </div>\
 </form>';
 
-    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close'>&times;</span>", 
+    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>", 
     content: content, html: true, placement: "top"});  
 });
