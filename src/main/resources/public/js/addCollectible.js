@@ -83,12 +83,19 @@ $(document).ready(function(){
 
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
+        //if form isn't open don't bother checking anything.
+        if ($("#newCollectibleForm").css("display") === "none")
+            return;
         var container = $("#newCollectibleForm");
-        console.log("clicked: " + e.target.nodeName)
-        $target = $(e.target);
+
         if (!container.is(e.target)
-            && container.has(e.target).length === 0 && $target.attr("class").indexOf("toast") === -1)
+            && container.has(e.target).length === 0)
         {
+            console.log("Closing...");
+            //if we click on the toast don't close the form
+            if ($(e.target).attr("class").indexOf("toast") !== -1)
+                return;
+
             clearForm();
             closeForm();
         }
