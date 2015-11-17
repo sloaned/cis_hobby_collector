@@ -49,15 +49,16 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-		if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
-				|| collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
-		{
-			em.merge(collectible);
-		}
-		else
-		{
-			em.persist(collectible);
-		}
+        /*if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
+                || collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
+        {
+            em.merge(collectible);
+        }
+        else
+        {
+            em.persist(collectible);
+        }*/
+        em.merge(collectible);
 		return true;
 	}
 
@@ -81,12 +82,14 @@ public class CollectionsDaoHibernate implements CollectionsDao {
         } catch (NoResultException e) {
             em.persist(collectible.getCondition());
         }
-        try {
-            Integer id = em.createQuery("SELECT c.id FROM Color c WHERE c.color = :color", Integer.class).setParameter("color", collectible.getColor().getColor()).getSingleResult();
-            collectible.getColor().setId(id);
-        } catch (NoResultException e) {
-            em.persist(collectible.getColor());
-        }
+
+        for (Color c : collectible.getColors())
+            try {
+                Integer id = em.createQuery("SELECT c.id FROM Color c WHERE c.color = :color", Integer.class).setParameter("color", c.getColor()).getSingleResult();
+                c.setId(id);
+            } catch (NoResultException e) {
+                em.persist(c);
+            }
         for (Keyword k: collectible.getKeywords())
             try {
                 Integer id = em.createQuery("SELECT k.id FROM Keyword k WHERE k.keyword = :keyword", Integer.class).setParameter("keyword", k.getKeyword()).getSingleResult();

@@ -15,8 +15,16 @@ function loadTable() {
 }
 
 function addDataToRow(collectible){
-	var row = "<tr class='alert-warning'><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.color.color) + "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
+	var row = "<tr class='alert-warning'><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>";
+	for(var i = 0; i < collectible.colors.length; i++){
+	    if(i === collectible.colors.length -1){
+	        row += capitalizeWord(collectible.colors[i].color);
+	    }
+	    else{
+	        row += capitalizeWord(collectible.colors[i].color) + ", ";
+	    }
+	}
+	row+=	"</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
 			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class=\"ellipsis\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div></td><td><div>"
 			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
 	for (var i = 0; i < collectible.keywords.length; i++) {
