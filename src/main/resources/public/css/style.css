@@ -160,6 +160,9 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
+table{
+	font-size: .9em;
+}
 
 .ellipsis {
     text-overflow: ellipsis;

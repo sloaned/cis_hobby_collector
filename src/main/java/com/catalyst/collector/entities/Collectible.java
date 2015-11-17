@@ -1,6 +1,10 @@
 package com.catalyst.collector.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 import java.util.Set;
 
 
@@ -43,6 +47,14 @@ public class Collectible {
 
     @Column(nullable = false)
     private boolean sold;
+    
+    @Column(nullable = false)
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
+    private Date purchaseDate;
+    
+    @Column(nullable = true)
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
+    private Date sellDate;
 
 
     public Integer getId() {
@@ -124,6 +136,22 @@ public class Collectible {
     public void setKeywords(Set<Keyword> keywords) {
         this.keywords = keywords;
     }
+    
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	public Date getSellDate() {
+		return sellDate;
+	}
+
+	public void setSellDate(Date sellDate) {
+		this.sellDate = sellDate;
+	}
 
     @Override
     public String toString() {
@@ -139,4 +167,5 @@ public class Collectible {
                 ", sold=" + sold +
                 '}';
     }
+
 }

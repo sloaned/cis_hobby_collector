@@ -3,6 +3,8 @@ package com.catalyst.collector.services;
 import com.catalyst.collector.entities.*;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,15 +27,20 @@ public class CollectionValidation {
     private Collectible collectible;
     private static final String keywordRegex = "[^a-zA-Z\\d]";
     private static final Pattern keywordPattern = Pattern.compile(keywordRegex);
+    private static final String dateRegex = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"; 
+    private static final Pattern datePattern = Pattern.compile(dateRegex);
     private Matcher matcher;
 
     public CollectionValidation() {}
 
     public boolean isCollectibleValid(){
-        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() &&
-                collectible.getName() != null && !collectible.getName().isEmpty() &&
+        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() && isPurchaseDateValid() &&
+        		(collectible.getSellDate() == null || isSellDateValid()) &&
+        		(collectible.getSellDate() == null || collectible.getSellDate() == collectible.getPurchaseDate() || collectible.getPurchaseDate().before(collectible.getSellDate())) &&
+        		collectible.getName() != null && !collectible.getName().isEmpty() &&
                 collectible.getDescription() != null && !collectible.getDescription().isEmpty() &&
-                collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty();
+                collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty() 
+                && collectible.getPurchaseDate() != null && (!collectible.isSold() || collectible.getSellDate() != null);
     }
 
     private boolean isCategoryValid() {
@@ -69,6 +76,14 @@ public class CollectionValidation {
 
     private boolean isAgeValid() {
         return isAgeValid(collectible.getAge());
+    }
+    
+    private boolean isPurchaseDateValid(){
+    	return isDateValid(collectible.getPurchaseDate());
+    }
+    
+    private boolean isSellDateValid(){
+    	return isDateValid(collectible.getSellDate());
     }
 
     public boolean isAgeValid(Age age){
@@ -120,5 +135,36 @@ public class CollectionValidation {
 
         matcher = keywordPattern.matcher(condition.getCondition());
         return !condition.getCondition().equals("") && condition.getCondition().length() < 256 && !matcher.find();
+    }
+    
+    public boolean isDateValid(Date date){
+    	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    	String dateString = formatter.format(date);
+    	matcher = datePattern.matcher(dateString);
+    	if(!matcher.matches())
+    	{
+    		return false;
+    	}
+    	int month = Integer.parseInt(dateString.substring(0, 2));
+    	int day = Integer.parseInt(dateString.substring(3, 5));
+    	int year = Integer.parseInt(dateString.substring(6, 10));
+    	
+    	if(month < 1 || month > 12)
+    	{
+    		return false;
+    	}
+    	
+    	int[] monthLength = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    	if(year%400 == 0 || (year%100 != 0 && year%4 == 0))
+    	{
+    		monthLength[1] = 29;
+    	}
+    	
+    	if(day < 0 || day > monthLength[month-1])
+    	{
+    		return false;
+    	}
+    	return true;  		
     }
 }
