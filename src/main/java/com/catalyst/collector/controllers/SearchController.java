@@ -25,8 +25,8 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @RequestMapping(value="/collectibles/{search}", method = RequestMethod.GET)
-    public ArrayList<Collectible> search(@RequestParam Search search) {
+    @RequestMapping(value="/collectibles/{search}", method = RequestMethod.POST)
+    public ArrayList<Collectible> search(@RequestBody Search search) {
         return searchService.search(search);
     }
 
