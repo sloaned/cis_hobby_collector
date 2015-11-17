@@ -13,12 +13,12 @@ public class Search {
     private String description;
     private String name;
     private String keyword;
-    private boolean sold;
+    private Boolean sold;
     private String catalogNumber;
 
     public Search(){}
 
-    public Search(String category, String color, String condition, String age, String description, String name, String keyword, boolean sold, String catalogueNumber) {
+    public Search(String category, String color, String condition, String age, String description, String name, String keyword, boolean sold, String catalogNumber) {
         this.category = category;
         this.color = color;
         this.condition = condition;
@@ -86,20 +86,20 @@ public class Search {
         this.keyword = keyword;
     }
 
-    public boolean isSold() {
+    public Boolean isSold() {
         return sold;
     }
 
-    public void setSold(boolean sold) {
+    public void setSold(Boolean sold) {
         this.sold = sold;
     }
 
-    public String getCatalogueNumber() {
+    public String getCatalogNumber() {
         return catalogNumber;
     }
 
-    public void setCatalogueNumber(String catalogueNumber) {
-        this.catalogNumber = catalogueNumber;
+    public void setCatalogNumber(String catalogNumber) {
+        this.catalogNumber = catalogNumber;
     }
 }
 

@@ -26,14 +26,14 @@ public class SearchDaoHibernate implements SearchDao{
         this.em = em;
     }
 
+
     @Override
     public ArrayList<Collectible> search(Search searchBody) {
 
-        List<Predicate> restrictions = new ArrayList<Predicate>(); //Greg needs to look this up.
-
-        CriteriaBuilder cb = em.getCriteriaBuilder(); //Greg needs to look this up.
-        CriteriaQuery<Collectible> cq = cb.createQuery(Collectible.class);//Greg needs to look this up.
-        Root<Collectible> collectible = cq.from(Collectible.class);//Greg needs to look this up.
+        List<Predicate> restrictions = new ArrayList<Predicate>();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Collectible> cq = cb.createQuery(Collectible.class);
+        Root<Collectible> collectible = cq.from(Collectible.class);
 
         String type = searchBody.getCategory();
         String color = searchBody.getColor();
@@ -42,8 +42,8 @@ public class SearchDaoHibernate implements SearchDao{
         String description = searchBody.getDescription();
         String name = searchBody.getName();
         String keyword = searchBody.getKeyword();
-        boolean soldStatus = searchBody.isSold();
-        String catalogNumber = searchBody.getCatalogueNumber();
+        Boolean soldStatus = searchBody.isSold();
+        String catalogNumber = searchBody.getCatalogNumber();
 
 
         if(type != null && type != ""){
@@ -76,35 +76,36 @@ public class SearchDaoHibernate implements SearchDao{
             restrictions.add(predicate);
         }
 
-    /*    if(keyword != null && keyword != ""){
-            Join<Collectible, Keyword> path = collectible.join("keyword");
+        if(keyword != null && keyword != ""){
+            Join<Collectible, Keyword> path = collectible.join("keywords");
             Predicate predicate = cb.and(path.get("keyword").in(keyword));
             restrictions.add(predicate);
         }
-    */
-        if(soldStatus){
-            Predicate predicate = cb.isTrue(collectible.<Boolean>get("sold"));
-            restrictions.add(predicate);
+
+        if(soldStatus != null) {
+
+            if (soldStatus == true) {
+                Predicate predicate = cb.isTrue(collectible.<Boolean>get("sold"));
+                restrictions.add(predicate);
+            }
+
+            if (soldStatus == false) {
+                Predicate predicate = cb.isFalse(collectible.<Boolean>get("sold"));
+                restrictions.add(predicate);
+            }
+
         }
-        else{
-            Predicate predicate = cb.isFalse(collectible.<Boolean>get("sold"));
+
+        if(catalogNumber != null && catalogNumber != ""){
+            Predicate predicate = cb.like(collectible.<String>get("catalogueNumber"), catalogNumber);
             restrictions.add(predicate);
         }
 
-    /*    if(catalogNumber != null && catalogNumber != ""){
-            Predicate predicate = cb.like(collectible.<String>get("cataloguenumber"), catalogNumber);
-            restrictions.add(predicate);
-        }
-    */
         cq.where(restrictions.toArray(new Predicate[0]));
         cq.select(collectible);
-
         TypedQuery<Collectible> q = em.createQuery(cq);
         ArrayList<Collectible> collectibles = (ArrayList<Collectible>) q.getResultList();
-
         return collectibles;
-
-
     }
 }
 
