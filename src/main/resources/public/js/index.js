@@ -16,9 +16,9 @@ function loadTable() {
 }
 
 function addDataToRow(collectible){
-	var row = "<tr id='"+collectible.id+"'><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
+	var row = "<tr class='alert-warning' id='"+collectible.id+"'><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
 			+ capitalizeWord(collectible.color.color) + "</div></td><td><div class='condition'>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div class='age'>"
-			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class='description'>" + capitalizeWord(collectible.description).truncString(10) + "</div></td><td><div class='name'>"
+			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class='description ellipsis'>" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div></td><td><div class='name'>"
 			+ capitalizeWord(collectible.name) + "</div></td><td><div class='keywords'>";
 	for (var i = 0; i < collectible.keywords.length; i++) {
 		if (i === collectible.keywords.length - 1)
