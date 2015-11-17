@@ -160,7 +160,7 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
-#searchButton{
+#searchButton, #submitSearch{
 	margin: 0 auto;
 display:block;
 }
