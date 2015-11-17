@@ -39,8 +39,8 @@ public class CollectionsController {
 	}
 
 	@RequestMapping(value="/collectible/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Collectible> updateCollectible(@PathVariable String id,@RequestBody Collectible c) {
-		c.setCatalogueNumber(id);
+	public ResponseEntity<Collectible> updateCollectible(@PathVariable Integer id,@RequestBody Collectible c) {
+		c.setId(id);
 		if (!collectionsService.updateCollectible(c))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(c, HttpStatus.OK);

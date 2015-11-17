@@ -41,7 +41,7 @@ public class FrontPage {
 
         String actualtitle = index.getTitle();
 
-        assertEquals("Hobby Collector", actualtitle);
+        assertEquals("Hobby Collector Login", actualtitle);
     }
 
     @After
