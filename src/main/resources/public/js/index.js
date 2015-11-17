@@ -15,31 +15,50 @@ function loadTable() {
 }
 
 function addDataToRow(collectible){
-	var row = "<tr class='alert-warning'><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>";
-	for(var i = 0; i < collectible.colors.length; i++){
-	    if(i === collectible.colors.length -1){
-	        row += capitalizeWord(collectible.colors[i].color);
-	    }
-	    else{
-	        row += capitalizeWord(collectible.colors[i].color) + ", ";
-	    }
-	}
-	row+=	"</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div class=\"ellipsis\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
-	for (var i = 0; i < collectible.keywords.length; i++) {
-		if (i === collectible.keywords.length - 1)
-			row += capitalizeWord(collectible.keywords[i].keyword);
-		else
-			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
-	}
+    var type = "<div>" + capitalizeWord(collectible.category.category) + "</div>";
+    var colors = "<div>";
+    	for(var i = 0; i < collectible.colors.length; i++){
+    	    if(i === collectible.colors.length -1){
+    	        colors += capitalizeWord(collectible.colors[i].color) + "</div>";
+    	    }
+    	    else{
+    	        colors += capitalizeWord(collectible.colors[i].color) + ", ";
+    	    }
+    	}
+    var condition = "<div>" + capitalizeWord(collectible.condition.condition) + "</div>";
+    var era = "<div>" + capitalizeWord(collectible.age.age) + "</div>";
+    var description = "<div title=" + capitalizeWord(collectible.description) + " class=\"ellipsis\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div>";
+    var name = "<div>" + capitalizeWord(collectible.name) + "</div>";
+    var soldStatus = "<div>" + capitalizeWord(collectible.sold.toString()) + "</div>";
+    var keywords = "<div>";
+    for (var i = 0; i < collectible.keywords.length; i++) {
+        if (i === collectible.keywords.length - 1)
+            keywords += capitalizeWord(collectible.keywords[i].keyword) + "</div>";
+        else
+            keywords += capitalizeWord(collectible.keywords[i].keyword) + ", ";
+    }
+    var catalogNumber = "<div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div>";
+    var purchaseDate = "<div>" + collectible.purchaseDate + "</div>";
+    var sellDate = "<div>" + collectible.sellDate + "</div>";
+    var row;
 
-	row += "</div></td><td><div>"
-			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
-			+ "<button class='editButton btn btn-default'>Edit</button>" + "</div></td></tr>";
+    if (collectible.sold == true){
+        row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
+            "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
+            "</td><td>" + "<b>Color:</b>" + colors + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td><div>" +
+            "<button class='editButton btn btn-default'>Done</button>" + "</div></td></tr>";
+    }
+    if (collectible.sold == false){
+        row = "<tr id=" + collectible.id + " class='alert-warning notSold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
+            "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
+            "</td><td>" + "<b>Color:</b>" + colors + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date:</b> <div>n/a </div> </td><td><div>" +
+            "<button class='editButton btn btn-default'>Done</button>" + "</div></td></tr>";
+    }
 
     $("tbody").append(row);
-    }
+}
 
 function capitalizeWord(word){
 	if (word !== null){
