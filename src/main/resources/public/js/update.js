@@ -38,32 +38,33 @@ function update(){
 function updated(){
     validate();
     var collectible = {};
-            collectible.id = $(".name .editField").parent().parent().parent().attr('id');
-            collectible.name = $(".name .editField").val().toLowerCase();
-            collectible.age = $(".age .editField").val().toLowerCase();
-            collectible.description = $(".description .editField").val().toLowerCase();
-            collectible.category = $(".category .editField").val().toLowerCase();;
-            collectible.condition = $(".condition .editField").val().toLowerCase();;
-            collectible.color = $(".color .editField").val().toLowerCase();;
-            collectible.keywords = getKeywords();
-            collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
-            collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
-            console.log(collectible);
-            if (false){
-                $.ajax({
-                    url: '/collectible',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(collectible)
-                }).then(function(){
-                    console.log("Post successful")
-                    location.reload(true);
-                }, function(error){
-                    console.log(error);
-                });
-            }
+    collectible.id = $(".name .editField").parent().parent().parent().attr('id');
+    collectible.name = $(".name .editField").val().toLowerCase();
+    collectible.age = $(".age .editField").val().toLowerCase();
+    collectible.description = $(".description .editField").val().toLowerCase();
+    collectible.category = $(".category .editField").val().toLowerCase();;
+    collectible.condition = $(".condition .editField").val().toLowerCase();;
+    collectible.color = $(".color .editField").val().toLowerCase();;
+    collectible.keywords = getKeywords();
+    collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
+    collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
+    console.log(collectible);
+    if (valid){
+        $.ajax({
+            url: '/collectible',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(collectible)
+        }).then(function(){
+            console.log("Post successful")
+            location.reload(true);
+        }, function(error){
+            console.log(error);
+        });
+    }
 }
 function validate(){
+    var valid = false;
     console.log("hi")
     var name = $(".name .editField").val().toLowerCase();
     var age = $(".age .editField").val().toLowerCase();
@@ -75,31 +76,37 @@ function validate(){
     var sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
     var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
 
-    isValid(name,".name",255);
-    isValid(age,".age",255);
-    isValid(description,".description",1000);
-    isValid(category,".category",255);
-    isValid(condition,".condition",255);
-    isValid(color,".color",255);
-    isValid(catalogNumber,".catalogNumber",16);
-    isKeywordsValid(keywords)
+    valid = isValid(name,".name",255);
+    valid = isValid(age,".age",255);
+    valid = isValid(description,".description",1000);
+    valid = isValid(category,".category",255);
+    valid = isValid(condition,".condition",255);
+    valid = isValid(color,".color",255);
+    valid = isValid(catalogNumber,".catalogNumber",16);
+    valid = isKeywordsValid(keywords)
 
     function isValid(text,where,length){
         if(text == null || text == ""){
             $(where+" .editField").addClass("error");
+            return false;
         }
         else if(text.length > length){
-            $(where+" .editField").addClass("error")
+            $(where+" .editField").addClass("error");
+             return false;
         }
         else
             $(where+" .editField").removeClass("error");
+          return true;
     }
 
     function isKeywordsValid(keywords){
         if(keywords.length < 3 ){
             $(".keywords .editField").addClass("error");
+             return false;
         }
+         return true;
     }
+    return valid;
 }
 
 function getKeywords(){
