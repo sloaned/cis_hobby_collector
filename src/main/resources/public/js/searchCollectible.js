@@ -1,4 +1,34 @@
+function callSearch(){
+    	alert();
+    	var search = {};
+    	search.category = $("#collectibleSearch").val();
+        search.color = $("#colorSearch").val(); 
+        search.condition = $("#conditionSearch").val();
+        search.age = $("#eraSearch").val();
+        search.description = $("#descriptionSearch").val();
+        search.name = $("#nameSearch").val();
+        search.keyword = $("#keywordsSearch").val();
+        search.sold = $("#soldSearch").val();
+        search.catalogNumber = $("#catalogNumberSearch").val();
+        alert(search);
+    	$.ajax({
+        url: '/collectibles/{search}',
+        method: 'GET',
+        data: search,
+        contentType: "application/json",
+        dataType: "json"
+    }).then(function(){
+    	alert("s");
+        console.log("Post successful")
+        location.reload(true);
+    }, function(error){
+    	alert("f");
+        console.log(error);
+    });
+    }
+	
 $(document).ready(function(){
+	
 var content = '<form class="form-inline" role="form">\
     <div class="form-group">\
       <label>Collectible:</label>\
@@ -28,13 +58,20 @@ var content = '<form class="form-inline" role="form">\
       <label>Catalog Number:</label>\
       <input type="text" class="form-control" id="catalogNumberSearch" placeholder="catalog number">\
     </div>\
-   <select>\
+	<div class="form-group">\
+      <label>Description:</label>\
+      <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
+  </div>\
+   <select id="soldSearch">\
   		<option value="select">Select</option>\
   		<option value="sold">Sold</option>\
   		<option value="notsold">Not Sold</option>\
 	</select>\
-    <button type="submit" id="submitSearch" class="btn btn-default">Submit</button>\
+    <button type="submit" id="submitSearch" onclick="callSearch();" class="btn btn-default">Submit</button>\
   </form>';
+
     $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3>", 
     content: content, html: true, placement: "top"}); 
+    
+    
 });
