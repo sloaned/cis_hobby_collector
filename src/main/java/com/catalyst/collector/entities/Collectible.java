@@ -52,7 +52,7 @@ public class Collectible {
     @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
     private Date purchaseDate;
     
-    @Column
+    @Column(nullable = true)
     @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
     private Date sellDate;
 

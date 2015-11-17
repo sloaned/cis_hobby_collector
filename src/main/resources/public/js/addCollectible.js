@@ -156,7 +156,11 @@ $(document).ready(function(){
         collectible.purchaseDate = $("#inputPurchaseDate").val();
         if(collectible.sold === "true")
         {
-        	collectible.soldDate = $("#inputSoldDate").val();
+        	collectible.sellDate = $("#inputSellDate").val();
+        }
+        else
+        {
+        	collectible.sellDate = null;
         }
         console.log(collectible);
         if (isValid){

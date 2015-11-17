@@ -27,7 +27,7 @@ public class CollectionValidation {
     private Collectible collectible;
     private static final String keywordRegex = "[^a-zA-Z\\d]";
     private static final Pattern keywordPattern = Pattern.compile(keywordRegex);
-    private static final String dateRegex = "([0-9]{2})/([0-9]{2})/([0-9]{4})";
+    private static final String dateRegex = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"; 
     private static final Pattern datePattern = Pattern.compile(dateRegex);
     private Matcher matcher;
 
@@ -36,10 +36,11 @@ public class CollectionValidation {
     public boolean isCollectibleValid(){
         return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() && isPurchaseDateValid() &&
         		(collectible.getSellDate() == null || isSellDateValid()) &&
-                collectible.getName() != null && !collectible.getName().isEmpty() &&
+        		(collectible.getSellDate() == null || collectible.getSellDate() == collectible.getPurchaseDate() || collectible.getPurchaseDate().before(collectible.getSellDate())) &&
+        		collectible.getName() != null && !collectible.getName().isEmpty() &&
                 collectible.getDescription() != null && !collectible.getDescription().isEmpty() &&
-                collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty() &&
-                collectible.getPurchaseDate() != null;
+                collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty() 
+                && collectible.getPurchaseDate() != null && (!collectible.isSold() || collectible.getSellDate() != null);
     }
 
     private boolean isCategoryValid() {
@@ -140,7 +141,7 @@ public class CollectionValidation {
     	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     	String dateString = formatter.format(date);
     	matcher = datePattern.matcher(dateString);
-    	if(matcher.find())
+    	if(!matcher.matches())
     	{
     		return false;
     	}

@@ -164,7 +164,7 @@
 					<div class="form-group">
 						<label for="inputPurchaseDate">Purchase Date</label>
 						<input type="text" class="form-control" id="inputPurchaseDate" placeholder="MM/DD/YYYY">
-						<p class="errorText">Valid Date Required</p>
+						<p class="errorText" id="inputPurchaseDateError">Valid Date Required</p>
 					</div>
 					<div class="form-group">
 						<label for="inputSoldStatus">Sold Status</label>
@@ -172,16 +172,16 @@
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								False <span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu">
-								<li><a>True</a></li>
-								<li><a>False</a></li>
+							<ul class="dropdown-menu" id="inputSoldDropdown">
+								<li><a id="soldStatusTrue">True</a></li>
+								<li><a id="soldStatusFalse">False</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputSellDate">Sell Date</label>
 						<input type="text" class="form-control" id="inputSellDate" placeholder="MM/DD/YYYY">
-						<p class="errorText">Valid Date Required</p>
+						<p class="errorText" id="inputSellDateError">Valid Date Required</p>
 					</div>
 
 					<div class="button-group">

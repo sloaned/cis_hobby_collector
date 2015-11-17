@@ -26,9 +26,18 @@ $(document).ready(function(){
 	$("#inputPurchaseDate").focusout(function(){
 		validatePurchaseDate();
 	});
-	$("#inputSoldDate").focusout(function(){
-		validateSellDate();
+	$("#inputSellDate").focusout(function(){
+		if($("#inputSoldStatus").find("button").text().trim() === "True" || $("#inputSellDate").val() != "")
+		{
+			validateSellDate();
+		}
 	});
+	$("#soldStatusFalse").click(function(){	
+		$("#inputSellDate").val("");
+		$("#inputSellDate").removeClass("error");
+		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
+		
+	})
 });
 
 function validateType(){
@@ -124,11 +133,15 @@ function validatePurchaseDate(){
 	var pDate = $("#inputPurchaseDate").val();
 	if(!validateDate(pDate))
 	{
+		$("#inputPurchaseDateError").empty();
+		$("#inputPurchaseDateError").append("Valid Date Required");
 		$("#inputPurchaseDate").parent().find(".errorText").css("visibility", "visible");
 		$("#inputPurchaseDate").addClass("error");
 	}
 	else if(!comparePurchaseDateToSellDate())
 	{
+		$("#inputPurchaseDateError").empty();
+		$("#inputPurchaseDateError").append("Purchase date must be earlier than sell date");
 		$("#inputPurchaseDate").parent().find(".errorText").css("visibility", "visible");
 		$("#inputPurchaseDate").addClass("error");
 	}
@@ -136,27 +149,41 @@ function validatePurchaseDate(){
 	{
 		$("#inputPurchaseDate").removeClass("error");
 		$("#inputPurchaseDate").parent().find(".errorText").css("visibility","hidden");
+		if($("#inputSellDateError").text() === "Sell date must come after purchase date")
+		{
+			$("#inputSellDate").removeClass("error");
+			$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
+		}
+		
 	}
 }
 
 function validateSellDate(){
-	var sDate = $("#inputSoldDate").val();
+	var sDate = $("#inputSellDate").val();
 	
-	if(!validateDate(sDate))
+	if(!validateDate(sDate) && $("#inputSoldStatus").find("button").text().trim() === "True")
 	{
+		$("#inputSellDateError").empty();
+		$("#inputSellDateError").append("Valid Date Required");
 		$("#inputSellDate").parent().find(".errorText").css("visibility", "visible");
 		$("#inputSellDate").addClass("error");
+		return;
+	}
+	else if(!validateDate(sDate))
+	{
 		return;
 	}
 	else
 	{
 		$("#inputSellDate").removeClass("error");
 		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
-		$("#inputSoldStatus").val("True");
+		$("#inputSoldStatus").find("button").html("True<span class='caret'></span>");
 	}
 	
 	if(!comparePurchaseDateToSellDate())
 	{
+		$("#inputSellDateError").empty();
+		$("#inputSellDateError").append("Sell date must come after purchase date");
 		$("#inputSellDate").parent().find(".errorText").css("visibility", "visible");
 		$("#inputSellDate").addClass("error");
 	}
@@ -164,13 +191,18 @@ function validateSellDate(){
 	{
 		$("#inputSellDate").removeClass("error");
 		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
-		$("#inputSoldStatus").val("True");
+		if($("#inputPurchaseDateError").text() == "Purchase date must be earlier than sell date")
+		{
+			$("#inputPurchaseDate").removeClass("error");
+			$("#inputPurchaseDate").parent().find(".errorText").css("visibility","hidden");
+		}
+		$("#inputSoldStatus").find("button").html("True <span class='caret'></span>");
 	}
 }
 
 function comparePurchaseDateToSellDate(){
 	var pDate = $("#inputPurchaseDate").val();
-	var sDate = $("#inputSoldDate").val();
+	var sDate = $("#inputSellDate").val();
 	if(!validateDate(pDate) || !validateDate(sDate))
 	{
 		return true;
