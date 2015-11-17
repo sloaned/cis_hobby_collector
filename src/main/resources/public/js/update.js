@@ -1,6 +1,7 @@
 function update(){
-    //if there is already a row beeing edited then dont make another row editable
-    if($(".editField").length !== 0) return;
+
+    //if there is already a row being edited then dont make another row editable
+    //if($(".editField").length !== 0) return;
     //if already changed td to input then don't do it again again
     if($(this).children().hasClass("editField"))return;
     //set row to the row of the CatalogNumber clicked
