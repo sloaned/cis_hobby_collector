@@ -45,14 +45,11 @@ public class SearchDaoHibernate implements SearchDao{
         boolean soldStatus = searchBody.isSold();
         String catalogNumber = searchBody.getCatalogueNumber();
 
-        String query = "SELECT c FROM Collectible c WHERE (";
-        String parameters = "'category',type";
-
 
   //      if(type != null){
    //         query = query + "c.type_id IN (SELECT id FROM category cat WHERE cat.category = :category))";
    //     }
-        return (ArrayList<Collectible>) em.createQuery("SELECT c FROM COLLECTIBLE c WHERE c.type_id IN (SELECT id FROM category cat WHERE cat.category = :category)").setParameter("category", type).getResultList();
+        return (ArrayList<Collectible>) em.createQuery("SELECT c FROM Collectible c WHERE c.category_id IN (SELECT id FROM category cat WHERE cat.category = :category)").setParameter("category", type).getResultList();
         /*
 
     //    String query = "SELECT c FROM Collectible c WHERE(";
