@@ -220,7 +220,7 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        c.setColor(l);
+        //c.setColor(l);
         c.setCondition(d);
 
         cv.setCollectible(c);
@@ -254,7 +254,7 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        c.setColor(l);
+        //c.setColor(l);
         c.setCondition(d);
 
         cv.setCollectible(c);
