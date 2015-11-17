@@ -109,7 +109,10 @@ $(document).ready(function(){
         validateKeywords();
         var purchaseDate = $("#inputPurchaseDate").val();
         var sellDate = $("#inputSellDate").val();
-        
+        if(!validateDate(purchaseDate))
+        {
+        	
+        }
 
         var isValid = false;
         if ($(".error").length < 1){
