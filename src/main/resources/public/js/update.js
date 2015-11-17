@@ -5,7 +5,6 @@ function update(){
     row = $(this.parentNode.parentNode);
    // console.log(row);
 
-
     //change all td to input boxes
     row.children().each(function(){
         //set this to what this is (the div)
@@ -83,6 +82,7 @@ function validate(){
     isValid(condition,".condition",255);
     isValid(color,".color",255);
     isValid(catalogNumber,".catalogNumber",16);
+    isKeywordsValid(keywords)
 
     function isValid(text,where,length){
         if(text == null || text == ""){
@@ -94,6 +94,12 @@ function validate(){
         else
             $(where+" .editField").removeClass("error");
     }
+
+    function isKeywordsValid(keywords){
+        if(keywords.length < 3 ){
+            $(".keywords .editField").addClass("error");
+        }
+    }
 }
 
 function getKeywords(){
@@ -103,7 +109,6 @@ function getKeywords(){
     keywords = keywords.clean("");
     console.log(keywords);
     return keywords;
-
 }
 
 Array.prototype.clean = function(deleteValue) {
@@ -125,11 +130,8 @@ String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
     var i = -1;
 
     if ( typeof token === "string" ) {
-
         if ( ignoreCase ) {
-
             _token = token.toLowerCase();
-
             while( (
                 i = str.toLowerCase().indexOf(
                     token, i >= 0 ? i + newToken.length : 0
@@ -139,11 +141,9 @@ String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
                     newToken +
                     str.substring( i + token.length );
             }
-
         } else {
             return this.split( token ).join( newToken );
         }
-
     }
-return str;
+    return str;
 };
