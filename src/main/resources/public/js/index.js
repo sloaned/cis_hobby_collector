@@ -1,16 +1,19 @@
 $(document).ready(function(){
-	$.ajax({
-		url : '/collectibles',
-		method : 'GET'
-	}).then(function(collectibles) {
-		$("tbody").children().remove();
-		for (var i = 0; i < collectibles.length; i++) {
-			addDataToRow(collectibles[i]);
-		}
-		$(".catalogNumber").click(update)
-	});
-
+    loadTable();
 });
+
+function loadTable() {
+    $.ajax({
+        url : '/collectibles',
+        method : 'GET'
+    }).then(function(collectibles) {
+        $("tbody").children().remove();
+        for (var i = 0; i < collectibles.length; i++) {
+            addDataToRow(collectibles[i]);
+        }
+        $(".catalogNumber").click(update);
+    });
+}
 
 function addDataToRow(collectible){
 	var row = "<tr id='"+collectible.id+"'><td><div class='category'>" + capitalizeWord(collectible.category.category) + "</div></td><td><div class='color'>"
@@ -44,4 +47,30 @@ function capitalizeWord(word){
 
 String.prototype.truncString = function(length) {
     return this.length > length ? this.substring(0, length-1) + "..." : this;
+}
+
+function toast(message, successful) {
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      'body-output-type': 'trustedHtml'
+    }
+
+    var status;
+    status = successful ? "Success" : "Error";
+
+    toastr[status.toLowerCase()](message, status);
 }
