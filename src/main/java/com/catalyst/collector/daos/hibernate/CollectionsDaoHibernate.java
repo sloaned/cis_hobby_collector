@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import com.catalyst.collector.entities.*;
@@ -60,11 +61,42 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return true;
 	}
 
-	@Override
-	public boolean updateCollectible(Collectible collectible) {
-		em.merge(collectible);
-		return true;
-	}
+    @Override
+    public boolean updateCollectible(Collectible collectible) {
+        try {
+            Integer id = em.createQuery("SELECT a.id FROM Age a WHERE a.age = :age", Integer.class).setParameter("age", collectible.getAge().getAge()).getSingleResult();
+            collectible.getAge().setId(id);
+        } catch (NoResultException e) {
+            em.persist(collectible.getAge());
+        }
+        try {
+            Integer id = em.createQuery("SELECT c.id FROM Category c WHERE c.category = :category", Integer.class).setParameter("category", collectible.getCategory().getCategory()).getSingleResult();
+            collectible.getCategory().setId(id);
+        } catch (NoResultException e) {
+            em.persist(collectible.getCategory());
+        }
+        try {
+            Integer id = em.createQuery("SELECT c.id FROM Condition c WHERE c.condition = :condition", Integer.class).setParameter("condition", collectible.getCondition().getCondition()).getSingleResult();
+            collectible.getCondition().setId(id);
+        } catch (NoResultException e) {
+            em.persist(collectible.getCondition());
+        }
+        try {
+            Integer id = em.createQuery("SELECT c.id FROM Color c WHERE c.color = :color", Integer.class).setParameter("color", collectible.getColor().getColor()).getSingleResult();
+            collectible.getColor().setId(id);
+        } catch (NoResultException e) {
+            em.persist(collectible.getColor());
+        }
+        for (Keyword k: collectible.getKeywords())
+            try {
+                Integer id = em.createQuery("SELECT k.id FROM Keyword k WHERE k.keyword = :keyword", Integer.class).setParameter("keyword", k.getKeyword()).getSingleResult();
+                k.setId(id);
+            } catch (NoResultException e) {
+                em.persist(k);
+            }
+        em.merge(collectible);
+        return true;
+    }
 
 	@Override
 	public boolean removeCollectible(int id) {
