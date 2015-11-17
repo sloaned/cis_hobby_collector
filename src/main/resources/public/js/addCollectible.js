@@ -83,11 +83,19 @@ $(document).ready(function(){
 
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
+        //if form isn't open don't bother checking anything.
+        if ($("#newCollectibleForm").css("display") === "none")
+            return;
         var container = $("#newCollectibleForm");
 
         if (!container.is(e.target)
             && container.has(e.target).length === 0)
         {
+            console.log("Closing...");
+            //if we click on the toast don't close the form
+            if ($(e.target).attr("class").indexOf("toast") !== -1)
+                return;
+
             clearForm();
             closeForm();
         }
@@ -156,10 +164,15 @@ $(document).ready(function(){
                 data: JSON.stringify(collectible)
             }).then(function(){
                 console.log("Post successful")
-                location.reload(true);
+                toast("Collectible added", true);
+                loadTable();
+                closeForm();
             }, function(error){
                 console.log(error);
+                toast("Catalog number already exists");
             });
+        } else {
+            toast(getErrors());
         }
     });
 
@@ -248,4 +261,26 @@ function clearForm(){
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
         $("#fade").css("display", "none");
+}
+
+function getErrors() {
+    var errText = "The following fields have errors: <br />";
+    var hasError = false;
+    $(".inputBox").each(function() {
+        if ($(this).hasClass("error")) {
+            hasError = true;
+            errText += $(this).attr("Placeholder") + "<br />";
+            console.log(errText);
+        }
+    });
+
+    if ($("#inputCatalogNumber").hasClass("error")) {
+        errText += "Catalog number <br />";
+        hasError = true;
+    }
+    if ($("#inputKeywords").hasClass("error")) {
+        errText += "Keywords"
+    }
+
+    return errText;
 }
