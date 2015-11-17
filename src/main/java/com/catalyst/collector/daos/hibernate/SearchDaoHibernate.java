@@ -28,13 +28,13 @@ public class SearchDaoHibernate implements SearchDao{
 
     @Override
     public ArrayList<Collectible> search(Search searchBody) {
-/*
+
         List<Predicate> restrictions = new ArrayList<Predicate>(); //Greg needs to look this up.
 
         CriteriaBuilder cb = em.getCriteriaBuilder(); //Greg needs to look this up.
         CriteriaQuery<Collectible> cq = cb.createQuery(Collectible.class);//Greg needs to look this up.
         Root<Collectible> collectible = cq.from(Collectible.class);//Greg needs to look this up.
-*/
+
         String type = searchBody.getCategory();
         String color = searchBody.getColor();
         String condition = searchBody.getCondition();
@@ -46,51 +46,42 @@ public class SearchDaoHibernate implements SearchDao{
         String catalogNumber = searchBody.getCatalogueNumber();
 
 
-  //      if(type != null){
-   //         query = query + "c.type_id IN (SELECT id FROM category cat WHERE cat.category = :category))";
-   //     }
-        return (ArrayList<Collectible>) em.createQuery("SELECT c FROM Collectible c WHERE c.category_id IN (SELECT id FROM category cat WHERE cat.category = :category)").setParameter("category", type).getResultList();
-        /*
-
-    //    String query = "SELECT c FROM Collectible c WHERE(";
-
-        if(type != null || type != ""){
+        if(type != null && type != ""){
             Predicate predicate = cb.like(collectible.<Category>get("category").<String>get("category"), type);
             restrictions.add(predicate);
-    //        query = query + "c.type_id IN (SELECT id FROM category cat WHERE category = :category)";
         }
 
-        if(color != null || color != ""){
+        if(color != null && color != ""){
             Predicate predicate = cb.like(collectible.<Color>get("color").<String>get("color"), color);
             restrictions.add(predicate);
         }
 
-        if(condition != null || condition != ""){
+        if(condition != null && condition != ""){
             Predicate predicate = cb.like(collectible.<Condition>get("condition").<String>get("condition"), condition);
             restrictions.add(predicate);
         }
 
-        if(age != null || age != ""){
+        if(age != null && age != ""){
             Predicate predicate = cb.like(collectible.<Age>get("age").<String>get("age"), age);
             restrictions.add(predicate);
         }
 
-        if(description != null || description != ""){
+        if(description != null && description != ""){
             Predicate predicate = cb.like(collectible.<String>get("description"), "%" + description + "%");
             restrictions.add(predicate);
         }
 
-        if(name != null || name != ""){
+        if(name != null && name != ""){
             Predicate predicate = cb.like(collectible.<String>get("name"),name);
             restrictions.add(predicate);
         }
 
-        if(keyword != null || keyword != ""){
+    /*    if(keyword != null && keyword != ""){
             Join<Collectible, Keyword> path = collectible.join("keyword");
             Predicate predicate = cb.and(path.get("keyword").in(keyword));
             restrictions.add(predicate);
         }
-
+    */
         if(soldStatus){
             Predicate predicate = cb.isTrue(collectible.<Boolean>get("sold"));
             restrictions.add(predicate);
@@ -100,11 +91,11 @@ public class SearchDaoHibernate implements SearchDao{
             restrictions.add(predicate);
         }
 
-        if(catalogNumber != null || catalogNumber != ""){
+    /*    if(catalogNumber != null && catalogNumber != ""){
             Predicate predicate = cb.like(collectible.<String>get("cataloguenumber"), catalogNumber);
             restrictions.add(predicate);
         }
-
+    */
         cq.where(restrictions.toArray(new Predicate[0]));
         cq.select(collectible);
 
@@ -113,7 +104,7 @@ public class SearchDaoHibernate implements SearchDao{
 
         return collectibles;
 
-        */
+
     }
 }
 
