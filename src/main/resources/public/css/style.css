@@ -20,7 +20,7 @@
     width: 75%;
     height: 75%;
     padding: 16px;
-    border: 1px solid black;
+    border: 7px solid #996633;
     background-color: white;
     z-index:1002;
     overflow: auto;
@@ -169,4 +169,29 @@ td div{
 
 table{
 	font-size: .9em;
+}
+
+.table-striped > tbody > tr:nth-child(2n-1) > td, .table-striped > tbody > tr:nth-child(2n-1) > th {
+    background-color: #f0ad4e;
+    color: #ffffff;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+thead {
+    color: #ffffff;
+}
+
+.body > .container{
+    border: 7px solid #996633;
+    border-radius: 10px;
+    background-color: #996633;
+}
+
+textarea:focus, input:focus{
+    background-color: #996633;
+>>>>>>> e3448e036067e36e806562b1acc40c03cd167bc4
 }
