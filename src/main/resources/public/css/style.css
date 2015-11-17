@@ -4,6 +4,9 @@
     box-sizing:border-box;
     -moz-box-sizing:border-box;
 }
+option,select{
+    color:black;
+}
 .black_overlay{
     display: none;
     position: absolute;
@@ -195,4 +198,5 @@ thead {
 
 textarea:focus, input:focus{
     background-color: #996633;
+    color:white;
 }

@@ -54,13 +54,15 @@ public class CollectionValidation {
         return true;
     }
     public boolean isKeywordsValid(Set<Keyword> keywords) {
+        int length = 0;
         if(keywords.size() < 3)
             return false;
         for (Keyword k: keywords) {
+            length+=k.getKeyword().length();
             if(!isKeywordValid(k))
                 return false;
         }
-        return true;
+        return length>1000;
     }
 
     private boolean isColorValid() {

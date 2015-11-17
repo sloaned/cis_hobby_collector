@@ -6,9 +6,7 @@ function update(){
     //set row to the row of the CatalogNumber clicked
     row = $(this.parentNode.parentNode);
 
-    row.focusout(function(){
-       console.log("hi");
-    });
+
    // console.log(row);
 
     //change all td to input boxes
@@ -40,6 +38,12 @@ function update(){
         $(div).html("<input class=\"form-control editField\"type=\"text\" value=\""+ text +"\">");
     });
     $(".editSubmitButton").click(updated)
+    $(document).mouseup(function(e){
+            if (!$(e.target).hasClass("editField"))
+                loadTable();
+           console.log(e.target);
+        $(document).off("mouseup");
+        });
 }
 function updated(){
     var valid = validate();
@@ -57,8 +61,8 @@ function updated(){
 
     if (valid){
         $.ajax({
-            url: '/collectible',
-            method: 'POST',
+            url: '/collectible/'+collectible.id,
+            method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(collectible)
         }).then(function(){
