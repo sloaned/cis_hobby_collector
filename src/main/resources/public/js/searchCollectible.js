@@ -1,3 +1,4 @@
+var collectibles;
 function callSearch(){
     	alert();
     	var search = {};
@@ -13,11 +14,11 @@ function callSearch(){
         alert(search);
     	$.ajax({
         url: '/collectibles/{search}',
-        method: 'GET',
-        data: search,
-        contentType: "application/json",
-        dataType: "json"
-    }).then(function(){
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(search)
+    }).then(function(searchResult){
+    	collectibles = searchResult;
     	alert("s");
         console.log("Post successful")
         location.reload(true);
@@ -26,10 +27,37 @@ function callSearch(){
         console.log(error);
     });
     }
+function replaceTable(e){
+	alert("remove");
+	 $("tbody").children().remove();
+     for (var i = 0; i < collectibles.length; i++) {
+         addDataToRow(collectibles[i]);
+     }
+	 e.preventDefault();
+}
+
+function addDataToRow(collectible){
+	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
+			+ capitalizeWord(collectible.color.color) + "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
+			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div>" + capitalizeWord(collectible.description).truncString(10) + "</div></td><td><div>"
+			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
+	for (var i = 0; i < collectible.keywords.length; i++) {
+		if (i === collectible.keywords.length - 1)
+			row += capitalizeWord(collectible.keywords[i].keyword);
+		else
+			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
+	}
+
+	row += "</div></td><td><div>"
+			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
+			+ "<button class='editButton btn btn-default'>Edit</button>" + "</div></td></tr>";
+
+    $("tbody").append(row);
+    }
 	
 $(document).ready(function(){
 	
-var content = '<form class="form-inline" role="form">\
+var content = '<form id="searchForm" onsubmit="replaceTable()" class="form-inline" role="form">\
     <div class="form-group">\
       <label>Collectible:</label>\
       <input class="form-control" id="collectibleSearch" placeholder="collectible">\
@@ -71,7 +99,5 @@ var content = '<form class="form-inline" role="form">\
   </form>';
 
     $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3>", 
-    content: content, html: true, placement: "top"}); 
-    
-    
+    content: content, html: true, placement: "top"});  
 });

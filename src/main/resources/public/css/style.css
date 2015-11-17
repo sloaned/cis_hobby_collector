@@ -160,6 +160,7 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
+<<<<<<< HEAD
 #searchButton{
 	margin: 0 auto;
 display:block;
@@ -167,3 +168,11 @@ display:block;
 .popover{
 	max-width:98%;
 }
+=======
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+>>>>>>> c5bdfa7496caa19cfeb560ef0e3ba2786f700c3a
