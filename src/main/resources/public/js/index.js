@@ -30,6 +30,8 @@ function addDataToRow(collectible){
             keywords += capitalizeWord(collectible.keywords[i].keyword) + ", ";
     }
     var catalogNumber = "<div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div>";
+    var purchaseDate = "<div>" + collectible.purchaseDate + "</div>";
+    var sellDate = "<div>" + collectible.sellDate + "</div>";
 
     var row;
 
@@ -37,15 +39,16 @@ function addDataToRow(collectible){
         row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
             "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td><div>" +
             "<button class='editButton btn btn-default'>Done</button>" + "</div></td></tr>";
     }
     if (collectible.sold == false){
         row = "<tr id=" + collectible.id + " class='alert-warning notSold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
             "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td><div>" +
             "<button class='editButton btn btn-default'>Done</button>" + "</div></td></tr>";
     }
-
 
     $("tbody").append(row);
 }
