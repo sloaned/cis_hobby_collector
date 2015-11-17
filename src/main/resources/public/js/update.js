@@ -36,7 +36,7 @@ function update(){
     $(".editSubmitButton").click(updated)
 }
 function updated(){
-    validate();
+    var valid = validate();
     var collectible = {};
     collectible.id = $(".name .editField").parent().parent().parent().attr('id');
     collectible.name = $(".name .editField").val().toLowerCase();
@@ -48,7 +48,7 @@ function updated(){
     collectible.keywords = getKeywords();
     collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
     collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
-    console.log(collectible);
+
     if (valid){
         $.ajax({
             url: '/collectible',
@@ -65,7 +65,7 @@ function updated(){
 }
 function validate(){
     var valid = false;
-    console.log("hi")
+
     var name = $(".name .editField").val().toLowerCase();
     var age = $(".age .editField").val().toLowerCase();
     var description = $(".description .editField").val().toLowerCase();
@@ -76,22 +76,24 @@ function validate(){
     var sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
     var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
 
-    valid = isValid(name,".name",255);
-    valid = isValid(age,".age",255);
-    valid = isValid(description,".description",1000);
-    valid = isValid(category,".category",255);
-    valid = isValid(condition,".condition",255);
-    valid = isValid(color,".color",255);
-    valid = isValid(catalogNumber,".catalogNumber",16);
-    valid = isKeywordsValid(keywords)
+    valid = isValid(name,".name",255) &&
+    isValid(age,".age",255) &&
+    isValid(description,".description",1000) &&
+    isValid(category,".category",255) &&
+    isValid(condition,".condition",255) &&
+    isValid(color,".color",255) &&
+    isValid(catalogNumber,".catalogNumber",16) &&
+    isKeywordsValid(keywords);
 
     function isValid(text,where,length){
         if(text == null || text == ""){
             $(where+" .editField").addClass("error");
+            toast(where.replace('.','')+" cannot be null")
             return false;
         }
         else if(text.length > length){
             $(where+" .editField").addClass("error");
+            toast(where.replace('.','')+" is too long")
              return false;
         }
         else
@@ -102,6 +104,7 @@ function validate(){
     function isKeywordsValid(keywords){
         if(keywords.length < 3 ){
             $(".keywords .editField").addClass("error");
+            toast("Must have at least three keywords")
              return false;
         }
          return true;
@@ -114,7 +117,6 @@ function getKeywords(){
     keywords = keywords.replaceAll(' ',',');
     keywords = keywords.split(',');
     keywords = keywords.clean("");
-    console.log(keywords);
     return keywords;
 }
 
