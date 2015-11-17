@@ -1,12 +1,9 @@
 package com.catalyst.collector.entities;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 import java.util.Set;
-
 
 @Entity
 public class Collectible {
