@@ -21,17 +21,17 @@ public class SearchDaoHibernate implements SearchDao{
 
     @PersistenceContext
     private EntityManager em;
-
+    private CriteriaBuilder cb;
     public void setEm(EntityManager em){
         this.em = em;
     }
-
+    public void setCb(CriteriaBuilder cb) {this.cb = cb;}
 
     @Override
     public ArrayList<Collectible> search(Search searchBody) {
 
         List<Predicate> restrictions = new ArrayList<Predicate>();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
+        cb = em.getCriteriaBuilder();
         CriteriaQuery<Collectible> cq = cb.createQuery(Collectible.class);
         Root<Collectible> collectible = cq.from(Collectible.class);
 
