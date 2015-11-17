@@ -11,8 +11,19 @@ public class HomeController {
      * Controller to navigate to the home page
      * @return String with location of html page to get
      */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home() {
 		return "/index.html";
 	}
+	
+	/**
+     * Controller to navigate to the login page
+     * @return String with location of html page to get
+     */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String login() {
+		return "/login.html";
+	}
+	
+	
 }
