@@ -33,9 +33,10 @@ public class Collectible {
     @JoinColumn
     private Condition condition;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "color")
-    private Color color;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
+            inverseJoinColumns = {@JoinColumn(name = "colorID")})
+    private Set<Color> colors;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
@@ -118,12 +119,12 @@ public class Collectible {
         this.condition = condition;
     }
 
-    public Color getColor() {
-        return color;
+    public Set<Color> getColors() {
+        return colors;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColors(Set<Color> color) {
+        this.colors = color;
     }
 
     public Set<Keyword> getKeywords() {
@@ -159,7 +160,7 @@ public class Collectible {
                 ", description='" + description + '\'' +
                 ", category=" + category +
                 ", condition=" + condition +
-                ", color=" + color +
+                ", color=" + colors +
                 ", keywords=" + keywords +
                 ", sold=" + sold +
                 '}';
