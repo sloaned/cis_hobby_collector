@@ -42,6 +42,10 @@ function capitalizeWord(word){
 	}
 }
 
+
+
+
+
 String.prototype.truncString = function(length) {
     return this.length > length ? this.substring(0, length-1) + "..." : this;
 }

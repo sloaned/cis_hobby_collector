@@ -46,7 +46,7 @@ function updated(){
             collectible.category = $(".category .editField").val().toLowerCase();;
             collectible.condition = $(".condition .editField").val().toLowerCase();;
             collectible.color = $(".color .editField").val().toLowerCase();;
-            collectible.keywords = iCanHazKeywords();
+            collectible.keywords = getKeywords();
             collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
             collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
             console.log(collectible);
@@ -72,7 +72,7 @@ function validate(){
     var category = $(".category .editField").val().toLowerCase();
     var condition = $(".condition .editField").val().toLowerCase();
     var color = $(".color .editField").val().toLowerCase();
-    var keywords = iCanHazKeywords();
+    var keywords = getKeywords();
     var sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
     var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
 
@@ -97,5 +97,53 @@ function validate(){
 }
 
 function getKeywords(){
+    var keywords =  $(".keywords .editField").val().toLowerCase();
+    keywords = keywords.replaceAll(' ',',');
+    keywords = keywords.split(',');
+    keywords = keywords.clean("");
+    console.log(keywords);
+    return keywords;
 
 }
+
+Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
+/**
+ * ReplaceAll by Fagner Brack (MIT Licensed)
+ * Replaces all occurrences of a substring in a string
+ */
+String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
+    var _token;
+    var str = this + "";
+    var i = -1;
+
+    if ( typeof token === "string" ) {
+
+        if ( ignoreCase ) {
+
+            _token = token.toLowerCase();
+
+            while( (
+                i = str.toLowerCase().indexOf(
+                    token, i >= 0 ? i + newToken.length : 0
+                ) ) !== -1
+            ) {
+                str = str.substring( 0, i ) +
+                    newToken +
+                    str.substring( i + token.length );
+            }
+
+        } else {
+            return this.split( token ).join( newToken );
+        }
+
+    }
+return str;
+};
