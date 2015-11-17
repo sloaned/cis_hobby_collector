@@ -155,4 +155,29 @@ function validateKeywords(){
 		$("#inputKeywords").removeClass("error");
 		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','hidden');
 	}
+
+    var keywords = [];
+    $(".keyword").each(function() {
+        keywords.push($(this).text());
+    });
+    if (hasDuplicates(keywords)) {
+        $("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','visible');
+        $("#inputKeywords").parent().parent().parent().parent().find(".errorText").text("Duplicate keywords not allowed");
+        $("#inputKeywords").addClass("error");
+    } else {
+        $("#inputKeywords").removeClass("error");
+        $("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','hidden');
+    }
+}
+
+function hasDuplicates(array) {
+    var valuesSoFar = Object.create(null);
+    for (var i = 0; i < array.length; ++i) {
+        var value = array[i];
+        if (value in valuesSoFar) {
+            return true;
+        }
+        valuesSoFar[value] = true;
+    }
+    return false;
 }
