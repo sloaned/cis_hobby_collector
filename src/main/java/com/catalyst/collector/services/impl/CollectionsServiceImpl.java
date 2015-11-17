@@ -202,7 +202,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean updateCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
 		if(collectionValidation.isCollectibleValid()) {
-            collectionsDao.addCollectible(collectible);
+            collectionsDao.updateCollectible(collectible);
             return true;
         }
         return false;
