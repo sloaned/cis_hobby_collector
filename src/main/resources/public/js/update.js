@@ -39,10 +39,10 @@ function update(){
     });
     $(".editSubmitButton").click(updated)
     $(document).mouseup(function(e){
-            if (!$(e.target).hasClass("editField"))
+            if (!$(e.target).hasClass("editField")){
                 loadTable();
-           console.log(e.target);
-        $(document).off("mouseup");
+                $(document).off("mouseup");
+            }
         });
 }
 function updated(){
