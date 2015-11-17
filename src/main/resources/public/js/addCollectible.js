@@ -116,7 +116,13 @@ $(document).ready(function(){
         validateDescription();
         validateName();
         validateCatalogNumber();
-        validateKeywords()
+        validateKeywords();
+        validatePurchaseDate();
+        if($("#inputSoldStatus").val() === "True")
+        {
+        	validateSoldDate();
+        }
+        
 
         var isValid = false;
         if ($(".error").length < 1){
@@ -157,6 +163,15 @@ $(document).ready(function(){
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
+        collectible.purchaseDate = $("#inputPurchaseDate").val();
+        if(collectible.sold === "true")
+        {
+        	collectible.sellDate = $("#inputSellDate").val();
+        }
+        else
+        {
+        	collectible.sellDate = null;
+        }
         console.log(collectible);
         if (isValid){
             $.ajax({
@@ -188,6 +203,8 @@ $(document).ready(function(){
     });
 
     $("#inputCatalogNumber").mask("SSS-000000000000");
+    $("#inputPurchaseDate").mask("00/00/0000");
+    $("#inputSellDate").mask("00/00/0000");
 });
 
 function typeahead(){
