@@ -78,7 +78,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 		if (collectionValidation.isCategoryValid(category)) {
 			category.setId(id);
 			String cat = category.getCategory();
-			cat.toLowerCase();
 			category.setCategory(cat);
 			return collectionsDao.updateCategory(category);
 		}
