@@ -17,14 +17,14 @@ function loadTable() {
 function addDataToRow(collectible){
     var type = "<div>" + capitalizeWord(collectible.category.category) + "</div>";
     var colors = "<div>";
-    	for(var i = 0; i < collectible.colors.length; i++){
-    	    if(i === collectible.colors.length -1){
-    	        colors += capitalizeWord(collectible.colors[i].color) + "</div>";
-    	    }
-    	    else{
-    	        colors += capitalizeWord(collectible.colors[i].color) + ", ";
-    	    }
-    	}
+        for(var i = 0; i < collectible.colors.length; i++){
+            if(i === collectible.colors.length -1){
+                colors += capitalizeWord(collectible.colors[i].color) + "</div>";
+            }
+            else{
+                colors += capitalizeWord(collectible.colors[i].color) + ", ";
+            }
+        }
     var condition = "<div>" + capitalizeWord(collectible.condition.condition) + "</div>";
     var era = "<div>" + capitalizeWord(collectible.age.age) + "</div>";
     var description = "<div title='" + capitalizeWord(collectible.description) + "' class=\"ellipsis\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div>";
@@ -46,7 +46,7 @@ function addDataToRow(collectible){
         row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
             "</td><td>" + "<b>Color:</b>" + colors + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
-            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td><div>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date:</b>" + sellDate + "</td><td><div>" +
             "<button class='editButton btn btn-default'>Done</button>" + "</div></td></tr>";
     }
     if (collectible.sold == false){

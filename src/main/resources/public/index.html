@@ -72,23 +72,26 @@
 						</div><!-- /input-group -->
 						<p class="errorText"></p>
 					</div>
-					<div class="form-group">
+					<div class="form-inline">
 						<label for="inputColor">Color</label>
-						<div class="input-group">
-							<input id="inputColor" type="text" class="form-control inputBox" aria-label="..." placeholder="Color" maxlength="255">
-							<div class="input-group-btn">
-								<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
-								<ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
-									<script id="colorDropdown" type="text/x-handlebars-template">
-										{{#each this}}
-										<li><a>{{color}}</a></li>
-										{{/each}}
-									</script>
-								</ul>
-							</div><!-- /btn-group -->
-						</div><!-- /input-group -->
-						<p class="errorText"></p>
+                        <div id="colors">
+                            <div class="input-group colors">
+                                <input id="inputColor" type="text" class="form-control inputBox typeahead" aria-label="..." placeholder="Color" maxlength="255">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
+                                    <ul id="colorSelection" class="dropdown-menu dropdown-menu-right">
+                                        <script id="colorDropdown" type="text/x-handlebars-template">
+                                            {{#each this}}
+                                            <li><a>{{color}}</a></li>
+                                            {{/each}}
+                                        </script>
+                                    </ul>
+                                </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                        </div>
+                        <p id="inputColorError" class="errorText"></p>
 					</div>
+
 					<div class="form-group">
 						<label for="inputCondition">Condition</label>
 						<div class="input-group">
@@ -139,7 +142,7 @@
 						<p class="errorText"></p>
 					</div>
 					<div class="form-group">
-						<label for="inputKeywords">keywords</label>
+						<label for="inputKeywords">Keywords</label>
 						<div id="keywords">
 							<div id="remote">
 								<input id="inputKeywords" class="form-control typeahead" type="text" autocomplete="off" maxlength="255">
@@ -163,6 +166,7 @@
 							<ul class="dropdown-menu" id="inputSoldDropdown">
 								<li><a id="soldStatusTrue">True</a></li>
 								<li><a id="soldStatusFalse">False</a></li>
+                            </ul>
 
 							<ul class="dropdown-menu">
 								<li class="btn-warning"><a>True</a></li>
