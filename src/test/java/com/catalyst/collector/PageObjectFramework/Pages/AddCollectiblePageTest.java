@@ -32,7 +32,7 @@ public class AddCollectiblePageTest extends TestPageObject {
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
         AddCollectiblePage addCollectiblePage = new AddCollectiblePage(driver);
 
-        String expectedType = VALID_TYPE;
+        String expectedType = VALID_CATALOG_NUMBER;
         addCollectiblePage.clickAddCollectible();
         addCollectiblePage.sendKeys(By.id("inputType"), VALID_TYPE);
         addCollectiblePage.sendKeys(By.id("inputColor"), VALID_COLOR);
@@ -46,9 +46,8 @@ public class AddCollectiblePageTest extends TestPageObject {
 
         addCollectiblePage.click(By.id("submitAdd"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr[7]/td[1]/div")));
+        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr[11]/td[1]/div")));
         String actualType = newRow.getText();
-        new WebDriverWait(driver,1000).until(ExpectedConditions.presenceOfElementLocated(By.id("hahahahhahahhahaha")));
         assertEquals(expectedType, actualType);
     }
 }

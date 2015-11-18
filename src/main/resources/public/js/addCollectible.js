@@ -34,7 +34,8 @@ $(document).ready(function(){
         $("#colorSelection").find("li").click(function () {
             var text = $(this).text();
             $("#inputColor").val(text);
-            validateColor();
+            addColor();
+            validateColors();
             for (var i = 0; i < colors.length; i++){
                 if (text == colors[i].color){
                     colorId = colors[i].id;
@@ -108,7 +109,7 @@ $(document).ready(function(){
 
     $("#submitAdd").click(function(){
         validateType();
-        validateColor();
+        validateColors();
         validateCondition();
         validateAge();
         validateDescription();
@@ -125,12 +126,6 @@ $(document).ready(function(){
         var isValid = false;
         if ($(".error").length < 1){
             isValid = true;
-        }
-        var color = {};
-        if (colorId == null){
-            color.color = $("#inputColor").val().toLowerCase();
-        }else{
-            color.id = colorId;
         }
         var age = {};
         if (ageId == null){
@@ -157,7 +152,7 @@ $(document).ready(function(){
         collectible.description = $("#inputDescription").val().toLowerCase();
         collectible.category = category;
         collectible.condition = condition;
-        collectible.color = color;
+        collectible.colors = iCanHazColorz();
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
@@ -192,7 +187,7 @@ $(document).ready(function(){
     });
 
     keywords();
-
+    colors();
     typeahead();
 
     $("#inputSoldStatus").find("li").click(function () {
@@ -253,6 +248,28 @@ function keywords () {
     });
 }
 
+function colors() {
+    $("#colors input").focusout(addColor).keyup(function(e){
+        // if: comma,enter
+        if(/(188|13)/.test(e.which)){
+            $(this).focusout();
+        }
+    });
+
+    $('#colors').on('click','.delete',function(){
+        $(this).parent().remove();
+        validateColors();
+    });
+}
+
+function addColor(){
+    var txt= $("#inputColor").val().replace(/[^\w]/g,'');
+    if(txt) {
+        $("#inputColor").parent().before('<span class="color">'+ txt + '<span class="delete">X</span></span>');
+    }
+    $("#inputColor").val("");
+}
+
 function iCanHazKeywords(){
     var keywords = [];
     $(".keyword").each(function(){
@@ -261,9 +278,18 @@ function iCanHazKeywords(){
     return keywords;
 }
 
+function iCanHazColorz(){
+    var colors = [];
+    $(".color").each(function(){
+        colors.push({"color": $(this).contents().first().text().toLowerCase()});
+    });
+    return colors;
+}
+
 function clearForm(){
         $("#inputType").val("");
         $("#inputColor").val("");
+        $(".color").remove();
         $("#inputCondition").val("");
         $("#inputAge").val("");
         $("#inputDescription").val("");
