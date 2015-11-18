@@ -69,7 +69,7 @@ public class CollectionValidation {
             if(!isKeywordValid(k))
                 return false;
         }
-        return length>1000;
+        return length<=1000;
     }
 
     private boolean isColorsValid() {

@@ -241,6 +241,11 @@ textarea:focus, input:focus{
     color: #ffffff;
 }
 
+#inputKeywords:focus,#soldSearch{
+	background-color: #ffffff;
+	color: black;
+}
+
 .notSold {
     background-color: #f0ad4e;
     color: #ffffff;

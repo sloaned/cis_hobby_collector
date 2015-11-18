@@ -42,6 +42,7 @@ function replaceTable(){
      for (var i = 0; i < collectibles.length; i++) {
          addDataToRow(collectibles[i]);
      }
+     $(".catalogNumber").click(update);
 }
 
 $(document).ready(function(){

@@ -105,7 +105,6 @@ function validate(){
 
     valid = isValid(name,".name",255) &&
     isValid(age,".age",255) &&
-    isValid(description,".description",1000) &&
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
 
