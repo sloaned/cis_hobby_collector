@@ -147,7 +147,7 @@ $(document).ready(function(){
         }
 
         var collectible = {};
-        collectible.name = $("#inputName").val();
+        collectible.name = $("#inputName").val().toLowerCase();
         collectible.age = age;
         collectible.description = $("#inputDescription").val().toLowerCase();
         collectible.category = category;

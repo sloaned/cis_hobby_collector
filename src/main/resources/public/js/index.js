@@ -28,7 +28,7 @@ function addDataToRow(collectible){
     var condition = "<div>" + capitalizeWord(collectible.condition.condition) + "</div>";
     var era = "<div>" + capitalizeWord(collectible.age.age) + "</div>";
     var description = "<div title='" + capitalizeWord(collectible.description) + "' class=\"ellipsis\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div>";
-    var name = "<div>" + collectible.name + "</div>";
+    var name = "<div>" + capitalizeWord(collectible.name) + "</div>";
     var soldStatus = "<div>" + capitalizeWord(collectible.sold.toString()) + "</div>";
     var keywords = "<div>";
     for (var i = 0; i < collectible.keywords.length; i++) {

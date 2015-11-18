@@ -12,6 +12,7 @@ function callSearch(){
         search.name = $("#nameSearch").val().toLowerCase();
         search.keyword = $("#keywordsSearch").val().toLowerCase();
         var sold = $("#soldSearch").val();
+        console.log("sold = " + sold);
         if(sold==="sold"){
         	search.sold=true;
         }
@@ -45,8 +46,15 @@ function replaceTable(){
 }
 
 function addRow(collectible){
-	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.color.color) + "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
+	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>";
+	for (var i = 0; i < collectible.colors.length; i++) {
+		if (i === collectible.colors.length - 1)
+			row += capitalizeWord(collectible.colors[i].color);
+		else
+			row += capitalizeWord(collectible.colors[i].color) + ", ";
+	}
+ 
+	row += "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
 			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div>" + capitalizeWord(collectible.description)+ "</div></td><td><div>"
 			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
 	for (var i = 0; i < collectible.keywords.length; i++) {
@@ -104,7 +112,7 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
       <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
      </div>\
      <select id="soldSearch" class="col-sm-4">\
-  		<option selected disabled>Select Sold Status</option>\
+  		<option selected="selected" disabled>Select Sold Status</option>\
   		<option value="sold">Sold</option>\
   		<option value="notsold">Not Sold</option>\
 	</select>\
