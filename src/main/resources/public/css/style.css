@@ -153,10 +153,7 @@ a:hover {
     margin: 0;
 }
 
-.error {
-    border-color: red;
-    font:inherit;
-}
+
 
 .errorText {
     color: red;
@@ -255,4 +252,9 @@ textarea:focus, input:focus{
 	background-color:#d9534f;
 	border: 1px solid #ccc;
     color: #ffffff;
+}
+
+.error {
+    border-color: red;
+    font:inherit;
 }
