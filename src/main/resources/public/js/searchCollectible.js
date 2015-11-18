@@ -12,10 +12,10 @@ function callSearch(){
         search.name = $("#nameSearch").val().toLowerCase();
         search.keyword = $("#keywordsSearch").val().toLowerCase();
         var sold = $("#soldSearch").val();
-        if(sold=="sold"){
+        if(sold==="sold"){
         	search.sold=true;
         }
-        else if(sold=="notsold"){
+        else if(sold==="notsold"){
         	search.sold=false;
         }
         else{
@@ -104,7 +104,7 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
       <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
      </div>\
      <select id="soldSearch" class="col-sm-4">\
-  		<option value="select">Select Sold Status</option>\
+  		<option selected disabled>Select Sold Status</option>\
   		<option value="sold">Sold</option>\
   		<option value="notsold">Not Sold</option>\
 	</select>\
