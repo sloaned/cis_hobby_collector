@@ -34,9 +34,9 @@ public class CollectionValidation {
     public CollectionValidation() {}
 
     public boolean isCollectibleValid(){
-        return isAgeValid() && isColorValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() && isPurchaseDateValid() &&
+        return isAgeValid() && isColorsValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() && isPurchaseDateValid() &&
         		(collectible.getSellDate() == null || isSellDateValid()) &&
-        		(collectible.getSellDate() == null || collectible.getSellDate() == collectible.getPurchaseDate() || collectible.getPurchaseDate().before(collectible.getSellDate())) &&
+        		(collectible.getSellDate() == null || !collectible.getPurchaseDate().after(collectible.getSellDate())) &&
         		collectible.getName() != null && !collectible.getName().isEmpty() &&
                 collectible.getDescription() != null && !collectible.getDescription().isEmpty() &&
                 collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty() 
@@ -72,8 +72,14 @@ public class CollectionValidation {
         return length>1000;
     }
 
-    private boolean isColorValid() {
-        return isColorValid(collectible.getColor());
+    private boolean isColorsValid() {
+        if(collectible.getColors().size() < 1)
+            return false;
+        for (Color c: collectible.getColors()) {
+            if(!isColorValid(c))
+                return false;
+        }
+        return true;
     }
 
     private boolean isAgeValid() {
@@ -140,6 +146,10 @@ public class CollectionValidation {
     }
     
     public boolean isDateValid(Date date){
+    	if(date == null)
+    	{
+    		return false;
+    	}
     	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     	String dateString = formatter.format(date);
     	matcher = datePattern.matcher(dateString);

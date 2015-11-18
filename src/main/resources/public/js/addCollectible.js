@@ -122,7 +122,7 @@ $(document).ready(function(){
         {
         	validateSoldDate();
         }
-        
+
 
         var isValid = false;
         if ($(".error").length < 1){
@@ -280,6 +280,19 @@ function clearForm(){
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
         $("#fade").css("display", "none");
+}
+
+function toast(message, successful) {
+    toastr.options = {
+        "positionClass": "toast-top-center",
+        "preventDuplicates": true
+    }
+
+    var status;
+    status = successful ? "Success" : "Error";
+
+    toastr[status.toLowerCase()](message, status);
+
 }
 
 function getErrors() {

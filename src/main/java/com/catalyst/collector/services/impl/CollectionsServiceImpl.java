@@ -185,9 +185,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 		if(collectible.getCategory().getCategory() !=null){
 			addCategory(collectible.getCategory());
 		}
-		if(collectible.getColor().getColor() !=null){
-			addColor(collectible.getColor());
-		}
+        for (Color c: collectible.getColors()) {
+            if(c.getColor() != null) {
+                addColor(c);
+            }
+        }
 		if(collectible.getCondition().getCondition() !=null){
 			addCondition(collectible.getCondition());
 		}

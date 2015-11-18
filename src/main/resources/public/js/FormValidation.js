@@ -36,6 +36,11 @@ $(document).ready(function(){
 		$("#inputSellDate").val("");
 		$("#inputSellDate").removeClass("error");
 		$("#inputSellDate").parent().find(".errorText").css("visibility","hidden");
+		if($("#inputPurchaseDateError").text() == "Purchase date must be earlier than sell date")
+		{
+			$("#inputPurchaseDate").removeClass("error");
+			$("#inputPurchaseDate").parent().find(".errorText").css("visibility","hidden");
+		}
 		
 	})
 });
