@@ -204,6 +204,11 @@ textarea:focus, input:focus{
     color: #ffffff;
 }
 
+#inputKeywords:focus{
+	background-color: #ffffff;
+	color: black;
+}
+
 .sold {
     background-color: #d9534f;
     color: #ffffff;

@@ -157,8 +157,9 @@ $(document).ready(function(){
         collectible.description = $("#inputDescription").val().toLowerCase();
         collectible.category = category;
         collectible.condition = condition;
-        collectible.color = color;
-        collectible.keywords = iCanHazKeywords();
+        // temporary fix
+        collectible.colors = []
+        collectible.colors.push(color);
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
         collectible.purchaseDate = $("#inputPurchaseDate").val();
@@ -181,6 +182,7 @@ $(document).ready(function(){
                 console.log("Post successful")
                 toast("Collectible added", true);
                 loadTable();
+                clearForm();
                 closeForm();
             }, function(error){
                 console.log(error);
