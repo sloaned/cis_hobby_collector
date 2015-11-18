@@ -21,6 +21,11 @@ public class CollectionValidationTests {
     static final private String VALID_COLOR = "validColor";
     static final private String VALID_CONDITION = "validCondition";
     static final private String VALID_CATEGORY = "validCategory";
+    static final private String VALID_DESCRIPTION = "validDescription";
+    static final private String VALID_NAME = "validName";
+    static final private String VALID_CATALOG_NUMBER = "CSE-987654321098";
+    static final private Date VALID_PURCHASE_DATE = new Date();
+    static final private Date VALID_SELL_DATE = new Date();
     static final private String INVALID_STRING_WITH_NUMBER = "Str1ng";
     static final private String INVALID_STRING_OF_SPACE = "     ";
     static final private String INVALID_NULL_STRING = (String) null;
@@ -201,13 +206,15 @@ public class CollectionValidationTests {
     public void HappyIsCollectibleValid(){
         Collectible c = new Collectible();
         Age a = new Age();
-        Color l = new Color();
+        HashSet<Color> l = new HashSet<>();
         Condition d = new Condition();
         Category g = new Category();
         HashSet<Keyword> ks =  new HashSet<>();
 
         a.setAge(VALID_AGE);
-        l.setColor(VALID_COLOR);
+        Color validC1 = new Color();
+        validC1.setColor(VALID_COLOR);
+        l.add(validC1);
         d.setCondition(VALID_CONDITION);
         g.setCategory(VALID_CATEGORY);
         Keyword valid1 = new Keyword();
@@ -223,8 +230,12 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        //c.setColor(l);
+        c.setColors(l);
         c.setCondition(d);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setName(VALID_NAME);
+        c.setPurchaseDate(VALID_PURCHASE_DATE);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
 
         cv.setCollectible(c);
 
@@ -232,16 +243,17 @@ public class CollectionValidationTests {
     }
 
     @Test
-    public void HappyIsCollectibleIDValid(){
+    public void HappyIsCollectibleValidUsingIDs(){
         Collectible c = new Collectible();
         Age a = new Age();
-        Color l = new Color();
+        HashSet<Color> l = new HashSet<>();
         Condition d = new Condition();
         Category g = new Category();
         HashSet<Keyword> ks =  new HashSet<>();
-
         a.setId(1);
-        l.setId(1);
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
         d.setId(1);
         g.setId(1);
         Keyword valid1 = new Keyword();
@@ -253,15 +265,55 @@ public class CollectionValidationTests {
         ks.add(valid1);
         ks.add(valid2);
         ks.add(valid3);
-
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        //c.setColor(l);
+        c.setColors(l);
         c.setCondition(d);
-
+        c.setSold(false);
+        c.setPurchaseDate(VALID_PURCHASE_DATE);
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
         cv.setCollectible(c);
+        assertTrue(cv.isCollectibleValid());
+    }
 
+    @Test
+    public void HappyIsCollectibleIDValidAndIsSold(){
+        Collectible c = new Collectible();
+        Age a = new Age();
+        HashSet<Color> l = new HashSet<>();
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks =  new HashSet<>();
+        a.setId(1);
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColors(l);
+        c.setCondition(d);
+        c.setSold(true);
+        c.setPurchaseDate(VALID_PURCHASE_DATE);
+        c.setName(VALID_NAME);
+        c.setSellDate(VALID_SELL_DATE);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        cv.setCollectible(c);
         assertTrue(cv.isCollectibleValid());
     }
 }

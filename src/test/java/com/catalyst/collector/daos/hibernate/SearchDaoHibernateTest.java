@@ -41,5 +41,5 @@ public class SearchDaoHibernateTest {
         mockCriteriaQuery = mock(CriteriaQuery.class);
         target.setEm(mockEm);
     }
-    
+
 }
