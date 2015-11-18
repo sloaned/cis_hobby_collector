@@ -24,13 +24,12 @@ public class CollectionValidationTests {
     static final private String VALID_DESCRIPTION = "validDescription";
     static final private String VALID_NAME = "validName";
     static final private String VALID_CATALOG_NUMBER = "CSE-987654321098";
-    static final private Date VALID_PURCHASE_DATE = new Date();
     static final private Date VALID_SELL_DATE = new Date();
     static final private String INVALID_STRING_WITH_NUMBER = "Str1ng";
     static final private String INVALID_STRING_OF_SPACE = "     ";
     static final private String INVALID_NULL_STRING = (String) null;
     static final private String INVALID_1004_STRING ="this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five charactersthis is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.";
-    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";    
+    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";
     static private CollectionValidation cv;
 
     @Before
