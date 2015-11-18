@@ -120,7 +120,7 @@ $(document).ready(function(){
         {
         	validateSoldDate();
         }
-        
+
 
         var isValid = false;
         if ($(".error").length < 1){
@@ -184,17 +184,10 @@ $(document).ready(function(){
                 closeForm();
             }, function(error){
                 console.log(error);
-<<<<<<< .merge_file_a05724
-                toast("Can't POST")
-            });
-        } else {
-            toast("Invalid input");
-=======
                 toast("Catalog number already exists");
             });
         } else {
             toast(getErrors());
->>>>>>> .merge_file_a05200
         }
     });
 
@@ -287,7 +280,6 @@ function closeForm(){
         $("#fade").css("display", "none");
 }
 
-<<<<<<< .merge_file_a05724
 function toast(message, successful) {
     toastr.options = {
         "positionClass": "toast-top-center",
@@ -300,7 +292,7 @@ function toast(message, successful) {
     toastr[status.toLowerCase()](message, status);
 
 }
-=======
+
 function getErrors() {
     var errText = "The following fields have errors: <br />";
     var hasError = false;
@@ -322,4 +314,3 @@ function getErrors() {
 
     return errText;
 }
->>>>>>> .merge_file_a05200
