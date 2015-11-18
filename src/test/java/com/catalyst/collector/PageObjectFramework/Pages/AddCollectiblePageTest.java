@@ -25,14 +25,14 @@ public class AddCollectiblePageTest extends TestPageObject {
     private static final String VALID_NAME = "Validname";
     private static final String VALID_CATALOG_NUMBER = "MMM-123498767543";
     private static final String VALID_KEYWORDS = "keywords,are,fun,";
-    private static final String VALID_PURCHASE_DATE = (new Date()).toString();
+    private static final String VALID_PURCHASE_DATE = "10/10/1000";
 
 
     @Test
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
         AddCollectiblePage addCollectiblePage = new AddCollectiblePage(driver);
 
-        String expectedType = VALID_TYPE;
+        String expectedType = VALID_CATALOG_NUMBER;
         addCollectiblePage.clickAddCollectible();
         addCollectiblePage.sendKeys(By.id("inputType"), VALID_TYPE);
         addCollectiblePage.sendKeys(By.id("inputColor"), VALID_COLOR);
@@ -46,9 +46,8 @@ public class AddCollectiblePageTest extends TestPageObject {
 
         addCollectiblePage.click(By.id("submitAdd"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr[7]/td[1]/div")));
+        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr[11]/td[1]/div")));
         String actualType = newRow.getText();
-
         assertEquals(expectedType, actualType);
     }
 }
