@@ -23,7 +23,7 @@ public abstract class PageObject {
      * @param by - the by selector for the given element
      */
     public void click(By by){
-        find(by);
+        find(by).click();
     }
 
     /**

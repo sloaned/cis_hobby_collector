@@ -82,6 +82,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
         } catch (NoResultException e) {
             em.persist(collectible.getCondition());
         }
+
         for (Color c : collectible.getColors())
             try {
                 Integer id = em.createQuery("SELECT c.id FROM Color c WHERE c.color = :color", Integer.class).setParameter("color", c.getColor()).getSingleResult();
