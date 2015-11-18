@@ -185,9 +185,11 @@ public class CollectionsServiceImpl implements CollectionsService {
 		if(collectible.getCategory().getCategory() !=null){
 			addCategory(collectible.getCategory());
 		}
-		if(collectible.getColor().getColor() !=null){
-			addColor(collectible.getColor());
-		}
+        for (Color c: collectible.getColors()) {
+            if(c.getColor() != null) {
+                addColor(c);
+            }
+        }
 		if(collectible.getCondition().getCondition() !=null){
 			addCondition(collectible.getCondition());
 		}
@@ -202,7 +204,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 	public boolean updateCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
 		if(collectionValidation.isCollectibleValid()) {
-            collectionsDao.addCollectible(collectible);
+            collectionsDao.updateCollectible(collectible);
             return true;
         }
         return false;

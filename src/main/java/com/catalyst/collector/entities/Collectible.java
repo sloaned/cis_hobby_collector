@@ -1,8 +1,9 @@
 package com.catalyst.collector.entities;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
 import java.util.Set;
-
 
 @Entity
 public class Collectible {
@@ -32,9 +33,10 @@ public class Collectible {
     @JoinColumn
     private Condition condition;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "color")
-    private Color color;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
+            inverseJoinColumns = {@JoinColumn(name = "colorID")})
+    private Set<Color> colors;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "collectibleId")},
@@ -43,6 +45,14 @@ public class Collectible {
 
     @Column(nullable = false)
     private boolean sold;
+    
+    @Column(nullable = false)
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
+    private Date purchaseDate;
+    
+    @Column(nullable = true)
+    @JsonFormat(pattern = "MM/dd/yyyy", timezone="PST")
+    private Date sellDate;
 
 
     public Integer getId() {
@@ -109,12 +119,12 @@ public class Collectible {
         this.condition = condition;
     }
 
-    public Color getColor() {
-        return color;
+    public Set<Color> getColors() {
+        return colors;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColors(Set<Color> color) {
+        this.colors = color;
     }
 
     public Set<Keyword> getKeywords() {
@@ -124,6 +134,22 @@ public class Collectible {
     public void setKeywords(Set<Keyword> keywords) {
         this.keywords = keywords;
     }
+    
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	public Date getSellDate() {
+		return sellDate;
+	}
+
+	public void setSellDate(Date sellDate) {
+		this.sellDate = sellDate;
+	}
 
     @Override
     public String toString() {
@@ -134,9 +160,10 @@ public class Collectible {
                 ", description='" + description + '\'' +
                 ", category=" + category +
                 ", condition=" + condition +
-                ", color=" + color +
+                ", color=" + colors +
                 ", keywords=" + keywords +
                 ", sold=" + sold +
                 '}';
     }
+
 }

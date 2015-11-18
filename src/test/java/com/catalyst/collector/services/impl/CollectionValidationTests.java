@@ -4,6 +4,9 @@ import com.catalyst.collector.entities.*;
 import com.catalyst.collector.services.CollectionValidation;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import static org.junit.Assert.assertFalse;
@@ -22,7 +25,7 @@ public class CollectionValidationTests {
     static final private String INVALID_STRING_OF_SPACE = "     ";
     static final private String INVALID_NULL_STRING = (String) null;
     static final private String INVALID_1004_STRING ="this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five charactersthis is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.";
-    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";
+    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";    
     static private CollectionValidation cv;
 
     @Before
@@ -220,7 +223,7 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        c.setColor(l);
+        //c.setColor(l);
         c.setCondition(d);
 
         cv.setCollectible(c);
@@ -254,7 +257,7 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        c.setColor(l);
+        //c.setColor(l);
         c.setCondition(d);
 
         cv.setCollectible(c);

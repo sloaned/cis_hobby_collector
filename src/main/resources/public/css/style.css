@@ -1,6 +1,6 @@
 .black_overlay{
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
@@ -14,7 +14,7 @@
 
 .white_content {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 12.5%;
     left: 12.5%;
     width: 75%;
@@ -160,6 +160,7 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
+
 #searchButton{
 	margin-left:48%;
 	display:block;
@@ -172,22 +173,15 @@ td div{
 }
 .popover{
 	max-width:98%;
+
+table{
+	font-size: .9em;
 }
 
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-}
-
-.table-striped > tbody > tr:nth-child(2n-1) > td, .table-striped > tbody > tr:nth-child(2n-1) > th {
-    background-color: #f0ad4e;
-    color: #ffffff;
-}
-
-.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
-    background-color: #d9534f;
-    color: #ffffff;
 }
 
 thead {
@@ -198,6 +192,7 @@ thead {
     border: 7px solid #996633;
     border-radius: 10px;
     background-color: #996633;
+    padding: 1px;
 }
 
 textarea:focus, input:focus{
@@ -209,4 +204,15 @@ popover select:focus, input:focus {
 .popover-title, .popover-content{
 	background-color:#d9534f;
 	border: 1px solid #ccc;
+    color: #ffffff;
+}
+
+.sold {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+.notSold {
+    background-color: #f0ad4e;
+    color: #ffffff;
 }
