@@ -41,19 +41,5 @@ public class SearchDaoHibernateTest {
         mockCriteriaQuery = mock(CriteriaQuery.class);
         target.setEm(mockEm);
     }
-
-
-    @Test
-    public void testSearch() throws Exception {
-        searchBody.setCategory("coins");
-        ArrayList<Collectible> expected = new ArrayList<Collectible>();
-        TypedQuery<Collectible> mockTypedQuery = mock(TypedQuery.class);
-        when(mockEm.createQuery(anyString(), eq(Collectible.class))).thenReturn(mockTypedQuery);
-        when(mockCriteriaBuilder.createQuery(String.class)).thenReturn(mockCriteriaQuery);
-        when(mockTypedQuery.getResultList()).thenReturn(expected);
-        searchDaoHibernate.setEm(mockEm);
-        searchDaoHibernate.setCb(mockCriteriaBuilder);
-        ArrayList<Collectible> result = searchDaoHibernate.search(searchBody);
-        assertEquals(expected, result);
-    }
+    
 }
