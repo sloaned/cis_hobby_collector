@@ -3,6 +3,7 @@ $(document).ready(function(){
     $("#addCollectibleButton").click(function(){
         $("#newCollectibleForm").css("display", "block");
         $("#fade").css("display", "block");
+        $(document).mouseup(closeAdd);
     });
 
     //Add categories to dropdown
@@ -83,7 +84,7 @@ $(document).ready(function(){
     });
 
     // Removes popup from display when users clicks away from container.
-    $(document).mouseup(function (e) {
+    function closeAdd(e) {
         //if form isn't open don't bother checking anything.
         if ($("#newCollectibleForm").css("display") === "none")
             return;
@@ -99,8 +100,9 @@ $(document).ready(function(){
 
             clearForm();
             closeForm();
+            $(document).off("mouseup");
         }
-    });
+    }
 
     $("#cancelAdd").click(function(){
         clearForm();
