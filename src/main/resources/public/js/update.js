@@ -35,6 +35,12 @@ function update(){
             $(div).html("<input class=\" form-control editField\" value=\""+$(div).attr('title') +"\">");
             return;
         }
+        if($(div).hasClass("CatalogNumber")){
+                    console.log($(div).find('.editField'))
+                    $(div).html("<input class=\" form-control editField\" value=\""+$(div).text() +"\">");
+                    $(div).children('.editField').mask('SSS-000000000000');
+                    return;
+                }
 
         text = $(div).text();
         $(div).html("<input class=\"form-control editField\"type=\"text\" value=\""+ text +"\">");
@@ -66,15 +72,15 @@ function updated(){
         collectible.sellDate = $(".sellDate .editField").val() === ""? null:moment(new Date($(".sellDate .editField").val())).format("MM/DD/YYYY");
         collectible.purchaseDate =  moment(new Date($(".purchaseDate .editField").val())).format("MM/DD/YYYY");
 
-        console.log(collectible)
         $.ajax({
             url: '/collectible/'+collectible.id,
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(collectible)
         }).then(function(){
-            console.log("Post successful")
-            location.reload(true);
+            toast("Updated!",true);
+            loadTable();
+            $(document).off("mouseup");
         }, function(error){
             console.log(error);
         });
