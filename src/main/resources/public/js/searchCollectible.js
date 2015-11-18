@@ -21,7 +21,7 @@ function callSearch(){
         else{
         	search.sold=null;
         }
-        search.catalogNumber = $("#catalogNumberSearch").val().toLowerCase();
+        search.catalogNumber = $("#catalogNumberSearch").val().toUpperCase();
     	$.ajax({
         url: '/collectibles/search',
         method: 'POST',
@@ -104,7 +104,7 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
       <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
      </div>\
      <select id="soldSearch" class="col-sm-4">\
-  		<option value="select">Select</option>\
+  		<option value="select">Select Sold Status</option>\
   		<option value="sold">Sold</option>\
   		<option value="notsold">Not Sold</option>\
 	</select>\
