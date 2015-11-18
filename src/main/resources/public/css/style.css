@@ -191,7 +191,8 @@ table{
 }
 
 #searchButton{
-	margin-left:48%;
+	margin-left:46%;
+	padding:none;
 	display:block;
 	position:fixed;
 	bottom:4px;
@@ -205,10 +206,6 @@ table{
 .popover{
 	max-width:98%;
 	position:fixed;
-}
-
-table{
-	font-size: .9em;
 }
 
 .ellipsis {
@@ -225,7 +222,7 @@ thead {
     border: 7px solid #996633;
     border-radius: 10px;
     background-color: #996633;
-    padding: 1px;
+    padding: 0;
 }
 
 textarea:focus, input:focus{

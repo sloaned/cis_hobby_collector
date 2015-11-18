@@ -1,9 +1,6 @@
 var collectibles;
-function show(){
-	$("[data-toggle='popover']").popover('show');
-}
 function hide(){
-    $("[data-toggle='popover']").popover('hide');
+    $("#searchButton").click();
 }
 function callSearch(){
     	var search ={};
@@ -33,13 +30,12 @@ function callSearch(){
     }).then(function(searchResult){
     	collectibles = searchResult;
     	replaceTable();
-        hide();
+    	hide();
         console.log("Post successful")
     }, function(error){
     	replaceTable();
         console.log(error);
     });
-    	$("[data-toggle='popover']").popover('toggle');
     }
 function replaceTable(){
 	 $("tbody").children().remove();
@@ -99,6 +95,6 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
  </div>\
 </form>';
 
-    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>", 
+    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>",
     content: content, html: true, placement: "top"});
 });
