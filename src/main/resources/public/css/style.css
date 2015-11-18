@@ -68,7 +68,7 @@ a:hover {
     display:block;
     float:left;
     color:#fff;
-    background:#689;
+    background: #996633;
     padding: 5px;
     padding-right: 25px;
     margin: 4px;
@@ -77,6 +77,30 @@ a:hover {
 #keywords span.keyword:hover{
     opacity: 0.7;
 }
+
+#colors {
+    border:1px solid #ccc;
+    padding:5px;
+    font-family:Arial;
+    border-radius: 5px;
+}
+
+#colors span.color{
+    cursor:pointer;
+    display:block;
+    float:left;
+    color:#fff;
+    background: #996633;
+    padding: 5px;
+    padding-right: 25px;
+    margin: 4px;
+    border-radius: 5px;
+}
+
+#colors span.color:hover{
+    opacity: 0.7;
+}
+
 .delete {
     position:absolute;
     border:1px solid;
@@ -146,6 +170,7 @@ a:hover {
 .errorText {
     color: red;
     visibility: hidden;
+    height: 1em;
 }
 
 ::-webkit-input-placeholder {
@@ -169,6 +194,7 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
+
 table{
 	font-size: .9em;
 }
@@ -179,12 +205,14 @@ table{
 	position:fixed;
 	bottom:4px;
 }
+
 #submitSearch{
 	margin: 0 auto;
 	display:block;
 }
-.popover {
-    max-width: 98%;
+
+.popover{
+	max-width:98%;
 }
 
 table{
@@ -222,21 +250,13 @@ textarea:focus, input:focus{
     background-color: #f0ad4e;
     color: #ffffff;
 }
+
 .popover select:focus, input:focus {
     color: #ffffff;
 }
+
 .popover-title, .popover-content{
 	background-color:#d9534f;
 	border: 1px solid #ccc;
-    color: #ffffff;
-}
-
-.sold {
-    background-color: #d9534f;
-    color: #ffffff;
-}
-
-.notSold {
-    background-color: #f0ad4e;
     color: #ffffff;
 }

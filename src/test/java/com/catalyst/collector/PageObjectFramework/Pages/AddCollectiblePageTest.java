@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,7 +25,7 @@ public class AddCollectiblePageTest extends TestPageObject {
     private static final String VALID_NAME = "Validname";
     private static final String VALID_CATALOG_NUMBER = "MMM-123498767543";
     private static final String VALID_KEYWORDS = "keywords,are,fun,";
-
+    private static final String VALID_PURCHASE_DATE = "11/11/1111";
 
     @Test
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
@@ -39,6 +41,7 @@ public class AddCollectiblePageTest extends TestPageObject {
         addCollectiblePage.sendKeys(By.id("inputName"), VALID_NAME);
         addCollectiblePage.sendKeys(By.id("inputCatalogNumber"), VALID_CATALOG_NUMBER);
         addCollectiblePage.sendKeys(By.id("inputKeywords"), VALID_KEYWORDS);
+        addCollectiblePage.sendKeys(By.id("inputPurchaseDate"), VALID_PURCHASE_DATE);
 
         addCollectiblePage.click(By.id("submitAdd"));
 

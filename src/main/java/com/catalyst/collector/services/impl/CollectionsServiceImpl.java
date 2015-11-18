@@ -174,25 +174,6 @@ public class CollectionsServiceImpl implements CollectionsService {
 		String everythingElse = collectible.getCatalogueNumber().substring(3);
 		collectible.setCatalogueNumber(""+firstThree+everythingElse);
 
-		for (Keyword k: collectible.getKeywords()) {
-			if(k.getKeyword() != null) {
-				addKeyword(k);
-			}
-		}
-		if(collectible.getAge().getAge() !=null){
-			addAge(collectible.getAge());
-		}
-		if(collectible.getCategory().getCategory() !=null){
-			addCategory(collectible.getCategory());
-		}
-        for (Color c: collectible.getColors()) {
-            if(c.getColor() != null) {
-                addColor(c);
-            }
-        }
-		if(collectible.getCondition().getCondition() !=null){
-			addCondition(collectible.getCondition());
-		}
 		if(collectionValidation.isCollectibleValid()) {
 			collectionsDao.addCollectible(collectible);
 			return true;
