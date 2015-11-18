@@ -68,15 +68,18 @@ function validateColors(){
             hasError = true;
             $("#inputColorError").css('visibility','visible');
             $("#inputColorError").text("Must be 1000 characters or less");
-            $("#inputColors").addClass("error");
+            $("#colors").addClass("error");
+            $("#colors").css("border-color","red")
         }else if ($(".color").length < 1){
             hasError = true;
             $("#inputColorError").css('visibility','visible');
             $("#inputColorError").text("1 color minimum");
-            $("#inputColors").addClass("error");
+            $("#colors").addClass("error");
+            $("#colors").css("border-color","red")
         }else {
-            $("#inputColors").removeClass("error");
+            $("#colors").removeClass("error");
             $("#inputColorError").css('visibility','hidden');
+            $("#colors").css("border-color","#ccc");
         }
 
         var colors = [];
@@ -86,10 +89,12 @@ function validateColors(){
         if (hasDuplicates(colors)) {
             $("#inputColorError").css('visibility','visible');
             $("#inputColorError").text("Duplicate colors not allowed");
-            $("#inputColors").addClass("error");
+            $("#colors").addClass("error");
+            $("#colors").css("border-color","red")
         } else if (!hasError) {
-            $("#inputColors").removeClass("error");
+            $("#colors").removeClass("error");
             $("#inputColorError").css('visibility','hidden');
+            $("#colors").css("border-color","#ccc");
         }
 }
 
@@ -325,14 +330,17 @@ function validateDate(dateString){
 
 function validateKeywords(){
 	var keyLength = $("#keywords").text().trim();
+    var hasError = false;
 	if (keyLength.length > 1000){
 		$("#inputKeywords").parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").parent().find(".errorText").text("Must be 1000 characters or less");
 		$("#inputKeywords").addClass("error");
+        hasError = true;
 	}else if ($(".keyword").length < 3){
 		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','visible');
 		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").text("3 keywords minimum");
 		$("#inputKeywords").addClass("error");
+		hasError = true;
 	}else {
 		$("#inputKeywords").removeClass("error");
 		$("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','hidden');
@@ -346,7 +354,7 @@ function validateKeywords(){
         $("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','visible');
         $("#inputKeywords").parent().parent().parent().parent().find(".errorText").text("Duplicate keywords not allowed");
         $("#inputKeywords").addClass("error");
-    } else {
+    } else if (!hasError) {
         $("#inputKeywords").removeClass("error");
         $("#inputKeywords").parent().parent().parent().parent().find(".errorText").css('visibility','hidden');
     }
