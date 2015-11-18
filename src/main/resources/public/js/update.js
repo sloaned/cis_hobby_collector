@@ -47,9 +47,9 @@ function update(){
     })});
     $(".editSubmitButton").click(updated)
     $(document).mouseup(function(e){
-
+            console.log(e.target)
             if (!$(e.target).hasClass("editField") &&!$(e.target).hasClass("editSubmitButton") &&
-                    !$(e.target).parent().hasClass("editing")){
+                    !$(e.target).parent().hasClass("editing") && !$(e.target).parent().parent().hasClass("editing")){
                 loadTable();
                 $(document).off("mouseup");
             }
@@ -107,7 +107,7 @@ function validate(){
     isValid(description,".description",1000) &&
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
-   // isValid(colors,".color",255) &&
+
     isValid(catalogNumber,".catalogNumber",16) &&
     isKeywordsValid(keywords) &&
     isDatesValid();
