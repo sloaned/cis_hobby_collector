@@ -10,11 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class AddCollectiblePage extends PageObject {
     public AddCollectiblePage(WebDriver driver) {
         super(driver);
-<<<<<<< .merge_file_a02272
-        goTo("http://localhost:8080");
-=======
         goTo("http://localhost:8080/home");
->>>>>>> .merge_file_a05328
     }
 
     public void clickAddCollectible(){

@@ -164,6 +164,23 @@ table{
 	font-size: .9em;
 }
 
+#searchButton{
+	margin-left:48%;
+	display:block;
+	position:fixed;
+	bottom:4px;
+}
+#submitSearch{
+	margin: 0 auto;
+	display:block;
+}
+.popover{
+	max-width:98%;
+
+table{
+	font-size: .9em;
+}
+
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -183,6 +200,24 @@ thead {
 
 textarea:focus, input:focus{
     background-color: #996633;
+    color: #ffffff;
+}
+
+.sold {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+.notSold {
+    background-color: #f0ad4e;
+    color: #ffffff;
+}
+popover select:focus, input:focus {
+    color: #ffffff;
+}
+.popover-title, .popover-content{
+	background-color:#d9534f;
+	border: 1px solid #ccc;
     color: #ffffff;
 }
 
