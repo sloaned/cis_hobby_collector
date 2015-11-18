@@ -110,7 +110,7 @@ function validate(){
     isValid(condition,".condition",255) &&
 
     isValid(catalogNumber,".catalogNumber",16) &&
-    isKeywordsValid(keywords) &&
+    isKeywordsValid(keywords) && isColorsValid(colors) &&
     isDatesValid();
 
     function isDatesValid(){
@@ -143,11 +143,11 @@ function validate(){
             toast(where.replace('.','')+" cannot be null")
             return false;
         }
-        if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
-            $(where+" .editField").addClass("error");
-            toast(where.replace('.','')+" cannot use special characters")
-            return false;
-        }
+       if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+           $(".color .editField").addClass("error");
+           toast("Colors cannot use special characters")
+           return false;
+       }
         else if(text.length > length){
             $(where+" .editField").addClass("error");
             toast(where.replace('.','')+" is too long")
@@ -163,11 +163,15 @@ function validate(){
                 toast("Must have at least one color.")
                  return false;
             }
-             if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
-                $(".color .editField").addClass("error");
-                toast("Colors cannot use special characters")
-                return false;
-             }
+
+            for(var i =0; i < colors.length;i++){
+                if(/^[a-zA-Z0-9- ]*$/.test(colors[i]) === false) {
+                    $(".colors .editField").addClass("error");
+                    toast("Colors cannot use special characters")
+                    return false;
+            }}
+
+
             if(hasDuplicates(colors))
             {
                 $(".color .editField").addClass("error");
@@ -183,11 +187,13 @@ function validate(){
             toast("Must have at least three keywords")
             return false;
         }
-        if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
-            $(".keywords .editField").addClass("error");
-            toast("Keywords cannot use special characters")
-            return false;
-        }
+
+        for(var i =0; i < keywords.length;i++){
+            if(/^[a-zA-Z0-9- ]*$/.test(keywords[i]) === false) {
+                $(".keywords .editField").addClass("error");
+                toast("Keywords cannot use special characters")
+                return false;
+        }}
         if(hasDuplicates(keywords))
         {
             $(".keywords .editField").addClass("error");
