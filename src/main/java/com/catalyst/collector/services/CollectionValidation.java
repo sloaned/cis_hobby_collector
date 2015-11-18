@@ -36,7 +36,7 @@ public class CollectionValidation {
     public boolean isCollectibleValid(){
         return isAgeValid() && isColorsValid() && isKeywordsValid() && isConditionValid() && isCategoryValid() && isPurchaseDateValid() &&
         		(collectible.getSellDate() == null || isSellDateValid()) &&
-        		(collectible.getSellDate() == null || collectible.getSellDate() == collectible.getPurchaseDate() || collectible.getPurchaseDate().before(collectible.getSellDate())) &&
+        		(collectible.getSellDate() == null || !collectible.getPurchaseDate().after(collectible.getSellDate())) &&
         		collectible.getName() != null && !collectible.getName().isEmpty() &&
                 collectible.getDescription() != null && !collectible.getDescription().isEmpty() &&
                 collectible.getCatalogueNumber() != null && !collectible.getCatalogueNumber().isEmpty() 
@@ -144,6 +144,10 @@ public class CollectionValidation {
     }
     
     public boolean isDateValid(Date date){
+    	if(date == null)
+    	{
+    		return false;
+    	}
     	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     	String dateString = formatter.format(date);
     	matcher = datePattern.matcher(dateString);
