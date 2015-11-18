@@ -34,7 +34,7 @@ public class FrontPage extends TestPageObject {
 
         String actualtitle = index.getTitle();
 
-        assertEquals("Hobby Collector", actualtitle);
+        assertEquals("Hobby Collector Login", actualtitle);
     }
 
 

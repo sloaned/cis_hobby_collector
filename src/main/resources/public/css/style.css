@@ -1,6 +1,6 @@
 .black_overlay{
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
@@ -14,13 +14,13 @@
 
 .white_content {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 12.5%;
     left: 12.5%;
     width: 75%;
     height: 75%;
     padding: 16px;
-    border: 1px solid black;
+    border: 7px solid #996633;
     background-color: white;
     z-index:1002;
     overflow: auto;
@@ -160,9 +160,38 @@ td div{
 .displayCatalogNumber{
 	white-space: nowrap;
 }
+table{
+	font-size: .9em;
+}
 
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+thead {
+    color: #ffffff;
+}
+
+.body > .container{
+    border: 7px solid #996633;
+    border-radius: 10px;
+    background-color: #996633;
+    padding: 1px;
+}
+
+textarea:focus, input:focus{
+    background-color: #996633;
+    color: #ffffff;
+}
+
+.sold {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+.notSold {
+    background-color: #f0ad4e;
+    color: #ffffff;
 }

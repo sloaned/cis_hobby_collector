@@ -83,11 +83,19 @@ $(document).ready(function(){
 
     // Removes popup from display when users clicks away from container.
     $(document).mouseup(function (e) {
+        //if form isn't open don't bother checking anything.
+        if ($("#newCollectibleForm").css("display") === "none")
+            return;
         var container = $("#newCollectibleForm");
 
         if (!container.is(e.target)
             && container.has(e.target).length === 0)
         {
+            console.log("Closing...");
+            //if we click on the toast don't close the form
+            if ($(e.target).attr("class").indexOf("toast") !== -1)
+                return;
+
             clearForm();
             closeForm();
         }
@@ -106,7 +114,13 @@ $(document).ready(function(){
         validateDescription();
         validateName();
         validateCatalogNumber();
-        validateKeywords()
+        validateKeywords();
+        validatePurchaseDate();
+        if($("#inputSoldStatus").val() === "True")
+        {
+        	validateSoldDate();
+        }
+        
 
         var isValid = false;
         if ($(".error").length < 1){
@@ -147,6 +161,15 @@ $(document).ready(function(){
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
         collectible.catalogueNumber = $("#inputCatalogNumber").val();
+        collectible.purchaseDate = $("#inputPurchaseDate").val();
+        if(collectible.sold === "true")
+        {
+        	collectible.sellDate = $("#inputSellDate").val();
+        }
+        else
+        {
+        	collectible.sellDate = null;
+        }
         console.log(collectible);
         if (isValid){
             $.ajax({
@@ -161,10 +184,17 @@ $(document).ready(function(){
                 closeForm();
             }, function(error){
                 console.log(error);
+<<<<<<< .merge_file_a05724
                 toast("Can't POST")
             });
         } else {
             toast("Invalid input");
+=======
+                toast("Catalog number already exists");
+            });
+        } else {
+            toast(getErrors());
+>>>>>>> .merge_file_a05200
         }
     });
 
@@ -178,6 +208,8 @@ $(document).ready(function(){
     });
 
     $("#inputCatalogNumber").mask("SSS-000000000000");
+    $("#inputPurchaseDate").mask("00/00/0000");
+    $("#inputSellDate").mask("00/00/0000");
 });
 
 function typeahead(){
@@ -255,6 +287,7 @@ function closeForm(){
         $("#fade").css("display", "none");
 }
 
+<<<<<<< .merge_file_a05724
 function toast(message, successful) {
     toastr.options = {
         "positionClass": "toast-top-center",
@@ -267,3 +300,26 @@ function toast(message, successful) {
     toastr[status.toLowerCase()](message, status);
 
 }
+=======
+function getErrors() {
+    var errText = "The following fields have errors: <br />";
+    var hasError = false;
+    $(".inputBox").each(function() {
+        if ($(this).hasClass("error")) {
+            hasError = true;
+            errText += $(this).attr("Placeholder") + "<br />";
+            console.log(errText);
+        }
+    });
+
+    if ($("#inputCatalogNumber").hasClass("error")) {
+        errText += "Catalog number <br />";
+        hasError = true;
+    }
+    if ($("#inputKeywords").hasClass("error")) {
+        errText += "Keywords"
+    }
+
+    return errText;
+}
+>>>>>>> .merge_file_a05200
