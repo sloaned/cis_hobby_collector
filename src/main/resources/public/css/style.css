@@ -204,6 +204,7 @@ table{
 
 .popover{
 	max-width:98%;
+	position:fixed;
 }
 
 table{

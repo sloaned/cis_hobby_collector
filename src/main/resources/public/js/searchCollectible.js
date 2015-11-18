@@ -30,6 +30,7 @@ function callSearch(){
     }).then(function(searchResult){
     	collectibles = searchResult;
     	replaceTable();
+
         console.log("Post successful")
     }, function(error){
     	replaceTable();
