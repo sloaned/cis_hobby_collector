@@ -25,7 +25,7 @@ function update(){
 
         //we want a drop down instead of an inputField here
         if($(div).hasClass("soldStatus")){
-            var isSold = $(div).text().toLowerCase() == "true"? "<option selected='selected'>true</option> <option>false</option>":"<option >true</option> <option selected='selected'>false</option>";
+            var isSold = $(div).text().toLowerCase() === "true"? "<option selected='selected'>true</option> <option>false</option>":"<option >true</option> <option selected='selected'>false</option>";
             $(div).html("<select class=\"editField\"> "+ isSold+ "</select>");
             return;
         }
@@ -50,24 +50,22 @@ function update(){
         });
 }
 function updated(){
-    var valid = validate();
+    if (validate()){
 
-
-    if (valid){
-        console.log("HI")
         var collectible = {};
         collectible.id = $(".name .editField").parent().parent().parent().attr('id');
         collectible.name = $(".name .editField").val().toLowerCase();
         collectible.age = $(".age .editField").val().toLowerCase();
         collectible.description = $(".description .editField").val().toLowerCase();
-        collectible.category = $(".category .editField").val().toLowerCase();;
-        collectible.condition = $(".condition .editField").val().toLowerCase();;
-        collectible.color = $(".color .editField").val().toLowerCase();;
+        collectible.category = $(".category .editField").val().toLowerCase();
+        collectible.condition = $(".condition .editField").val().toLowerCase();
+        collectible.color = $(".color .editField").val().toLowerCase();
         collectible.keywords = getKeywords();
         collectible.sold = $(".soldStatus :selected").text();
         collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
-        collectible.sellDate = moment(new Date($(".sellDate .editField").val())).format("MM/DD/YYYY");
-        collectible.purchaseDate = moment(new Date($(".purchaseDate .editField").val())).format("MM/DD/YYYY");
+        collectible.sellDate = $(".sellDate .editField").val() === ""? null:moment(new Date($(".sellDate .editField").val())).format("MM/DD/YYYY");
+        collectible.purchaseDate =  moment(new Date($(".purchaseDate .editField").val())).format("MM/DD/YYYY");
+
         console.log(collectible)
         $.ajax({
             url: '/collectible/'+collectible.id,
@@ -115,7 +113,7 @@ function validate(){
              return false;
         }
         if(sold === "false"){
-            $(".sellDate .editField").val('');
+            $(".sellDate .editField").val(null);
             return true;
         }
         if(!sellDate.isValid()){
