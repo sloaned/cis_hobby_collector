@@ -16,13 +16,13 @@ function loadTable() {
 }
 
 function addDataToRow(collectible){
-    var type = "<div class='alert-warning category' id='"+collectible.id+"'>" + capitalizeWord(collectible.category.category) + "</div>";
+    var type = "<div class=' category' id='"+collectible.id+"'>" + capitalizeWord(collectible.category.category) + "</div>";
     var color = "<div class='color'>" + capitalizeWord(collectible.color.color) + "</div>";
     var condition = "<div class='condition'>" + capitalizeWord(collectible.condition.condition) + "</div>";
     var era = "<div class='age'>" + capitalizeWord(collectible.age.age) + "</div>";
-    var description = "<div title=" + capitalizeWord(collectible.description) + " class=\"ellipsis description\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div>";
+    var description = "<div title='" + capitalizeWord(collectible.description) + "' class=\"ellipsis description\">" + capitalizeWord(collectible.description).makeEllipsis(15) + "</div>";
     var name = "<div class='name'>" + capitalizeWord(collectible.name) + "</div>";
-    var soldStatus = "<div class='sold'>" + capitalizeWord(collectible.sold.toString()) + "</div>";
+    var soldStatus = "<div class='soldStatus'>" + capitalizeWord(collectible.sold.toString()) + "</div>";
     var keywords = "<div class='keywords'>";
     for (var i = 0; i < collectible.keywords.length; i++) {
         if (i === collectible.keywords.length - 1)
@@ -30,7 +30,7 @@ function addDataToRow(collectible){
         else
             keywords += capitalizeWord(collectible.keywords[i].keyword) + ", ";
     }
-    var catalogNumber = "<div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div>";
+    var catalogNumber = "<div class='CatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div>";
     var purchaseDate = "<div class='purchaseDate'>" + collectible.purchaseDate + "</div>";
     var sellDate = "<div class='sellDate'>" + collectible.sellDate + "</div>";
 
@@ -39,16 +39,16 @@ function addDataToRow(collectible){
     if (collectible.sold == true){
         row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
-            "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
-            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td><div>" +
-            "<button class='editSubmitButton btn btn-default hidden'>Done</button>" + "</div></td></tr>";
+            "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td>" + "<b>Condition:</b>" + condition + "</td><td>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td>" +
+            "<button class='editSubmitButton btn btn-default hidden'>Done</button>" + "</td></tr>";
     }
     if (collectible.sold == false){
         row = "<tr id=" + collectible.id + " class='alert-warning notSold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
-            "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td><div>" + "<b>Condition</b>" + condition + "</td><td><div>" +
-            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date:</b> <div>n/a </div> </td><td><div>" +
-            "<button class='editSubmitButton btn btn-default hidden'>Done</button>" + "</div></td></tr>";
+            "</td><td>" + "<b>Color:</b>" + color + "<b>Sold Status:</b>" + soldStatus + "</td><td>" + "<b>Condition:</b>" + condition + "</td><td>" +
+            "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date:</b> <div class='sellDate'>n/a </div> </td><td>" +
+            "<button class='editSubmitButton btn btn-default hidden'>Done</button>" + "</td></tr>";
     }
 
     $("tbody").append(row);

@@ -162,6 +162,8 @@ public class Collectible {
                 ", color=" + color +
                 ", keywords=" + keywords +
                 ", sold=" + sold +
+                ", purchaseDate=" + purchaseDate +
+                ", sellDate=" + sellDate +
                 '}';
     }
 

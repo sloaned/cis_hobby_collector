@@ -1,28 +1,30 @@
 function update(){
 
-    //if there is already a row being edited then dont make another row editable
-    //if($(".editField").length !== 0) return;
+    //if there is already a row being edited then don't make another row editable
+    if($(".editField").length !== 0) return;
     //if already changed td to input then don't do it again again
     if($(this).children().hasClass("editField"))return;
     //set row to the row of the CatalogNumber clicked
     row = $(this.parentNode.parentNode);
-
-
+    row.addClass("editing");
+    //console.log(row.find("div"))
    // console.log(row);
 
     //change all td to input boxes
     row.children().each(function(){
+        $(this).children().each(function(){
         //set this to what this is (the div)
-        div=$(this.children);
+        div=$(this);
+        if(div.is('b')) return;
 
         //if this is the submit button we don't want to change it to a input field however we do want to show it
-        if($(div).children().hasClass("editSubmitButton")){
-            $(div).children().toggleClass("hidden");
+        if($(div).hasClass("editSubmitButton")){
+            $(div).toggleClass("hidden");
             return;
         }
 
         //we want a drop down instead of an inputField here
-        if($(div).hasClass("sold")){
+        if($(div).hasClass("soldStatus")){
             var isSold = $(div).text().toLowerCase() == "true"? "<option selected='selected'>true</option> <option>false</option>":"<option >true</option> <option selected='selected'>false</option>";
             $(div).html("<select class=\"editField\"> "+ isSold+ "</select>");
             return;
@@ -30,17 +32,18 @@ function update(){
 
         //we need to grab the full description from the title of the parent
         if($(div).hasClass("description")){
-
-            $(div).html("<input class=\" form-control editField\" value=\""+$(div).parent().attr('title') +"\">");
+            $(div).html("<input class=\" form-control editField\" value=\""+$(div).attr('title') +"\">");
             return;
         }
 
         text = $(div).text();
         $(div).html("<input class=\"form-control editField\"type=\"text\" value=\""+ text +"\">");
-    });
+    })});
     $(".editSubmitButton").click(updated)
     $(document).mouseup(function(e){
-            if (!$(e.target).hasClass("editField")){
+
+            if (!$(e.target).hasClass("editField") &&!$(e.target).hasClass("editSubmitButton") &&
+                    !$(e.target).parent().hasClass("editing")){
                 loadTable();
                 $(document).off("mouseup");
             }
@@ -48,19 +51,24 @@ function update(){
 }
 function updated(){
     var valid = validate();
-    var collectible = {};
-    collectible.id = $(".name .editField").parent().parent().parent().attr('id');
-    collectible.name = $(".name .editField").val().toLowerCase();
-    collectible.age = $(".age .editField").val().toLowerCase();
-    collectible.description = $(".description .editField").val().toLowerCase();
-    collectible.category = $(".category .editField").val().toLowerCase();;
-    collectible.condition = $(".condition .editField").val().toLowerCase();;
-    collectible.color = $(".color .editField").val().toLowerCase();;
-    collectible.keywords = getKeywords();
-    collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
-    collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
+
 
     if (valid){
+        console.log("HI")
+        var collectible = {};
+        collectible.id = $(".name .editField").parent().parent().parent().attr('id');
+        collectible.name = $(".name .editField").val().toLowerCase();
+        collectible.age = $(".age .editField").val().toLowerCase();
+        collectible.description = $(".description .editField").val().toLowerCase();
+        collectible.category = $(".category .editField").val().toLowerCase();;
+        collectible.condition = $(".condition .editField").val().toLowerCase();;
+        collectible.color = $(".color .editField").val().toLowerCase();;
+        collectible.keywords = getKeywords();
+        collectible.sold = $(".soldStatus :selected").text();
+        collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
+        collectible.sellDate = moment(new Date($(".sellDate .editField").val())).format("MM/DD/YYYY");
+        collectible.purchaseDate = moment(new Date($(".purchaseDate .editField").val())).format("MM/DD/YYYY");
+        console.log(collectible)
         $.ajax({
             url: '/collectible/'+collectible.id,
             method: 'PUT',
@@ -84,8 +92,11 @@ function validate(){
     var condition = $(".condition .editField").val().toLowerCase();
     var color = $(".color .editField").val().toLowerCase();
     var keywords = getKeywords();
-    var sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
+    var sold = $(".soldStatus :selected").text();
     var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
+    var purchaseDate = moment(new Date($(".purchaseDate .editField").val()));
+    var sellDate = moment(new Date($(".sellDate .editField").val()));
+
 
     valid = isValid(name,".name",255) &&
     isValid(age,".age",255) &&
@@ -94,8 +105,28 @@ function validate(){
     isValid(condition,".condition",255) &&
     isValid(color,".color",255) &&
     isValid(catalogNumber,".catalogNumber",16) &&
-    isKeywordsValid(keywords);
+    isKeywordsValid(keywords) &&
+    isDatesValid();
 
+    function isDatesValid(){
+        if(!purchaseDate.isValid()){
+             $(".purchaseDate .editField").addClass("error");
+             toast("Purchase Date is invalid")
+             return false;
+        }
+        if(sold === "false"){
+            $(".sellDate .editField").val('');
+            return true;
+        }
+        if(!sellDate.isValid()){
+            console.log(sellDate.invalidAt())
+             $(".sellDate .editField").addClass("error");
+             toast("Sell Date is invalid")
+             return false;
+        }
+        return true;
+
+    }
     function isValid(text,where,length){
         if(text == null || text == ""){
             $(where+" .editField").addClass("error");
