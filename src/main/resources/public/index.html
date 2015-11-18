@@ -79,7 +79,7 @@
 					<div class="form-inline">
 						<label for="inputColor">Color</label>
                         <div id="colors">
-                            <div  class="input-group colors">
+                            <div class="input-group colors">
                                 <input id="inputColor" type="text" class="form-control inputBox typeahead" aria-label="..." placeholder="Color" maxlength="255">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret">&nbsp;</span></button>
@@ -92,8 +92,8 @@
                                     </ul>
                                 </div><!-- /btn-group -->
                             </div><!-- /input-group -->
-                            <p class="errorText"></p>
                         </div>
+                        <p id="inputColorError" class="errorText"></p>
 					</div>
 
 					<div class="form-group">
@@ -170,6 +170,7 @@
 							<ul class="dropdown-menu" id="inputSoldDropdown">
 								<li><a id="soldStatusTrue">True</a></li>
 								<li><a id="soldStatusFalse">False</a></li>
+                            </ul>
 
 							<ul class="dropdown-menu">
 								<li class="btn-warning"><a>True</a></li>

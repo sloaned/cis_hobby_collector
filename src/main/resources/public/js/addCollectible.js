@@ -35,7 +35,7 @@ $(document).ready(function(){
             var text = $(this).text();
             $("#inputColor").val(text);
             addColor();
-            validateColor();
+            validateColors();
             for (var i = 0; i < colors.length; i++){
                 if (text == colors[i].color){
                     colorId = colors[i].id;
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
     $("#submitAdd").click(function(){
         validateType();
-        validateColor();
+        validateColors();
         validateCondition();
         validateAge();
         validateDescription();
@@ -265,9 +265,9 @@ function colors() {
 function addColor(){
     var txt= $("#inputColor").val().replace(/[^\w]/g,'');
     if(txt) {
-        $(this).parent().before('<span class="color">'+ txt + '<span class="delete">X</span></span>');
+        $("#inputColor").parent().before('<span class="color">'+ txt + '<span class="delete">X</span></span>');
     }
-    $(this).val("");
+    $("#inputColor").val("");
 }
 
 function iCanHazKeywords(){
@@ -289,6 +289,7 @@ function iCanHazColorz(){
 function clearForm(){
         $("#inputType").val("");
         $("#inputColor").val("");
+        $(".color").remove();
         $("#inputCondition").val("");
         $("#inputAge").val("");
         $("#inputDescription").val("");

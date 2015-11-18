@@ -3,7 +3,7 @@ $(document).ready(function(){
 		validateType();
 	});
 	$("#inputColor").focusout(function(){
-		validateColor();
+		validateColors();
 	});
 	$("#inputCondition").focusout(function(){
 		validateCondition();
@@ -56,20 +56,36 @@ function validateType(){
 	}
 }
 
-function validateColor(){
-	var text = $("#inputColor").val();
-	if (text == null || text == ""){
-		$("#inputColor").parent().parent().find(".errorText").css("visibility", "visible");
-		$("#inputColor").parent().parent().find(".errorText").text("Required field");
-		$("#inputColor").addClass("error");
-	}else if(text.length > 255){
-		$("#inputColor").parent().parent().find(".errorText").css("visibility", "visible");
-		$("#inputColor").parent().parent().find(".errorText").text("Must be less than 256 characters");
-		$("#inputColor").addClass("error");
-	}else {
-		$("#inputColor").removeClass("error");
-		$("#inputColor").parent().parent().find(".errorText").css("visibility", "hidden");
-	}
+function validateColors(){
+    var colorsLength = $("#colors").text().trim();
+    var hasError = false;
+        if (colorsLength.length > 1000){
+            hasError = true;
+            $("#inputColorError").css('visibility','visible');
+            $("#inputColorError").text("Must be 1000 characters or less");
+            $("#inputColors").addClass("error");
+        }else if ($(".color").length < 1){
+            hasError = true;
+            $("#inputColorError").css('visibility','visible');
+            $("#inputColorError").text("1 color minimum");
+            $("#inputColors").addClass("error");
+        }else {
+            $("#inputColors").removeClass("error");
+            $("#inputColorError").css('visibility','hidden');
+        }
+
+        var colors = [];
+        $(".color").each(function() {
+            colors.push($(this).text());
+        });
+        if (hasDuplicates(colors)) {
+            $("#inputColorError").css('visibility','visible');
+            $("#inputColorError").text("Duplicate colors not allowed");
+            $("#inputColors").addClass("error");
+        } else if (!hasError) {
+            $("#inputColors").removeClass("error");
+            $("#inputColorError").css('visibility','hidden');
+        }
 }
 
 function validateCondition(){
