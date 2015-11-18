@@ -25,8 +25,7 @@ public class AddCollectiblePageTest extends TestPageObject {
     private static final String VALID_NAME = "Validname";
     private static final String VALID_CATALOG_NUMBER = "MMM-123498767543";
     private static final String VALID_KEYWORDS = "keywords,are,fun,";
-    private static final String VALID_PURCHASE_DATE = (new Date()).toString();
-
+    private static final String VALID_PURCHASE_DATE = "11/11/1111";
 
     @Test
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
