@@ -49,7 +49,8 @@ function update(){
     $(document).mouseup(function(e){
             console.log(e.target)
             if (!$(e.target).hasClass("editField") &&!$(e.target).hasClass("editSubmitButton") &&
-                    !$(e.target).parent().hasClass("editing") && !$(e.target).parent().parent().hasClass("editing")){
+                    !$(e.target).parent().hasClass("editing") && !$(e.target).parent().parent().hasClass("editing")&&
+                    !$(e.target).parent().parent().parent().parent().hasClass("editing")){
                 loadTable();
                 $(document).off("mouseup");
             }
@@ -142,6 +143,11 @@ function validate(){
             toast(where.replace('.','')+" cannot be null")
             return false;
         }
+        if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+            $(where+" .editField").addClass("error");
+            toast(where.replace('.','')+" cannot use special characters")
+            return false;
+        }
         else if(text.length > length){
             $(where+" .editField").addClass("error");
             toast(where.replace('.','')+" is too long")
@@ -157,6 +163,11 @@ function validate(){
                 toast("Must have at least one color.")
                  return false;
             }
+             if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+                $(".color .editField").addClass("error");
+                toast("Colors cannot use special characters")
+                return false;
+             }
             if(hasDuplicates(colors))
             {
                 $(".color .editField").addClass("error");
@@ -170,6 +181,11 @@ function validate(){
         if(keywords.length < 3 ){
             $(".keywords .editField").addClass("error");
             toast("Must have at least three keywords")
+            return false;
+        }
+        if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+            $(".keywords .editField").addClass("error");
+            toast("Keywords cannot use special characters")
             return false;
         }
         if(hasDuplicates(keywords))
