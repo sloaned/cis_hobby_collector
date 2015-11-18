@@ -299,6 +299,7 @@ function clearForm(){
         $(".keyword").remove();
         $(".error").removeClass("error")
         $(".errorText").css("visibility", "hidden");
+        $("#colors").css("border-color","#ccc");
 }
 
 function closeForm(){
@@ -322,12 +323,13 @@ function toast(message, successful) {
 function getErrors() {
     var errText = "The following fields have errors: <br />";
     var hasError = false;
-    $(".inputBox").each(function() {
+    $(".inputBox, #colors").each(function() {
         if ($(this).hasClass("error")) {
+            errText += !$(this).is("#colors") ? $(this).attr("Placeholder") + "<br />" : "Colors <br />"
             hasError = true;
-            errText += $(this).attr("Placeholder") + "<br />";
             console.log(errText);
         }
+
     });
 
     if ($("#inputCatalogNumber").hasClass("error")) {
@@ -335,7 +337,13 @@ function getErrors() {
         hasError = true;
     }
     if ($("#inputKeywords").hasClass("error")) {
-        errText += "Keywords"
+        errText += "Keywords <br />"
+    }
+    if ($("#inputPurchaseDate").hasClass("error")) {
+        errText += "Purchase date <br />"
+    }
+    if ($("#inputSellDate").hasClass("error")) {
+        errText += "Sell date"
     }
 
     return errText;
