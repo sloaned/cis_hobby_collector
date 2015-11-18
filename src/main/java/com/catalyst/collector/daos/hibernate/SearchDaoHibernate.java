@@ -52,7 +52,8 @@ public class SearchDaoHibernate implements SearchDao{
         }
 
         if(color != null && color != ""){
-            Predicate predicate = cb.like(collectible.<Color>get("color").<String>get("color"), color);
+            Join<Collectible, Color> path = collectible.join("colors");
+            Predicate predicate = cb.and(path.get("color").in(color));
             restrictions.add(predicate);
         }
 
