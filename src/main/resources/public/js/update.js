@@ -59,7 +59,7 @@ function updated(){
         collectible.description = $(".description .editField").val().toLowerCase();
         collectible.category = $(".category .editField").val().toLowerCase();
         collectible.condition = $(".condition .editField").val().toLowerCase();
-        collectible.color = $(".color .editField").val().toLowerCase();
+        collectible.colors = getColors();
         collectible.keywords = getKeywords();
         collectible.sold = $(".soldStatus :selected").text();
         collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
@@ -88,7 +88,7 @@ function validate(){
     var description = $(".description .editField").val().toLowerCase();
     var category = $(".category .editField").val().toLowerCase();
     var condition = $(".condition .editField").val().toLowerCase();
-    var color = $(".color .editField").val().toLowerCase();
+    var colors = getColors();
     var keywords = getKeywords();
     var sold = $(".soldStatus :selected").text();
     var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
@@ -101,7 +101,7 @@ function validate(){
     isValid(description,".description",1000) &&
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
-    isValid(color,".color",255) &&
+   // isValid(colors,".color",255) &&
     isValid(catalogNumber,".catalogNumber",16) &&
     isKeywordsValid(keywords) &&
     isDatesValid();
@@ -117,9 +117,14 @@ function validate(){
             return true;
         }
         if(!sellDate.isValid()){
-            console.log(sellDate.invalidAt())
              $(".sellDate .editField").addClass("error");
              toast("Sell Date is invalid")
+             return false;
+        }
+
+        if(sellDate.isBefore(purchaseDate)){
+            $(".sellDate .editField").addClass("error");
+             toast("Sell Date cannot be before purchase date")
              return false;
         }
         return true;
@@ -140,10 +145,16 @@ function validate(){
             $(where+" .editField").removeClass("error");
           return true;
     }
-    function isColorsValid(keywords){
-            if(keywords.length < 3 ){
-                $(".keywords .editField").addClass("error");
-                toast("Must have at least three keywords")
+    function isColorsValid(colors){
+            if(colors.length < 1 ){
+                $(".color .editField").addClass("error");
+                toast("Must have at least one color.")
+                 return false;
+            }
+            if(hasDuplicates(colors))
+            {
+                $(".color .editField").addClass("error");
+                toast("Cannot have the same color more than once.")
                  return false;
             }
              return true;
@@ -153,19 +164,34 @@ function validate(){
         if(keywords.length < 3 ){
             $(".keywords .editField").addClass("error");
             toast("Must have at least three keywords")
-             return false;
+            return false;
+        }
+        if(hasDuplicates(keywords))
+        {
+            $(".keywords .editField").addClass("error");
+            toast("Cannot have the same keyword more than once.")
+            return false;
         }
          return true;
     }
     return valid;
 }
-
+function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
+}
 function getKeywords(){
     var keywords =  $(".keywords .editField").val().toLowerCase();
     keywords = keywords.replaceAll(' ',',');
     keywords = keywords.split(',');
     keywords = keywords.clean("");
     return keywords;
+}
+function getColors(){
+    var colors =  $(".color .editField").val().toLowerCase();
+    colors = colors.replaceAll(' ',',');
+    colors = colors.split(',');
+    colors = colors.clean("");
+    return colors;
 }
 
 Array.prototype.clean = function(deleteValue) {
