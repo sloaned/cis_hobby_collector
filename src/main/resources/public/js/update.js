@@ -140,6 +140,14 @@ function validate(){
             $(where+" .editField").removeClass("error");
           return true;
     }
+    function isColorsValid(keywords){
+            if(keywords.length < 3 ){
+                $(".keywords .editField").addClass("error");
+                toast("Must have at least three keywords")
+                 return false;
+            }
+             return true;
+        }
 
     function isKeywordsValid(keywords){
         if(keywords.length < 3 ){
