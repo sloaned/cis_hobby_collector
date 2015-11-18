@@ -5,6 +5,7 @@ import com.catalyst.collector.services.CollectionValidation;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -21,11 +22,17 @@ public class CollectionValidationTests {
     static final private String VALID_COLOR = "validColor";
     static final private String VALID_CONDITION = "validCondition";
     static final private String VALID_CATEGORY = "validCategory";
+    static final private String VALID_DESCRIPTION = "validDescription";
+    static final private String VALID_NAME = "validName";
+    static final private String VALID_CATALOG_NUMBER = "AAA-989898989898";
     static final private String INVALID_STRING_WITH_NUMBER = "Str1ng";
     static final private String INVALID_STRING_OF_SPACE = "     ";
     static final private String INVALID_NULL_STRING = (String) null;
     static final private String INVALID_1004_STRING ="this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.this is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five charactersthis is way more than two hundred fifty five characters long so I hope that it fails miserably and does not actually post to the database because we have a maximum of two hundred fifty five characters.";
-    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";    
+    private static final String INVALID_STRING_WITH_SPECIAL = "Str!ng";
+    static final private String VALID_DATE = "04/11/2001";
+    static final private String PURCHASE_DATE = "10/01/2000";
+    static final private String INVALID_SELL_DATE = "09/30/2000";
     static private CollectionValidation cv;
 
     @Before
@@ -33,7 +40,18 @@ public class CollectionValidationTests {
         cv = new CollectionValidation();
     }
 
-
+    @Test
+    public void HappyIsDateValid(){
+    	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    	Date sample = new Date();
+    	try {
+			sample = sdf.parse(VALID_DATE);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    	assertTrue(cv.isDateValid(sample));
+    }
+    
     @Test
     public void HappyIsAgeValid(){
         assertTrue(cv.isAgeValid(new Age(VALID_AGE)));
@@ -201,13 +219,22 @@ public class CollectionValidationTests {
     public void HappyIsCollectibleValid(){
         Collectible c = new Collectible();
         Age a = new Age();
-        Color l = new Color();
+        HashSet<Color> l = new HashSet<>();
         Condition d = new Condition();
         Category g = new Category();
         HashSet<Keyword> ks =  new HashSet<>();
-
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    	Date sample = new Date();
+    	try {
+			sample = sdf.parse(VALID_DATE);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    	
         a.setAge(VALID_AGE);
-        l.setColor(VALID_COLOR);
+        Color validC1 = new Color();
+        validC1.setColor(VALID_COLOR);
+        l.add(validC1);
         d.setCondition(VALID_CONDITION);
         g.setCategory(VALID_CATEGORY);
         Keyword valid1 = new Keyword();
@@ -223,25 +250,37 @@ public class CollectionValidationTests {
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        //c.setColor(l);
+        c.setColors(l);
         c.setCondition(d);
-
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+    	c.setPurchaseDate(sample);
+    	c.setSold(false);
         cv.setCollectible(c);
 
         assertTrue(cv.isCollectibleValid());
     }
 
     @Test
-    public void HappyIsCollectibleIDValid(){
+    public void HappyIsCollectibleValidUsingIDs() {
         Collectible c = new Collectible();
         Age a = new Age();
-        Color l = new Color();
+        HashSet<Color> l = new HashSet<>();
         Condition d = new Condition();
         Category g = new Category();
-        HashSet<Keyword> ks =  new HashSet<>();
-
+        HashSet<Keyword> ks = new HashSet<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date sample = new Date();
+        try {
+            sample = sdf.parse(VALID_DATE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         a.setId(1);
-        l.setId(1);
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
         d.setId(1);
         g.setId(1);
         Keyword valid1 = new Keyword();
@@ -253,15 +292,212 @@ public class CollectionValidationTests {
         ks.add(valid1);
         ks.add(valid2);
         ks.add(valid3);
-
         c.setAge(a);
         c.setKeywords(ks);
         c.setCategory(g);
-        //c.setColor(l);
+        c.setColors(l);
         c.setCondition(d);
-
+        c.setPurchaseDate(sample);
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        c.setSold(false);
+        c.setId(1);
         cv.setCollectible(c);
 
         assertTrue(cv.isCollectibleValid());
+    }
+
+    @Test
+    public void HappyIsCollectibleValidSellDateEqualsPurchaseDate() {
+        Collectible c = new Collectible();
+        Age a = new Age();
+        HashSet<Color> l = new HashSet<>();
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks = new HashSet<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date sample = new Date();
+        try {
+            sample = sdf.parse(PURCHASE_DATE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        a.setId(1);
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColors(l);
+        c.setCondition(d);
+        c.setPurchaseDate(sample);
+        c.setSellDate(sample);
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        c.setSold(true);
+        c.setId(1);
+        cv.setCollectible(c);
+
+        assertTrue(cv.isCollectibleValid());
+    }
+    
+    @Test
+    public void SadIsCollectibleValidSellDateLaterThanPurchaseDate(){
+        Collectible c = new Collectible();
+        Age a = new Age();
+        HashSet<Color> l = new HashSet<>();
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks =  new HashSet<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    	Date sample = new Date();
+    	try {
+			sample = sdf.parse(PURCHASE_DATE);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    	
+    	Date sample2 = new Date();
+    	try {
+			sample2 = sdf.parse(INVALID_SELL_DATE);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        a.setId(1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColors(l);
+        c.setCondition(d);
+    	c.setPurchaseDate(sample);
+    	c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        c.setSold(true);
+        c.setSellDate(sample2);
+    	cv.setCollectible(c);
+
+        assertFalse(cv.isCollectibleValid());
+    }
+
+    @Test
+    public void SadIsCollectibleValidInvalidAge() {
+        Collectible c = new Collectible();
+        Age a = new Age();
+        HashSet<Color> l = new HashSet<>();
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks = new HashSet<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date sample = new Date();
+        try {
+            sample = sdf.parse(PURCHASE_DATE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        a.setAge(INVALID_STRING_WITH_SPECIAL);
+        Color validC1 = new Color();
+        validC1.setId(1);
+        l.add(validC1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColors(l);
+        c.setCondition(d);
+        c.setPurchaseDate(sample);
+        c.setSellDate(sample);
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        c.setSold(true);
+        c.setId(1);
+        cv.setCollectible(c);
+        assertFalse(cv.isCollectibleValid());
+    }
+
+    @Test
+    public void SadIsCollectibleValidInvalidColor() {
+        Collectible c = new Collectible();
+        Age a = new Age();
+        HashSet<Color> l = new HashSet<>();
+        Condition d = new Condition();
+        Category g = new Category();
+        HashSet<Keyword> ks = new HashSet<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date sample = new Date();
+        try {
+            sample = sdf.parse(PURCHASE_DATE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        a.setId(1);
+        Color validC1 = new Color();
+        validC1.setColor(INVALID_STRING_WITH_SPECIAL);
+        l.add(validC1);
+        d.setId(1);
+        g.setId(1);
+        Keyword valid1 = new Keyword();
+        Keyword valid2 = new Keyword();
+        Keyword valid3 = new Keyword();
+        valid1.setId(1);
+        valid2.setId(1);
+        valid3.setId(1);
+        ks.add(valid1);
+        ks.add(valid2);
+        ks.add(valid3);
+        c.setAge(a);
+        c.setKeywords(ks);
+        c.setCategory(g);
+        c.setColors(l);
+        c.setCondition(d);
+        c.setPurchaseDate(sample);
+        c.setSellDate(sample);
+        c.setName(VALID_NAME);
+        c.setDescription(VALID_DESCRIPTION);
+        c.setCatalogueNumber(VALID_CATALOG_NUMBER);
+        c.setSold(true);
+        c.setId(1);
+        cv.setCollectible(c);
+
+        assertFalse(cv.isCollectibleValid());
     }
 }
