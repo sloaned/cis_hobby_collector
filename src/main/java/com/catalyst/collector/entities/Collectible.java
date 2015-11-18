@@ -12,10 +12,10 @@ public class Collectible {
     @Id
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String catalogueNumber;
 
-    @Column(nullable = false, length = 255,unique = true)
+    @Column(nullable = false, length = 255)
     private String name;
 
     @Column(nullable = false, length = 1000)
@@ -163,6 +163,8 @@ public class Collectible {
                 ", color=" + colors +
                 ", keywords=" + keywords +
                 ", sold=" + sold +
+                ", purchaseDate=" + purchaseDate +
+                ", sellDate=" + sellDate +
                 '}';
     }
 

@@ -3,9 +3,9 @@ function hide(){
     $("#searchButton").click();
 }
 function callSearch(){
-    	var search ={};
-    	search.category = $("#collectibleSearch").val().toLowerCase();
-        search.color = $("#colorSearch").val().toLowerCase(); 
+      var search ={};
+      search.category = $("#collectibleSearch").val().toLowerCase();
+        search.color = $("#colorSearch").val().toLowerCase();
         search.condition = $("#conditionSearch").val().toLowerCase();
         search.age = $("#eraSearch").val().toLowerCase();
         search.description = $("#descriptionSearch").val().toLowerCase();
@@ -13,16 +13,16 @@ function callSearch(){
         search.keyword = $("#keywordsSearch").val().toLowerCase();
         var sold = $("#soldSearch").val();
         if(sold=="sold"){
-        	search.sold=true;
+            search.sold=true;
         }
         else if(sold=="notsold"){
-        	search.sold=false;
+            search.sold=false;
         }
         else{
-        	search.sold=null;
+            search.sold=null;
         }
         search.catalogNumber = $("#catalogNumberSearch").val().toUpperCase();
-    	$.ajax({
+      $.ajax({
         url: '/collectibles/search',
         method: 'POST',
         contentType: 'application/json',
@@ -33,19 +33,19 @@ function callSearch(){
     	hide();
         console.log("Post successful")
     }, function(error){
-    	replaceTable();
+      replaceTable();
         console.log(error);
     });
     }
 function replaceTable(){
-	 $("tbody").children().remove();
+      $("tbody").children().remove();
      for (var i = 0; i < collectibles.length; i++) {
          addDataToRow(collectibles[i]);
      }
 }
 
 $(document).ready(function(){
-	
+
 var content = '<form class="container" id="searchForm" class="form-inline" role="form">\
   <div class="row">\
 	<div class="form-group col-sm-4">\
@@ -80,19 +80,19 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
       <label>Catalog Number:</label>\
       <input type="text" class="form-control" id="catalogNumberSearch" placeholder="catalog number">\
     </div>\
-	<div class="form-group col-sm-4">\
+      <div class="form-group col-sm-4">\
       <label>Description:</label>\
       <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
      </div>\
      <select id="soldSearch" class="col-sm-4">\
-  		<option value="select">Select Sold Status</option>\
-  		<option value="sold">Sold</option>\
-  		<option value="notsold">Not Sold</option>\
-	</select>\
+            <option value="select">Select Sold Status</option>\
+            <option value="sold">Sold</option>\
+            <option value="notsold">Not Sold</option>\
+      </select>\
   </div>\
   <div class="row">\
     <button type="button" id="submitSearch" onclick="callSearch();" class="btn btn-default">Submit</button>\
- </div>\
+</div>\
 </form>';
 
     $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>",
