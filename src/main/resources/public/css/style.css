@@ -174,8 +174,9 @@ table{
 	margin: 0 auto;
 	display:block;
 }
-.popover{
-	max-width:98%;
+.popover {
+    max-width: 98%;
+}
 
 table{
 	font-size: .9em;
@@ -212,7 +213,7 @@ textarea:focus, input:focus{
     background-color: #f0ad4e;
     color: #ffffff;
 }
-popover select:focus, input:focus {
+.popover select:focus, input:focus {
     color: #ffffff;
 }
 .popover-title, .popover-content{
