@@ -1,4 +1,7 @@
 var collectibles;
+function show(){
+	$("[data-toggle='popover']").popover('show');
+}
 function hide(){
     $("[data-toggle='popover']").popover('hide');
 }
@@ -30,7 +33,7 @@ function callSearch(){
     }).then(function(searchResult){
     	collectibles = searchResult;
     	replaceTable();
-
+        hide();
         console.log("Post successful")
     }, function(error){
     	replaceTable();
@@ -41,27 +44,8 @@ function callSearch(){
 function replaceTable(){
 	 $("tbody").children().remove();
      for (var i = 0; i < collectibles.length; i++) {
-         addRow(collectibles[i]);
+         addDataToRow(collectibles[i]);
      }
-}
-
-function addRow(collectible){
-	var row = "<tr><td><div>" + capitalizeWord(collectible.category.category) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.color.color) + "</div></td><td><div>" + capitalizeWord(collectible.condition.condition) + "</div></td><td><div>"
-			+ capitalizeWord(collectible.age.age) + "</div></td><td title=\"" + capitalizeWord(collectible.description) + "\"><div>" + capitalizeWord(collectible.description)+ "</div></td><td><div>"
-			+ capitalizeWord(collectible.name) + "</div></td><td><div>";
-	for (var i = 0; i < collectible.keywords.length; i++) {
-		if (i === collectible.keywords.length - 1)
-			row += capitalizeWord(collectible.keywords[i].keyword);
-		else
-			row += capitalizeWord(collectible.keywords[i].keyword) + ", ";
-	}
-
-	row += "</div></td><td><div>"
-			+ capitalizeWord(collectible.sold.toString()) + "</div></td><td><div class='displayCatalogNumber'>" + collectible.catalogueNumber.substring(0,3).toUpperCase() + collectible.catalogueNumber.substring(3) + "</div></td><td><div>"
-			+ "<button class='editButton btn btn-default'>Edit</button>" + "</div></td></tr>";
-
-    $("tbody").append(row);
 }
 
 $(document).ready(function(){
@@ -69,8 +53,8 @@ $(document).ready(function(){
 var content = '<form class="container" id="searchForm" class="form-inline" role="form">\
   <div class="row">\
 	<div class="form-group col-sm-4">\
-      <label>Collectible:</label>\
-      <input class="form-control" id="collectibleSearch" placeholder="collectible">\
+      <label>Type:</label>\
+      <input class="form-control" id="collectibleSearch" placeholder="type">\
     </div>\
     <div class="form-group col-sm-4">\
       <label>Color:</label>\
@@ -116,5 +100,5 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
 </form>';
 
     $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>", 
-    content: content, html: true, placement: "top"});  
+    content: content, html: true, placement: "top"});
 });
