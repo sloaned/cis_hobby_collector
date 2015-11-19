@@ -83,6 +83,7 @@ function updated(){
             loadTable();
             $(document).off("mouseup");
         }, function(error){
+            toast("Update Unsuccessful. Maybe the catalog number is is not Unique")
             console.log(error);
         });
     }
@@ -107,7 +108,7 @@ function validate(){
     isValid(age,".age",255) &&
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
-    isValid(catalogNumber,".catalogNumber",16) && catalogNumber.length === 16 &&
+    isValid(catalogNumber,".catalogNumber",16) && catalogNumber.length === 16 || toast("Catalog NUmber is too short")&&
     isKeywordsValid(keywords) && isColorsValid(colors) &&
     isDatesValid();
 
