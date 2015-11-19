@@ -298,11 +298,16 @@ function clearForm(){
         $("#inputName").val("");
         $("#inputCatalogNumber").val("");
         $("#inputKeywords").val("");
+        $("#inputPurchaseDate").val("");
+        $("#inputSellDate").val("");
+        $("#inputSoldStatus").find("button").html("False <span class='caret'></span>");
         $(".keyword").remove();
-        $(".error").removeClass("error")
+        $(".error").removeClass("error");
         $(".errorText").css("visibility", "hidden");
+        $("body, #newCollectibleForm").scrollTop(0);
         $("#colors").css("border-color","#ccc");
 }
+
 
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
