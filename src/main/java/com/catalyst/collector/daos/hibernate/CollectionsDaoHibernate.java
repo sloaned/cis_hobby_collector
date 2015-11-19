@@ -253,7 +253,7 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 	}
 	@Override
 	public ArrayList<Collectible> getCollectibles() {
-		return (ArrayList<Collectible>) em.createQuery("Select c FROM Collectible c", Collectible.class).getResultList();
+		return (ArrayList<Collectible>) em.createQuery("Select c FROM Collectible c ORDER BY c.id", Collectible.class).getResultList();
 	}
 
 	@Override
