@@ -83,6 +83,7 @@ function updated(){
             loadTable();
             $(document).off("mouseup");
         }, function(error){
+            toast("Update Unsuccessful. Maybe the catalog number is is not Unique")
             console.log(error);
         });
     }
