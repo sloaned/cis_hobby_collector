@@ -14,6 +14,6 @@ public class SearchCollectiblePage extends PageObject {
     }
 
     public void clickSearchCollectible(){
-        click(By.id("ID FOR SEARCH COLLECTIBLE BUTTON GOES HERE"));
+        click(By.id("searchButton"));
     }
 }

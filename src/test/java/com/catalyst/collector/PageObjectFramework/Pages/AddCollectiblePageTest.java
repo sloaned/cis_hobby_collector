@@ -32,6 +32,10 @@ public class AddCollectiblePageTest extends TestPageObject {
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
         AddCollectiblePage addCollectiblePage = new AddCollectiblePage(driver);
 
+        int current = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr")).size();
+        int expected = current+1;
+
+
         String expectedType = VALID_CATALOG_NUMBER;
         addCollectiblePage.clickAddCollectible();
         addCollectiblePage.sendKeys(By.id("inputType"), VALID_TYPE);
@@ -46,8 +50,8 @@ public class AddCollectiblePageTest extends TestPageObject {
 
         addCollectiblePage.click(By.id("submitAdd"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr[11]/td[1]/div")));
-        String actualType = newRow.getText();
-        assertEquals(expectedType, actualType);
+        WebElement newRow = new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='category'][contains(., 'Validtype')]")));
+        int actual = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr")).size();
+        assertEquals(expected, actual);
     }
 }
