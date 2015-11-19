@@ -157,7 +157,7 @@ $(document).ready(function(){
         collectible.colors = iCanHazColorz();
         collectible.keywords = iCanHazKeywords();
         collectible.sold = $("#inputSoldStatus").find("button").text().toLowerCase().trim();
-        collectible.catalogueNumber = $("#inputCatalogNumber").val();
+        collectible.catalogueNumber = $("#inputCatalogNumber").val().toUpperCase();
         collectible.purchaseDate = $("#inputPurchaseDate").val();
         if(collectible.sold === "true")
         {
