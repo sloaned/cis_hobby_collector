@@ -309,6 +309,7 @@ function clearForm(){
         $("#colors").css("border-color","#ccc");
 }
 
+
 function closeForm(){
         $("#newCollectibleForm").css("display", "none");
         $("#fade").css("display", "none");

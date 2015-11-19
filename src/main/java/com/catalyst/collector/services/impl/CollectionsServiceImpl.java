@@ -184,6 +184,9 @@ public class CollectionsServiceImpl implements CollectionsService {
 	@Override
 	public boolean updateCollectible(Collectible collectible) {
 		collectionValidation.setCollectible(collectible);
+		String firstThree = collectible.getCatalogueNumber().substring(0,3).toUpperCase();
+		String everythingElse = collectible.getCatalogueNumber().substring(3);
+		collectible.setCatalogueNumber(""+firstThree+everythingElse);
 		if(collectionValidation.isCollectibleValid()) {
             collectionsDao.updateCollectible(collectible);
             return true;
