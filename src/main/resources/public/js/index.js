@@ -44,7 +44,7 @@ function addDataToRow(collectible){
     var row;
 
     if (collectible.sold == true){
-        row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
+        row = "<tr id=" + collectible.id + " class='alert-warning sold'><td>" + "<b class='CatalogNumber'>Catalog Number:</b>" + catalogNumber + "<b>Era:</b>" + era + "</td>" +
             "<td>" + "<b>Name:</b>" + name + "<b>Description:</b>" + description +"</td><td>" + "<b>Type:</b>" + type + "<b>Keywords:</b>" + keywords +
             "</td><td>" + "<b>Color:</b>" + colors + "<b>Sold Status:</b>" + soldStatus + "</td><td>" + "<b>Condition:</b>" + condition + "</td><td>" +
             "</td><td>" + "<b>Purchase Date:</b>" + purchaseDate + "<b>Sell Date</b>" + sellDate + "</td><td>" +
