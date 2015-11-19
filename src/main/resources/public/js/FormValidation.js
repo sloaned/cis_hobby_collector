@@ -64,38 +64,38 @@ function validateType(){
 function validateColors(){
     var colorsLength = $("#colors").text().trim();
     var hasError = false;
-        if (colorsLength.length > 1000){
-            hasError = true;
-            $("#inputColorError").css('visibility','visible');
-            $("#inputColorError").text("Must be 1000 characters or less");
-            $("#colors").addClass("error");
-            $("#colors").css("border-color","red")
-        }else if ($(".color").length < 1){
-            hasError = true;
-            $("#inputColorError").css('visibility','visible');
-            $("#inputColorError").text("1 color minimum");
-            $("#colors").addClass("error");
-            $("#colors").css("border-color","red")
-        }else {
-            $("#colors").removeClass("error");
-            $("#inputColorError").css('visibility','hidden');
-            $("#colors").css("border-color","#ccc");
-        }
+    if (colorsLength.length > 1000){
+        hasError = true;
+        $("#inputColorError").css('visibility','visible');
+        $("#inputColorError").text("Must be 1000 characters or less");
+        $("#colors").addClass("error");
+        $("#colors").css("border-color","red")
+    }else if ($("#newCollectibleForm .color ").length < 1){
+        hasError = true;
+        $("#inputColorError").css('visibility','visible');
+        $("#inputColorError").text("1 color minimum");
+        $("#colors").addClass("error");
+        $("#colors").css("border-color","red")
+    }else {
+        $("#colors").removeClass("error");
+        $("#inputColorError").css('visibility','hidden');
+        $("#colors").css("border-color","#ccc");
+    }
 
-        var colors = [];
-        $(".color").each(function() {
-            colors.push($(this).text());
-        });
-        if (hasDuplicates(colors)) {
-            $("#inputColorError").css('visibility','visible');
-            $("#inputColorError").text("Duplicate colors not allowed");
-            $("#colors").addClass("error");
-            $("#colors").css("border-color","red")
-        } else if (!hasError) {
-            $("#colors").removeClass("error");
-            $("#inputColorError").css('visibility','hidden');
-            $("#colors").css("border-color","#ccc");
-        }
+    var colors = [];
+    $("#newCollectibleForm .color").each(function() {
+        colors.push($(this).text());
+    });
+    if (hasDuplicates(colors)) {
+        $("#inputColorError").css('visibility','visible');
+        $("#inputColorError").text("Duplicate colors not allowed");
+        $("#colors").addClass("error");
+        $("#colors").css("border-color","red")
+    } else if (!hasError) {
+        $("#colors").removeClass("error");
+        $("#inputColorError").css('visibility','hidden');
+        $("#colors").css("border-color","#ccc");
+    }
 }
 
 function validateCondition(){
