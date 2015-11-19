@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 /**
  * Created by derekdelaney on 11/13/15.
  */
@@ -33,6 +35,10 @@ public abstract class PageObject {
      */
     public WebElement find(By by){
         return driver.findElement(by);
+    }
+
+    public List<WebElement> findElements(By by) {
+        return driver.findElements(by);
     }
 
     public String getInnerHtml(By by){

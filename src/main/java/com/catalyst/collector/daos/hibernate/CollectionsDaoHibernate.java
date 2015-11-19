@@ -102,8 +102,13 @@ public class CollectionsDaoHibernate implements CollectionsDao {
             } catch (NoResultException e) {
                 em.persist(k);
             }
-        em.merge(collectible);
-		return true;
+        try{
+        	em.merge(collectible);
+        	return true;
+        }catch(Exception e){
+        	return false;
+        }
+        
 	}
 
     @Override

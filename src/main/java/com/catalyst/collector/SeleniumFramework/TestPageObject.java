@@ -15,6 +15,7 @@ public abstract class TestPageObject {
     public void setup(){
         seleniumSettings = new SeleniumSettings();
         driver = seleniumSettings.getDriver();
+    //    driver.navigate().refresh();
     }
 
     @After

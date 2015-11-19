@@ -283,7 +283,7 @@ function iCanHazKeywords(){
 
 function iCanHazColorz(){
     var colors = [];
-    $(".color").each(function(){
+    $("#newCollectibleForm .color").each(function(){
         colors.push({"color": $(this).contents().first().text().toLowerCase()});
     });
     return colors;
