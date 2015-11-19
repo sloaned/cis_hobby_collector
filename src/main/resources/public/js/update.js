@@ -108,7 +108,7 @@ function validate(){
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
 
-    isValid(catalogNumber,".catalogNumber",16) &&
+    isValid(catalogNumber,".catalogNumber",16) && catalogNumber.length === 16 &&
     isKeywordsValid(keywords) && isColorsValid(colors) &&
     isDatesValid();
 
