@@ -25,112 +25,90 @@ public class SearchCollectiblesTest extends TestPageObject {
 
 
     @Test
-    public void searchCollectiblePageForTypeArrowhead(){
+    public void searchCollectiblePageForTypeArrowhead() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='category']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='category'][contains(., 'Arrowhead')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("collectibleSearch"), VALID_TYPE);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForGreenColor(){
+    public void searchCollectiblePageForGreenColor() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='color']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='color'][contains(., 'Green')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("colorSearch"), VALID_COLOR);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr/td/div[@class='color']")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForMintCondition(){
+    public void searchCollectiblePageForMintCondition() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='condition']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='condition'][contains(., 'Mint')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("conditionSearch"), VALID_CONDITION);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForPaleolithicEra(){
+    public void searchCollectiblePageForPaleolithicEra() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='age']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='age'][contains(., 'Paleolithic')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("eraSearch"), VALID_ERA);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForMagazineName(){
+    public void searchCollectiblePageForMagazineName() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='name']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='name'][contains(., 'Magazine')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("nameSearch"), VALID_NAME);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForShinyKeyword(){
+    public void searchCollectiblePageForShinyKeyword() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='keywords']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='keywords'][contains(., 'Shiny')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("keywordsSearch"), VALID_KEYWORD);
         sCP.click(By.id("submitSearch"));
+        waitAndVerify(expected, sCP);
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchCollectiblePageForCatalogNumber(){
+    public void searchCollectiblePageForCatalogNumber() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='CatalogNumber']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='CatalogNumber'][contains(., 'AAA-123456789101')]")).size();
         sCP.clickSearchCollectible();
         sCP.sendKeys(By.id("catalogNumberSearch"), VALID_CATALOG_NUMBER);
         sCP.click(By.id("submitSearch"));
-
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
+        waitAndVerify(expected, sCP);
     }
 
     @Test
-    public void searchCollectiblePageForDescriptionWithE(){
+    public void searchCollectiblePageForDescriptionWithE() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='ellipsis description']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='ellipsis description'][contains(., 'e')]")).size();
@@ -138,14 +116,11 @@ public class SearchCollectiblesTest extends TestPageObject {
         sCP.sendKeys(By.id("descriptionSearch"), VALID_DESCRIPTION);
         sCP.click(By.id("submitSearch"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
-
-        int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
-        assertEquals(expected, actual);
+        waitAndVerify(expected, sCP);
     }
 
     @Test
-    public void searchCollectiblePageForStatusNotSold(){
+    public void searchCollectiblePageForStatusNotSold() throws InterruptedException {
         SearchCollectiblePage sCP = new SearchCollectiblePage(driver);
         WebElement wait = new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='soldStatus']")));
         int expected = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='soldStatus'][contains(., 'False')]")).size();
@@ -154,8 +129,12 @@ public class SearchCollectiblesTest extends TestPageObject {
         soldStatus.selectByValue("notsold");
         sCP.click(By.id("submitSearch"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
+        waitAndVerify(expected, sCP);
+    }
 
+    public void waitAndVerify(int expected, SearchCollectiblePage sCP) throws InterruptedException {
+        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
+        Thread.sleep(1000);
         int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
         assertEquals(expected, actual);
     }
