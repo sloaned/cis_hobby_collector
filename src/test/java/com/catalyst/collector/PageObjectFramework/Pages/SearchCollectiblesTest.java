@@ -48,7 +48,7 @@ public class SearchCollectiblesTest extends TestPageObject {
         sCP.sendKeys(By.id("colorSearch"), VALID_COLOR);
         sCP.click(By.id("submitSearch"));
 
-        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody")));
+        WebElement newRow = new WebDriverWait(driver, 100).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div/table/tbody/tr/td/div[@class='color']")));
 
         int actual = sCP.findElements(By.xpath("/html/body/div[1]/div/table/tbody/tr")).size();
         assertEquals(expected, actual);

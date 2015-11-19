@@ -32,6 +32,8 @@ public class AddCollectiblePageTest extends TestPageObject {
     public void addACollectibleToTheTableSuccessfullyTest() throws InterruptedException {
         AddCollectiblePage addCollectiblePage = new AddCollectiblePage(driver);
 
+        WebElement iLoveSelenium = new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div/table/tbody/tr/td/div[@class='category']")));
+
         int current = driver.findElements(By.xpath("/html/body/div/div/table/tbody/tr")).size();
         int expected = current+1;
 
