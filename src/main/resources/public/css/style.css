@@ -264,3 +264,17 @@ textarea:focus, input:focus{
     border-color: red;
     font:inherit;
 }
+
+thead {
+    color: #ffffff;
+}
+
+.body > .container{
+    border: 7px solid #996633;
+    border-radius: 10px;
+    background-color: #996633;
+}
+
+textarea:focus, input:focus{
+    background-color: #996633;
+}
