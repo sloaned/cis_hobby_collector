@@ -4,9 +4,6 @@ import com.catalyst.collector.SeleniumFramework.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by gfisher on 11/18/2015.
- */
 public class SearchCollectiblePage extends PageObject {
     public SearchCollectiblePage(WebDriver driver) {
         super(driver);
