@@ -17,7 +17,7 @@ public class UpdateCollectiblePageTest extends TestPageObject {
     private static final String VALID_ERA = "Validera";
     private static final String VALID_DESCRIPTION = "Validdescription";
     private static final String VALID_NAME = "Validname";
-    private static final String VALID_CATALOG_NUMBER = "MMM-123498767543";
+    private static final String VALID_CATALOG_NUMBER = "UNI-123498767543";
     private static final String VALID_KEYWORDS = "keywords,are,fun";
     private static final String VALID_PURCHASE_DATE = "10/10/1000";
     private static final String INVALID_KEYWORDS = "keywords,,";
