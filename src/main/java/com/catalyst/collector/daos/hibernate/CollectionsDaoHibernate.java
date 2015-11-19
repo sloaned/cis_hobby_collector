@@ -49,15 +49,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 
 	@Override
 	public boolean addCollectible(Collectible collectible) {
-        /*if(collectible.getAge().getAge() == null || collectible.getCategory().getCategory() == null
-                || collectible.getColor().getColor() == null|| collectible.getCondition().getCondition() == null)
-        {
-            em.merge(collectible);
-        }
-        else
-        {
-            em.persist(collectible);
-        }*/
         try {
             System.out.println(collectible.getAge());
             if (collectible.getAge().getAge() != null) {
@@ -101,13 +92,10 @@ public class CollectionsDaoHibernate implements CollectionsDao {
                 }
             } catch (NoResultException e) {
                 em.persist(k);
-            }
-        try{
-        	em.merge(collectible);
-        	return true;
-        }catch(Exception e){
-        	return false;
-        }
+            }      
+        em.merge(collectible);
+        return true;
+        
         
 	}
 

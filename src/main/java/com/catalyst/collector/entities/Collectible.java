@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(uniqueConstraints = 
-	@UniqueConstraint(columnNames = {"catalogueNumber"}))
 public class Collectible {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
