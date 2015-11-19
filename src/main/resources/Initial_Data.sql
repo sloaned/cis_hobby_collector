@@ -35,7 +35,7 @@ INSERT INTO keyword (keyword) VALUES ('swiveling');
 INSERT INTO keyword (keyword) VALUES ('annoying');
 INSERT INTO keyword (keyword) VALUES ('genuine');
 INSERT INTO keyword (keyword) VALUES ('speedy');
-INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, condition_id, purchaseDate, sellDate) VALUES ('AAA-123456789101', 'swiss nuclear', 'clock', TRUE, 1, 1, 1, '5/12/2012', '7/17/2014');
+INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, condition_id, purchaseDate, sellDate) VALUES ('AAA-123456789101', 'swiss nuclear war has begun in a long battle running for many years and has to stop before time runs out -- type of clock', 'clock', TRUE, 1, 1, 1, '5/12/2012', '7/17/2014');
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, condition_id, purchaseDate) VALUES ('BBB-223456789101', 'so comfortable', 'chair', FALSE, 2, 2, 2, '6/16/1993');
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, condition_id, purchaseDate) VALUES ('CCC-323456789101', 'extremely plastic', 'cup', FALSE, 3, 3, 3, '3/29/1981');
 INSERT INTO collectible (cataloguenumber, description, name, sold, age_id, category_id, condition_id, purchaseDate, sellDate) VALUES ('DDD-423456789101', 'lava', 'lamp', TRUE, 4, 4, 4, '7/2/2014', '2/16/2015');
