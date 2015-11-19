@@ -1,6 +1,7 @@
 package com.catalyst.collector.SeleniumFramework;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -84,6 +85,7 @@ public abstract class PageObject {
      * @param value - the text to input into the input box.
      */
     public void sendKeys(By by, String value){
+        find(by).clear();
         find(by).sendKeys(value);
     }
 
