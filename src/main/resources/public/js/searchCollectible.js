@@ -42,7 +42,6 @@ function replaceTable(){
      for (var i = 0; i < collectibles.length; i++) {
          addDataToRow(collectibles[i]);
      }
-<<<<<<< HEAD
 }
 
 function addRow(collectible){
