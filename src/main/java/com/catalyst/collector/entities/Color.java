@@ -12,7 +12,6 @@ public class Color {
 	private String color;
 	public Color(){}
 	
-
 	public Color(int i) {
 		id=i;
 	}
