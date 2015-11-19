@@ -165,7 +165,6 @@ public class CollectionsDaoHibernate implements CollectionsDao {
 		return true;
 	}
 
-
 	@Override
     public ArrayList<Condition> getAllConditions() {
         return (ArrayList<Condition>) em.createQuery("SELECT c FROM Condition c", Condition.class).getResultList();

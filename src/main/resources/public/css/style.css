@@ -1,3 +1,12 @@
+/* keep the editFields from being bigger than its parent container */
+.editField{
+    width:100%;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
+option,select{
+    color:black;
+}
 .black_overlay{
     display: none;
     position: fixed;
@@ -229,7 +238,7 @@ textarea:focus, input:focus{
     color: #ffffff;
 }
 
-#inputKeywords:focus{
+#inputKeywords:focus, #soldSearch{
 	background-color: #ffffff;
 	color: black;
 }
