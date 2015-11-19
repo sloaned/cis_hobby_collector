@@ -1,6 +1,6 @@
 var collectibles;
 function hide(){
-    $("[data-toggle='popover']").popover('hide');
+    $("#searchButton").click();
 }
 function callSearch(){
       var search ={};
@@ -28,20 +28,21 @@ function callSearch(){
         contentType: 'application/json',
         data: JSON.stringify(search)
     }).then(function(searchResult){
-      collectibles = searchResult;
-      replaceTable();
+    	collectibles = searchResult;
+    	replaceTable();
+    	hide();
         console.log("Post successful")
     }, function(error){
       replaceTable();
         console.log(error);
     });
-      $("[data-toggle='popover']").popover('toggle');
     }
 function replaceTable(){
       $("tbody").children().remove();
      for (var i = 0; i < collectibles.length; i++) {
-         addRow(collectibles[i]);
+         addDataToRow(collectibles[i]);
      }
+<<<<<<< HEAD
 }
 
 function addRow(collectible){
@@ -89,15 +90,17 @@ function addRow(collectible){
     }
 
     $("tbody").append(row);
+
+    $(".catalogNumber").click(update);
 }
 
 $(document).ready(function(){
 
 var content = '<form class="container" id="searchForm" class="form-inline" role="form">\
   <div class="row">\
-      <div class="form-group col-sm-4">\
-      <label>Collectible:</label>\
-      <input class="form-control" id="collectibleSearch" placeholder="collectible">\
+	<div class="form-group col-sm-4">\
+      <label>Type:</label>\
+      <input class="form-control" id="collectibleSearch" placeholder="type">\
     </div>\
     <div class="form-group col-sm-4">\
       <label>Color:</label>\

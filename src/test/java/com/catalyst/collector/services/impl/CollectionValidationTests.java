@@ -33,7 +33,7 @@ public class CollectionValidationTests {
     static final private String VALID_DATE = "04/11/2001";
     static final private String PURCHASE_DATE = "10/01/2000";
     static final private String INVALID_SELL_DATE = "09/30/2000";
-    static private CollectionValidation cv;
+    private CollectionValidation cv;
 
     @Before
     public void setup(){
@@ -206,8 +206,9 @@ public class CollectionValidationTests {
         Keyword valid = new Keyword();
         Keyword valid2 = new Keyword();
         Keyword invalid = new Keyword();
-        invalid.setKeyword(INVALID_STRING_WITH_NUMBER);
+        invalid.setKeyword(INVALID_STRING_WITH_SPECIAL);
         valid.setKeyword(VALID_KEYWORD);
+        valid2.setKeyword(VALID_KEYWORD);
         ks.add(valid);
         ks.add(valid2);
         ks.add(invalid);
