@@ -69,7 +69,7 @@ function updated(){
         collectible.colors = getColors();
         collectible.keywords = getKeywords();
         collectible.sold = $(".soldStatus :selected").text();
-        collectible.catalogueNumber = $(".catalogNumber .editField").val().toLowerCase();
+        collectible.catalogueNumber = $(".catalogNumber .editField").val().toUpperCase();
         collectible.sellDate = $(".sellDate .editField").val() === ""? null:moment(new Date($(".sellDate .editField").val())).format("MM/DD/YYYY");
         collectible.purchaseDate =  moment(new Date($(".purchaseDate .editField").val())).format("MM/DD/YYYY");
 
