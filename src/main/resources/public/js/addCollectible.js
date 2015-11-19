@@ -305,7 +305,7 @@ function clearForm(){
         $(".keyword").remove();
         $(".error").removeClass("error");
         $(".errorText").css("visibility", "hidden");
-        $("#newCollectibleForm").scrollTop(0);
+        $("body, #newCollectibleForm").scrollTop(0);
         $("#colors").css("border-color","#ccc");
 }
 
