@@ -85,17 +85,20 @@ var content = '<form class="container" id="searchForm" class="form-inline" role=
       <label>Description:</label>\
       <input type="text" class="form-control" id="descriptionSearch" placeholder="description">\
      </div>\
-     <select id="soldSearch" class="col-sm-4">\
+     <div class="col-sm-4">\
+     <label>Sold Status:</label>\
+     <select id="soldSearch" class="form-control">\
             <option value="select" selected="selected">Select Sold Status</option>\
             <option value="sold">Sold</option>\
             <option value="notsold">Not Sold</option>\
       </select>\
+      </div>\
   </div>\
   <div class="row">\
     <button type="button" id="submitSearch" onclick="callSearch();" class="btn btn-default">Submit</button>\
 </div>\
 </form>';
 
-    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span class='close' onclick=hide()> Cancel &times;</span>",
+    $('#searchButton').popover({container: 'body',title: "<h3 style='text-align:center'>Collectibles Search</h3><span id='cancel' class='close' onclick=hide()>&times;</span>",
     content: content, html: true, placement: "top"});
 });

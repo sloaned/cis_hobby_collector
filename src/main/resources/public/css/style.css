@@ -196,8 +196,7 @@ table{
 }
 
 #searchButton{
-	margin-left:46%;
-	padding:none;
+	margin-left:46.3%;
 	display:block;
 	position:fixed;
 	bottom:4px;
@@ -300,8 +299,9 @@ textarea:focus, input:focus{
 
 .close{
 	opacity: 1.0;
-	background-color: white;
-	margin-top: 0em;
+	background-color: transparent;
+	margin-top: -2.8em;
+    color: white;
 }
 
 .popover-title, .popover-content{
@@ -310,5 +310,3 @@ textarea:focus, input:focus{
     opacity:.80;
     filter: alpha(opacity=80);
 }
-
-
