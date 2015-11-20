@@ -144,9 +144,9 @@ function validate(){
             toast(where.replace('.','')+" cannot be null")
             return false;
         }
-       if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
-           $(".color .editField").addClass("error");
-           toast("Colors cannot use special characters")
+       else if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+          $(where+" .editField").addClass("error");
+           toast(where.replace('.','')+" cannot be null")
            return false;
        }
         else if(text.length > length){
