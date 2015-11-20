@@ -98,7 +98,7 @@ function validate(){
     var colors = getColors();
     var keywords = getKeywords();
     var sold = $(".soldStatus :selected").text();
-    var catalogNumber = $(".catalogNumber .editField").val().toLowerCase();
+    var catalogNumber = $(".catalogNumber .editField").val().toUpperCase();
     var purchaseDate = moment(new Date($(".purchaseDate .editField").val()));
     var sellDate = moment(new Date($(".sellDate .editField").val()));
 

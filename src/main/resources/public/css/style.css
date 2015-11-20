@@ -201,6 +201,11 @@ table{
 	display:block;
 	position:fixed;
 	bottom:4px;
+	background-color: black;
+	color: white;
+	-moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
 }
 
 #submitSearch{
@@ -212,6 +217,7 @@ table{
 	max-width:98%;
 	position:fixed;
 }
+
 
 .ellipsis {
     text-overflow: ellipsis;
@@ -235,6 +241,19 @@ textarea:focus, input:focus{
     color: #ffffff;
 }
 
+textarea:focus::-webkit-input-placeholder, input:focus::-webkit-input-placeholder {
+ color: #d7b38e !important;
+}
+textarea:focus:-moz-placeholder, input:focus:-moz-placeholder { /* older Firefox*/
+ color: #d7b38e !important;
+}
+textarea:focus::-moz-placeholder, input:focus::-moz-placeholder { /* Firefox 19+ */ 
+ color: #d7b38e !important;
+} 
+textarea:focus:-ms-input-placeholder, input:focus:-ms-input-placeholder { 
+ color: #d7b38e !important;
+}
+
 .sold {
     background-color: #d9534f;
     color: #ffffff;
@@ -255,7 +274,7 @@ textarea:focus, input:focus{
 }
 
 .popover-title, .popover-content{
-	background-color:#d9534f;
+	background-color:black;
 	border: 1px solid #ccc;
     color: #ffffff;
 }
@@ -278,3 +297,19 @@ thead {
 textarea:focus, input:focus{
     background-color: #996633;
 }
+
+.close{
+	opacity: 1.0;
+	background-color: white;
+	margin-bottom: 3em;
+	z-index:1001;
+}
+
+.popover-title, .popover-content{
+	background-color: black;
+	-moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+
+
