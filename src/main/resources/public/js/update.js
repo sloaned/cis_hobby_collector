@@ -45,9 +45,11 @@ function update(){
         text = $(div).text();
         $(div).html("<input class=\"form-control editField\"type=\"text\" value=\""+ text +"\">");
     })});
+
     $(".editSubmitButton").click(updated)
     $(document).mouseup(function(e){
-            console.log(e.target)
+             if ($(e.target).attr("class").indexOf("toast") !== -1)
+                            return;
             if (!$(e.target).hasClass("editField") &&!$(e.target).hasClass("editSubmitButton") &&
                     !$(e.target).parent().hasClass("editing") && !$(e.target).parent().parent().hasClass("editing")&&
                     !$(e.target).parent().parent().parent().parent().hasClass("editing")){
