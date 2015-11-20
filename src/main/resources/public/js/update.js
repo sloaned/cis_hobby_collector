@@ -83,6 +83,7 @@ function updated(){
             loadTable();
             $(document).off("mouseup");
         }, function(error){
+            toast("Update Unsuccessful. Maybe the catalog number is is not Unique")
             console.log(error);
         });
     }
@@ -107,7 +108,7 @@ function validate(){
     isValid(age,".age",255) &&
     isValid(category,".category",255) &&
     isValid(condition,".condition",255) &&
-    isValid(catalogNumber,".catalogNumber",16) && catalogNumber.length === 16 &&
+    isValid(catalogNumber,".catalogNumber",16) && (catalogNumber.length === 16 || toast("Catalog Number is not in a valid format")) &&
     isKeywordsValid(keywords) && isColorsValid(colors) &&
     isDatesValid();
 
@@ -133,8 +134,8 @@ function validate(){
              return false;
         }
         return true;
-
     }
+
     function isValid(text,where,length){
         if(text == null || text == ""){
             $(where+" .editField").addClass("error");
@@ -155,6 +156,7 @@ function validate(){
             $(where+" .editField").removeClass("error");
           return true;
     }
+
     function isColorsValid(colors){
             if(colors.length < 1 ){
                 $(".color .editField").addClass("error");

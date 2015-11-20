@@ -10,9 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by gfisher on 11/18/2015.
- */
 public class SearchCollectiblesTest extends TestPageObject {
     private static final String VALID_TYPE = "arrowhead";
     private static final String VALID_COLOR = "green";

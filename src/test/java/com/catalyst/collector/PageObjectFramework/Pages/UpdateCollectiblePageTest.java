@@ -7,9 +7,6 @@ import org.openqa.selenium.By;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by ddelaney on 11/19/2015.
- */
 public class UpdateCollectiblePageTest extends TestPageObject {
     private static final String VALID_TYPE = "Validtype";
     private static final String VALID_COLOR = "Validcolor";

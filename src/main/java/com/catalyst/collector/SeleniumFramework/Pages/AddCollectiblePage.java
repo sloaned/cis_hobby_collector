@@ -4,9 +4,6 @@ import com.catalyst.collector.SeleniumFramework.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by derekdelaney on 11/16/15.
- */
 public class AddCollectiblePage extends PageObject {
     public AddCollectiblePage(WebDriver driver) {
         super(driver);

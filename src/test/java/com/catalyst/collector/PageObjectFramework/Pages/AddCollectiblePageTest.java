@@ -8,13 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Date;
-
 import static org.junit.Assert.*;
 
-/**
- * Created by derekdelaney on 11/16/15.
- */
 public class AddCollectiblePageTest extends TestPageObject {
 
     private static final String VALID_TYPE = "Validtype";
