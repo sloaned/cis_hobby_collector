@@ -292,7 +292,7 @@ function iCanHazColorz(){
 function clearForm(){
         $("#inputType").val("");
         $("#inputColor").val("");
-        $(".color").remove();
+        $("#colors .color").remove();
         $("#inputCondition").val("");
         $("#inputAge").val("");
         $("#inputDescription").val("");
