@@ -146,7 +146,7 @@ function validate(){
         }
        else if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
           $(where+" .editField").addClass("error");
-           toast(where.replace('.','')+" cannot be null")
+           toast(where.replace('.','')+" cannot have special characters")
            return false;
        }
         else if(text.length > length){
