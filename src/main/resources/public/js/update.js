@@ -144,7 +144,7 @@ function validate(){
             toast(where.replace('.','')+" cannot be null")
             return false;
         }
-       else if(/^[a-zA-Z0-9- ]*$/.test(text) == false) {
+       else if(/^[a-zA-Z0-9-]*$/.test(text) == false) {
           $(where+" .editField").addClass("error");
            toast(where.replace('.','')+" cannot have special characters")
            return false;
@@ -167,7 +167,7 @@ function validate(){
             }
 
             for(var i =0; i < colors.length;i++){
-                if(/^[a-zA-Z0-9- ]*$/.test(colors[i]) === false) {
+                if(/^[a-zA-Z0-9-]*$/.test(colors[i]) === false) {
                     $(".colors .editField").addClass("error");
                     toast("Colors cannot use special characters")
                     return false;
@@ -191,7 +191,7 @@ function validate(){
         }
 
         for(var i =0; i < keywords.length;i++){
-            if(/^[a-zA-Z0-9- ]*$/.test(keywords[i]) === false) {
+            if(/^[a-zA-Z0-9-]*$/.test(keywords[i]) === false) {
                 $(".keywords .editField").addClass("error");
                 toast("Keywords cannot use special characters")
                 return false;
