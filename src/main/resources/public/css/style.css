@@ -301,8 +301,7 @@ textarea:focus, input:focus{
 .close{
 	opacity: 1.0;
 	background-color: white;
-	margin-bottom: 3em;
-	z-index:1001;
+	margin-top: 0em;
 }
 
 .popover-title, .popover-content{
